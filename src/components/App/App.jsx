@@ -8,7 +8,7 @@ import {
 
 import { useDispatch } from 'react-redux';
 
-import {theme} from '../Theme/Theme';
+import { theme } from '../Theme/Theme';
 
 import './App.css';
 
