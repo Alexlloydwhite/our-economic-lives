@@ -5,8 +5,9 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import { useDispatch } from 'react-redux';
+
+import Home from '../Home/Home';
 
 import './App.css';
 
@@ -18,6 +19,12 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    <h1>Yo</h1>
+    <Router>
+      <h1>Yo</h1>
+      <Redirect exact from="/" to="/home" />
+      <Route exact path="/home">
+        <Home />
+      </Route>
+    </Router>
   );
 }
