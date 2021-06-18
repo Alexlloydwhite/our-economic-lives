@@ -8,6 +8,8 @@ import {
 
 import { useDispatch } from 'react-redux';
 
+import {theme} from '../Theme/Theme';
+
 import './App.css';
 
 export default function App() {
