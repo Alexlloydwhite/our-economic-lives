@@ -6,20 +6,18 @@ import {
     Avatar,
     TextField,
     Button,
-    Link,
-    Grid
 } from '@material-ui/core/';
 // React
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
-//styles
 // Styles
 const useStyles = makeStyles((theme) => ({
     layout: {
         width: 'auto',
         marginLeft: theme.spacing(2),
         marginRight: theme.spacing(2),
+        marginTop: theme.spacing(10),
         [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
             width: 600,
             marginLeft: 'auto',
@@ -36,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
             padding: theme.spacing(3),
         },
     },
+    avatar: {
+        width: 150,
+        height: 150
+    }
 }));
 
 export default function Login() {
@@ -64,12 +66,15 @@ export default function Login() {
     return (
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
+                    <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
+                        <img src="/images/OELavatar.png" />
+                    </Avatar>
                     <Typography
                         component="h3"
-                        variant="h3"
+                        variant="h4"
                         align="center"
                         gutterBottom
-                        id="header"
+                        style={{ color: '#12ae5b' }}
                     >
                         Our Economic Lives
                     </Typography>
@@ -86,7 +91,7 @@ export default function Login() {
                             required
                             fullWidth
                             id="Username"
-                            label="Username"
+                            label="Email"
                             name="Username"
                             autoComplete="email"
                             value={username}

@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 
 import { theme } from '../Theme/Theme';
 import { ThemeProvider } from '@material-ui/styles';
-
+import CssBaseline from "@material-ui/core/CssBaseline";
 import Home from '../Home/Home';
 import Login from '../Login/Login';
 
@@ -24,6 +24,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Router>
         <Redirect exact from="/" to="/home" />
         {/* Login View */}
