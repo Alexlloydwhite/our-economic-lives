@@ -110,3 +110,11 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
+
+/* ------- Footer -------- */
+
+footer {
+  margin-top: 25rem;
+  padding: 5rem;
+  text-align: center;
+}
