@@ -1,7 +1,6 @@
 // MUI
 import {
     Typography,
-    Paper,
     makeStyles,
     Avatar,
     TextField,
@@ -64,6 +63,8 @@ export default function Login() {
                     password: password,
                 },
             });
+            // TODO add validation to check if user is registered
+            // Send user to either home view or register form
         } else {
             dispatch({ type: 'LOGIN_INPUT_ERROR' });
         };
