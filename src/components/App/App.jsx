@@ -25,7 +25,6 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Router>
-          <h1>Yo</h1>
           <Redirect exact from="/" to="/home" />
           <Route exact path="/home">
             <Home />
