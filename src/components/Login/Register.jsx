@@ -7,7 +7,9 @@ import {
     Button,
     Grid,
     Select,
-    MenuItem
+    MenuItem,
+    InputLabel,
+    FormControl
 } from '@material-ui/core/';
 // React
 import { useDispatch, useSelector } from 'react-redux';
@@ -51,6 +53,8 @@ export default function Register() {
     const history = useHistory();
     const errors = useSelector(store => store.errors);
     const dispatch = useDispatch();
+
+    const [careerPyramid, setCareerPyramid] = useState('');
 
     const register = () => {
         return 200;
@@ -124,15 +128,20 @@ export default function Register() {
                         label="Current Profession"
                         placeholder="Current Profession"
                     />
-                    <Select 
-                        fullWidth
-                        style={{ marginTop: 15 }}
-                    >
-                        <MenuItem>Career Pyramid 1</MenuItem>
-                        <MenuItem>Career Pyramid 2</MenuItem>
-                        <MenuItem>Career Pyramid 3</MenuItem>
-                        <MenuItem>Career Pyramid 4</MenuItem>
-                    </Select>
+                    <FormControl variant="outlined" fullWidth>
+                        <InputLabel>Career Pyramid</InputLabel>
+                        <Select
+                            style={{ marginTop: 15 }}
+                            label="Career Pyramid"
+                            value={careerPyramid}
+                            onChange={(e) => setCareerPyramid(e.target.value)}
+                        >
+                            <MenuItem>Career Pyramid 1</MenuItem>
+                            <MenuItem>Career Pyramid 2</MenuItem>
+                            <MenuItem>Career Pyramid 3</MenuItem>
+                            <MenuItem>Career Pyramid 4</MenuItem>
+                        </Select>
+                    </FormControl>
                 </form>
             </Grid>
         </Grid>
