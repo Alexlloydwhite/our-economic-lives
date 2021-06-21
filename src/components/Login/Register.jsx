@@ -5,7 +5,9 @@ import {
     Avatar,
     TextField,
     Button,
-    Grid
+    Grid,
+    Select,
+    MenuItem
 } from '@material-ui/core/';
 // React
 import { useDispatch, useSelector } from 'react-redux';
@@ -75,6 +77,62 @@ export default function Register() {
                             {errors.loginMessage}
                         </h3>
                     )}
+                    <Typography
+                        variant="subtitle1"
+                        align="center"
+                        gutterBottom
+                    >
+                        Please complete the following required fields in order to register your profile
+                    </Typography>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        label="First Name"
+                        placeholder="First Name"
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        label="Last Name"
+                        placeholder="Last Name"
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        label="Phone Number"
+                        placeholder="Phone Number"
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        label="City of Residence"
+                        placeholder="City of Residence"
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        label="Current Profession"
+                        placeholder="Current Profession"
+                    />
+                    <Select 
+                        fullWidth
+                        style={{ marginTop: 15 }}
+                    >
+                        <MenuItem>Career Pyramid 1</MenuItem>
+                        <MenuItem>Career Pyramid 2</MenuItem>
+                        <MenuItem>Career Pyramid 3</MenuItem>
+                        <MenuItem>Career Pyramid 4</MenuItem>
+                    </Select>
                 </form>
             </Grid>
         </Grid>
