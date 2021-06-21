@@ -6,6 +6,7 @@ import {
     Avatar,
     TextField,
     Button,
+    Grid
 } from '@material-ui/core/';
 // React
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         width: 'auto',
         marginLeft: theme.spacing(2),
         marginRight: theme.spacing(2),
-        marginTop: theme.spacing(10),
+        marginTop: theme.spacing(8),
         [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
             width: 600,
             marginLeft: 'auto',
@@ -25,9 +26,12 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     paper: {
-        marginTop: theme.spacing(3),
+        marginTop: theme.spacing(2),
         marginBottom: theme.spacing(3),
-        padding: theme.spacing(2),
+        padding: theme.spacing(1),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
         [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
             marginTop: theme.spacing(6),
             marginBottom: theme.spacing(6),
@@ -36,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
     },
     avatar: {
         width: 150,
-        height: 150
+        height: 150,
+        marginBottom: theme.spacing(3)
     }
 }));
 
@@ -64,8 +69,9 @@ export default function Login() {
         }
     }; // end login
     return (
-            <main className={classes.layout}>
-                <Paper className={classes.paper}>
+        <Grid container component="main" className={classes.layout}>
+            <Grid item xs={12} component={Paper}>
+                <div className={classes.paper}>
                     <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
                         <img src="/images/OELavatar.png" />
                     </Avatar>
@@ -122,7 +128,8 @@ export default function Login() {
                             Log In
                         </Button>
                     </form>
-                </Paper>
-            </main>
+                </div>
+            </Grid>
+        </Grid>
     )
 }
