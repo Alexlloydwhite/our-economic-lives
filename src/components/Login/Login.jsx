@@ -50,7 +50,7 @@ export default function Login() {
     const history = useHistory();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const errors = useSelector(store => store.errors)
+    const errors = useSelector(store => store.errors);
     const dispatch = useDispatch();
 
     const login = (event) => {
@@ -66,7 +66,7 @@ export default function Login() {
             });
         } else {
             dispatch({ type: 'LOGIN_INPUT_ERROR' });
-        }
+        };
     }; // end login
     return (
         <Grid container component="main" className={classes.layout}>
@@ -129,5 +129,5 @@ export default function Login() {
                 </form>
             </Grid>
         </Grid>
-    )
-}
+    );
+};
