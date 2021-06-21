@@ -12,6 +12,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Home from '../Home/Home';
 import Login from '../Login/Login';
+import Register from '../Login/Register';
 
 import './App.css';
 
@@ -30,6 +31,10 @@ export default function App() {
         {/* Login View */}
         <Route exact path="/login">
           <Login />
+        </Route>
+        {/* Register View */}
+        <Route exact path='/register'>
+          <Register />
         </Route>
         {/* Home Screen / Pyramid View */}
         <Route exact path="/home">

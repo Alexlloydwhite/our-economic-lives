@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         width: 'auto',
         marginLeft: theme.spacing(2),
         marginRight: theme.spacing(2),
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(5),
         [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
             width: 600,
             marginLeft: 'auto',
@@ -39,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     avatar: {
-        width: 150,
-        height: 150,
-        marginBottom: theme.spacing(3)
+        width: 100,
+        height: 100,
+        marginBottom: theme.spacing(2)
     }
 }));
 
@@ -70,65 +70,63 @@ export default function Login() {
     }; // end login
     return (
         <Grid container component="main" className={classes.layout}>
-            <Grid item xs={12} component={Paper}>
-                <div className={classes.paper}>
-                    <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
-                        <img src="/images/OELavatar.png" />
-                    </Avatar>
-                    <Typography
-                        component="h3"
-                        variant="h4"
-                        align="center"
-                        gutterBottom
-                        style={{ color: '#12ae5b' }}
+            <Grid item xs={12} className={classes.paper}>
+                <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
+                    <img src="/images/OELavatar.png" />
+                </Avatar>
+                <Typography
+                    component="h3"
+                    variant="h4"
+                    align="center"
+                    gutterBottom
+                    style={{ color: '#12ae5b' }}
+                >
+                    Our Economic Lives
+                </Typography>
+                <form className={classes.form} onSubmit={login} noValidate>
+                    {errors.loginMessage && (
+                        <h3 className="alert" role="alert">
+                            {errors.loginMessage}
+                        </h3>
+                    )}
+                    {/* Input for Username */}
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="Username"
+                        label="Email"
+                        name="Username"
+                        autoComplete="email"
+                        value={username}
+                        onChange={(event) => setUsername(event.target.value)}
+                    />
+                    {/* input for password */}
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        type="password"
+                        name="password"
+                        label="Password"
+                        required
+                        autoComplete="current-password"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                        style={{ marginBottom: 20 }}
+                    />
+                    {/* submit button */}
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        fullWidth
                     >
-                        Our Economic Lives
-                    </Typography>
-                    <form className={classes.form} onSubmit={login} noValidate>
-                        {errors.loginMessage && (
-                            <h3 className="alert" role="alert">
-                                {errors.loginMessage}
-                            </h3>
-                        )}
-                        {/* Input for Username */}
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="Username"
-                            label="Email"
-                            name="Username"
-                            autoComplete="email"
-                            value={username}
-                            onChange={(event) => setUsername(event.target.value)}
-                        />
-                        {/* input for password */}
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            type="password"
-                            name="password"
-                            label="Password"
-                            required
-                            autoComplete="current-password"
-                            value={password}
-                            onChange={(event) => setPassword(event.target.value)}
-                            style={{ marginBottom: 20 }}
-                        />
-                        {/* submit button */}
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color="primary"
-                            fullWidth
-                        >
-                            Log In
-                        </Button>
-                    </form>
-                </div>
+                        Login
+                    </Button>
+                </form>
             </Grid>
         </Grid>
     )
