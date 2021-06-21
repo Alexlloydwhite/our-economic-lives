@@ -6,7 +6,8 @@ import {
   Switch,
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
+import { theme } from '../Theme/Theme';
+import { ThemeProvider } from '@material-ui/styles';
 import Home from '../Home/Home';
 
 import './App.css';
@@ -19,12 +20,14 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    <Router>
-      <h1>Yo</h1>
-      <Redirect exact from="/" to="/home" />
-      <Route exact path="/home">
-        <Home />
-      </Route>
-    </Router>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <h1>Yo</h1>
+          <Redirect exact from="/" to="/home" />
+          <Route exact path="/home">
+            <Home />
+          </Route>
+        </Router>
+      </ThemeProvider>
   );
 }
