@@ -1,18 +1,19 @@
 import { makeStyles, Typography } from "@material-ui/core"
+import { theme } from '../Theme/Theme'
 
 const getLeftBoarderColor = (leftWidth) => {
   if (leftWidth > 0) {
-    return '100px solid #0f0';
+    return '100px solid ' + theme.palette.success.main;
   } else {
-    return '100px solid #555';
+    return '100px solid ' + theme.palette.secondary.main;
   }
 }
 
 const getRightBoarderColor = (rightWidth) => {
   if (rightWidth > 0) {
-    return '100px solid #555';
+    return '100px solid ' + theme.palette.secondary.main;
   } else {
-    return '100px solid #0f0';
+    return '100px solid ' + theme.palette.success.main;
   }
 }
 
