@@ -8,7 +8,9 @@ import {
 import { useDispatch } from 'react-redux';
 import { theme } from '../Theme/Theme';
 import { ThemeProvider } from '@material-ui/styles';
+import CssBaseline from "@material-ui/core/CssBaseline";
 import Home from '../Home/Home';
+import Footer from '../Footer/Footer';
 
 import './App.css';
 
@@ -21,12 +23,14 @@ export default function App() {
 
   return (
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Router>
           <h1>Yo</h1>
           <Redirect exact from="/" to="/home" />
           <Route exact path="/home">
             <Home />
           </Route>
+          <Footer />
         </Router>
       </ThemeProvider>
   );
