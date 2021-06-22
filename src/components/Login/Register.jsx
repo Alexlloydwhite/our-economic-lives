@@ -71,8 +71,11 @@ export default function Register() {
     };
 
     const register = () => {
-        return 200;
-    }
+        dispatch({
+            type: 'SUBMIT_REGISTER_FORM',
+            payload: formState
+        });
+    };
 
     return (
         <Grid
@@ -93,6 +96,7 @@ export default function Register() {
                 >
                     Our Economic Lives
                 </Typography>
+                {JSON.stringify(formState, null, 2)}
                 <form
                     className={classes.form}
                     onSubmit={register}
@@ -118,6 +122,8 @@ export default function Register() {
                         fullWidth
                         label="First Name"
                         placeholder="First Name"
+                        onChange={handleChange}
+                        name="firstName"
                     />
                     <TextField
                         variant="outlined"
@@ -126,6 +132,8 @@ export default function Register() {
                         fullWidth
                         label="Last Name"
                         placeholder="Last Name"
+                        onChange={handleChange}
+                        name="lastName"
                     />
                     <TextField
                         variant="outlined"
@@ -134,6 +142,8 @@ export default function Register() {
                         fullWidth
                         label="Phone Number"
                         placeholder="Phone Number"
+                        onChange={handleChange}
+                        name="phoneNumber"
                     />
                     <TextField
                         variant="outlined"
@@ -142,6 +152,8 @@ export default function Register() {
                         fullWidth
                         label="City of Residence"
                         placeholder="City of Residence"
+                        onChange={handleChange}
+                        name="cityOfResidence"
                     />
                     <TextField
                         variant="outlined"
@@ -150,18 +162,21 @@ export default function Register() {
                         fullWidth
                         label="Current Profession"
                         placeholder="Current Profession"
+                        onChange={handleChange}
+                        name="currentProfession"
                     />
                     <FormControl
                         variant="outlined"
                         fullWidth
                         style={{ marginTop: 15 }}
                         required
-                        value={careerPyramid}
+                        value={formState.careerPyramid}
+                        name="careerPyramid"
+                        onChange={handleChange}
                     >
                         <InputLabel>Desired Career</InputLabel>
                         <Select
-                            value={careerPyramid || ''}
-                            onChange={(e) => setCareerPyramid(e.target.value)}
+                            value={formState.careerPyramid || ''}
                         >
                             <MenuItem>Career Pyramid 1</MenuItem>
                             <MenuItem>Career Pyramid 2</MenuItem>
