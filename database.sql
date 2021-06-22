@@ -1,4 +1,4 @@
-
+-- Database name is our_economic_lives
 -- USER is a reserved keyword with Postgres
 -- You must use double quotes in every query that user is in:
 -- ex. SELECT * FROM "user";
@@ -14,7 +14,8 @@ CREATE TABLE "user" (
 	"authorization" INT NOT NULL,
 	"coach_id" INT,
 	"current_profession" VARCHAR (80),
-	"desired_career" INT
+	"desired_career" INT,
+	"is_registered" BOOLEAN DEFAULT FALSE
 ); 
 
 CREATE TABLE "user_type" (
@@ -26,7 +27,7 @@ CREATE TABLE "user_blocks"(
 	"id" SERIAL PRIMARY KEY,
 	"user_id" INT NOT NULL,
 	"building_block_id" INT NOT NULL,
-	"is_recommended" BOOLEAN
+	"is_recommended" BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE "attachments"(
@@ -35,7 +36,7 @@ CREATE TABLE "attachments"(
 	"picture" VARCHAR (80),
 	"user_blocks_id" INT NOT NULL,
 	"coach_comments" VARCHAR (300),
-	"is_completed" BOOLEAN
+	"is_completed" BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE "building_block"(
@@ -47,7 +48,7 @@ CREATE TABLE "building_block"(
 
 CREATE TABLE "competency"(
 	"id" SERIAL PRIMARY KEY,
-	"name" VARCHAR (80) NOT NULL,
+	"value" VARCHAR (80) NOT NULL,
 	"building_block_id" INT NOT NULL
 );
 
@@ -67,12 +68,6 @@ VALUES ('test1', 'test1', 'Test', 'PA', '123', 'Minneapolis', 1, NULL, NULL, NUL
 ('test2', 'test2', 'Test', 'Coach', '123', 'Minneapolis', 2, NULL, NULL, NULL),
 ('test3', 'test3', 'Test', 'User', '123', 'Minneapolis', 3, 2, 'Cashier', 2); 
 
-SELECT * FROM "user";
-SELECT * FROM "building_block";
-
-DROP TABLE "user";
-DROP TABLE "building_block";
-
 INSERT INTO "career_path" ("name")
 VALUES ('Generic'),
 ('Plumber'),
@@ -84,7 +79,7 @@ VALUES ('Integrity', 'Displaying strong moral principles and work ethic.', 1),
 ('Professionalism', 'Maintaining a professional presence.', 1),
 ('Initaitive', 'Demonstrating a commitment to effective job performance by taking action on one’s own and following through to get the job done.', 1);
 
-INSERT INTO "competency" ("name", "building_block_id")
+INSERT INTO "competency" ("value", "building_block_id")
 VALUES ('Behaving ethically', 1),
 ('Acting fairly', 1),
 ('Taking responsibility', 1),

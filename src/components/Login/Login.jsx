@@ -50,7 +50,10 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const errors = useSelector(store => store.errors);
+    const user = useSelector(store => store.user);
     const dispatch = useDispatch();
+
+    console.log(user);
 
     const login = (event) => {
         event.preventDefault();
@@ -63,6 +66,9 @@ export default function Login() {
                     password: password,
                 },
             });
+            if(user.is_registered === false) {
+                history.push('/register');
+            }
             // TODO add validation to check if user is registered
             // Send user to either home view or register form
         } else {
