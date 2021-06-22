@@ -32,20 +32,8 @@ router.post('/create', (req, res, next) => {
       res.sendStatus(500);
     });
 });
-// "email" VARCHAR (80) UNIQUE NOT NULL,
-// 	"password" VARCHAR (1000) NOT NULL,
-// 	"first_name" VARCHAR (80),
-// 	"last_name" VARCHAR (80),
-// 	"phone_number" VARCHAR (80),
-// 	"city" VARCHAR (80),
-// 	"authorization" INT NOT NULL,
-// 	"coach_id" INT,
-// 	"current_profession" VARCHAR (80),
-// 	"desired_career" INT,
-// 	"is_registered" BOOLEAN DEFAULT FALSE
 
-router.post('/register', (req,res) => {
-
+router.put('/register', (req,res) => {
   const queryText = `
   UPDATE "user" 
   SET 
@@ -57,7 +45,6 @@ router.post('/register', (req,res) => {
     desired_career=$6
     is_registered='true'
   WHERE id=$7`
-
   pool
     .query(queryText, [
       req.body.firstName,
