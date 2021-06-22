@@ -142,10 +142,11 @@ export default function Register() {
                         fullWidth
                         style={{ marginTop: 15 }}
                         required
+                        value={careerPyramid}
                     >
                         <InputLabel>Desired Career</InputLabel>
                         <Select
-                            value={careerPyramid}
+                            value={careerPyramid || ''}
                             onChange={(e) => setCareerPyramid(e.target.value)}
                         >
                             <MenuItem>Career Pyramid 1</MenuItem>
