@@ -17,7 +17,7 @@ const getRightBoarderColor = (rightWidth) => {
   }
 }
 
-let progress = [1, 0.8, 0.6, 0.4, 0.2, 0]
+let progress = [1, 0.8, 0.6, 0.4, 0.2, 0.4, 0.6]
 
 const useStyles = makeStyles({
   pyramid: {
@@ -27,6 +27,71 @@ const useStyles = makeStyles({
     alignItems: 'center',
     width: '100vw',
     marginTop: 20,
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
+  tier6: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: 210,
+    width: 145,
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 0,
+    marginRight: 5,
+  },
+  tier6Title: {
+    zIndex: 1000,
+  },
+  tier6Remaining: {
+    marginBottom: 210 * progress[6 - 1],
+    width: 145 - 20 * progress[6 - 1],
+    marginLeft: 20 * progress[6 - 1],
+    borderBottom: (210 - 210 * progress[6 - 1]) + 'px solid ' + theme.palette.secondary.main,
+    borderLeft: 20 - 20 * progress[6 - 1] + 'px solid transparent',
+    zIndex: 500,
+    position: 'absolute',
+  },
+  tier6Progress: {
+    width: 145,
+    marginTop: 210 - 210 * progress[6 - 1],
+    borderLeft: 20 * progress[6 - 1] + 'px solid transparent',
+    borderBottom: (210 * progress[6 - 1]) + 'px solid ' + theme.palette.success.main,
+    zIndex: 500,
+    position: 'absolute',
+  },
+  tier7: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: 210,
+    width: 145,
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 0,
+    marginLeft: 5,
+  },
+  tier7Title: {
+    zIndex: 1000,
+  },
+  tier7Remaining: {
+    marginBottom: 210 * progress[7 - 1],
+    width: 145 - 20 * progress[7 - 1],
+    marginRight: 20 * progress[7 - 1],
+    borderBottom: (210 - 210 * progress[7 - 1]) + 'px solid ' + theme.palette.secondary.main,
+    borderRight: 20 - 20 * progress[7 - 1] + 'px solid transparent',
+    zIndex: 500,
+    position: 'absolute',
+  },
+  tier7Progress: {
+    width: 145,
+    marginTop: 210 - 210 * progress[7 - 1],
+    borderRight: 20 * progress[7 - 1] + 'px solid transparent',
+    borderBottom: (210 * progress[7 - 1]) + 'px solid ' + theme.palette.success.main,
+    zIndex: 500,
+    position: 'absolute',
   },
 });
 
@@ -89,6 +154,18 @@ export default function Home() {
 
   return (
     <div className={classes.pyramid}>
+      <div className={classes.row}>
+        <div className={classes.tier6}>
+          <Typography className={classes.tier6Title}>Tier 6</Typography>
+          <div className={classes.tier6Remaining}></div>
+          <div className={classes.tier6Progress}></div>
+        </div>
+        <div className={classes.tier7}>
+          <Typography className={classes.tier7Title}>Tier 7</Typography>
+          <div className={classes.tier7Remaining}></div>
+          <div className={classes.tier7Progress}></div>
+        </div>
+      </div>
       <Tier tier={5} />
       <Tier tier={4} />
       <Tier tier={3} />
