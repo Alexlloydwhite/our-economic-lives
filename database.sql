@@ -13,7 +13,8 @@ CREATE TABLE "user" (
 	"city" VARCHAR (80),
 	"authorization" INT NOT NULL,
 	"coach_id" INT,
-	"current_profession" VARCHAR (80)
+	"current_profession" VARCHAR (80),
+	"desired_career" INT
 ); 
 
 CREATE TABLE "user_type" (
@@ -61,10 +62,10 @@ CREATE TABLE "career_path"(
 	"name" VARCHAR (80) NOT NULL
 );
 
-INSERT INTO "user" ("email", "password", "first_name", "last_name", "phone_number", "city", "authorization", "coach_id", "current_profession")
-VALUES ('test1', 'test1', 'Test', 'PA', '123', 'Minneapolis', 1, 0, 'Application Manager'),
-('test2', 'test2', 'Test', 'Coach', '123', 'Minneapolis', 2, 0, 'Mechanical Engineer'),
-('test3', 'test3', 'Test', 'User', '123', 'Minneapolis', 3, 2, 'Cashier'); 
+INSERT INTO "user" ("email", "password", "first_name", "last_name", "phone_number", "city", "authorization", "coach_id", "current_profession", "desired_career")
+VALUES ('test1', 'test1', 'Test', 'PA', '123', 'Minneapolis', 1, NULL, NULL, NULL),
+('test2', 'test2', 'Test', 'Coach', '123', 'Minneapolis', 2, NULL, NULL, NULL),
+('test3', 'test3', 'Test', 'User', '123', 'Minneapolis', 3, 2, 'Cashier', 2); 
 
 SELECT * FROM "user";
 SELECT * FROM "building_block";
