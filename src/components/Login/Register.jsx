@@ -70,11 +70,13 @@ export default function Register() {
         });
     };
     // Handles submit of form
-    const register = () => {
+    const register = (e) => {
+        e.preventDefault();
         dispatch({
             type: 'SUBMIT_REGISTER_FORM',
             payload: formState
         });
+        history.push('/home');
     };
 
     return (
@@ -199,6 +201,26 @@ export default function Register() {
                             <MenuItem value={4}>Lawyer</MenuItem>
                         </Select>
                     </FormControl>
+                    {/* Div sets margin/position for buttons */}
+                    <div style={{ marginTop: 20, textAlign: 'right' }}>
+                        {/* Cancel btn */}
+                        <Button
+                            variant="outlined"
+                            color="error"
+                            style={{ marginRight: 10 }}
+                            onClick={()=>history.push('/login')}
+                        >
+                            Cancel
+                        </Button>
+                        {/* Submit btn */}
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                        >
+                            Register
+                        </Button>
+                    </div>
                 </form>
             </Grid>
         </Grid>
