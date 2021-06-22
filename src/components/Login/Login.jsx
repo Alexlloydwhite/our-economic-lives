@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
     const classes = useStyles();
     const history = useHistory();
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const errors = useSelector(store => store.errors);
     const dispatch = useDispatch();
@@ -55,11 +55,11 @@ export default function Login() {
     const login = (event) => {
         event.preventDefault();
 
-        if (username && password) {
+        if (email && password) {
             dispatch({
                 type: 'LOGIN',
                 payload: {
-                    username: username,
+                    username: email,
                     password: password,
                 },
             });
@@ -100,8 +100,8 @@ export default function Login() {
                         label="Email"
                         name="Username"
                         autoComplete="email"
-                        value={username}
-                        onChange={(event) => setUsername(event.target.value)}
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
                     />
                     {/* input for password */}
                     <TextField

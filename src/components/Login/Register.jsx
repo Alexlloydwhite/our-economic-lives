@@ -217,7 +217,6 @@ export default function Register() {
                         {/* Cancel btn */}
                         <Button
                             variant="outlined"
-                            color="error"
                             style={{ marginRight: 10 }}
                             onClick={() => history.push('/login')}
                         >
