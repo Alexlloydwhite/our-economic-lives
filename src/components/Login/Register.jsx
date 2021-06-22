@@ -61,7 +61,11 @@ export default function Register() {
     }
 
     return (
-        <Grid container component="main" className={classes.layout}>
+        <Grid
+            container
+            component="main"
+            className={classes.layout}
+        >
             <Grid item xs={12} className={classes.paper}>
                 <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
                     <img src="/images/OELavatar.png" />
@@ -75,7 +79,11 @@ export default function Register() {
                 >
                     Our Economic Lives
                 </Typography>
-                <form className={classes.form} onSubmit={register} noValidate>
+                <form
+                    className={classes.form}
+                    onSubmit={register}
+                    noValidate
+                >
                     {errors.loginMessage && (
                         <h3 className="alert" role="alert">
                             {errors.loginMessage}
@@ -86,7 +94,8 @@ export default function Register() {
                         align="center"
                         gutterBottom
                     >
-                        Please complete the following required fields in order to register your profile
+                        Please complete the following required fields
+                        in order to register your profile
                     </Typography>
                     <TextField
                         variant="outlined"
@@ -128,11 +137,14 @@ export default function Register() {
                         label="Current Profession"
                         placeholder="Current Profession"
                     />
-                    <FormControl variant="outlined" fullWidth>
-                        <InputLabel>Career Pyramid</InputLabel>
+                    <FormControl
+                        variant="outlined"
+                        fullWidth
+                        style={{ marginTop: 15 }}
+                        required
+                    >
+                        <InputLabel>Desired Career</InputLabel>
                         <Select
-                            style={{ marginTop: 15 }}
-                            label="Career Pyramid"
                             value={careerPyramid}
                             onChange={(e) => setCareerPyramid(e.target.value)}
                         >
