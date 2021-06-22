@@ -45,7 +45,11 @@ const useStyles = makeStyles((theme) => ({
         width: 100,
         height: 100,
         marginBottom: theme.spacing(2)
-    }
+    },
+    buttons: {
+        marginTop: 20,
+        textAlign: 'right'
+    },
 }));
 
 export default function Register() {
@@ -54,14 +58,7 @@ export default function Register() {
     const errors = useSelector(store => store.errors);
     const dispatch = useDispatch();
     // Local form state
-    const [formState, setFormState] = useState({
-        firstName: '',
-        lastName: '',
-        phoneNumber: '',
-        cityOfResidence: '',
-        currentProfession: '',
-        careerPyramid: ''
-    });
+    const [formState, setFormState] = useState({});
     // Handles change for inputs
     const handleChange = (e) => {
         setFormState({
@@ -72,11 +69,17 @@ export default function Register() {
     // Handles submit of form
     const register = (e) => {
         e.preventDefault();
-        dispatch({
-            type: 'SUBMIT_REGISTER_FORM',
-            payload: formState
-        });
-        history.push('/home');
+        if (Object.keys(formState).length === 6) {
+            dispatch({
+                type: 'SUBMIT_REGISTER_FORM',
+                payload: formState
+            });
+            history.push('/home');
+        } else {
+            dispatch({
+                type: 'REGISTRATION_INPUT_ERROR'
+            });
+        }
     };
 
     return (
@@ -100,22 +103,11 @@ export default function Register() {
                 >
                     Our Economic Lives
                 </Typography>
-                {/* Remove before build */}
-                <pre>
-                    {JSON.stringify(formState, null, 2)}
-                </pre>
                 <form
                     className={classes.form}
                     onSubmit={register}
                     noValidate
                 >
-                    {/* hook into errors reducer */}
-                    {/* TODO: change to register message */}
-                    {errors.loginMessage && (
-                        <h3 className="alert" role="alert">
-                            {errors.loginMessage}
-                        </h3>
-                    )}
                     {/* Helper instructions */}
                     <Typography
                         variant="subtitle1"
@@ -125,6 +117,16 @@ export default function Register() {
                         Please complete the following required fields
                         in order to register your profile
                     </Typography>
+                    {/* hook into errors reducer to display msg */}
+                    {errors.registrationMessage && (
+                        <h3 className="alert" role="alert">
+                            {errors.registrationMessage}
+                        </h3>
+                    )}
+                    {/* Remove before build */}
+                    <pre>
+                        {JSON.stringify(formState, null, 2)}
+                    </pre>
                     {/* First Name */}
                     <TextField
                         variant="outlined"
@@ -140,9 +142,9 @@ export default function Register() {
                     <TextField
                         variant="outlined"
                         margin="normal"
+                        label="Last Name"
                         required
                         fullWidth
-                        label="Last Name"
                         placeholder="Last Name"
                         onChange={handleChange}
                         name="lastName"
@@ -202,13 +204,13 @@ export default function Register() {
                         </Select>
                     </FormControl>
                     {/* Div sets margin/position for buttons */}
-                    <div style={{ marginTop: 20, textAlign: 'right' }}>
+                    <div className={classes.buttons}>
                         {/* Cancel btn */}
                         <Button
                             variant="outlined"
                             color="error"
                             style={{ marginRight: 10 }}
-                            onClick={()=>history.push('/login')}
+                            onClick={() => history.push('/login')}
                         >
                             Cancel
                         </Button>
