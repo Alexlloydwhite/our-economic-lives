@@ -57,8 +57,10 @@ export default function Register() {
     const history = useHistory();
     const errors = useSelector(store => store.errors);
     const dispatch = useDispatch();
+
     // Local form state
     const [formState, setFormState] = useState({});
+
     // Handles change for inputs
     const handleChange = (e) => {
         setFormState({
@@ -66,16 +68,22 @@ export default function Register() {
             [e.target.name]: e.target.value
         });
     };
+
     // Handles submit of form
     const register = (e) => {
         e.preventDefault();
+        // checks if the formState object 
+        // has all 6 required inputs
         if (Object.keys(formState).length === 6) {
+            // send form data to saga
             dispatch({
                 type: 'SUBMIT_REGISTER_FORM',
                 payload: formState
             });
+            // Bring the user home
             history.push('/home');
         } else {
+            // Dispatch errors reducer to display input error
             dispatch({
                 type: 'REGISTRATION_INPUT_ERROR'
             });
@@ -196,6 +204,7 @@ export default function Register() {
                             name="careerPyramid"
                             onChange={handleChange}
                         >
+                            {/* TODO - pull pyramid data from Postgres to display here! */}
                             {/* Here, value is the id of the career pyramid. */}
                             <MenuItem value={1}>Mechanic</MenuItem>
                             <MenuItem value={2}>Batman</MenuItem>
