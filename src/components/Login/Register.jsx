@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         width: 'auto',
         marginLeft: theme.spacing(2),
         marginRight: theme.spacing(2),
-        marginTop: theme.spacing(5),
+        marginTop: theme.spacing(0),
         [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
             width: 600,
             marginLeft: 'auto',
@@ -53,7 +53,7 @@ export default function Register() {
     const history = useHistory();
     const errors = useSelector(store => store.errors);
     const dispatch = useDispatch();
-
+    // Local form state
     const [formState, setFormState] = useState({
         firstName: '',
         lastName: '',
@@ -62,14 +62,14 @@ export default function Register() {
         currentProfession: '',
         careerPyramid: ''
     });
-
+    // Handles change for inputs
     const handleChange = (e) => {
         setFormState({
             ...formState,
             [e.target.name]: e.target.value
         });
     };
-
+    // Handles submit of form
     const register = () => {
         dispatch({
             type: 'SUBMIT_REGISTER_FORM',
@@ -84,9 +84,11 @@ export default function Register() {
             className={classes.layout}
         >
             <Grid item xs={12} className={classes.paper}>
+                {/* Logo */}
                 <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
                     <img src="/images/OELavatar.png" />
                 </Avatar>
+                {/* Title */}
                 <Typography
                     component="h3"
                     variant="h4"
@@ -96,17 +98,23 @@ export default function Register() {
                 >
                     Our Economic Lives
                 </Typography>
-                {JSON.stringify(formState, null, 2)}
+                {/* Remove before build */}
+                <pre>
+                    {JSON.stringify(formState, null, 2)}
+                </pre>
                 <form
                     className={classes.form}
                     onSubmit={register}
                     noValidate
                 >
+                    {/* hook into errors reducer */}
+                    {/* TODO: change to register message */}
                     {errors.loginMessage && (
                         <h3 className="alert" role="alert">
                             {errors.loginMessage}
                         </h3>
                     )}
+                    {/* Helper instructions */}
                     <Typography
                         variant="subtitle1"
                         align="center"
@@ -115,6 +123,7 @@ export default function Register() {
                         Please complete the following required fields
                         in order to register your profile
                     </Typography>
+                    {/* First Name */}
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -125,6 +134,7 @@ export default function Register() {
                         onChange={handleChange}
                         name="firstName"
                     />
+                    {/* Last Name */}
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -135,6 +145,7 @@ export default function Register() {
                         onChange={handleChange}
                         name="lastName"
                     />
+                    {/* Phone Number */}
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -145,6 +156,7 @@ export default function Register() {
                         onChange={handleChange}
                         name="phoneNumber"
                     />
+                    {/* City of Residence */}
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -155,6 +167,7 @@ export default function Register() {
                         onChange={handleChange}
                         name="cityOfResidence"
                     />
+                    {/* Current Profession */}
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -165,23 +178,25 @@ export default function Register() {
                         onChange={handleChange}
                         name="currentProfession"
                     />
+                    {/* Desired Career */}
                     <FormControl
                         variant="outlined"
                         fullWidth
                         style={{ marginTop: 15 }}
                         required
                         value={formState.careerPyramid}
-                        name="careerPyramid"
-                        onChange={handleChange}
                     >
                         <InputLabel>Desired Career</InputLabel>
                         <Select
                             value={formState.careerPyramid || ''}
+                            name="careerPyramid"
+                            onChange={handleChange}
                         >
-                            <MenuItem>Career Pyramid 1</MenuItem>
-                            <MenuItem>Career Pyramid 2</MenuItem>
-                            <MenuItem>Career Pyramid 3</MenuItem>
-                            <MenuItem>Career Pyramid 4</MenuItem>
+                            {/* Here, value is the id of the career pyramid. */}
+                            <MenuItem value={1}>Mechanic</MenuItem>
+                            <MenuItem value={2}>Batman</MenuItem>
+                            <MenuItem value={3}>Doctor</MenuItem>
+                            <MenuItem value={4}>Lawyer</MenuItem>
                         </Select>
                     </FormControl>
                 </form>

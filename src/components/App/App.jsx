@@ -27,7 +27,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <Redirect exact from="/" to="/home" />
+        {/* <Redirect exact from="/" to="/home" /> */}
         {/* Login View */}
         <Route exact path="/login">
           <Login />
