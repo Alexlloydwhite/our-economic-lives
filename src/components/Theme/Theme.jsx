@@ -6,7 +6,7 @@ export const theme = createMuiTheme(
         palette: {
             // looks like white... but it's not. Trust me this is better
             background: {
-                default: "#EdEFF2"
+                default: "#F3F5F7"
             },
             // lightish blue color
             primary: {
