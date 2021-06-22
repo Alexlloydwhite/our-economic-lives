@@ -54,7 +54,21 @@ export default function Register() {
     const errors = useSelector(store => store.errors);
     const dispatch = useDispatch();
 
-    const [careerPyramid, setCareerPyramid] = useState('');
+    const [formState, setFormState] = useState({
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
+        cityOfResidence: '',
+        currentProfession: '',
+        careerPyramid: ''
+    });
+
+    const handleChange = (e) => {
+        setFormState({
+            ...formState,
+            [e.target.name]: e.target.value
+        });
+    };
 
     const register = () => {
         return 200;
