@@ -13,6 +13,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Login/Register';
+import Footer from '../Footer/Footer';
 
 import './App.css';
 
@@ -40,6 +41,7 @@ export default function App() {
         <Route exact path="/home">
           <Home />
         </Route>
+        <Footer />
       </Router>
     </ThemeProvider>
   );
