@@ -68,6 +68,8 @@ export default function Login() {
             });
             if(user.is_registered === false) {
                 history.push('/register');
+            } else {
+                history.push('/home');
             }
             // TODO add validation to check if user is registered
             // Send user to either home view or register form
