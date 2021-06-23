@@ -67,7 +67,7 @@ export default function Login() {
             });
             // IF user is registered, send to /home
             // ELSE send to /register
-            if(user.is_registered === false) {
+            if (user.is_registered === false) {
                 history.push('/register');
             } else {
                 history.push('/home');
