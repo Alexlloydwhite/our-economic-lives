@@ -10,12 +10,13 @@ import { useDispatch } from 'react-redux';
 import { theme } from '../Theme/Theme';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Home from '../Home/Home';
+import Home from '../Home/Pyramid';
 import Login from '../Login/Login';
 import Register from '../Login/Register';
 import Footer from '../Footer/Footer';
 
 import './App.css';
+import PyramidTier from '../PyramidTier/PyramidTier';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -40,6 +41,9 @@ export default function App() {
         {/* Home Screen / Pyramid View */}
         <Route exact path="/home">
           <Home />
+        </Route>
+        <Route exact path="/tier">
+          <PyramidTier />
         </Route>
         <Footer />
       </Router>
