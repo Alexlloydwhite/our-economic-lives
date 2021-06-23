@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
+import { HistoryOutlined } from '@material-ui/icons';
 // Styles
 const useStyles = makeStyles((theme) => ({
     layout: {
@@ -53,8 +54,8 @@ export default function Login() {
     const user = useSelector(store => store.user);
     const dispatch = useDispatch();
 
-    const login = (e) => {
-        e.preventDefault();
+
+    const checkLogin = async () => {
         // Checks if email & password state is not null
         if (email && password) {
             // Login user with email & password state
@@ -65,31 +66,51 @@ export default function Login() {
                     password: password,
                 }
             });
-            switch (user.authorization) {
-                case 3:
-                    return (
-                        // IF user is registered, send to /home
-                        // ELSE send to /register
-                        (user.is_registered === false) ?
-                            history.push('/register')
-                            :
-                            history.push('/home')
-                    );
-                case 2:
-                    return history.push('/coach-dashboard');
-                case 1:
-                    return // bring to PA view
-            }
         } else {
             // Set error if inputs are missing or not valid
             dispatch({ type: 'LOGIN_INPUT_ERROR' });
-        };
-    }; // end login
+        }
+    }
+
+    const login = async (e) => {
+        e.preventDefault();
+        await checkLogin()
+            .then(() => {
+                setTimeout(function () {
+                    switch (user.authorization) {
+                        case 3:
+                            // IF user is registered, send to /home
+                            // ELSE send to /register
+                            return (user.is_registered === false) ?
+                                history.push('/register')
+                                :
+                                history.push('/home')
+                        case 2:
+                            return history.push('/dashboard');
+                        case 1:
+                            return history.push('/dashboard');
+                    }
+                }, 1000)
+            })
+    };
+
     return (
         <Grid container component="main" className={classes.layout}>
             <Grid item xs={12} className={classes.paper}>
-                {/* Temp logout btn */}
+                {/* Temp stuff */}
                 <button onClick={() => dispatch({ type: 'LOGOUT' })}>Temp Logout Btn</button>
+                <button onClick={() => {
+                    setEmail('test3');
+                    setPassword('test3');
+                }}>registered user</button>
+                <button onClick={() => {
+                    setEmail('test4');
+                    setPassword('test4');
+                }}>new user</button>
+                <button onClick={() => {
+                    setEmail('testcoach');
+                    setPassword('testcoach');
+                }}>coach</button>
                 {/* Logo avatar */}
                 <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
                     <img src="/images/OELavatar.png" />

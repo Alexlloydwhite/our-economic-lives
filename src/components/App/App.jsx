@@ -44,7 +44,7 @@ export default function App() {
           <Home />
         </Route>
         {/* Coach Dashboard */}
-        <Route exact path="/coach-dashboard">
+        <Route exact path="/dashboard">
           <CoachDashboard />
         </Route>
         <Footer />
