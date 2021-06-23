@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import LoginPage from '../Login/Login';
 import Register from '../Login/Register';
+import CoachDashboard from '../CoachDashboard/CoachDashboard';
 import { useSelector } from 'react-redux';
 
 // A Custom Wrapper Component -- This will keep our code DRY.
@@ -31,12 +32,15 @@ function ProtectedRoute(props) {
   let ComponentToShow;
 
   if (user.id) {
-    if (user.authorization === 3 && user.is_registered === false) {
-      ComponentToShow = Register;
-    } else {
-      // if the user is logged in (only logged in users have ids)
-      // show the component that is protected
-      ComponentToShow = ComponentToProtect;
+    if (user.authorization === 3) {
+      if (user.is_registered === true) {
+        ComponentToShow = ComponentToProtect;
+      } else {
+        ComponentToShow = Register;
+      }
+    }
+    if (user.authorization === 2 ) {
+      ComponentToShow = CoachDashboard;
     }
   } else {
     // if they are not logged in, check the loginMode on Redux State

@@ -80,6 +80,8 @@ export default function Register() {
                 type: 'REGISTER_USER',
                 payload: formState
             });
+            // Reload the page hack :)
+            location.reload();
         } else {
             // Dispatch errors reducer to display input error
             dispatch({
