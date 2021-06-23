@@ -6,6 +6,9 @@ const useStyles = makeStyles({
   root: {
     flexGrow: 1,
   },
+  navbar: {
+    backgroundColor: theme.palette.primary.main,
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -19,15 +22,11 @@ export default function NavBar() {
 
   return(
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.navbar}>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Home
-          </Typography>
-          <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>   
     </div>
