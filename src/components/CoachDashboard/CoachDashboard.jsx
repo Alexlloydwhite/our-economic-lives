@@ -7,7 +7,7 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle
+    DialogTitle,
 } from '@material-ui/core';
 // React Imports
 import { useState } from 'react';
@@ -25,6 +25,11 @@ export default function CoachDashboard() {
         });
     }
 
+    const handleSubmit = (e) => {
+        setOpen(false);
+        console.log('clicked!');
+    }
+
     return (
         <div style={{ textAlign: 'center' }}>
             <Typography>
@@ -40,21 +45,36 @@ export default function CoachDashboard() {
                         Please enter your clients email address, followed by a password.
                         We recommend using the name of your organization as the password
                     </DialogContentText>
-                    <TextField
-                        label="Email"
-                        name="email"
-                        fullWidth
-                        required
-                        onChange={handleChange}
-                    />
-                    <TextField
-                        label="Password"
-                        name="password"
-                        fullWidth
-                        required
-                        onChange={handleChange}
-                    />
+                        <TextField
+                            label="Email"
+                            name="email"
+                            fullWidth
+                            required
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            label="Password"
+                            name="password"
+                            fullWidth
+                            required
+                            onChange={handleChange}
+                        />
                 </DialogContent>
+                <DialogActions>
+                    <Button
+                        variant="outlined"
+                        onClick={() => setOpen(false)}
+                    >
+                        Cancel
+                    </Button>
+                    <Button
+                        onClick={handleSubmit}
+                        variant="contained"
+                        color="primary"
+                    >
+                        Add Client
+                    </Button>
+                </DialogActions>
             </Dialog>
         </div>
     );
