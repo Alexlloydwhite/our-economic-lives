@@ -17,19 +17,50 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
-router.post('/register', (req, res, next) => {
+router.post('/create', (req, res, next) => {
   const username = req.body.username;
+  const authorization = req.body.authorization;
   const password = encryptLib.encryptPassword(req.body.password);
 
-  const queryText = `INSERT INTO "user" (email, password)
-    VALUES ($1, $2) RETURNING id`;
+  const queryText = `INSERT INTO "user" (email, password, "authorization")
+    VALUES ($1, $2, $3) RETURNING id`;
   pool
-    .query(queryText, [username, password])
+    .query(queryText, [username, password, authorization])
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log('User registration failed: ', err);
       res.sendStatus(500);
     });
+});
+
+router.put('/register', (req,res) => {
+  console.log(req.body, req.user.id);
+  const queryText = `
+  UPDATE "user" 
+  SET 
+    first_name=$1, 
+    last_name=$2,
+    phone_number=$3,
+    city=$4,
+    current_profession=$5,
+    desired_career=$6,
+    is_registered='true'
+  WHERE id=$7`
+  pool
+    .query(queryText, [
+      req.body.firstName,
+      req.body.lastName,
+      req.body.phoneNumber,
+      req.body.cityOfResidence,
+      req.body.currentProfession,
+      req.body.careerPyramid,
+      req.user.id
+    ])
+    .then(() => res.sendStatus(201))
+    .catch((err) => {
+      res.sendStatus(500);
+      console.log(`error registering user: ${err}`);
+    });  
 });
 
 // Handles login form authenticate/login POST

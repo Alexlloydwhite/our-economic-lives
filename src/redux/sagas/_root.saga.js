@@ -1,7 +1,8 @@
-import { all } from 'redux-saga/effects';
+import { all, takeEvery } from 'redux-saga/effects';
 import loginSaga from './login.saga';
-import registrationSaga from './registration.saga';
+import createUserSaga from './createUser.saga';
 import userSaga from './user.saga';
+import registerNewUser from './register.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -11,9 +12,10 @@ import userSaga from './user.saga';
 // the registration triggers a login
 // and login triggers setting the user
 export default function* rootSaga() {
+  yield takeEvery('REGISTER_USER', registerNewUser);
   yield all([
     loginSaga(), // login saga is now registered
-    registrationSaga(),
+    createUserSaga(),
     userSaga(),
   ]);
 }
