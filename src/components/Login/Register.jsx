@@ -77,11 +77,11 @@ export default function Register() {
         if (Object.keys(formState).length === 6) {
             // send form data to saga
             dispatch({
-                type: 'SUBMIT_REGISTER_FORM',
+                type: 'REGISTER_USER',
                 payload: formState
             });
-            // Bring the user home
-            history.push('/home');
+            // Reload the page hack :)
+            location.reload();
         } else {
             // Dispatch errors reducer to display input error
             dispatch({
@@ -217,7 +217,6 @@ export default function Register() {
                         {/* Cancel btn */}
                         <Button
                             variant="outlined"
-                            color="error"
                             style={{ marginRight: 10 }}
                             onClick={() => history.push('/login')}
                         >

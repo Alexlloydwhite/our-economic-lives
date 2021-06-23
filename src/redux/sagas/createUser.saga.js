@@ -2,7 +2,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 // worker Saga: will be fired on "REGISTER" actions
-function* registerUser(action) {
+function* createUser(action) {
   try {
     // clear any existing error on the registration page
     yield put({ type: 'CLEAR_REGISTRATION_ERROR' });
@@ -22,8 +22,8 @@ function* registerUser(action) {
   }
 }
 
-function* registrationSaga() {
-  yield takeLatest('REGISTER', registerUser);
+function* createUserSaga() {
+  yield takeLatest('REGISTER', createUser);
 }
 
-export default registrationSaga;
+export default createUserSaga;
