@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import LoginPage from '../LoginPage/LoginPage';
-import {useSelector} from 'react-redux';
+import LoginPage from '../Login/Login';
+import Register from '../Login/Register';
+import { useSelector } from 'react-redux';
 
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
@@ -30,15 +31,18 @@ function ProtectedRoute(props) {
   let ComponentToShow;
 
   if (user.id) {
-    // if the user is logged in (only logged in users have ids)
-    // show the component that is protected
-    ComponentToShow = ComponentToProtect;
+    if (user.authorization === 3 && user.is_registered === false) {
+      ComponentToShow = Register;
+    } else {
+      // if the user is logged in (only logged in users have ids)
+      // show the component that is protected
+      ComponentToShow = ComponentToProtect;
+    }
   } else {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage
     ComponentToShow = LoginPage;
   }
-
 
   // redirect a logged in user if an authRedirect prop has been provided
   if (user.id && authRedirect != null) {

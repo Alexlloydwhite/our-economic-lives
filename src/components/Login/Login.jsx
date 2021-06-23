@@ -54,8 +54,8 @@ export default function Login() {
     const user = useSelector(store => store.user);
     const dispatch = useDispatch();
 
-
-    const checkLogin = async () => {
+    const login = (e) => {
+        e.preventDefault();
         // Checks if email & password state is not null
         if (email && password) {
             // Login user with email & password state
@@ -66,39 +66,18 @@ export default function Login() {
                     password: password,
                 }
             });
+            history.push('/home');
         } else {
             // Set error if inputs are missing or not valid
             dispatch({ type: 'LOGIN_INPUT_ERROR' });
         }
-    }
-
-    const login = async (e) => {
-        e.preventDefault();
-        await checkLogin()
-            .then(() => {
-                setTimeout(function () {
-                    switch (user.authorization) {
-                        case 3:
-                            // IF user is registered, send to /home
-                            // ELSE send to /register
-                            return (user.is_registered === false) ?
-                                history.push('/register')
-                                :
-                                history.push('/home')
-                        case 2:
-                            return history.push('/dashboard');
-                        case 1:
-                            return history.push('/dashboard');
-                    }
-                }, 1000)
-            })
     };
 
     return (
         <Grid container component="main" className={classes.layout}>
             <Grid item xs={12} className={classes.paper}>
                 {/* Temp stuff */}
-                <button onClick={() => dispatch({ type: 'LOGOUT' })}>Temp Logout Btn</button>
+                <button onClick={() => dispatch({ type: 'LOGOUT' })}>Logout</button>
                 <button onClick={() => {
                     setEmail('test3');
                     setPassword('test3');
@@ -111,6 +90,9 @@ export default function Login() {
                     setEmail('testcoach');
                     setPassword('testcoach');
                 }}>coach</button>
+                <pre>
+                    {JSON.stringify(user, null, 2)}
+                </pre>
                 {/* Logo avatar */}
                 <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
                     <img src="/images/OELavatar.png" />

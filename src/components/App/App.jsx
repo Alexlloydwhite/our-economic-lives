@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { theme } from '../Theme/Theme';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -40,9 +40,12 @@ export default function App() {
           <Register />
         </Route>
         {/* Home Screen / Pyramid View */}
-        <Route exact path="/home">
+        <ProtectedRoute
+          exact 
+          path='/home'
+        >
           <Home />
-        </Route>
+        </ProtectedRoute>
         {/* Coach Dashboard */}
         <Route exact path="/dashboard">
           <CoachDashboard />
