@@ -14,6 +14,7 @@ import Home from '../Home/Pyramid';
 import Login from '../Login/Login';
 import Register from '../Login/Register';
 import Footer from '../Footer/Footer';
+import NavBar from './NavBar/NavBar';
 
 import './App.css';
 
@@ -27,6 +28,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <NavBar />
       <Router>
         {/* <Redirect exact from="/" to="/home" /> */}
         {/* Login View */}
