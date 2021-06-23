@@ -41,11 +41,15 @@ export default function CoachDashboard() {
         if (Object.keys(formState).length === 2) {
             // Close dialog
             setOpen(false);
+            // Dispatch data to sage
             dispatch({
                 type: 'CREATE_CLIENT',
                 payload: formState
             })
+            // Reset form state
+            setFormState({});
         } else {
+            // Throw error
             dispatch({
                 type: 'CREATE_CLIENT_INPUT_ERROR'
             })
@@ -54,26 +58,30 @@ export default function CoachDashboard() {
 
     return (
         <div style={{ textAlign: 'center' }}>
+            {/* Page Title */}
             <Typography>
                 You may have a maximum of 8 clients on your team
             </Typography>
+            {/* Btn to invite new client */}
             <Button onClick={() => setOpen(true)}>Invite a new client to your team</Button>
+            {/* Dialog */}
             <Dialog open={open} onClose={handleClose}>
+                {/* Title */}
                 <DialogTitle>
                     Add a new client to your team
                 </DialogTitle>
-                <pre>
-                    {JSON.stringify(formState, null, 2)}
-                </pre>
                 <DialogContent>
+                    {/* Helper text */}
                     <DialogContentText>
                         We recommend using the name of your organization as the password.
                     </DialogContentText>
+                    {/* Errors */}
                     {errors.createUserMessage && (
                         <h3 className="alert" role="alert">
                             {errors.createUserMessage}
                         </h3>
                     )}
+                    {/* Email */}
                     <TextField
                         label="Email"
                         name="email"
@@ -81,6 +89,7 @@ export default function CoachDashboard() {
                         required
                         onChange={handleChange}
                     />
+                    {/* Password */}
                     <TextField
                         label="Password"
                         name="password"
@@ -90,12 +99,14 @@ export default function CoachDashboard() {
                     />
                 </DialogContent>
                 <DialogActions>
+                    {/* CancelBtn */}
                     <Button
                         variant="outlined"
                         onClick={handleClose}
                     >
                         Cancel
                     </Button>
+                    {/* Add client btn */}
                     <Button
                         onClick={handleSubmit}
                         variant="contained"
