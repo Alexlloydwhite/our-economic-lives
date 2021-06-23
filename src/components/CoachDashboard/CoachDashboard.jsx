@@ -11,8 +11,11 @@ import {
 } from '@material-ui/core';
 // React Imports
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function CoachDashboard() {
+    const dispatch = useDispatch();
+    const errors = useSelector(store => store.errors);
     // State for dialog. Is it open or closed?
     const [open, setOpen] = useState(false);
     // Local form state
@@ -24,10 +27,21 @@ export default function CoachDashboard() {
             [e.target.name]: e.target.value
         });
     }
-
+    // Handle dialog submit
     const handleSubmit = (e) => {
-        setOpen(false);
-        console.log('clicked!');
+        // Check is both required field are entered
+        if (Object.keys(formState).length === 2) {
+            // Close dialog
+            setOpen(false);
+            dispatch({
+                type: 'CREATE_CLIENT',
+                payload: formState
+            })
+        } else {
+            dispatch({
+                type: 'CREATE_CLIENT_INPUT_ERROR'
+            })
+        }
     }
 
     return (
@@ -42,23 +56,27 @@ export default function CoachDashboard() {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Please enter your clients email address, followed by a password.
-                        We recommend using the name of your organization as the password
+                        We recommend using the name of your organization as the password.
                     </DialogContentText>
-                        <TextField
-                            label="Email"
-                            name="email"
-                            fullWidth
-                            required
-                            onChange={handleChange}
-                        />
-                        <TextField
-                            label="Password"
-                            name="password"
-                            fullWidth
-                            required
-                            onChange={handleChange}
-                        />
+                    {errors.loginMessage && (
+                        <h3 className="alert" role="alert">
+                            {errors.loginMessage}
+                        </h3>
+                    )}
+                    <TextField
+                        label="Email"
+                        name="email"
+                        fullWidth
+                        required
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        label="Password"
+                        name="password"
+                        fullWidth
+                        required
+                        onChange={handleChange}
+                    />
                 </DialogContent>
                 <DialogActions>
                     <Button
