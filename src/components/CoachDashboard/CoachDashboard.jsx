@@ -20,6 +20,14 @@ export default function CoachDashboard() {
     const [open, setOpen] = useState(false);
     // Local form state
     const [formState, setFormState] = useState({});
+    // Handle close of dialog
+    const handleClose = () => {
+        setOpen(false);
+        // Clear error state
+        dispatch({
+            type: 'CLEAR_CLIENT_INPUT_ERROR'
+        })
+    }
     // Handle input change
     const handleChange = (e) => {
         setFormState({
@@ -50,7 +58,7 @@ export default function CoachDashboard() {
                 You may have a maximum of 8 clients on your team
             </Typography>
             <Button onClick={() => setOpen(true)}>Invite a new client to your team</Button>
-            <Dialog open={open} onClose={() => setOpen(false)}>
+            <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>
                     Add a new client to your team
                 </DialogTitle>
@@ -58,9 +66,9 @@ export default function CoachDashboard() {
                     <DialogContentText>
                         We recommend using the name of your organization as the password.
                     </DialogContentText>
-                    {errors.loginMessage && (
+                    {errors.createUserMessage && (
                         <h3 className="alert" role="alert">
-                            {errors.loginMessage}
+                            {errors.createUserMessage}
                         </h3>
                     )}
                     <TextField
@@ -81,7 +89,7 @@ export default function CoachDashboard() {
                 <DialogActions>
                     <Button
                         variant="outlined"
-                        onClick={() => setOpen(false)}
+                        onClick={handleClose}
                     >
                         Cancel
                     </Button>
