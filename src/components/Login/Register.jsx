@@ -77,11 +77,9 @@ export default function Register() {
         if (Object.keys(formState).length === 6) {
             // send form data to saga
             dispatch({
-                type: 'SUBMIT_REGISTER_FORM',
+                type: 'REGISTER_USER',
                 payload: formState
             });
-            // Bring the user home
-            history.push('/home');
         } else {
             // Dispatch errors reducer to display input error
             dispatch({
