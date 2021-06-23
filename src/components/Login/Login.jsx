@@ -63,9 +63,8 @@ export default function Login() {
                 payload: {
                     username: email,
                     password: password,
-                },
+                }
             });
-
             switch (user.authorization) {
                 case 3:
                     return (
@@ -75,13 +74,12 @@ export default function Login() {
                             history.push('/register')
                             :
                             history.push('/home')
-                    )
+                    );
                 case 2:
-                    return history.push('/coach-dashboard')
+                    return history.push('/coach-dashboard');
                 case 1:
                     return // bring to PA view
             }
-
         } else {
             // Set error if inputs are missing or not valid
             dispatch({ type: 'LOGIN_INPUT_ERROR' });
