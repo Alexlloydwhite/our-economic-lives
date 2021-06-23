@@ -18,18 +18,20 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
+    marginTop: '5rem',
   },
   gridList: { // gridList styles the list of building blocks
     flexWrap: 'nowrap', // makes the list horizontal
     transform: 'translateZ(0)', // recommended by m-ui
     padding: '.5rem',
-    width: '85%',
+    width: '80%',
   },
   card: { // card styles the building blocks
     width: theme.spacing(34),
     height: theme.spacing(21),
     padding: '.5rem',
     background: 'linear-gradient(to top, rgba(255,130,0,0.7) 0%, rgba(255,130,0,0.3) 70%, rgba(255,130,0,0.1) 100%)',
+    // backgroundColor: theme.palette.primary.main,
     margin: theme.spacing(1),
     textAlign: 'center',
   },
@@ -78,7 +80,7 @@ export default function PyramidTier() {
   return (
     <div className={classes.root} >
       <ArrowBackIosIcon className={classes.arrow} />
-      <GridList className={classes.gridList} cols={1.5} > 
+      <GridList className={classes.gridList} cols={1.1} > 
         {tileData.map((block) => (
           <GridListTile key={block.id}>
             <Card className={classes.card} variant="outlined">
