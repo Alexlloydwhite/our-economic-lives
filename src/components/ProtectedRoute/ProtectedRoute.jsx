@@ -30,16 +30,22 @@ function ProtectedRoute(props) {
   const ComponentToProtect = props.component || (() => props.children);
 
   let ComponentToShow;
-
+  // is the user is valid ?
   if (user.id) {
+    // is the user authorized as an end user?
     if (user.authorization === 3) {
+      // is the user registered?
       if (user.is_registered === true) {
+        // If they are registered, show /home 
         ComponentToShow = ComponentToProtect;
       } else {
+        // if they are not registered, show /register
         ComponentToShow = Register;
       }
     }
+    // is the user a coach?
     if (user.authorization === 2 ) {
+      // if they are, show the coach dashboard
       ComponentToShow = CoachDashboard;
     }
   } else {
