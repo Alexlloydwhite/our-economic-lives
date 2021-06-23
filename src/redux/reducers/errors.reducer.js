@@ -32,10 +32,22 @@ const registrationMessage = (state = '', action) => {
   }
 };
 
+const createUserMessage = (state = '', action) => {
+  switch (action.type) {
+    case 'CLEAR_CLIENT_INPUT_ERROR':
+      return '';
+    case 'CREATE_CLIENT_INPUT_ERROR':
+      return 'Please enter your clients email and create a password'
+    default:
+      return state;
+  }
+}
+
 // make one object that has keys loginMessage, registrationMessage
 // these will be on the redux state at:
 // state.errors.loginMessage and state.errors.registrationMessage
 export default combineReducers({
   loginMessage,
   registrationMessage,
+  createUserMessage,
 });

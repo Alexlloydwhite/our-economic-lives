@@ -13,9 +13,9 @@ import registerNewUser from './register.saga';
 // and login triggers setting the user
 export default function* rootSaga() {
   yield takeEvery('REGISTER_USER', registerNewUser);
+  yield takeEvery('CREATE_CLIENT', createUserSaga);
   yield all([
     loginSaga(), // login saga is now registered
-    createUserSaga(),
     userSaga(),
   ]);
 }
