@@ -53,12 +53,11 @@ export default function Login() {
     const user = useSelector(store => store.user);
     const dispatch = useDispatch();
 
-    console.log(user);
-
     const login = (event) => {
         event.preventDefault();
-
+        // Checks if email & password state is not null
         if (email && password) {
+            // Login user with email & password state
             dispatch({
                 type: 'LOGIN',
                 payload: {
@@ -66,23 +65,26 @@ export default function Login() {
                     password: password,
                 },
             });
+            // IF user is registered, send to /home
+            // ELSE send to /register
             if(user.is_registered === false) {
                 history.push('/register');
             } else {
                 history.push('/home');
             }
-            // TODO add validation to check if user is registered
-            // Send user to either home view or register form
         } else {
+            // Set error if inputs are missing or not valid
             dispatch({ type: 'LOGIN_INPUT_ERROR' });
         };
     }; // end login
     return (
         <Grid container component="main" className={classes.layout}>
             <Grid item xs={12} className={classes.paper}>
+                {/* Logo avatar */}
                 <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
                     <img src="/images/OELavatar.png" />
                 </Avatar>
+                {/* Title */}
                 <Typography
                     component="h3"
                     variant="h4"
@@ -93,6 +95,7 @@ export default function Login() {
                     Our Economic Lives
                 </Typography>
                 <form className={classes.form} onSubmit={login} noValidate>
+                    {/* Errors display */}
                     {errors.loginMessage && (
                         <h3 className="alert" role="alert">
                             {errors.loginMessage}
@@ -111,7 +114,7 @@ export default function Login() {
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
                     />
-                    {/* input for password */}
+                    {/* Input for password */}
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -126,7 +129,7 @@ export default function Login() {
                         onChange={(event) => setPassword(event.target.value)}
                         style={{ marginBottom: 20 }}
                     />
-                    {/* submit button */}
+                    {/* Submit button */}
                     <Button
                         type="submit"
                         variant="contained"
