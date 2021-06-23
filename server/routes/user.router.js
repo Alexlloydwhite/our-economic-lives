@@ -34,6 +34,7 @@ router.post('/create', (req, res, next) => {
 });
 
 router.put('/register', (req,res) => {
+  console.log(req.body, req.user.id);
   const queryText = `
   UPDATE "user" 
   SET 
@@ -41,8 +42,8 @@ router.put('/register', (req,res) => {
     last_name=$2,
     phone_number=$3,
     city=$4,
-    current_profession=$5
-    desired_career=$6
+    current_profession=$5,
+    desired_career=$6,
     is_registered='true'
   WHERE id=$7`
   pool
