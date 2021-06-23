@@ -131,10 +131,6 @@ export default function Register() {
                             {errors.registrationMessage}
                         </h3>
                     )}
-                    {/* Remove before build */}
-                    <pre>
-                        {JSON.stringify(formState, null, 2)}
-                    </pre>
                     {/* First Name */}
                     <TextField
                         variant="outlined"
