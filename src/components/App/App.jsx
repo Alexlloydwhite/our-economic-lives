@@ -16,6 +16,7 @@ import Register from '../Login/Register';
 import Footer from '../Footer/Footer';
 
 import './App.css';
+import PyramidTier from '../PyramidTier/PyramidTier';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -40,6 +41,9 @@ export default function App() {
         {/* Home Screen / Pyramid View */}
         <Route exact path="/home">
           <Home />
+        </Route>
+        <Route exact path="/tier">
+          <PyramidTier />
         </Route>
         <Footer />
       </Router>
