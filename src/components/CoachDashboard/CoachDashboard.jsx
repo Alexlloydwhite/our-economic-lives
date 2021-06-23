@@ -62,6 +62,9 @@ export default function CoachDashboard() {
                 <DialogTitle>
                     Add a new client to your team
                 </DialogTitle>
+                <pre>
+                    {JSON.stringify(formState, null, 2)}
+                </pre>
                 <DialogContent>
                     <DialogContentText>
                         We recommend using the name of your organization as the password.
