@@ -53,8 +53,8 @@ export default function Login() {
     const user = useSelector(store => store.user);
     const dispatch = useDispatch();
 
-    const login = (event) => {
-        event.preventDefault();
+    const login = (e) => {
+        e.preventDefault();
         // Checks if email & password state is not null
         if (email && password) {
             // Login user with email & password state
@@ -65,13 +65,23 @@ export default function Login() {
                     password: password,
                 },
             });
-            // IF user is registered, send to /home
-            // ELSE send to /register
-            if (user.is_registered === false) {
-                history.push('/register');
-            } else {
-                history.push('/home');
+
+            switch (user.authorization) {
+                case 3:
+                    return (
+                        // IF user is registered, send to /home
+                        // ELSE send to /register
+                        (user.is_registered === false) ?
+                            history.push('/register')
+                            :
+                            history.push('/home')
+                    )
+                case 2:
+                    return history.push('/coach-dashboard')
+                case 1:
+                    return // bring to PA view
             }
+
         } else {
             // Set error if inputs are missing or not valid
             dispatch({ type: 'LOGIN_INPUT_ERROR' });
@@ -80,6 +90,8 @@ export default function Login() {
     return (
         <Grid container component="main" className={classes.layout}>
             <Grid item xs={12} className={classes.paper}>
+                {/* Temp logout btn */}
+                <button onClick={() => dispatch({ type: 'LOGOUT' })}>Temp Logout Btn</button>
                 {/* Logo avatar */}
                 <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
                     <img src="/images/OELavatar.png" />
