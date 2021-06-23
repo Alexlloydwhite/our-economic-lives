@@ -13,6 +13,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Login/Register';
+import CoachDashboard from '../CoachDashboard/CoachDashboard';
 import Footer from '../Footer/Footer';
 
 import './App.css';
@@ -41,6 +42,10 @@ export default function App() {
         {/* Home Screen / Pyramid View */}
         <Route exact path="/home">
           <Home />
+        </Route>
+        {/* Coach Dashboard */}
+        <Route exact path="/coach-dashboard">
+          <CoachDashboard />
         </Route>
         <Footer />
       </Router>
