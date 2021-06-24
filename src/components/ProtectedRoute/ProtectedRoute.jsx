@@ -50,7 +50,7 @@ function ProtectedRoute(props) {
       ComponentToShow = CoachDashboard;
     }
     // is the user an admin?
-    if (user.authorization === 3 ) {
+    if (user.authorization === 1 ) {
       ComponentToShow = AdminDashboard;
     } 
   } else {
