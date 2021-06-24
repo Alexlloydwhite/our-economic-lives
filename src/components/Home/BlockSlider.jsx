@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.default,
     marginTop: '5rem',
   },
   gridList: { // gridList styles the list of building blocks
@@ -27,13 +27,11 @@ const useStyles = makeStyles((theme) => ({
     width: '80%',
   },
   card: { // card styles the building blocks
-    // width: theme.spacing(34),
-    // height: theme.spacing(21),
     width: '95%',
-    height: theme.spacing(21),
+    height: '95%',
     padding: '.5rem',
     background: 'linear-gradient(45deg, #3ca6fe 40%, #cdecfa 90%)',
-    margin: theme.spacing(1),
+    margin: '.5rem',
     textAlign: 'center',
   },
   title: {
