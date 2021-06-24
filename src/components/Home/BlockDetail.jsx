@@ -37,8 +37,16 @@ const useStyles = makeStyles((theme) => ({
     {
         title: 'Ambition',
     },
-   
   ];
+
+//   const submitSkill = () => {
+//       console.log('in submitSkill', );
+//       dispatch({
+//         type: 'ADD_SKILL', payload: {
+//             skill: skill
+//         }
+//     })
+//     }
 
 export default function BlockDetail () {
 
@@ -77,7 +85,7 @@ export default function BlockDetail () {
                 variant="contained" 
                 color="primary"
                 size="large" 
-                // onClick={submitForm}
+                // onClick={submitSkill}
             >
                 Submit for coach review
             </Button>
@@ -85,7 +93,7 @@ export default function BlockDetail () {
         </Box>
 
         <div className={classes.box}>
-        <Typography >Saved Skillz: 2 / 5</Typography>
+        <Typography >Saved Skillz: 1 / 5</Typography>
         <Box className={classes.root}>
             {/* {savedskills.map(skill => ( */}
             <>
