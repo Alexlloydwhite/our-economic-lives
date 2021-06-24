@@ -16,13 +16,21 @@ import ClientTableRow from './ClientTableRow';
 // Styles
 const useStyles = makeStyles((theme) => ({
     container: {
+        width: 'auto',
         marginTop: theme.spacing(3),
         marginBottom: theme.spacing(3),
-        direction: 'rows',
-        display: 'flex',
-        position: 'relative',
-        alignItems: ' center',
-        justify: 'center'
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        [theme.breakpoints.up(1000 + theme.spacing(2) * 2)]: {
+            width: 1000,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        },
+    },
+    table: {
+        marginRight: theme.spacing(2),
+        marginLeft: theme.spacing(2),
+        maxWidth: 600
     },
     tableHeader: {
         padding: theme.spacing(1)
@@ -55,8 +63,18 @@ export default function ClientTable() {
     }, [dispatch])
     return (
         <div className={classes.container}>
-            <Grid container>
-                <Grid item>
+            <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+            >
+                <Grid
+                    item
+                    className={classes.table}
+                    xs={12}
+                    component={Paper}
+                >
                     <Typography
                         className={classes.tableHeader}
                         variant="h4"
@@ -64,11 +82,6 @@ export default function ClientTable() {
                     >
                         Your Clients
                     </Typography>
-                </Grid>
-                <Grid
-                    item
-                    className={classes.table}
-                >
                     <Table>
                         <TableBody>
                             {clientList.map((client) => (
