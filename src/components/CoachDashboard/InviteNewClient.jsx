@@ -60,16 +60,22 @@ export default function InviteNewClient() {
     return (
         <div style={{ textAlign: 'center' }}>
             {/* Page Title */}
-            <Typography>
+            <Typography variant="h5">
                 You have {clientList.length} / 8 clients on your team
             </Typography>
             {/* Btn to invite new client */}
-            <Button 
-                onClick={() => setOpen(true)}
-                variant="outlined"
-            >
-                Invite a new client to your team
-            </Button>
+            {clientList.length < 8 ?
+                <Button
+                    onClick={() => setOpen(true)}
+                    variant="outlined"
+                >
+                    Invite a new client to your team
+                </Button>
+                :
+                <Typography variant="h6">
+                    Your client list is full
+                </Typography>
+            }
             {/* Dialog */}
             <Dialog open={open} onClose={handleClose}>
                 {/* Title */}
