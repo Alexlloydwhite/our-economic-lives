@@ -5,7 +5,7 @@ const router = express.Router();
 const fileUpload = require('express-fileupload');
 router.use(fileUpload());
 
-router.post('/', async (req, res) => {
+router.post('/:id', async (req, res) => {
     const client = await pool.connect();
     try {
         client.query('BEGIN')
@@ -53,7 +53,6 @@ router.post('/', async (req, res) => {
     } finally {
         client.release();
     }
-
 })
 
 
