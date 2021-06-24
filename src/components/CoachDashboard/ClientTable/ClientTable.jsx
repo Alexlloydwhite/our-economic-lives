@@ -18,6 +18,14 @@ const useStyles = makeStyles((theme) => ({
     table: {
         maxWidth: 500,
         padding: theme.spacing(2)
+    },
+    tableHeader: {
+        padding: theme.spacing(1)
+    },
+    tableButton: {
+        display: 'block',
+        marginLeft: 'auto',
+        marginRight: 0,
     }
 }));
 
@@ -44,6 +52,7 @@ export default function ClientTable() {
         <div className={classes.table}>
             <TableContainer component={Paper}>
                 <Typography
+                    className={classes.tableHeader}
                     variant="h4"
                     color="primary"
                 >
@@ -56,6 +65,7 @@ export default function ClientTable() {
                                 key={client.id}
                                 client={client}
                                 StyledTableRow={StyledTableRow}
+                                classes={classes}
                             />
                         ))}
                     </TableBody>

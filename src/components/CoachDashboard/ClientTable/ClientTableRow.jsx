@@ -11,7 +11,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // React
 import { useState } from 'react';
 
-export default function ClientTableRow({client, StyledTableRow}) {
+export default function ClientTableRow({client, StyledTableRow, classes}) {
     const [anchorEl, setAnchorEl] = useState(null);
     return (
         <StyledTableRow>
@@ -23,12 +23,19 @@ export default function ClientTableRow({client, StyledTableRow}) {
                         </Typography>
                     </TableCell>
                     <TableCell>
-                        <Button size="small" variant="outlined">
+                        <Button 
+                        size="small" 
+                        variant="outlined"
+                        className={classes.tableButton}
+                        >
                             Critical Experiences
                         </Button>
                     </TableCell>
                     <TableCell>
-                        <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
+                        <IconButton 
+                            onClick={(e) => setAnchorEl(e.currentTarget)}
+                            className={classes.tableButton}   
+                        >
                             <MoreHorizIcon />
                         </IconButton>
                         <Menu
