@@ -10,7 +10,10 @@ router.get('/', (req, res) => {
     const queryText = `
     SELECT * 
     FROM "user" u
-    WHERE u.coach_id=$1;`;
+    WHERE u.coach_id=$1
+    ORDER BY 
+        u.is_registered DESC,
+        u.last_name ASC;`;
     pool
         .query(queryText, [coachId])
         .then(result => {

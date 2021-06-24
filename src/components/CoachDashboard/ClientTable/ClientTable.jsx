@@ -63,6 +63,9 @@ export default function ClientTable() {
     }, [dispatch])
     return (
         <div className={classes.container}>
+            <pre>
+                {JSON.stringify(clientList[0], null, 2)}
+            </pre>
             <Grid
                 container
                 direction="row"
@@ -88,6 +91,7 @@ export default function ClientTable() {
                                 <ClientTableRow
                                     key={client.id}
                                     client={client}
+                                    clientList={clientList}
                                     StyledTableRow={StyledTableRow}
                                     classes={classes}
                                 />
