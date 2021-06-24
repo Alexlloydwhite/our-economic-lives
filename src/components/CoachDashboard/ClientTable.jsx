@@ -8,9 +8,13 @@ import {
     TableRow,
     Paper,
     Typography,
-    Button
+    Button,
+    IconButton,
+    Menu,
+    MenuItem
 } from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // React
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -69,13 +73,18 @@ export default function ClientTable() {
                                     <>
                                         <TableCell>
                                             <Typography>
-                                                {client.first_name}{ ' ' }{client.last_name}
+                                                {client.first_name}{' '}{client.last_name}
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
                                             <Button size="small" variant="outlined">
                                                 Critical Experiences
                                             </Button>
+                                        </TableCell>
+                                        <TableCell>
+                                            <IconButton>
+                                                <MoreHorizIcon />
+                                            </IconButton>
                                         </TableCell>
                                     </>
                                     :
