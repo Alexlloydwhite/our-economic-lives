@@ -2,11 +2,11 @@
 import {
     Table,
     TableBody,
-    TableCell,
     TableContainer,
     TableRow,
     Paper,
     Typography,
+    Grid
 } from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 // React
@@ -15,9 +15,14 @@ import { useDispatch, useSelector } from "react-redux"
 import ClientTableRow from './ClientTableRow';
 // Styles
 const useStyles = makeStyles((theme) => ({
-    table: {
-        maxWidth: 500,
-        padding: theme.spacing(2)
+    container: {
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3),
+        direction: 'rows',
+        display: 'flex',
+        position: 'relative',
+        alignItems: ' center',
+        justify: 'center'
     },
     tableHeader: {
         padding: theme.spacing(1)
@@ -49,28 +54,35 @@ export default function ClientTable() {
         })
     }, [dispatch])
     return (
-        <div className={classes.table}>
-            <TableContainer component={Paper}>
-                <Typography
-                    className={classes.tableHeader}
-                    variant="h4"
-                    color="primary"
+        <div className={classes.container}>
+            <Grid container>
+                <Grid item>
+                    <Typography
+                        className={classes.tableHeader}
+                        variant="h4"
+                        color="primary"
+                    >
+                        Your Clients
+                    </Typography>
+                </Grid>
+                <Grid
+                    item
+                    className={classes.table}
                 >
-                    Your Clients
-                </Typography>
-                <Table>
-                    <TableBody>
-                        {clientList.map((client) => (
-                            <ClientTableRow
-                                key={client.id}
-                                client={client}
-                                StyledTableRow={StyledTableRow}
-                                classes={classes}
-                            />
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                    <Table>
+                        <TableBody>
+                            {clientList.map((client) => (
+                                <ClientTableRow
+                                    key={client.id}
+                                    client={client}
+                                    StyledTableRow={StyledTableRow}
+                                    classes={classes}
+                                />
+                            ))}
+                        </TableBody>
+                    </Table>
+                </Grid>
+            </Grid>
         </div>
     )
 }
