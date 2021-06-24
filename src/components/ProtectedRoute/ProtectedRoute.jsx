@@ -3,6 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import LoginPage from '../Login/Login';
 import Register from '../Login/Register';
 import CoachDashboard from '../CoachDashboard/CoachDashboard';
+import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import { useSelector } from 'react-redux';
 
 // A Custom Wrapper Component -- This will keep our code DRY.
@@ -48,6 +49,10 @@ function ProtectedRoute(props) {
       // if they are, show the coach dashboard
       ComponentToShow = CoachDashboard;
     }
+    // is the user an admin?
+    if (user.authorization === 3 ) {
+      ComponentToShow = AdminDashboard;
+    } 
   } else {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage
