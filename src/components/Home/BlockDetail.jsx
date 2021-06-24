@@ -1,6 +1,7 @@
+import {useDispatch, useSelector} from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -16,18 +17,17 @@ const useStyles = makeStyles((theme) => ({
         width: '90%',
       },
     },
-    card: {
+    heading: {
         textAlign: 'Center',
         padding: theme.spacing(1),
     },
-    newSkill: {
+    box: {
         textAlign: 'Center',
-        width: '90%',
-        padding: theme.spacing(1),
+        padding: theme.spacing(2),
     },
   }));
 
-  const tileData = [
+  const sample = [
     {
       title: 'Interpersonal Skills',
     },
@@ -43,25 +43,27 @@ const useStyles = makeStyles((theme) => ({
 export default function BlockDetail () {
 
     const classes = useStyles();
+    // const savedBlocks = useSelector((store) => store.savedskills);
+    // const blockInfo = useSelector((store) => store.blockInfo);
 
     return (
         <>
-        <Card className={classes.card}>
+        <Card className={classes.heading}>
           <Typography variant="h4" >
             Integrity
           </Typography>
             <List >
-            {tileData.map( example => (
-                    <ListItem className={classes.card}>
+            {sample.map( example => (
+                    <ListItem className={classes.heading}>
                         <ListItemText primary={example.title}/>
                     </ListItem>
                 ))}
             </List>
         </Card>
         
-        <Box className={classes.card}>
+        <Box className={classes.box}>
             <Typography >
-                How you display Integrity in your daily life?
+                How do you display Integrity in your daily life?
             </Typography>
         <form className={classes.root} noValidate autoComplete="off">
             <TextField
@@ -82,9 +84,11 @@ export default function BlockDetail () {
         </form>
         </Box>
 
-        <div className={classes.card}>
+        <div className={classes.box}>
+        <Typography >Saved Skillz: 2 / 5</Typography>
         <Box className={classes.root}>
-            <Typography >Saved Skillz: 2 / 5</Typography>
+            {/* {savedskills.map(skill => ( */}
+            <>
             <TextField
                 label="My Jedi skillz are on point"
                 multiline
@@ -109,6 +113,8 @@ export default function BlockDetail () {
             >
                 Comments
             </Button>
+            </>
+             {/* ))} */}
         </Box>
         </div>
     </>
