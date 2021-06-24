@@ -4,14 +4,9 @@ import {
     TableBody,
     TableCell,
     TableContainer,
-    TableHead,
     TableRow,
     Paper,
     Typography,
-    Button,
-    IconButton,
-    Menu,
-    MenuItem
 } from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 // React
@@ -25,15 +20,6 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2)
     }
 }));
-
-const StyledTableCell = withStyles((theme) => ({
-    head: {
-        backgroundColor: theme.palette.primary.light
-    },
-    body: {
-        fontSize: 14,
-    }
-}))(TableCell);
 
 const StyledTableRow = withStyles((theme) => ({
     root: {
