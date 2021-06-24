@@ -8,8 +8,15 @@ import {
     MenuItem
 } from '@material-ui/core'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+// React
+import { useState } from 'react';
 
 export default function ClientTableRow({client, StyledTableRow}) {
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const handleMenuOpen = (e) => {
+        setAnchorEl(e.currentTarget);
+    }
     return (
         <StyledTableRow>
             {client.is_registered ?
@@ -26,8 +33,18 @@ export default function ClientTableRow({client, StyledTableRow}) {
                     </TableCell>
                     <TableCell>
                         <IconButton>
-                            <MoreHorizIcon />
+                            <MoreHorizIcon onClick={handleMenuOpen} />
                         </IconButton>
+                        <Menu
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={() => setAnchorEl(null)}
+                        >
+                            <MenuItem>View Pyramid</MenuItem>
+                            <MenuItem>Client Info</MenuItem>
+                            <MenuItem>Deactivate Client</MenuItem>
+                        </Menu>
                     </TableCell>
                 </>
                 :
