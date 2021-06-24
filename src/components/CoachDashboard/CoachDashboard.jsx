@@ -1,5 +1,5 @@
 import InviteNewClient from './InviteNewClient';
-import ClientTable from './ClientTable';
+import ClientTable from './ClientTable/ClientTable';
 
 export default function CoachDashboard() {
     return (

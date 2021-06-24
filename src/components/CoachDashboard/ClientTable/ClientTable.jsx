@@ -14,10 +14,10 @@ import {
     MenuItem
 } from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // React
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import ClientTableRow from './ClientTableRow';
 // Styles
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -68,40 +68,11 @@ export default function ClientTable() {
                     </TableHead>
                     <TableBody>
                         {clientList.map((client) => (
-                            <StyledTableRow key={client.id}>
-                                {client.is_registered ?
-                                    <>
-                                        <TableCell>
-                                            <Typography>
-                                                {client.first_name}{' '}{client.last_name}
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Button size="small" variant="outlined">
-                                                Critical Experiences
-                                            </Button>
-                                        </TableCell>
-                                        <TableCell>
-                                            <IconButton>
-                                                <MoreHorizIcon />
-                                            </IconButton>
-                                        </TableCell>
-                                    </>
-                                    :
-                                    <>
-                                        <TableCell>
-                                            <Typography>
-                                                {client.email}
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Typography>
-                                                Not Registered
-                                            </Typography>
-                                        </TableCell>
-                                    </>
-                                }
-                            </StyledTableRow>
+                            <ClientTableRow
+                                key={client.id}
+                                client={client}
+                                StyledTableRow={StyledTableRow}
+                            />
                         ))}
                     </TableBody>
                 </Table>
