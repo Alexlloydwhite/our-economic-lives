@@ -24,8 +24,9 @@ import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link as RouterLink, useHistory, HashRouter as Router} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { ListItem, ListItemText } from '@material-ui/core';
+import { Container, ListItem, ListItemText, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import { theme } from '../../Theme/Theme'
 
 const useStyles = makeStyles({
   list: {
@@ -33,6 +34,16 @@ const useStyles = makeStyles({
   },
   fullList: {
     width: 'auto',
+  },
+  name: {
+    padding: 15,
+    backgroundColor: theme.palette.primary.main,
+    width: '100%',
+    margin: 0,
+  },
+  drawer: {
+    margin: 0,
+    padding: 0,
   },
 });
 
@@ -100,30 +111,35 @@ export default function Drawer() {
 
   // This sets up the list of links that are rendered when the drawer is open
   const list = (anchor) => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        <ListItemLink to="/home" primary="Home" />
-      </List>
-      {/* This divider renders a dividing line between the page nagivation links and the user account links */}
-      <Divider />
-      {!user.email ?
-      // The following link only displays if a user is not logged in and the remaining links after the colon are rendered when a user is logged in
-      <ListItemLink to="/login" primary="Login" /> :
-      <>
-      {/* The profile link is currently disables and will be added in a future update */}
-      {/* <ListItemLink to="/profile" primary="Profile" /> */}
-      <ListItem>
-      <ListItemText  primary="Log out" 
-      onClick={() => handleLogout()}/>
-      </ListItem></> }
-    </div>
+    <Container className={classes.drawer}>
+      <div
+        className={clsx(classes.list, {
+          [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+        })}
+        role="presentation"
+        onClick={toggleDrawer(anchor, false)}
+        onKeyDown={toggleDrawer(anchor, false)}
+        >
+        <Typography className={classes.name}>{user.first_name + ' ' + user.last_name}</Typography>
+        <Divider />
+        <List>
+          <ListItemLink to="/home" primary="Home" />
+          <ListItemLink to="/profile" primary="Profile" />
+        </List>
+        {/* This divider renders a dividing line between the page nagivation links and the user account links */}
+        <Divider />
+        {!user.email ?
+        // The following link only displays if a user is not logged in and the remaining links after the colon are rendered when a user is logged in
+        <ListItemLink to="/login" primary="Login" /> :
+        <>
+        {/* The profile link is currently disables and will be added in a future update */}
+        {/* <ListItemLink to="/profile" primary="Profile" /> */}
+        <ListItem>
+        <ListItemText  primary="Log out" 
+        onClick={() => handleLogout()}/>
+        </ListItem></> }
+      </div>
+    </Container>
   );
 
   // This describs the part of the display the drawer comes from. Top makes it look

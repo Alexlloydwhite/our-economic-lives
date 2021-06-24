@@ -14,9 +14,12 @@ const useStyles = makeStyles({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    width: '10vw',
   },
   title: {
-    flexGrow: 1,
+    width: '90vw',
+    textAlign: 'center',
+    position: 'absolute',
   },
 });
 
@@ -27,10 +30,7 @@ export default function NavBar() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.navbar}>
         <Toolbar>
-          <Drawer />
-          {/* <IconButton edge="start" className={classes.menuButton} onClick={toggleDrawer(anchor, true)} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton> */}
+          <Drawer className={classes.menuButton} />
         </Toolbar>
       </AppBar>   
     </div>
