@@ -17,6 +17,7 @@ import Footer from '../Footer/Footer';
 
 import './App.css';
 import BlockSlider from '../Home/BlockSlider';
+import BlockDetail from '../Home/BlockDetail';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,9 @@ export default function App() {
         </Route>
         <Route exact path="/blockSlider">
           <BlockSlider />
+        </Route>
+        <Route exact path="/blockDetail">
+          <BlockDetail />
         </Route>
         <Footer />
       </Router>
