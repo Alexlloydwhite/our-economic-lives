@@ -1,6 +1,9 @@
-import { AppBar, Button, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Button, IconButton, makeStyles, Toolbar, Typography, SwipeableDrawer, List, Divider, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { useState } from 'react';
+import clsx from 'clsx';
 import MenuIcon from '@material-ui/icons/Menu';
 import { theme } from '../../Theme/Theme';
+import Drawer from './Drawer';
 
 const useStyles = makeStyles({
   root: {
@@ -24,9 +27,10 @@ export default function NavBar() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.navbar}>
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <Drawer />
+          {/* <IconButton edge="start" className={classes.menuButton} onClick={toggleDrawer(anchor, true)} color="inherit" aria-label="menu">
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
         </Toolbar>
       </AppBar>   
     </div>
