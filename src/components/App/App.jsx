@@ -49,10 +49,6 @@ export default function App() {
         >
           <Home />
         </ProtectedRoute>
-        {/* Coach Dashboard */}
-        <Route exact path="/dashboard">
-          <CoachDashboard />
-        </Route>
         <Route exact path="/blockSlider">
           <BlockSlider />
         </Route>
