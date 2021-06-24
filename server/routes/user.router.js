@@ -36,7 +36,7 @@ router.post('/create', (req, res, next) => {
 
 // Handles PUT request, this is the end point
 // used when a new user logins in for the first time
-router.put('/register', (req,res) => {
+router.put('/register', (req, res) => {
   console.log(req.body, req.user.id);
   const queryText = `
   UPDATE "user" 
@@ -63,7 +63,7 @@ router.put('/register', (req,res) => {
     .catch((err) => {
       res.sendStatus(500);
       console.log(`error registering user: ${err}`);
-    });  
+    });
 });
 
 // Handles login form authenticate/login POST
