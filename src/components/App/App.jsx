@@ -15,6 +15,7 @@ import Login from '../Login/Login';
 import Register from '../Login/Register';
 import CoachDashboard from '../CoachDashboard/CoachDashboard';
 import Footer from '../Footer/Footer';
+import NavBar from './NavBar/NavBar';
 
 import './App.css';
 import BlockSlider from '../Home/BlockSlider';
@@ -30,6 +31,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <NavBar />
       <Router>
         {/* <Redirect exact from="/" to="/home" /> */}
         {/* Login View */}
