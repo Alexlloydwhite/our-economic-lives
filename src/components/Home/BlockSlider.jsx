@@ -27,11 +27,12 @@ const useStyles = makeStyles((theme) => ({
     width: '80%',
   },
   card: { // card styles the building blocks
-    width: theme.spacing(34),
+    // width: theme.spacing(34),
+    // height: theme.spacing(21),
+    width: '95%',
     height: theme.spacing(21),
     padding: '.5rem',
-    background: 'linear-gradient(to top, rgba(255,130,0,0.7) 0%, rgba(255,130,0,0.3) 70%, rgba(255,130,0,0.1) 100%)',
-    // backgroundColor: theme.palette.primary.main,
+    background: 'linear-gradient(45deg, #3ca6fe 40%, #cdecfa 90%)',
     margin: theme.spacing(1),
     textAlign: 'center',
   },
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary, 
   },
   arrow: {
-    marginTop: '16%',
+    marginTop: '18%',
     fontSize: 35,
   }
 }));
