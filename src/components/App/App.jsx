@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import {
   HashRouter as Router,
   Route,
-  Redirect,
-  Switch,
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -13,7 +11,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Login/Register';
-import CoachDashboard from '../CoachDashboard/CoachDashboard';
 import Footer from '../Footer/Footer';
 import NavBar from './NavBar/NavBar';
 
