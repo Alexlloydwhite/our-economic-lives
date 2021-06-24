@@ -15,8 +15,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 // Handles POST request with new user data
-// The only thing different from this and every other post we've seen
-// is that the password gets encrypted before being inserted
+// This is the end point used when a coach
+// adds a new client to their team
 router.post('/create', (req, res, next) => {
   console.log(`IN, create route`);
   const email = req.body.email;
@@ -34,6 +34,8 @@ router.post('/create', (req, res, next) => {
     });
 });
 
+// Handles PUT request, this is the end point
+// used when a new user logins in for the first time
 router.put('/register', (req,res) => {
   console.log(req.body, req.user.id);
   const queryText = `

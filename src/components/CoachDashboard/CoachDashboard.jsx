@@ -83,7 +83,7 @@ export default function CoachDashboard() {
                     )}
                     {/* Email */}
                     <TextField
-                        label="Email"
+                        label="Client's Email"
                         name="email"
                         fullWidth
                         required
@@ -91,23 +91,25 @@ export default function CoachDashboard() {
                     />
                     {/* Password */}
                     <TextField
-                        label="Password"
+                        label="Create a Password"
                         name="password"
                         fullWidth
                         required
                         onChange={handleChange}
                     />
                 </DialogContent>
-                <DialogActions>
+                <DialogActions style={{ marginRight: 10, marginBottom: 10 }}>
                     {/* CancelBtn */}
                     <Button
-                        variant="outlined"
                         onClick={handleClose}
+                        variant="outlined"
+                        size="small"
                     >
                         Cancel
                     </Button>
                     {/* Add client btn */}
                     <Button
+                        size="small"
                         onClick={handleSubmit}
                         variant="contained"
                         color="primary"
