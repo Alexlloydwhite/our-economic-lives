@@ -1,11 +1,12 @@
 import Pyramid from './Pyramid';
-import PyramidTier from '../PyramidTier/PyramidTier';
+import RecommendedButton from './RecommendedButton';
 
 export default function Home() {
+
   return (
     <>
      <Pyramid />
-    {/* <PyramidTier /> */}
+     <RecommendedButton />
     </>
   )
 }

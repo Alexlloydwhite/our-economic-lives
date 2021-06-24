@@ -68,13 +68,6 @@ VALUES ('test1', 'test1', 'Test', 'PA', '123', 'Minneapolis', 1, NULL, NULL, NUL
 ('test2', 'test2', 'Test', 'Coach', '123', 'Minneapolis', 2, NULL, NULL, NULL),
 ('test3', 'test3', 'Test', 'User', '123', 'Minneapolis', 3, 2, 'Cashier', 2); 
 
-SELECT * FROM "user";
-SELECT * FROM "building_block";
-
-DROP TABLE "user";
-DROP TABLE "building_block";
-DROP TABLE "competency";
-
 INSERT INTO "career_path" ("name")
 VALUES ('Generic'),
 ('Plumber'),
