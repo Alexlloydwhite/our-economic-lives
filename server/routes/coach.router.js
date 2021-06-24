@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     WHERE u.coach_id=$1;`;
     pool
         .query(queryText, [coachId])
-        .then(() => {
+        .then(result => {
             res.send(result.rows);
         })
         .catch(err => {

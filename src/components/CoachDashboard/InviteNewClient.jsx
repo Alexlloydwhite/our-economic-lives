@@ -63,7 +63,12 @@ export default function InviteNewClient() {
                 You may have a maximum of 8 clients on your team
             </Typography>
             {/* Btn to invite new client */}
-            <Button onClick={() => setOpen(true)}>Invite a new client to your team</Button>
+            <Button 
+                onClick={() => setOpen(true)}
+                variant="outlined"
+            >
+                Invite a new client to your team
+            </Button>
             {/* Dialog */}
             <Dialog open={open} onClose={handleClose}>
                 {/* Title */}
