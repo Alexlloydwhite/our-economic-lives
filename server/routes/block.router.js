@@ -14,7 +14,7 @@ router.get('/:id', async (req, res) => {
     await client.query('BEGIN');
     //gets a users building blocks from the database
     let buildingBlocks = await client.query(queryText, [Number(req.params.id)])
-    buildingBlocks = buildingBlocks.rows ;
+    buildingBlocks = buildingBlocks.rows;
     //loops through those building blocks             
     for (let i = 0; i < buildingBlocks.length; i++) {
       queryText = `SELECT value FROM competency
