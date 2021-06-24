@@ -13,10 +13,6 @@ import { useState } from 'react';
 
 export default function ClientTableRow({client, StyledTableRow}) {
     const [anchorEl, setAnchorEl] = useState(null);
-
-    const handleMenuOpen = (e) => {
-        setAnchorEl(e.currentTarget);
-    }
     return (
         <StyledTableRow>
             {client.is_registered ?
@@ -32,8 +28,8 @@ export default function ClientTableRow({client, StyledTableRow}) {
                         </Button>
                     </TableCell>
                     <TableCell>
-                        <IconButton>
-                            <MoreHorizIcon onClick={handleMenuOpen} />
+                        <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
+                            <MoreHorizIcon />
                         </IconButton>
                         <Menu
                             anchorEl={anchorEl}
@@ -58,6 +54,9 @@ export default function ClientTableRow({client, StyledTableRow}) {
                         <Typography>
                             Not Registered
                         </Typography>
+                    </TableCell>
+                    <TableCell>
+                        {' '}
                     </TableCell>
                 </>
             }

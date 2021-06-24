@@ -21,7 +21,8 @@ import ClientTableRow from './ClientTableRow';
 // Styles
 const useStyles = makeStyles((theme) => ({
     table: {
-        maxWidth: 300,
+        maxWidth: 500,
+        padding: theme.spacing(2)
     }
 }));
 
@@ -54,18 +55,15 @@ export default function ClientTable() {
         })
     }, [dispatch])
     return (
-        <div style={{ textAlign: 'center' }}>
+        <div className={classes.table}>
             <TableContainer component={Paper}>
-                <Table className={classes.table}>
-                    <TableHead>
-                        <TableRow>
-                            <StyledTableCell>
-                                <Typography>
-                                    Your Clients
-                                </Typography>
-                            </StyledTableCell>
-                        </TableRow>
-                    </TableHead>
+                <Typography
+                    variant="h4"
+                    color="primary"
+                >
+                    Your Clients
+                </Typography>
+                <Table>
                     <TableBody>
                         {clientList.map((client) => (
                             <ClientTableRow
