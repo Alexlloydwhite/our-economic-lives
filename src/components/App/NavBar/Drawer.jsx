@@ -96,7 +96,6 @@ export default function Drawer() {
   // "Logout" is clicked
   const handleLogout = () => {
     dispatch({type: 'LOGOUT'})
-    history.push('/home')
   }
 
   // This sets up the list of links that are rendered when the drawer is open
@@ -114,7 +113,7 @@ export default function Drawer() {
       </List>
       {/* This divider renders a dividing line between the page nagivation links and the user account links */}
       <Divider />
-      {!user.username ?
+      {!user.email ?
       // The following link only displays if a user is not logged in and the remaining links after the colon are rendered when a user is logged in
       <ListItemLink to="/login" primary="Login" /> :
       <>
