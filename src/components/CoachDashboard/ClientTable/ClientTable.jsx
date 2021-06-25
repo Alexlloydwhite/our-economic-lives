@@ -62,40 +62,44 @@ export default function ClientTable() {
     }, [dispatch])
     return (
         <div className={classes.container}>
-            <Grid
-                container
-                direction="row"
-                justify="center"
-                alignItems="center"
-            >
+            {clientList.length > 0 ?
                 <Grid
-                    item
-                    className={classes.table}
-                    xs={12}
-                    component={Paper}
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
                 >
-                    <Typography
-                        className={classes.tableHeader}
-                        variant="h4"
-                        color="primary"
+                    <Grid
+                        item
+                        className={classes.table}
+                        xs={12}
+                        component={Paper}
                     >
-                        Your Clients
-                    </Typography>
-                    <Table>
-                        <TableBody>
-                            {clientList.map((client) => (
-                                <ClientTableRow
-                                    key={client.id}
-                                    client={client}
-                                    clientList={clientList}
-                                    StyledTableRow={StyledTableRow}
-                                    classes={classes}
-                                />
-                            ))}
-                        </TableBody>
-                    </Table>
+                        <Typography
+                            className={classes.tableHeader}
+                            variant="h4"
+                            color="primary"
+                        >
+                            Your Clients
+                        </Typography>
+                        <Table>
+                            <TableBody>
+                                {clientList.map((client) => (
+                                    <ClientTableRow
+                                        key={client.id}
+                                        client={client}
+                                        clientList={clientList}
+                                        StyledTableRow={StyledTableRow}
+                                        classes={classes}
+                                    />
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </Grid>
                 </Grid>
-            </Grid>
+                :
+                null
+            }
         </div>
     )
 }
