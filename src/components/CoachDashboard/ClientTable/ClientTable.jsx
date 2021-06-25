@@ -70,9 +70,6 @@ export default function ClientTable({ clientList, filteredClientList, notFiltere
     }, [dispatch])
     return (
         <div className={classes.container}>
-            <pre style={{ textAlign: 'center' }}>
-                {JSON.stringify(clientList[0], null, 2)}
-            </pre>
             {/* Check is the coach has any clients */}
             {clientList.length > 0 ?
                 <Grid
