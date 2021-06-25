@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Register() {
     const classes = useStyles();
     const history = useHistory();
+    const careerPath = useSelector(store => store.career_path);
     const errors = useSelector(store => store.errors);
     const dispatch = useDispatch();
 
@@ -137,6 +138,7 @@ export default function Register() {
                             {errors.registrationMessage}
                         </h3>
                     )}
+                    {JSON.stringify(formState, null, 2)}
                     {/* First Name */}
                     <TextField
                         variant="outlined"
@@ -206,12 +208,10 @@ export default function Register() {
                             name="careerPyramid"
                             onChange={handleChange}
                         >
-                            {/* TODO - pull pyramid data from Postgres to display here! */}
-                            {/* Here, value is the id of the career pyramid. */}
-                            <MenuItem value={1}>Mechanic</MenuItem>
-                            <MenuItem value={2}>Batman</MenuItem>
-                            <MenuItem value={3}>Doctor</MenuItem>
-                            <MenuItem value={4}>Lawyer</MenuItem>
+                            {/* Map array of careers paths, display each as a menu item */}
+                            {careerPath.map((path) => (
+                                <MenuItem value={path.id} key={path.id}>{path.name}</MenuItem>
+                            ))}
                         </Select>
                     </FormControl>
                     {/* Div sets margin/position for buttons */}
