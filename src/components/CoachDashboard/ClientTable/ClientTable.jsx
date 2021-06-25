@@ -113,6 +113,7 @@ export default function ClientTable() {
                                 item
                                 className={classes.select}
                             >
+                                {/* Select option to filter client list */}
                                 <FormControl>
                                     <Select
                                         value={filter}
