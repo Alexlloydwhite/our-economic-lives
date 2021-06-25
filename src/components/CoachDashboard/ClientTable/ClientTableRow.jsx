@@ -71,12 +71,12 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
                         </Typography>
                     </TableCell>
                     <TableCell>
+                        {' '}
+                    </TableCell>
+                    <TableCell>
                         <Typography>
                             Not Registered
                         </Typography>
-                    </TableCell>
-                    <TableCell>
-                        {' '}
                     </TableCell>
                 </>
             }
