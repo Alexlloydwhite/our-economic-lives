@@ -68,12 +68,12 @@ const useStyles = makeStyles((theme) => ({
  
 export default function PyramidTier() {
   const classes = useStyles();
-  // const history = useHistory();
+  const history = useHistory();
   // const tier = useSelector((store) => store.tier);
 
-  // const handleClick = (id) => {
-  //     history.push(`/block/${id}`);  
-  // }
+  const handleClick = (id) => {
+      history.push(`/blockDetail`);  
+  }
 
 
   return (
@@ -82,8 +82,8 @@ export default function PyramidTier() {
       <GridList className={classes.gridList} cols={1.1} > 
         {tileData.map((block) => (
           <GridListTile key={block.id}>
-            <Card className={classes.card} variant="outlined">
-              {/* onClick={(e) => handleClick(block.id)} */}
+            <Card className={classes.card} variant="outlined"
+              onClick={(e) => handleClick(block.id)}>
               <CardContent className={classes.title}>
                 <Typography variant="h4">{block.title}</Typography>
               </CardContent>
