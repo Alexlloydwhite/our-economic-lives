@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Handles GET request for users that are
 // associated with a particular coach
-router.get('/', (req, res) => {
+router.get('/client-list', (req, res) => {
     // Get coach id from req.user
     const coachId = req.user.id;
     const queryText = `
