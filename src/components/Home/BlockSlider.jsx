@@ -72,7 +72,9 @@ export default function PyramidTier() {
   // const tier = useSelector((store) => store.tier);
 
   const handleClick = (id) => {
-      history.push(`/blockDetail`);  
+    console.log('Clicked slider', id);
+    dispatch({ type: 'SET_DETAIL', payload: id });
+      // history.push(`/blockDetail/${batch.id}`);  
   }
 
 
@@ -80,10 +82,10 @@ export default function PyramidTier() {
     <div className={classes.root} >
       <ArrowBackIosIcon className={classes.arrow} />
       <GridList className={classes.gridList} cols={1.1} > 
-        {tileData.map((block) => (
-          <GridListTile key={block.id}>
+        {tileData.map((block, i) => (
+          <GridListTile key={i}>
             <Card className={classes.card} variant="outlined"
-              onClick={(e) => handleClick(block.id)}>
+              onClick={(e) => handleClick(i)}>
               <CardContent className={classes.title}>
                 <Typography variant="h4">{block.title}</Typography>
               </CardContent>
