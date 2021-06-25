@@ -1,19 +1,26 @@
 import { makeStyles, Typography } from "@material-ui/core"
 import { theme } from '../Theme/Theme'
 
+//these settings can be used to adjust the pyramid dimensions 
+let pyramidTierHeight = 60;
+let pyramidTierMargin = 10;
+let pyramidTier67Height = pyramidTierHeight * 2 + pyramidTierMargin;
+let pyramidBaseWidth = 350;
+let pyramidTier67Width = (pyramidBaseWidth - 100)/2 -10
+
 const getLeftBoarderColor = (leftWidth) => {
   if (leftWidth > 0) {
-    return '100px solid ' + theme.palette.success.main;
+    return pyramidTierHeight + 'px solid ' + theme.palette.success.main;
   } else {
-    return '100px solid ' + theme.palette.secondary.main;
+    return pyramidTierHeight + 'px solid ' + theme.palette.secondary.main;
   }
 }
 
 const getRightBoarderColor = (rightWidth) => {
   if (rightWidth > 0) {
-    return '100px solid ' + theme.palette.secondary.main;
+    return pyramidTierHeight + 'px solid ' + theme.palette.secondary.main;
   } else {
-    return '100px solid ' + theme.palette.success.main;
+    return pyramidTierHeight + 'px solid ' + theme.palette.success.main;
   }
 }
 
@@ -36,8 +43,8 @@ const useStyles = makeStyles({
   tier6: {
     display: 'flex',
     flexDirection: 'column',
-    height: 210,
-    width: 145,
+    height: pyramidTier67Height,
+    width: pyramidTier67Width,
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: 0,
@@ -47,27 +54,27 @@ const useStyles = makeStyles({
     zIndex: 1000,
   },
   tier6Remaining: {
-    marginBottom: 210 * progress[6 - 1],
-    width: 145 - 20 * progress[6 - 1],
+    marginBottom: pyramidTier67Height * progress[6 - 1],
+    width: pyramidTier67Width - 20 * progress[6 - 1],
     marginLeft: 20 * progress[6 - 1],
-    borderBottom: (210 - 210 * progress[6 - 1]) + 'px solid ' + theme.palette.secondary.main,
+    borderBottom: (pyramidTier67Height - pyramidTier67Height * progress[6 - 1]) + 'px solid ' + theme.palette.secondary.main,
     borderLeft: 20 - 20 * progress[6 - 1] + 'px solid transparent',
     zIndex: 500,
     position: 'absolute',
   },
   tier6Progress: {
-    width: 145,
-    marginTop: 210 - 210 * progress[6 - 1],
+    width: pyramidTier67Width,
+    marginTop: pyramidTier67Height - pyramidTier67Height * progress[6 - 1],
     borderLeft: 20 * progress[6 - 1] + 'px solid transparent',
-    borderBottom: (210 * progress[6 - 1]) + 'px solid ' + theme.palette.success.main,
+    borderBottom: (pyramidTier67Height * progress[6 - 1]) + 'px solid ' + theme.palette.success.main,
     zIndex: 500,
     position: 'absolute',
   },
   tier7: {
     display: 'flex',
     flexDirection: 'column',
-    height: 210,
-    width: 145,
+    height: pyramidTier67Height,
+    width: pyramidTier67Width,
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: 0,
@@ -77,19 +84,19 @@ const useStyles = makeStyles({
     zIndex: 1000,
   },
   tier7Remaining: {
-    marginBottom: 210 * progress[7 - 1],
-    width: 145 - 20 * progress[7 - 1],
+    marginBottom: pyramidTier67Height * progress[7 - 1],
+    width: pyramidTier67Width - 20 * progress[7 - 1],
     marginRight: 20 * progress[7 - 1],
-    borderBottom: (210 - 210 * progress[7 - 1]) + 'px solid ' + theme.palette.secondary.main,
+    borderBottom: (pyramidTier67Height - pyramidTier67Height * progress[7 - 1]) + 'px solid ' + theme.palette.secondary.main,
     borderRight: 20 - 20 * progress[7 - 1] + 'px solid transparent',
     zIndex: 500,
     position: 'absolute',
   },
   tier7Progress: {
-    width: 145,
-    marginTop: 210 - 210 * progress[7 - 1],
+    width: pyramidTier67Width,
+    marginTop: pyramidTier67Height - pyramidTier67Height * progress[7 - 1],
     borderRight: 20 * progress[7 - 1] + 'px solid transparent',
-    borderBottom: (210 * progress[7 - 1]) + 'px solid ' + theme.palette.success.main,
+    borderBottom: (pyramidTier67Height * progress[7 - 1]) + 'px solid ' + theme.palette.success.main,
     zIndex: 500,
     position: 'absolute',
   },
@@ -97,7 +104,7 @@ const useStyles = makeStyles({
 
 function Tier(props) {
   let num = props.tier;
-  const width = 400 - ((num - 1) * 20);
+  const width = pyramidBaseWidth - ((num - 1) * 20);
 
   const tierProgress = progress[num -1];
   const tierRemaining = 1 - progress[num -1];
@@ -117,19 +124,19 @@ function Tier(props) {
       justifyContent: 'center',
       alignItems: 'center',
       width: width,
-      height: 100,
+      height: pyramidTierHeight,
     },
     tierRemaining: {
       borderBottom: getRightBoarderColor(tierRemaining),
       borderRight: '10px solid transparent',
-      height: 100,
+      height: pyramidTierHeight,
       width: tierRemaining * 100 + '%',
       zIndex: 0,
     },
     tierProgress: {
       borderBottom: getLeftBoarderColor(tierProgress),
       borderLeft: '10px solid transparent',
-      height: 100,
+      height: pyramidTierHeight,
       width: tierProgress * 100 + '%',
       zIndex: 0,
     },
