@@ -58,7 +58,7 @@ export default function InviteNewClient() {
     }
 
     return (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center', marginTop: 10 }}>
             {/* Page Title */}
             <Typography variant="h5">
                 You have {clientList.length} / 8 clients on your team

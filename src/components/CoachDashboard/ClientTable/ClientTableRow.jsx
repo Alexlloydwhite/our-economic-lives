@@ -5,14 +5,18 @@ import {
     Button,
     IconButton,
     Menu,
-    MenuItem
+    MenuItem,
 } from '@material-ui/core'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // React
 import { useState } from 'react';
+import ClientInfo from './ClientInfo';
+import DeactivateClient from './DeactivateClient';
 
-export default function ClientTableRow({client, StyledTableRow, classes}) {
+export default function ClientTableRow({ client, clientList, StyledTableRow, classes }) {
+    // State for setting location of kabob menu
     const [anchorEl, setAnchorEl] = useState(null);
+
     return (
         <StyledTableRow>
             {client.is_registered ?
@@ -23,18 +27,18 @@ export default function ClientTableRow({client, StyledTableRow, classes}) {
                         </Typography>
                     </TableCell>
                     <TableCell>
-                        <Button 
-                        size="small" 
-                        variant="outlined"
-                        className={classes.tableButton}
+                        <Button
+                            size="small"
+                            variant="outlined"
+                            className={classes.tableButton}
                         >
                             Critical Experiences
                         </Button>
                     </TableCell>
                     <TableCell>
-                        <IconButton 
+                        <IconButton
                             onClick={(e) => setAnchorEl(e.currentTarget)}
-                            className={classes.tableButton}   
+                            className={classes.tableButton}
                         >
                             <MoreHorizIcon />
                         </IconButton>
@@ -43,10 +47,11 @@ export default function ClientTableRow({client, StyledTableRow, classes}) {
                             keepMounted
                             open={Boolean(anchorEl)}
                             onClose={() => setAnchorEl(null)}
+                            onClick={() => setAnchorEl(null)}
                         >
                             <MenuItem>View Pyramid</MenuItem>
-                            <MenuItem>Client Info</MenuItem>
-                            <MenuItem>Deactivate Client</MenuItem>
+                            <ClientInfo client={client} clientList={clientList} />
+                            <DeactivateClient client={client} />
                         </Menu>
                     </TableCell>
                 </>

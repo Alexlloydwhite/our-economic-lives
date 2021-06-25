@@ -4,6 +4,7 @@ import createClient from './CreateClient.saga';
 import userSaga from './user.saga';
 import registerNewUser from './register.saga';
 import fetchClients from './fetchClients.saga';
+import deactivateClient from './deactivateClient.saga';
 import fetchCareerPath from './fetchCareerPath.saga';
 
 // rootSaga is the primary saga.
@@ -17,6 +18,7 @@ export default function* rootSaga() {
   yield takeEvery('REGISTER_USER', registerNewUser);
   yield takeEvery('CREATE_CLIENT', createClient);
   yield takeEvery('FETCH_CLIENTS', fetchClients);
+  yield takeEvery('DEACTIVATE_CLIENT', deactivateClient);
   yield takeEvery('FETCH_CAREER_PATH', fetchCareerPath);
   yield all([
     loginSaga(), // login saga is now registered

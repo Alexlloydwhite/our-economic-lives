@@ -2,7 +2,6 @@
 import {
     Table,
     TableBody,
-    TableContainer,
     TableRow,
     Paper,
     Typography,
@@ -88,6 +87,7 @@ export default function ClientTable() {
                                 <ClientTableRow
                                     key={client.id}
                                     client={client}
+                                    clientList={clientList}
                                     StyledTableRow={StyledTableRow}
                                     classes={classes}
                                 />
