@@ -19,12 +19,12 @@ export default function DeactivateClient({ client }) {
     // Dispatches to remove client from coach
     const deactivateClient = (id) => {
         // Close dialog
-        setDialogOpen(false);
+        setOpenDialog(false);
         // Dispatch to remove client
         dispatch({
             type: 'DEACTIVATE_CLIENT',
             payload: id
-        })
+        });
     }
 
     return (
