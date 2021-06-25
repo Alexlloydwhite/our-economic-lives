@@ -24,9 +24,12 @@ import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link as RouterLink, useHistory, HashRouter as Router} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, ListItem, ListItemText, Typography } from '@material-ui/core';
+import { Container, ListItem, ListItemText, ListItemIcon, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { theme } from '../../Theme/Theme'
+import { theme } from '../../Theme/Theme';
+import HomeIcon from '@material-ui/icons/Home';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const useStyles = makeStyles({
   list: {
@@ -60,7 +63,7 @@ function ListItemLink(props) {
   // This puts the link in a ListItem as a button component
   return (
     <li>
-      <ListItem button component={renderLink}>
+      <ListItem button={true} component={renderLink}>
         {/* If there is an icon for the link this will render it in front of the text */}
         {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
         {/* This is the text for the link */}
@@ -123,8 +126,8 @@ export default function Drawer() {
         <Typography className={classes.name}>{user.first_name + ' ' + user.last_name}</Typography>
         <Divider />
         <List>
-          <ListItemLink to="/home" primary="Home" />
-          <ListItemLink to="/profile" primary="Profile" />
+          <ListItemLink to="/home" primary="Home" icon={<HomeIcon />}/>
+          <ListItemLink to="/profile" primary="Profile" icon={<AccountCircleIcon />} />
         </List>
         {/* This divider renders a dividing line between the page nagivation links and the user account links */}
         <Divider />
@@ -134,8 +137,9 @@ export default function Drawer() {
         <>
         {/* The profile link is currently disables and will be added in a future update */}
         {/* <ListItemLink to="/profile" primary="Profile" /> */}
-        <ListItem>
-        <ListItemText  primary="Log out" 
+        <ListItem button={true} >
+          <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+        <ListItemText primary="Log out" 
         onClick={() => handleLogout()}/>
         </ListItem></> }
       </div>

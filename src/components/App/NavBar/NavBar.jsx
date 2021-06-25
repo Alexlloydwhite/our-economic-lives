@@ -16,11 +16,6 @@ const useStyles = makeStyles({
     marginRight: theme.spacing(2),
     width: '10vw',
   },
-  title: {
-    width: '90vw',
-    textAlign: 'center',
-    position: 'absolute',
-  },
 });
 
 export default function NavBar() {
@@ -28,9 +23,10 @@ export default function NavBar() {
 
   return(
     <div className={classes.root}>
-      <AppBar position="static" className={classes.navbar}>
+      <AppBar className={classes.navbar}>
         <Toolbar>
           <Drawer className={classes.menuButton} />
+          <Typography>Our Economic Lives</Typography>
         </Toolbar>
       </AppBar>   
     </div>
