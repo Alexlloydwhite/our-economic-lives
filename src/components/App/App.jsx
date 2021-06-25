@@ -50,7 +50,7 @@ export default function App() {
         <Route exact path="/blockSlider">
           <BlockSlider />
         </Route>
-        <Route exact path="/blockDetail">
+        <Route exact path="/blockDetail/:id">
           <BlockDetail />
         </Route>
         <Footer />

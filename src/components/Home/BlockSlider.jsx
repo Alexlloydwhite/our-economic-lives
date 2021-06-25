@@ -69,12 +69,13 @@ const useStyles = makeStyles((theme) => ({
 export default function PyramidTier() {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
   // const tier = useSelector((store) => store.tier);
 
   const handleClick = (id) => {
     console.log('Clicked slider', id);
     dispatch({ type: 'SET_DETAIL', payload: id });
-      // history.push(`/blockDetail/${batch.id}`);  
+    history.push(`/blockDetail/${id}`);  
   }
 
 
