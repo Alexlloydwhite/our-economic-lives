@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.default,
     marginTop: '5rem',
   },
   gridList: { // gridList styles the list of building blocks
@@ -27,12 +27,11 @@ const useStyles = makeStyles((theme) => ({
     width: '80%',
   },
   card: { // card styles the building blocks
-    width: theme.spacing(34),
-    height: theme.spacing(21),
+    width: '95%',
+    height: '95%',
     padding: '.5rem',
-    background: 'linear-gradient(to top, rgba(255,130,0,0.7) 0%, rgba(255,130,0,0.3) 70%, rgba(255,130,0,0.1) 100%)',
-    // backgroundColor: theme.palette.primary.main,
-    margin: theme.spacing(1),
+    background: 'linear-gradient(45deg, #3ca6fe 40%, #cdecfa 90%)',
+    margin: '.5rem',
     textAlign: 'center',
   },
   title: {
@@ -40,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary, 
   },
   arrow: {
-    marginTop: '16%',
+    marginTop: '18%',
     fontSize: 35,
   }
 }));
@@ -69,22 +68,25 @@ const useStyles = makeStyles((theme) => ({
  
 export default function PyramidTier() {
   const classes = useStyles();
-  // const history = useHistory();
+  const history = useHistory();
+  const dispatch = useDispatch();
   // const tier = useSelector((store) => store.tier);
 
-  // const handleClick = (id) => {
-  //     history.push(`/block/${id}`);  
-  // }
+  const handleClick = (id) => {
+    console.log('Clicked slider', id);
+    dispatch({ type: 'SET_DETAIL', payload: id });
+    history.push(`/blockDetail/${id}`);  
+  }
 
 
   return (
     <div className={classes.root} >
       <ArrowBackIosIcon className={classes.arrow} />
       <GridList className={classes.gridList} cols={1.1} > 
-        {tileData.map((block) => (
-          <GridListTile key={block.id}>
-            <Card className={classes.card} variant="outlined">
-              {/* onClick={(e) => handleClick(block.id)} */}
+        {tileData.map((block, i) => (
+          <GridListTile key={i}>
+            <Card className={classes.card} variant="outlined"
+              onClick={(e) => handleClick(i)}>
               <CardContent className={classes.title}>
                 <Typography variant="h4">{block.title}</Typography>
               </CardContent>
