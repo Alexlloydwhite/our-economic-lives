@@ -17,6 +17,13 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
     // State for setting location of kabob menu
     const [anchorEl, setAnchorEl] = useState(null);
 
+    const handleActivateClient = (id) => {
+        dispatchEvent({
+            type: 'ACTIVE_CLIENT', 
+            id
+        });
+    }
+
     return (
         <StyledTableRow>
             {/* Render row differently based on wether client is registered */}
@@ -74,6 +81,7 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
                                 size="small"
                                 variant="outlined"
                                 className={classes.tableButton}
+                                onClick={() => handleActivateClient(client.id)}
                             >
                                 reactivate Client
                             </Button>
