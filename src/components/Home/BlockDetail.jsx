@@ -1,5 +1,5 @@
+import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
@@ -39,20 +39,38 @@ const useStyles = makeStyles((theme) => ({
     },
   ];
 
-//   const submitSkill = () => {
-//       console.log('in submitSkill', );
-//       dispatch({
-//         type: 'ADD_SKILL', payload: {
-//             skill: skill
-//         }
-//     })
-//     }
-
 export default function BlockDetail () {
 
     const classes = useStyles();
     // const savedBlocks = useSelector((store) => store.savedskills);
-    // const blockInfo = useSelector((store) => store.blockInfo);
+    const detail = useSelector((store) => store.detail);
+    console.log('in detail', detail);
+    const [newSkill, setNewSkill] = useState('');
+    const [newSkillError, setNewSkillError] = useState(false);
+
+    // Validate skill form
+    const validateForm = (e) => {
+        e.preventDefault();
+        setNewSkillError(false)
+       
+        if (newSkill == ''){
+            setNewSkillError(true)
+        }
+        submitSkill();
+    }
+
+    // Once validated send new skill to saga
+    const submitSkill = () => {
+        console.log('in submitSkill');
+        dispatch({
+            type: 'ADD_SKILL', payload: {
+                            skill: newSkill
+            }
+        })
+        // Clear skill form
+        setNewSkill('');
+    }
+
 
     return (
         <>
@@ -73,19 +91,20 @@ export default function BlockDetail () {
             <Typography >
                 How do you display Integrity in your daily life?
             </Typography>
-        <form className={classes.root} noValidate autoComplete="off">
+        <form className={classes.root} noValidate autoComplete="off" onSubmit={validateForm}>
             <TextField
                 label="Add a skill"
                 multiline
                 rows={5}
                 variant="outlined"
+                value={newSkill}
             />
             <Button 
                 type="submit" 
                 variant="contained" 
                 color="primary"
                 size="large" 
-                // onClick={submitSkill}
+                onChange={(e) => setNewSkill(e.target.value)}
             >
                 Submit for coach review
             </Button>
@@ -108,7 +127,6 @@ export default function BlockDetail () {
                 variant="contained" 
                 color="primary"
                 size="large" 
-                // onClick={submitForm}
             >
                 Edit
             </Button>
@@ -117,7 +135,6 @@ export default function BlockDetail () {
                 variant="contained" 
                 color="primary"
                 size="large" 
-                // onClick={submitForm}
             >
                 Comments
             </Button>
