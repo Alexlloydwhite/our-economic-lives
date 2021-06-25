@@ -25,4 +25,15 @@ router.get('/client-list', (req, res) => {
         });
 });
 
+router.put('/deactivate-client/:id', (req, res) => {
+    const clientId = req.params.id;
+    const queryText = `UPDATE "user" u SET is_active=false WHERE u.id=$1`
+    pool
+        .query(queryText, [clientId])
+        .then(() => res.sendStatus(201))
+        .catch((err) => {
+            console.log(`IN deactivate-client router: ${err}`);
+        });
+});
+
 module.exports = router;
