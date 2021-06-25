@@ -108,8 +108,8 @@ export default function ClientTable({ clientList, filteredClientList, notFiltere
                                         value={filter}
                                         onChange={(e) => setFilter(e.target.value)}
                                     >
-                                        <MenuItem value={false}>Active Clients</MenuItem>
-                                        <MenuItem value={true}>Deactivated Clients</MenuItem>
+                                        <MenuItem value={false}>Active</MenuItem>
+                                        <MenuItem value={true}>Deactivategit </MenuItem>
                                     </Select>
                                 </FormControl>
                             </Grid>
