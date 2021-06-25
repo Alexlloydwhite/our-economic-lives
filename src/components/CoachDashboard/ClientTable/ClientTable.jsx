@@ -60,7 +60,8 @@ const StyledTableRow = withStyles((theme) => ({
 export default function ClientTable() {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const [filter, setFilter] = useState(1);
+    const [filter, setFilter] = useState(false);
+    console.log(filter);
     const clientList = useSelector(store => store.clients)
     // On page load, grab the client
     // data associated with coach
@@ -111,8 +112,8 @@ export default function ClientTable() {
                                         value={filter}
                                         onChange={(e) => setFilter(e.target.value)}
                                     >
-                                        <MenuItem value={1}>Active</MenuItem>
-                                        <MenuItem value={2}>Deactivated</MenuItem>
+                                        <MenuItem value={false}>Active</MenuItem>
+                                        <MenuItem value={true}>Deactivated</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Grid>
@@ -120,16 +121,20 @@ export default function ClientTable() {
                         {/* Table to display clients */}
                         <Table>
                             <TableBody>
-                                {clientList.map((client) => (
-                                    <ClientTableRow
-                                        key={client.id}
-                                        client={client}
-                                        clientList={clientList}
-                                        StyledTableRow={StyledTableRow}
-                                        classes={classes}
-                                        isActive={filter}
-                                    />
-                                ))}
+                                {filter ?
+                                    <div>filter is on!</div>
+                                    :
+                                    clientList.map((client) => (
+                                        <ClientTableRow
+                                            key={client.id}
+                                            client={client}
+                                            clientList={clientList}
+                                            StyledTableRow={StyledTableRow}
+                                            classes={classes}
+                                        />
+                                    ))
+                                }
+
                             </TableBody>
                         </Table>
                     </Grid>
