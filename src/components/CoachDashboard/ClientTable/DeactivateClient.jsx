@@ -22,8 +22,8 @@ export default function DeactivateClient({ client }) {
         setOpenDialog(false);
         // Dispatch to remove client
         dispatch({
-            type: 'DEACTIVATE_CLIENT',
-            payload: id
+            type: 'DEACTIVATE_CLIENT', 
+            id
         });
     }
 

@@ -15,7 +15,8 @@ CREATE TABLE "user" (
 	"coach_id" INT,
 	"current_profession" VARCHAR (80),
 	"desired_career" INT,
-	"is_registered" BOOLEAN DEFAULT FALSE
+	"is_registered" BOOLEAN DEFAULT FALSE,
+	"is_active" BOOLEAN DEFAULT TRUE
 ); 
 
 CREATE TABLE "user_type" (
