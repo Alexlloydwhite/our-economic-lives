@@ -2,10 +2,10 @@ import { makeStyles, Typography } from "@material-ui/core"
 import { theme } from '../Theme/Theme'
 
 //these settings can be used to adjust the pyramid dimensions 
-let pyramidTierHeight = 60;
+let pyramidTierHeight = 50;
 let pyramidTierMargin = 10;
 let pyramidTier67Height = pyramidTierHeight * 2 + pyramidTierMargin;
-let pyramidBaseWidth = 350;
+let pyramidBaseWidth = 310;
 let pyramidTier67Width = (pyramidBaseWidth - 100)/2 -10
 
 const getLeftBoarderColor = (leftWidth) => {
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100vw',
-    marginTop: 20,
+    marginTop: 70,
   },
   row: {
     display: 'flex',
