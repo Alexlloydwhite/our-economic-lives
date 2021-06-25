@@ -40,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 0,
     }
 }));
-
+// custom style for TableRow to display grey 
+// background at every nth row.
 const StyledTableRow = withStyles((theme) => ({
     root: {
         '&:nth-of-type(odd)': {
@@ -62,6 +63,7 @@ export default function ClientTable() {
     }, [dispatch])
     return (
         <div className={classes.container}>
+            {/* Check is the coach has any clients */}
             {clientList.length > 0 ?
                 <Grid
                     container
@@ -75,6 +77,7 @@ export default function ClientTable() {
                         xs={12}
                         component={Paper}
                     >
+                        {/* Table Header */}
                         <Typography
                             className={classes.tableHeader}
                             variant="h4"
@@ -82,6 +85,7 @@ export default function ClientTable() {
                         >
                             Your Clients
                         </Typography>
+                        {/* Table to display clients */}
                         <Table>
                             <TableBody>
                                 {clientList.map((client) => (
@@ -98,6 +102,7 @@ export default function ClientTable() {
                     </Grid>
                 </Grid>
                 :
+                // If client list is 0 return null, do not display an empty table
                 null
             }
         </div>

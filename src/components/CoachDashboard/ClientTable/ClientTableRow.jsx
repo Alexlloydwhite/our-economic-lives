@@ -19,14 +19,17 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
 
     return (
         <StyledTableRow>
+            {/* Render row differently based on wether client is registered */}
             {client.is_registered ?
                 <>
                     <TableCell>
+                        {/* Client name */}
                         <Typography>
                             {client.first_name}{' '}{client.last_name}
                         </Typography>
                     </TableCell>
                     <TableCell>
+                        {/* Btn to open critical experiences view */}
                         <Button
                             size="small"
                             variant="outlined"
@@ -36,6 +39,7 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
                         </Button>
                     </TableCell>
                     <TableCell>
+                        {/* Kebob menu with options */}
                         <IconButton
                             onClick={(e) => setAnchorEl(e.currentTarget)}
                             className={classes.tableButton}
@@ -49,8 +53,11 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
                             onClose={() => setAnchorEl(null)}
                             onClick={() => setAnchorEl(null)}
                         >
+                            {/* TODO: add this */}
                             <MenuItem>View Pyramid</MenuItem>
+                            {/* Opens dialog to display client data */}
                             <ClientInfo client={client} clientList={clientList} />
+                            {/* Opens dialog to confirm deactivate */}
                             <DeactivateClient client={client} />
                         </Menu>
                     </TableCell>
@@ -58,6 +65,7 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
                 :
                 <>
                     <TableCell>
+                        {/* If client is not registered, display email instead of name */}
                         <Typography>
                             {client.email}
                         </Typography>
