@@ -37,4 +37,15 @@ router.put('/deactivate-client/:id', (req, res) => {
         });
 });
 
+router.put('/activate-client/:id', (req, res) => {
+    const clientId = req.params.id;
+    const queryText = `UPDATE "user" u SET is_active=true WHERE u.id=$1`
+    pool
+        .query(queryText, [clientId])
+        .then(() => res.sendStatus(201))
+        .catch((err) => {
+            console.log(`IN activate-client router: ${err}`);
+        });
+});
+
 module.exports = router;
