@@ -7,11 +7,12 @@ import {
     Typography,
     Grid,
     Select,
-    MenuItem
+    MenuItem,
+    FormControl
 } from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 // React
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import ClientTableRow from './ClientTableRow';
 // Styles
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     },
     select: {
         marginLeft: 'auto',
-        marginRight: 0
+        marginRight: theme.spacing(2)
     }
 }));
 // custom style for TableRow to display grey 
@@ -59,7 +60,7 @@ const StyledTableRow = withStyles((theme) => ({
 export default function ClientTable() {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const [filter, setFilter] = useState('');
+    const [filter, setFilter] = useState(1);
     const clientList = useSelector(store => store.clients)
     // On page load, grab the client
     // data associated with coach
@@ -87,7 +88,7 @@ export default function ClientTable() {
                         xs={12}
                         component={Paper}
                     >
-                        <Grid 
+                        <Grid
                             container
                             alignItems="center"
                         >
@@ -101,14 +102,19 @@ export default function ClientTable() {
                                     Your Clients
                                 </Typography>
                             </Grid>
-                            <Grid item>
-                                <Select
-                                    
-
-                                >
-                                    <MenuItem>Active</MenuItem>
-                                    <MenuItem>Deactivated</MenuItem>
-                                </Select>
+                            <Grid
+                                item
+                                className={classes.select}
+                            >
+                                <FormControl>
+                                    <Select
+                                        value={filter}
+                                        onChange={(e) => setFilter(e.target.value)}
+                                    >
+                                        <MenuItem value={1}>Active</MenuItem>
+                                        <MenuItem value={2}>Deactivated</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </Grid>
                         </Grid>
                         {/* Table to display clients */}
