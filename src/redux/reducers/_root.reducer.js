@@ -4,6 +4,7 @@ import user from './user.reducer';
 import clients from './clients.reducer';
 import career_path from './careerPath.reducer.js';
 import detail from './details.reducer';
+import clientProfile from './clientProfile.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   clients, // holds array of client data for each coach
   career_path, //holds an array of all the career path data
-  detail,
+  detail, // holds an array of building block details
+  clientProfile, // holds an array of the clients profile info
 });
 
 export default rootReducer;
