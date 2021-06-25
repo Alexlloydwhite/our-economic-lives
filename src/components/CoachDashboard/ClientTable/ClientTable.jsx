@@ -13,7 +13,7 @@ import {
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 // React
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import ClientTableRow from './ClientTableRow';
 // Styles
 const useStyles = makeStyles((theme) => ({
@@ -57,18 +57,10 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
-export default function ClientTable() {
+export default function ClientTable({ clientList, filteredClientList, notFilteredClientList }) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const [filter, setFilter] = useState(false);
-    // List of clients from store
-    const clientList = useSelector(store => store.clients)
-    // Filter client list to display NOT active clients
-    // This is later passed to the TR component via props
-    const filteredClientList = clientList.filter((client) => client.is_active === false);
-    // Filter client list to display only ACTIVE clients
-    // This is later passed to the TR component via props
-    const notFilteredClientList = clientList.filter((client) => client.is_active === true);
     // On page load, grab the client
     // data associated with coach
     useEffect(() => {
