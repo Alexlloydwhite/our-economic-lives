@@ -5,12 +5,15 @@ import {
     TableRow,
     Paper,
     Typography,
-    Grid
+    Grid,
+    Select,
+    MenuItem,
+    FormControl
 } from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 // React
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
 import ClientTableRow from './ClientTableRow';
 // Styles
 const useStyles = makeStyles((theme) => ({
@@ -38,9 +41,14 @@ const useStyles = makeStyles((theme) => ({
         display: 'block',
         marginLeft: 'auto',
         marginRight: 0,
+    },
+    select: {
+        marginLeft: 'auto',
+        marginRight: theme.spacing(2)
     }
 }));
-
+// custom style for TableRow to display grey 
+// background at every nth row.
 const StyledTableRow = withStyles((theme) => ({
     root: {
         '&:nth-of-type(odd)': {
@@ -49,10 +57,10 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
-export default function ClientTable() {
+export default function ClientTable({ clientList, filteredClientList, notFilteredClientList }) {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const clientList = useSelector(store => store.clients)
+    const [filter, setFilter] = useState(false);
     // On page load, grab the client
     // data associated with coach
     useEffect(() => {
@@ -62,6 +70,7 @@ export default function ClientTable() {
     }, [dispatch])
     return (
         <div className={classes.container}>
+            {/* Check is the coach has any clients */}
             {clientList.length > 0 ?
                 <Grid
                     container
@@ -75,29 +84,69 @@ export default function ClientTable() {
                         xs={12}
                         component={Paper}
                     >
-                        <Typography
-                            className={classes.tableHeader}
-                            variant="h4"
-                            color="primary"
+                        <Grid
+                            container
+                            alignItems="center"
                         >
-                            Your Clients
-                        </Typography>
+                            <Grid item>
+                                {/* Table Header */}
+                                <Typography
+                                    className={classes.tableHeader}
+                                    variant="h4"
+                                    color="primary"
+                                >
+                                    Your Clients
+                                </Typography>
+                            </Grid>
+                            <Grid
+                                item
+                                className={classes.select}
+                            >
+                                {/* Select option to filter client list */}
+                                <FormControl>
+                                    <Select
+                                        value={filter}
+                                        onChange={(e) => setFilter(e.target.value)}
+                                    >
+                                        <MenuItem value={false}>Active</MenuItem>
+                                        <MenuItem value={true}>Deactivated</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                        </Grid>
+                        {/* Table to display clients */}
                         <Table>
                             <TableBody>
-                                {clientList.map((client) => (
-                                    <ClientTableRow
-                                        key={client.id}
-                                        client={client}
-                                        clientList={clientList}
-                                        StyledTableRow={StyledTableRow}
-                                        classes={classes}
-                                    />
-                                ))}
+                                {/* If filter is TRUE display not active clients */}
+                                {/* If filter is FALSE(default state) display ACTIVE clients */}
+                                {filter ?
+                                    filteredClientList.map((client) => (
+                                        <ClientTableRow
+                                            key={client.id}
+                                            client={client}
+                                            clientList={filteredClientList}
+                                            StyledTableRow={StyledTableRow}
+                                            classes={classes}
+                                        />
+                                    ))
+                                    :
+                                    notFilteredClientList.map((client) => (
+                                        <ClientTableRow
+                                            key={client.id}
+                                            client={client}
+                                            clientList={notFilteredClientList}
+                                            StyledTableRow={StyledTableRow}
+                                            classes={classes}
+                                        />
+                                    ))
+                                }
+
                             </TableBody>
                         </Table>
                     </Grid>
                 </Grid>
                 :
+                // If client list is 0 return null, do not display an empty table
                 null
             }
         </div>

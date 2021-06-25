@@ -22,7 +22,7 @@ export default function ClientInfo({ clientList, client }) {
     // State of client detail dialog
     const [clientDetailsClicked, setClientDetailsClicked] = useState(null);
     const [openDialog, setOpenDialog] = useState(false);
-
+    // Handles display of client data on click of "client info"
     const handleOpenClientInfo = (id) => {
         // Open the dialog
         setOpenDialog(true);
@@ -31,8 +31,6 @@ export default function ClientInfo({ clientList, client }) {
         // set local state to result of filter 
         setClientDetailsClicked(clientClicked);
     }
-
-
     return (
         <>
             <MenuItem
