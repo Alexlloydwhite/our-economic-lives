@@ -63,9 +63,6 @@ export default function ClientTable() {
     }, [dispatch])
     return (
         <div className={classes.container}>
-            <pre>
-                {JSON.stringify(clientList[0], null, 2)}
-            </pre>
             <Grid
                 container
                 direction="row"
