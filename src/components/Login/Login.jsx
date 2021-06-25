@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
+import { HistoryOutlined } from '@material-ui/icons';
 // Styles
 const useStyles = makeStyles((theme) => ({
     layout: {
@@ -47,34 +48,56 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
     const classes = useStyles();
     const history = useHistory();
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const errors = useSelector(store => store.errors);
+    const user = useSelector(store => store.user);
     const dispatch = useDispatch();
 
-    const login = (event) => {
-        event.preventDefault();
-
-        if (username && password) {
+    const login = (e) => {
+        e.preventDefault();
+        // Checks if email & password state is not null
+        if (email && password) {
+            // Login user with email & password state
             dispatch({
                 type: 'LOGIN',
                 payload: {
-                    username: username,
+                    username: email,
                     password: password,
-                },
+                }
             });
-            // TODO add validation to check if user is registered
-            // Send user to either home view or register form
+            history.push('/home');
         } else {
+            // Set error if inputs are missing or not valid
             dispatch({ type: 'LOGIN_INPUT_ERROR' });
-        };
-    }; // end login
+        }
+    };
+
     return (
         <Grid container component="main" className={classes.layout}>
             <Grid item xs={12} className={classes.paper}>
+                {/* Temp stuff */}
+                <button onClick={() => dispatch({ type: 'LOGOUT' })}>Logout</button>
+                <button onClick={() => {
+                    setEmail('test3');
+                    setPassword('test3');
+                }}>registered user</button>
+                <button onClick={() => {
+                    setEmail('test4');
+                    setPassword('test4');
+                }}>new user</button>
+                <button onClick={() => {
+                    setEmail('testcoach');
+                    setPassword('testcoach');
+                }}>coach</button>
+                <pre>
+                    {JSON.stringify(user, null, 2)}
+                </pre>
+                {/* Logo avatar */}
                 <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
                     <img src="/images/OELavatar.png" />
                 </Avatar>
+                {/* Title */}
                 <Typography
                     component="h3"
                     variant="h4"
@@ -85,6 +108,7 @@ export default function Login() {
                     Our Economic Lives
                 </Typography>
                 <form className={classes.form} onSubmit={login} noValidate>
+                    {/* Errors display */}
                     {errors.loginMessage && (
                         <h3 className="alert" role="alert">
                             {errors.loginMessage}
@@ -100,10 +124,10 @@ export default function Login() {
                         label="Email"
                         name="Username"
                         autoComplete="email"
-                        value={username}
-                        onChange={(event) => setUsername(event.target.value)}
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
                     />
-                    {/* input for password */}
+                    {/* Input for password */}
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -118,7 +142,7 @@ export default function Login() {
                         onChange={(event) => setPassword(event.target.value)}
                         style={{ marginBottom: 20 }}
                     />
-                    {/* submit button */}
+                    {/* Submit button */}
                     <Button
                         type="submit"
                         variant="contained"

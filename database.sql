@@ -15,7 +15,8 @@ CREATE TABLE "user" (
 	"coach_id" INT,
 	"current_profession" VARCHAR (80),
 	"desired_career" INT,
-	"is_registered" BOOLEAN DEFAULT FALSE
+	"is_registered" BOOLEAN DEFAULT FALSE,
+	"is_active" BOOLEAN DEFAULT TRUE
 ); 
 
 CREATE TABLE "user_type" (
@@ -67,13 +68,6 @@ INSERT INTO "user" ("email", "password", "first_name", "last_name", "phone_numbe
 VALUES ('test1', 'test1', 'Test', 'PA', '123', 'Minneapolis', 1, NULL, NULL, NULL),
 ('test2', 'test2', 'Test', 'Coach', '123', 'Minneapolis', 2, NULL, NULL, NULL),
 ('test3', 'test3', 'Test', 'User', '123', 'Minneapolis', 3, 2, 'Cashier', 2); 
-
-SELECT * FROM "user";
-SELECT * FROM "building_block";
-
-DROP TABLE "user";
-DROP TABLE "building_block";
-DROP TABLE "competency";
 
 INSERT INTO "career_path" ("name")
 VALUES ('Generic'),
