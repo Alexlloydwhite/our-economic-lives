@@ -51,7 +51,7 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
                         >
                             <MenuItem>View Pyramid</MenuItem>
                             <ClientInfo client={client} clientList={clientList} />
-                            <DeactivateClient />
+                            <DeactivateClient client={client} />
                         </Menu>
                     </TableCell>
                 </>

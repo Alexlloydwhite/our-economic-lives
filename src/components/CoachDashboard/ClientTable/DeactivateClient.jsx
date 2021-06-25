@@ -10,9 +10,22 @@ import {
 } from '@material-ui/core'
 // React
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-export default function DeactivateClient() {
+export default function DeactivateClient({ client }) {
+    const dispatch = useDispatch();
+    // State for dialog open || !open
     const [openDialog, setOpenDialog] = useState(false);
+    // Dispatches to remove client from coach
+    const deactivateClient = (id) => {
+        // Close dialog
+        setDialogOpen(false);
+        // Dispatch to remove client
+        dispatch({
+            type: 'DEACTIVATE_CLIENT',
+            payload: id
+        })
+    }
 
     return (
         <>
@@ -38,6 +51,7 @@ export default function DeactivateClient() {
                     </Button>
                     <Button
                         variant="outlined"
+                        onClick={() => deactivateClient(client.id)}
                     >
                         Deactivate
                     </Button>
