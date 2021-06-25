@@ -14,7 +14,7 @@ import Register from '../Login/Register';
 import Footer from '../Footer/Footer';
 import NavBar from './NavBar/NavBar';
 
-import './App.css';
+// import './App.css';
 import BlockSlider from '../Home/BlockSlider';
 import BlockDetail from '../Home/BlockDetail';
 

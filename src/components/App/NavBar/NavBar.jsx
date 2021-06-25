@@ -26,6 +26,7 @@ export default function NavBar() {
       <AppBar className={classes.navbar}>
         <Toolbar>
           <Drawer className={classes.menuButton} />
+          <Typography>Our Economic Lives</Typography>
         </Toolbar>
       </AppBar>   
     </div>
