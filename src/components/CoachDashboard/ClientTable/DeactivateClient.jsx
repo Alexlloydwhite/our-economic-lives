@@ -30,7 +30,17 @@ export default function DeactivateClient() {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    
+                    {/* Cancel btn, closes dialog */}
+                    <Button
+                        onClick={() => setOpenDialog(false)}
+                    >
+                        Cancel
+                    </Button>
+                    <Button
+                        variant="outlined"
+                    >
+                        Deactivate
+                    </Button>
                 </DialogActions>
             </Dialog>
         </>
