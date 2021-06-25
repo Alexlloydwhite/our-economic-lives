@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core/';
 // React
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 // Styles
 const useStyles = makeStyles((theme) => ({
@@ -68,6 +68,12 @@ export default function Register() {
             [e.target.name]: e.target.value
         });
     };
+    // GET 
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_CAREER_PATH'
+        })
+    }, []);
 
     // Handles submit of form
     const register = (e) => {
