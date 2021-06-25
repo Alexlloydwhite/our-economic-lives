@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const encryptLib = require('../modules/encryption');
 
 router.get('/career_path', (req, res) => {
     let queryText = `SELECT * FROM career_path;`
