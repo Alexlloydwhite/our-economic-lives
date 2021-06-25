@@ -63,6 +63,9 @@ export default function ClientTable() {
     const [filter, setFilter] = useState(false);
     console.log(filter);
     const clientList = useSelector(store => store.clients)
+    const filteredClientList = clientList.filter((client) => client.is_active === false);
+    const notFilteredClientList = clientList.filter((client) => client.is_active === true);
+    console.log(filteredClientList);
     // On page load, grab the client
     // data associated with coach
     useEffect(() => {
@@ -122,13 +125,21 @@ export default function ClientTable() {
                         <Table>
                             <TableBody>
                                 {filter ?
-                                    <div>filter is on!</div>
-                                    :
-                                    clientList.map((client) => (
+                                    filteredClientList.map((client) => (
                                         <ClientTableRow
                                             key={client.id}
                                             client={client}
-                                            clientList={clientList}
+                                            clientList={filteredClientList}
+                                            StyledTableRow={StyledTableRow}
+                                            classes={classes}
+                                        />
+                                    ))
+                                    :
+                                    notFilteredClientList.map((client) => (
+                                        <ClientTableRow
+                                            key={client.id}
+                                            client={client}
+                                            clientList={notFilteredClientList}
                                             StyledTableRow={StyledTableRow}
                                             classes={classes}
                                         />
