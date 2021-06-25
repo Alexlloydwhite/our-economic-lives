@@ -2,9 +2,7 @@
 import {
     MenuItem,
     Dialog,
-    DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle,
     List,
     ListItem,
@@ -31,6 +29,7 @@ export default function ClientInfo({ clientList, client }) {
         setOpenDialog(true);
         // filter client list to grab client with matching ID
         const clientClicked = (clientList.filter((client) => client.id === id));
+        // set local state to result of filter 
         setClientDetailsClicked(clientClicked);
     }
 
