@@ -51,6 +51,7 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
                             keepMounted
                             open={Boolean(anchorEl)}
                             onClose={() => setAnchorEl(null)}
+                            onClick={() => setAnchorEl(null)}
                         >
                             <MenuItem>View Pyramid</MenuItem>
                             <ClientInfo client={client} clientList={clientList} />

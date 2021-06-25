@@ -9,19 +9,20 @@ import {
 } from '@material-ui/core'
 // React
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 export default function ClientInfo({ clientList, client }) {
+    const dispatch = useDispatch();
     // State of client detail dialog
     const [clientDetailsClicked, setClientDetailsClicked] = useState({});
     const [openDialog, setOpenDialog] = useState(false);
     const handleOpenClientInfo = (id) => {
         // Open the dialog
         setOpenDialog(true);
-        // filter client list to grab client with matching ID
-        const clientClicked = (clientList.filter(client => client.id === id));
-        // set state of client details clicked to the results of filer
-        setClientDetailsClicked(clientClicked);
-        console.log(clientClicked);
+        dispatch({
+            type: 'FETCH_CLIENT_BY_ID',
+            payload: id
+        });
     }
     return (
         <>
@@ -38,16 +39,7 @@ export default function ClientInfo({ clientList, client }) {
                     {"Client Info"}
                 </DialogTitle>
                 <DialogContent>
-                    <pre>
-                        {JSON.stringify(clientDetailsClicked, null, 2)}
-                    </pre>
-                    <DialogContentText>
-                        {clientDetailsClicked ?
-                            <h3>no</h3>
-                            :
-                            <h3>yes</h3>
-                        }
-                    </DialogContentText>
+
                 </DialogContent>
             </Dialog>
         </>
