@@ -14,7 +14,6 @@ import PersonIcon from '@material-ui/icons/Person';
 import PhoneIcon from '@material-ui/icons/Phone';
 import HomeIcon from '@material-ui/icons/Home';
 import WorkIcon from '@material-ui/icons/Work';
-import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory';
 import CloseIcon from '@material-ui/icons/Close';
 // React
 import { useState } from 'react';

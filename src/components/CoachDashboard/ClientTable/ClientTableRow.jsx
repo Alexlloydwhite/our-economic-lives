@@ -6,16 +6,12 @@ import {
     IconButton,
     Menu,
     MenuItem,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
 } from '@material-ui/core'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // React
 import { useState } from 'react';
 import ClientInfo from './ClientInfo';
+import DeactivateClient from './DeactivateClient';
 
 export default function ClientTableRow({ client, clientList, StyledTableRow, classes }) {
     // State for setting location of kabob menu
@@ -55,7 +51,7 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
                         >
                             <MenuItem>View Pyramid</MenuItem>
                             <ClientInfo client={client} clientList={clientList} />
-                            <MenuItem>Deactivate Client</MenuItem>
+                            <DeactivateClient />
                         </Menu>
                     </TableCell>
                 </>
