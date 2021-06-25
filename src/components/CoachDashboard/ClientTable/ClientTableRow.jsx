@@ -10,16 +10,18 @@ import {
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // React
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import ClientInfo from './ClientInfo';
 import DeactivateClient from './DeactivateClient';
 
 export default function ClientTableRow({ client, clientList, StyledTableRow, classes }) {
+    const dispatch = useDispatch();
     // State for setting location of kabob menu
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleActivateClient = (id) => {
-        dispatchEvent({
-            type: 'ACTIVE_CLIENT', 
+        dispatch({
+            type: 'ACTIVATE_CLIENT', 
             id
         });
     }
