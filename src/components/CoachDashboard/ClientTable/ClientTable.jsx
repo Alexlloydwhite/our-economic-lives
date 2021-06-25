@@ -61,8 +61,13 @@ export default function ClientTable() {
     const classes = useStyles();
     const dispatch = useDispatch();
     const [filter, setFilter] = useState(false);
+    // List of clients from store
     const clientList = useSelector(store => store.clients)
+    // Filter client list to display NOT active clients
+    // This is later passed to the TR component via props
     const filteredClientList = clientList.filter((client) => client.is_active === false);
+    // Filter client list to display only ACTIVE clients
+    // This is later passed to the TR component via props
     const notFilteredClientList = clientList.filter((client) => client.is_active === true);
     // On page load, grab the client
     // data associated with coach
@@ -122,6 +127,8 @@ export default function ClientTable() {
                         {/* Table to display clients */}
                         <Table>
                             <TableBody>
+                                {/* If filter is TRUE display not active clients */}
+                                {/* If filter is FALSE(default state) display ACTIVE clients */}
                                 {filter ?
                                     filteredClientList.map((client) => (
                                         <ClientTableRow
