@@ -13,7 +13,8 @@ router.get('/client-list', (req, res) => {
     WHERE u.coach_id=$1
     ORDER BY 
         u.is_registered DESC,
-        u.last_name ASC;`;
+        u.last_name ASC,
+        u.first_name ASC;`;
     pool
         .query(queryText, [coachId])
         .then(result => {
