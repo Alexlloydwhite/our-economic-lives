@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector} from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
@@ -17,12 +17,16 @@ const useStyles = makeStyles((theme) => ({
 export default function PyramidTier() {
 
     const classes = useStyles();
-    // const history = useHistory();
+    const history = useHistory();
+    const dispatch = useDispatch();
     // const recommendations = useSelector((store) => store);
 
-    // const handleClick = (id) => {
-    //     history.push(`/block/${id}`);  
-    // }
+    // send user to recommended block detail using history, params
+    const handleClick = (id) => {
+        console.log('Recommended block clicked', id);
+        dispatch({ type: 'SET_DETAIL', payload: id });
+        history.push(`/blockDetail/${id}`);  
+    }
 
     const sample = [
         {
@@ -46,8 +50,9 @@ export default function PyramidTier() {
                     <Button 
                         variant="outlined" 
                         color="primary" 
-                        className={classes.content}>
-                        {/* onClick={(e) => handleClick(recommended.id)} */}
+                        className={classes.content}
+                        onClick={() => handleClick(recommended.id)}
+                        >
                         {recommended.block}
                     </Button>
                 ))}

@@ -1,5 +1,7 @@
+// React
 import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+// MUI
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
@@ -9,6 +11,10 @@ import List from '@material-ui/core/List';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,9 +23,15 @@ const useStyles = makeStyles((theme) => ({
         width: '90%',
       },
     },
+    title: {
+        textAlign: 'Center',
+        padding: theme.spacing(1),
+        backgroundColor: theme.palette.primary.light,
+    },
     heading: {
         textAlign: 'Center',
         padding: theme.spacing(1),
+        alignItems: 'center',
     },
     box: {
         textAlign: 'Center',
@@ -42,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 export default function BlockDetail () {
 
     const classes = useStyles();
-    // const savedBlocks = useSelector((store) => store.savedskills);
+    // const savedSkills = useSelector((store) => store.savedskills);
     const detail = useSelector((store) => store.detail);
     console.log('in detail', detail);
     const [newSkill, setNewSkill] = useState('');
@@ -74,18 +86,42 @@ export default function BlockDetail () {
 
     return (
         <>
-        <Card className={classes.heading}>
-          <Typography variant="h4" >
+        <Card >
+          <Typography className={classes.title} variant="h4" >
             Integrity
           </Typography>
-            <List >
-            {sample.map( example => (
+            {/* <List > */}
+                {/* <ListItem className={classes.heading}>
+                    <ListItemText primary="Displaying strong moral principles and work ethic"/>
+                </ListItem> */}
+                {/* {sample.map( example => (
                     <ListItem className={classes.heading}>
                         <ListItemText primary={example.title}/>
                     </ListItem>
-                ))}
-            </List>
-        </Card>
+                ))} */}
+            {/* </List> */}
+            </Card>
+            <div className={classes.rootz}>
+            <Accordion className={classes.rootz}>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                    >
+                    <Typography >Displaying strong moral principles and work ethic.</Typography>
+                </AccordionSummary>
+                {sample.map( example => (
+                    <AccordionDetails ml={16} >
+                    
+                    <Typography className={classes.heading}>
+                        Ex. &nbsp;{example.title}
+                    </Typography>
+                   
+                </AccordionDetails>
+                 ))}
+            </Accordion>
+            </div>
+        
         
         <Box className={classes.box}>
             <Typography >
@@ -113,6 +149,7 @@ export default function BlockDetail () {
 
         <div className={classes.box}>
         <Typography >Saved Skillz: 1 / 5</Typography>
+        {/* <Typography >Saved Skillz: {savedSkills.length} / 5</Typography> */}
         <Box className={classes.root}>
             {/* {savedskills.map(skill => ( */}
             <>

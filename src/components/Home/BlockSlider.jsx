@@ -1,6 +1,8 @@
+// React
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+// MUI
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -18,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.default,
-    marginTop: '5rem',
   },
   gridList: { // gridList styles the list of building blocks
     flexWrap: 'nowrap', // makes the list horizontal
@@ -41,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   arrow: {
     marginTop: '18%',
     fontSize: 35,
+    color: theme.palette.primary.main,
   }
 }));
 
@@ -73,7 +75,7 @@ export default function PyramidTier() {
   // const tier = useSelector((store) => store.tier);
 
   const handleClick = (id) => {
-    console.log('Clicked slider', id);
+    // console.log('Clicked slider', id);
     dispatch({ type: 'SET_DETAIL', payload: id });
     history.push(`/blockDetail/${id}`);  
   }
