@@ -1,10 +1,6 @@
 const express = require('express');
-const {
-    rejectUnauthenticated,
-} = require('../modules/authentication-middleware');
-const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
-const userStrategy = require('../strategies/user.strategy');
+const router = express.Router();
 
 // Handles PUT request, this is the end point
 // used when a new user logins in for the first time
