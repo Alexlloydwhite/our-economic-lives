@@ -15,8 +15,6 @@ export default function CoachDashboard() {
         <div>
             {/* Page header / opens form to add new client */}
             <InviteNewClient
-                clientList={clientList}
-                filteredClientList={filteredClientList}
                 notFilteredClientList={notFilteredClientList}
             />
             {/* Table of client data */}

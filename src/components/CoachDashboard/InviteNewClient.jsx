@@ -13,7 +13,7 @@ import {
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-export default function InviteNewClient({ clientList, filteredClientList, notFilteredClientList }) {
+export default function InviteNewClient({ notFilteredClientList }) {
     const dispatch = useDispatch();
     const errors = useSelector(store => store.errors);
     // State for dialog. Is it open or closed?
