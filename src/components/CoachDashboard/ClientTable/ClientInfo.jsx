@@ -41,20 +41,26 @@ export default function ClientInfo({ clientList, client }) {
             >
                 Client Info
             </MenuItem>
+            {/* Dialog displays on click of menu item */}
             <Dialog
                 open={openDialog}
             >
+                {/* Dialog Title */}
                 <DialogTitle>
                     <IconButton onClick={() => setOpenDialog(false)}>
                         <CloseIcon />
                     </IconButton>
                     {"Client Info"}
                 </DialogTitle>
+                {/* Dialog Body */}
                 <DialogContent>
                     <List>
+                        {/* Check is client details is !== null */}
                         {clientDetailsClicked ?
+                            // Map over array to display data
                             clientDetailsClicked.map((idx) => (
                                 <div key={idx.id}>
+                                    {/* Client name */}
                                     <ListItem>
                                         <ListItemAvatar>
                                             <PersonIcon />
@@ -63,6 +69,7 @@ export default function ClientInfo({ clientList, client }) {
                                             {idx.first_name}{' '}{idx.last_name}
                                         </ListItemText>
                                     </ListItem>
+                                    {/* Client Phone Number */}
                                     <ListItem>
                                         <ListItemAvatar>
                                             <PhoneIcon />
@@ -71,6 +78,7 @@ export default function ClientInfo({ clientList, client }) {
                                             {idx.phone_number}
                                         </ListItemText>
                                     </ListItem>
+                                    {/* Client City */}
                                     <ListItem>
                                         <ListItemAvatar>
                                             <HomeIcon />
@@ -79,6 +87,7 @@ export default function ClientInfo({ clientList, client }) {
                                             {idx.city}
                                         </ListItemText>
                                     </ListItem>
+                                    {/* Client Profession */}
                                     <ListItem>
                                         <ListItemAvatar>
                                             <WorkIcon />
@@ -87,18 +96,10 @@ export default function ClientInfo({ clientList, client }) {
                                             {idx.current_profession}
                                         </ListItemText>
                                     </ListItem>
-                                    <ListItem>
-                                        <ListItemAvatar>
-                                            <ChangeHistoryIcon />
-                                        </ListItemAvatar>
-                                        <ListItemText>
-                                            {idx.desired_career}
-                                        </ListItemText>
-                                    </ListItem>
                                 </div>
-                        ))
-                        :
-                        null
+                            ))
+                            :
+                            null
                         }
                     </List>
                 </DialogContent>
