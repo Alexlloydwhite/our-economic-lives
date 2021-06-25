@@ -37,23 +37,8 @@ router.post('/:id', async (req, res) => {
             let previousBlockName = 'test';
             let buildingBlockId = 0;
             //loops through the array of json object
-            await Promise.all(jsonObj.forEach(async (block) => {
+            for (const block of jsonObj ) {
                 console.log('Beginning', buildingBlockId);
-                    // broken if else statement
-                    // if (block.Name === previousBlockName) {
-                    //     console.log('in If', block.Name, previousBlockName);
-                    //     client.query(queryText2, [block.value, buildingBlockId]);
-                    // } else {
-                    //     console.log(previousBlockName, 'in else', block.Name);
-                    //     previousBlockName = block.Name;
-                    //     //Creates a new Building Block
-                    //     const buildingBlockResults = await client.query(queryText1, [block.Name, block.Description, block.tier_id]);
-                    //     buildingBlockId = buildingBlockResults.rows[0].id;
-                    //     //Creates
-                    //     client.query(queryText2, [block.value, buildingBlockId]);
-                    //     //
-                    //     client.query(queryText3, [buildingBlockId, req.params.id]);
-                    // } // end if else
                 //switch statement to check if the previous block name is the same so it only creates the competency if it is.
                 switch (block.Name) {
                     case previousBlockName:
@@ -76,7 +61,7 @@ router.post('/:id', async (req, res) => {
                         await client.query(queryText3, [buildingBlockId, req.params.id]);
                         console.log('after default join', buildingBlockId);
                 }// end switch statement
-            })); //end forEach loop
+            }; //end forEach loop
         }); //end csvtojson .then
         client.query('COMMIT')
         res.sendStatus(201);
