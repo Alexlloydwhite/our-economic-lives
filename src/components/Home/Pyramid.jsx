@@ -1,5 +1,12 @@
+// React
+import React, {useState} from 'react'
+import BlockSlider from './BlockSlider'
+// MUI
 import { makeStyles, Typography } from "@material-ui/core"
 import { theme } from '../Theme/Theme'
+import Backdrop from '@material-ui/core/Backdrop'
+
+
 
 const getLeftBoarderColor = (leftWidth) => {
   if (leftWidth > 0) {
@@ -133,17 +140,35 @@ function Tier(props) {
       width: tierProgress * 100 + '%',
       zIndex: 0,
     },
+    backdrop: { 
+      zIndex: theme.zIndex.drawer + 1,
+      color: '#fff',
+    },
   })
 
   const classes = useStyles();
 
+  // Setting state for backdrop 
+  const [open, setOpen] = useState(false);
+  // Setting handle functions for backdrop functionality
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    // console.log('clicked pyramid', num);
+    setOpen(!open);
+  };
+
   return (
-    <div className={classes.tier}>
+    <div className={classes.tier}  onClick={handleToggle}>
       <div className={classes.tierTitle}>
         <Typography>Tier {num}</Typography>
       </div>
       <div className={classes.tierProgress}></div>
       <div className={classes.tierRemaining}></div>
+      <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
+            <BlockSlider />
+        </Backdrop>
     </div>
   )
 }
