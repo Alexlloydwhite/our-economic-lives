@@ -32,9 +32,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/block', blockRouter);
 app.use('/api/upload', uploadRouter);
-
 app.use('/api/admin', adminRouter);
-
 app.use('/api/coach', coachRouter);
 
 // Serve static files
