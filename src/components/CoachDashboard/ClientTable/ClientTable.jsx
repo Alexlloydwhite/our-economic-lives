@@ -127,6 +127,7 @@ export default function ClientTable() {
                                         clientList={clientList}
                                         StyledTableRow={StyledTableRow}
                                         classes={classes}
+                                        isActive={filter}
                                     />
                                 ))}
                             </TableBody>
