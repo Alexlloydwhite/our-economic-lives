@@ -46,12 +46,13 @@ export default function PyramidTier() {
                 <Typography variant="h5" >
                     Your Recommended Building Blocks
                 </Typography>
-                {sample.map((recommended) => (
+                {sample.map((recommended, i) => (
                     <Button 
+                        key={i}
                         variant="outlined" 
                         color="primary" 
                         className={classes.content}
-                        onClick={() => handleClick(recommended.id)}
+                        onClick={() => handleClick(i)}
                         >
                         {recommended.block}
                     </Button>
