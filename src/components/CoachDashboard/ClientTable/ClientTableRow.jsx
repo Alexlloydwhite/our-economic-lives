@@ -21,7 +21,7 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
 
     const handleActivateClient = (id) => {
         dispatch({
-            type: 'ACTIVATE_CLIENT', 
+            type: 'ACTIVATE_CLIENT',
             id
         });
     }
@@ -99,14 +99,46 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
                             {client.email}
                         </Typography>
                     </TableCell>
-                    <TableCell>
-                        {' '}
-                    </TableCell>
-                    <TableCell>
-                        <Typography>
-                            Not Registered
-                        </Typography>
-                    </TableCell>
+                    {client.is_active ?
+                        <>
+                            <TableCell>
+                                <Typography style={{textAlign: 'right'}}>
+                                    Not Registered
+                                </Typography>
+                            </TableCell>
+                            <TableCell>
+                                {/* Kebob menu with options */}
+                                <IconButton
+                                    onClick={(e) => setAnchorEl(e.currentTarget)}
+                                    className={classes.tableButton}
+                                >
+                                    <MoreHorizIcon />
+                                </IconButton>
+                                <Menu
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    open={Boolean(anchorEl)}
+                                    onClose={() => setAnchorEl(null)}
+                                    onClick={() => setAnchorEl(null)}
+                                >
+                                    {/* Opens dialog to confirm deactivate */}
+                                    <DeactivateClient client={client} />
+                                </Menu>
+                            </TableCell>
+                        </>
+                        :
+                        <TableCell>
+                            <Button
+                                size="small"
+                                variant="outlined"
+                                className={classes.tableButton}
+                                onClick={() => handleActivateClient(client.id)}
+                            >
+                                reactivate Client
+                            </Button>
+                        </TableCell>
+                    }
+
                 </>
             }
         </StyledTableRow>
