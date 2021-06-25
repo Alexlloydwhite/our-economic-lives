@@ -58,8 +58,6 @@ export default function Register() {
     const errors = useSelector(store => store.errors);
     const dispatch = useDispatch();
     const user = useSelector(store => store.user);
-    const [registered, setRegistered] = useState(user.is_registered);
-    console.log('in user', user, user.is_registered);
 
     const [firstName, setFirstName] = useState(user.first_name);
     const [lastName, setLastName] = useState(user.last_name);
@@ -68,44 +66,22 @@ export default function Register() {
     const [city, setCity] = useState(user.city);
     const [profession, setProfession] = useState(user.current_profession);
     const [career, setCareer] = useState(user.desired_career);
-    // useEffect(() => {
-    //     dispatch({ type: 'FETCH_USER' });
-    //   }, []) 
-
-    
-    
-    
-
-    // Local form state
-    const [formState, setFormState] = useState({});
-
-    // Handles change for inputs
-    const handleChange = (e) => {
-        setFormState({
-            ...formState,
-            [e.target.name]: e.target.value
-        });
-    };
 
     // Handles submit of form
     const register = (e) => {
         e.preventDefault();
-        // checks if the formState object 
-        // has all 6 required inputs
-        if (Object.keys(formState).length === 6) {
-            // send form data to saga
-            dispatch({
-                type: 'REGISTER_USER',
-                payload: formState
-            });
-            // Reload the page hack :)
-            location.reload();
-        } else {
-            // Dispatch errors reducer to display input error
-            dispatch({
-                type: 'REGISTRATION_INPUT_ERROR'
-            });
+       
+        console.log('clicked Save Edit', update.name, update.tank, update.batch_num, update.hops);
+        const updatedBatch = {
+            id: update.id, // User can't edit, so getting from reducer
+            name: name,
+            style: style,
+            tank: tank,
+            batch_num: batch,
         }
+        console.log('updated batch info', updatedBatch);
+        dispatch({type: 'UPDATE_BATCH', payload: updatedBatch})
+
     };
 
     return (
@@ -142,8 +118,7 @@ export default function Register() {
                         align="center"
                         gutterBottom
                     >
-                        Please complete the following required fields
-                        in order to register your profile
+                        Update profile information below.
                     </Typography>
                     {/* hook into errors reducer to display msg */}
                     {errors.registrationMessage && (
@@ -157,6 +132,7 @@ export default function Register() {
                         margin="normal"
                         required
                         fullWidth
+                        label="First Name"
                         value={firstName}
                         placeholder="First Name"
                         onChange={(e) => setFirstName(e.target.value)}
@@ -167,6 +143,7 @@ export default function Register() {
                     <TextField
                         variant="outlined"
                         margin="normal"
+                        label="Last Name"
                         value={lastName}
                         required
                         fullWidth
@@ -180,6 +157,7 @@ export default function Register() {
                         margin="normal"
                         required
                         fullWidth
+                        label="Email"
                         value={email}
                         placeholder="Phone Number"
                         onChange={(e) => setEmail(e.target.value)}
@@ -191,6 +169,7 @@ export default function Register() {
                         margin="normal"
                         required
                         fullWidth
+                        label="Phone Number"
                         value={phoneNum}
                         placeholder="Phone Number"
                         onChange={(e) => setPhoneNum(e.target.value)}
@@ -202,6 +181,7 @@ export default function Register() {
                         margin="normal"
                         required
                         fullWidth
+                        label="City"
                         value={city}
                         placeholder="City of Residence"
                         onChange={(e) => setCity(e.target.value)}
@@ -213,6 +193,7 @@ export default function Register() {
                         margin="normal"
                         required
                         fullWidth
+                        label="Profession"
                         value={profession}
                         placeholder="Current Profession"
                         onChange={(e) => setProfession(e.target.value)}
@@ -224,13 +205,13 @@ export default function Register() {
                         fullWidth
                         style={{ marginTop: 15 }}
                         required
-                        value={formState.careerPyramid}
+                        value={career}
                     >
                         <InputLabel>Desired Career</InputLabel>
                         <Select
-                            value={formState.careerPyramid || ''}
+                            value={career}
                             name="careerPyramid"
-                            onChange={handleChange}
+                            onChange={(e) => setCareer(e.target.value)}
                         >
                             {/* TODO - pull pyramid data from Postgres to display here! */}
                             {/* Here, value is the id of the career pyramid. */}
@@ -246,7 +227,7 @@ export default function Register() {
                         <Button
                             variant="outlined"
                             style={{ marginRight: 10 }}
-                            onClick={() => history.push('/login')}
+                            onClick={() => history.push('/home')}
                         >
                             Cancel
                         </Button>
@@ -256,7 +237,7 @@ export default function Register() {
                             color="primary"
                             type="submit"
                         >
-                            Register
+                            Save
                         </Button>
                     </div>
                 </form>
