@@ -5,7 +5,9 @@ import {
     TableRow,
     Paper,
     Typography,
-    Grid
+    Grid,
+    Select,
+    MenuItem
 } from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 // React
@@ -38,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
         display: 'block',
         marginLeft: 'auto',
         marginRight: 0,
+    },
+    select: {
+        marginLeft: 'auto',
+        marginRight: 0
     }
 }));
 // custom style for TableRow to display grey 
@@ -53,6 +59,7 @@ const StyledTableRow = withStyles((theme) => ({
 export default function ClientTable() {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const [filter, setFilter] = useState('');
     const clientList = useSelector(store => store.clients)
     // On page load, grab the client
     // data associated with coach
@@ -63,6 +70,9 @@ export default function ClientTable() {
     }, [dispatch])
     return (
         <div className={classes.container}>
+            <pre style={{ textAlign: 'center' }}>
+                {JSON.stringify(clientList[0], null, 2)}
+            </pre>
             {/* Check is the coach has any clients */}
             {clientList.length > 0 ?
                 <Grid
@@ -77,14 +87,30 @@ export default function ClientTable() {
                         xs={12}
                         component={Paper}
                     >
-                        {/* Table Header */}
-                        <Typography
-                            className={classes.tableHeader}
-                            variant="h4"
-                            color="primary"
+                        <Grid 
+                            container
+                            alignItems="center"
                         >
-                            Your Clients
-                        </Typography>
+                            <Grid item>
+                                {/* Table Header */}
+                                <Typography
+                                    className={classes.tableHeader}
+                                    variant="h4"
+                                    color="primary"
+                                >
+                                    Your Clients
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <Select
+                                    
+
+                                >
+                                    <MenuItem>Active</MenuItem>
+                                    <MenuItem>Deactivated</MenuItem>
+                                </Select>
+                            </Grid>
+                        </Grid>
                         {/* Table to display clients */}
                         <Table>
                             <TableBody>
