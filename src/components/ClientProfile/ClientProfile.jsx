@@ -11,6 +11,7 @@ import {
     InputLabel,
     FormControl
 } from '@material-ui/core/';
+import SaveIcon from '@material-ui/icons/Save';
 // React
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
@@ -66,27 +67,29 @@ export default function Register() {
     const [city, setCity] = useState(user.city);
     const [profession, setProfession] = useState(user.current_profession);
     const [career, setCareer] = useState(user.desired_career);
+    console.log('user', user);
 
     // Handles submit of form
     const register = (e) => {
         e.preventDefault();
        
-        console.log('clicked Save Edit', update.name, update.tank, update.batch_num, update.hops);
-        const updatedBatch = {
-            id: update.id, // User can't edit, so getting from reducer
-            name: name,
-            style: style,
-            tank: tank,
-            batch_num: batch,
+        console.log('clicked Save Edit', user.first_name, firstName);
+        const update = {
+            id: user.id, // User can't edit, so grabing from reducer
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            phone_number: phoneNum,
+            city: city,
+            current_profession: profession,
         }
-        console.log('updated batch info', updatedBatch);
-        dispatch({type: 'UPDATE_BATCH', payload: updatedBatch})
+        console.log('updated profile info', update);
+        // dispatch({type: 'UPDATE_BATCH', payload: updatedBatch})
 
     };
 
     return (
-    // <>
-    //     { registered && user ? 
+
         <Grid
             container
             component="main"
@@ -134,10 +137,8 @@ export default function Register() {
                         fullWidth
                         label="First Name"
                         value={firstName}
-                        placeholder="First Name"
                         onChange={(e) => setFirstName(e.target.value)}
                         name="firstName"
-                        
                     />
                     {/* Last Name */}
                     <TextField
@@ -147,7 +148,6 @@ export default function Register() {
                         value={lastName}
                         required
                         fullWidth
-                        placeholder="Last Name"
                         onChange={(e) => setLastName(e.target.value)}
                         name="lastName"
                     />
@@ -159,7 +159,6 @@ export default function Register() {
                         fullWidth
                         label="Email"
                         value={email}
-                        placeholder="Phone Number"
                         onChange={(e) => setEmail(e.target.value)}
                         name="email"
                     />
@@ -171,7 +170,6 @@ export default function Register() {
                         fullWidth
                         label="Phone Number"
                         value={phoneNum}
-                        placeholder="Phone Number"
                         onChange={(e) => setPhoneNum(e.target.value)}
                         name="phoneNumber"
                     />
@@ -183,7 +181,6 @@ export default function Register() {
                         fullWidth
                         label="City"
                         value={city}
-                        placeholder="City of Residence"
                         onChange={(e) => setCity(e.target.value)}
                         name="cityOfResidence"
                     />
@@ -195,7 +192,6 @@ export default function Register() {
                         fullWidth
                         label="Profession"
                         value={profession}
-                        placeholder="Current Profession"
                         onChange={(e) => setProfession(e.target.value)}
                         name="currentProfession"
                     />
@@ -231,22 +227,18 @@ export default function Register() {
                         >
                             Cancel
                         </Button>
-                        {/* Submit btn */}
+                        {/* Save btn */}
                         <Button
                             variant="contained"
                             color="primary"
                             type="submit"
                         >
-                            Save
+                            <SaveIcon />
+                            &nbsp;Save
                         </Button>
                     </div>
                 </form>
             </Grid>
         </Grid>
-
-    //     :
-
-    //     <p>sup</p>          }
-    // </>
     );
 };
