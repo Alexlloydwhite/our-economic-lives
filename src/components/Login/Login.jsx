@@ -11,14 +11,13 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
-import { HistoryOutlined } from '@material-ui/icons';
 // Styles
 const useStyles = makeStyles((theme) => ({
     layout: {
         width: 'auto',
         marginLeft: theme.spacing(2),
         marginRight: theme.spacing(2),
-        marginTop: theme.spacing(5),
+        // marginTop: theme.spacing(5),
         [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
             width: 600,
             marginLeft: 'auto',
@@ -77,22 +76,19 @@ export default function Login() {
         <Grid container component="main" className={classes.layout}>
             <Grid item xs={12} className={classes.paper}>
                 {/* Temp stuff */}
-                <button onClick={() => dispatch({ type: 'LOGOUT' })}>Logout</button>
+                <h5>Temp testing buttons</h5>
                 <button onClick={() => {
                     setEmail('test3');
                     setPassword('test3');
                 }}>registered user</button>
                 <button onClick={() => {
-                    setEmail('test4');
-                    setPassword('test4');
+                    setEmail('test6');
+                    setPassword('test6');
                 }}>new user</button>
                 <button onClick={() => {
                     setEmail('testcoach');
                     setPassword('testcoach');
                 }}>coach</button>
-                <pre>
-                    {JSON.stringify(user, null, 2)}
-                </pre>
                 {/* Logo avatar */}
                 <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
                     <img src="/images/OELavatar.png" />

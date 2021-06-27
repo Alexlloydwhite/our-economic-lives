@@ -138,7 +138,6 @@ export default function Register() {
                             {errors.registrationMessage}
                         </h3>
                     )}
-                    {JSON.stringify(formState, null, 2)}
                     {/* First Name */}
                     <TextField
                         variant="outlined"
