@@ -49,7 +49,19 @@ router.get('/client-list', (req, res) => {
     // Get coach id from req.user
     const coachId = req.user.id;
     const queryText = `
-    SELECT * 
+    SELECT 
+        u.id,
+        u.email,
+        u.first_name,
+        u.last_name,
+        u.phone_number,
+        u.city,
+        u.authorization,
+        u.coach_id,
+        u.current_profession,
+        u.desired_career,
+        u.is_registered,
+        u.is_active
     FROM "user" u
     WHERE u.coach_id=$1
     ORDER BY 
