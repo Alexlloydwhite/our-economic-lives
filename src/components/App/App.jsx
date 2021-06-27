@@ -30,20 +30,34 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* <NavBar /> */}
+      <NavBar />
       <Router>
+        {/* Default direct to /home */}
         <Redirect exact from="/" to="/home" />
-        {/* Login View */}
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        {/* Register View */}
-        <Route exact path='/register'>
-          <Register />
-        </Route>
-        {/* Home Screen / Pyramid View */}
+        {/* If authenticated, show /home as /login */}
         <ProtectedRoute
-          exact 
+          exact
+          path="/login"
+          authRedirect="/home"
+        >
+          <Login />
+        </ProtectedRoute>
+        {/* If authenticated, show /register as / */}
+        <ProtectedRoute
+          exact
+          path="/register"
+          authRedirect="/home"
+        >
+          <Register />
+        </ProtectedRoute>
+        {/* 
+          /home:
+          Client: Pyramid View
+          Coach: Dashboard
+          PA: Dashboard
+        */}
+        <ProtectedRoute
+          exact
           path='/home'
         >
           <Home />
