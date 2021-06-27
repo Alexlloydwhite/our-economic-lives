@@ -11,10 +11,12 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // React
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import ClientInfo from './ClientInfo';
 import DeactivateClient from './DeactivateClient';
 
 export default function ClientTableRow({ client, clientList, StyledTableRow, classes }) {
+    const history = useHistory();
     const dispatch = useDispatch();
     // State for setting location of kabob menu
     const [anchorEl, setAnchorEl] = useState(null);
@@ -26,9 +28,13 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
         });
     }
 
+    const handleCritExpClick = (id) => {
+        history.push(`/crit-review/${id}`);
+    }
+
     return (
         <StyledTableRow>
-            {/* Render row differently based on wether client is registered */}
+            {/* Render row differently based on whether client is registered */}
             {client.is_registered ?
                 <>
                     <TableCell>
@@ -49,6 +55,7 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
                                     size="small"
                                     variant="outlined"
                                     className={classes.tableButton}
+                                    onClick={() => handleCritExpClick(client.id)}
                                 >
                                     Critical Experiences
                                 </Button>

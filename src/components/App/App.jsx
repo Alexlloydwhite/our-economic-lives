@@ -64,7 +64,7 @@ export default function App() {
         </ProtectedRoute>
         <Route
           exact
-          path='/crit-review'
+          path='/crit-review/:id'
         >
           <CoachCritExpReview />
         </Route>
