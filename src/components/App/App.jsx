@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import {
   HashRouter as Router,
   Route,
+  Redirect
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -31,7 +32,7 @@ export default function App() {
       <CssBaseline />
       <NavBar />
       <Router>
-        {/* <Redirect exact from="/" to="/home" /> */}
+        <Redirect exact from="/" to="/home" />
         {/* Login View */}
         <Route exact path="/login">
           <Login />
