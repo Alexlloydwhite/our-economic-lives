@@ -14,7 +14,7 @@ import Login from '../Login/Login';
 import Register from '../Login/Register';
 import Footer from '../Footer/Footer';
 import NavBar from './NavBar/NavBar';
-
+import CoachCritExpReview from '../CoachCritExpReview/CoachCritExpReview';
 // import './App.css';
 import BlockSlider from '../Home/BlockSlider';
 import BlockDetail from '../Home/BlockDetail';
@@ -62,6 +62,14 @@ export default function App() {
         >
           <Home />
         </ProtectedRoute>
+        <Route
+          exact
+          path='/crit-review'
+        >
+          <CoachCritExpReview />
+        </Route>
+
+
         <Route exact path="/blockSlider">
           <BlockSlider />
         </Route>
