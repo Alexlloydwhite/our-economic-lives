@@ -15,7 +15,7 @@ import Register from '../Login/Register';
 import Footer from '../Footer/Footer';
 import NavBar from './NavBar/NavBar';
 
-import './App.css';
+// import './App.css';
 import BlockSlider from '../Home/BlockSlider';
 import BlockDetail from '../Home/BlockDetail';
 
@@ -30,7 +30,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <NavBar />
+      {/* <NavBar /> */}
       <Router>
         <Redirect exact from="/" to="/home" />
         {/* Login View */}

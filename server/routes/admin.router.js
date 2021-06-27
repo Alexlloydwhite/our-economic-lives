@@ -29,6 +29,6 @@ router.post('/create_coach', (req, res) => {
         console.log('User registration failed: ', err);
         res.sendStatus(500);
       });
-  });
+});
 
 module.exports = router;
