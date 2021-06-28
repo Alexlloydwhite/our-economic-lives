@@ -29,7 +29,7 @@ export default function* rootSaga() {
   yield takeEvery('DEACTIVATE_CLIENT', deactivateClient);
   yield takeEvery('ACTIVATE_CLIENT', activateClient);
   yield takeEvery('FETCH_CAREER_PATH', fetchCareerPath);
-  yield takeEvery('CREATE_CAREER_PATH', createCareerPath);
+  yield takeEvery('ADD_CAREER_PATH', createCareerPath);
   yield takeEvery('UPDATE_CLIENT', updateClient);
   yield all([
     loginSaga(), // login saga is now registered

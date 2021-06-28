@@ -14,18 +14,18 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export default function AdminDashboard() {
     const dispatch = useDispatch();
-    const [careerPath, setCareerPath] = useState(0);
-    const [name, setName] = useState('');
+    // const [careerPath, setCareerPath] = useState(0);
+    const [careerPath, setCareerPath] = useState('');
     let routerPath = '/api/upload/' + careerPath;
     const setCareerPaths = useSelector(store => store.career_path)
 
     const addCareerPath = (e) => {
         e.preventDefault();
         // check is name is not null
-        if (name) {
+        if (careerPath) {
             dispatch({
                 type: 'ADD_CAREER_PATH',
-                payload: name
+                payload: careerPath
             });
         }
     }
@@ -46,16 +46,18 @@ export default function AdminDashboard() {
                     <Typography>
                         Add New Career Path
                     </Typography>
+                    <pre>
+                        {JSON.stringify(careerPath, null, 2)}
+                    </pre>
                     <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                         <TextField
                             variant="outlined"
                             margin="normal"
                             size="small"
                             required
-                            name="name"
                             label="Career Path"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            value={careerPath}
+                            onChange={(e) => setCareerPath(e.target.value)}
                             style={{ marginRight: 5 }}
                         />
                         <Button
@@ -69,6 +71,9 @@ export default function AdminDashboard() {
                         </Button>
                     </Grid>
                 </form>
+                <pre>
+                    {JSON.stringify(setCareerPaths, null, 2)}
+                </pre>
             </Grid>
         </Grid >
     )
