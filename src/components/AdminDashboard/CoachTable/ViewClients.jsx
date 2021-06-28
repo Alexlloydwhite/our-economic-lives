@@ -16,7 +16,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from 'react';
 
-export default function viewClients({ classes, coachList, coach }) {
+export default function viewClients({ classes, coach }) {
     const [openDialog, setOpenDialog] = useState(false);
     const dispatch = useDispatch();
     // List of clients from store

@@ -63,7 +63,7 @@ export default function CoachTable() {
         dispatch({
             type: 'FETCH_COACHES'
         });
-    }, [dispatch]);
+    }, []);
     return (
         <div className={classes.container}>
             {/* Only display table if coaches exist */}
@@ -102,7 +102,6 @@ export default function CoachTable() {
                                     <CoachTableRow 
                                         key={coach.id}
                                         coach={coach}
-                                        coachList={coachList}
                                         StyledTableRow={StyledTableRow}
                                         classes={classes}
                                     />
