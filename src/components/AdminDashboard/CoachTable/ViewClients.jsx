@@ -22,7 +22,9 @@ export default function viewClients({ classes, coachList, coach }) {
     // List of clients from store
     const clientList = useSelector(store => store.clients);
     const handleOpenClientList = (id) => {
+        // Open dialog
         setOpenDialog(true);
+        // Dispatch to grab client list by coach ID
         dispatch({
             type: 'FETCH_CLIENTS',
             coachId: id
@@ -30,6 +32,7 @@ export default function viewClients({ classes, coachList, coach }) {
     }
     return (
         <>
+            {/* Btn opens dialog to show client list for coach clicked */}
             <Button
                 variant="outlined"
                 className={classes.tableButton}
@@ -53,7 +56,7 @@ export default function viewClients({ classes, coachList, coach }) {
                     <List>
                         {/* Check if the coach has any clients */}
                         {clientList.length > 1 ?
-                            // If true map over array to display data
+                            // If the coach has clients map over array to display data
                             clientList.map((client) => (
                                 <div key={client.id}>
                                     {/* Client name */}
@@ -63,12 +66,12 @@ export default function viewClients({ classes, coachList, coach }) {
                                         </ListItemAvatar>
                                         {/* Check is client is registered */}
                                         {client.is_registered ?
-                                            // If true, display name
+                                            // If client is register display name
                                             <ListItemText>
                                                 {client.first_name}{' '}{client.last_name}
                                             </ListItemText>
                                             :
-                                            // Else display email
+                                            // if client is not registered display email
                                             <ListItemText>
                                                 {client.email}
                                             </ListItemText>
@@ -78,7 +81,7 @@ export default function viewClients({ classes, coachList, coach }) {
                                 </div>
                             ))
                             :
-                            // Else display message
+                            // If the coach does not have any clients display message
                             <ListItem>
                                 <ListItemText>
                                     This coach has no clients
