@@ -8,37 +8,12 @@ import {
     DialogContent,
     DialogContentText,
     DialogTitle,
-    Paper,
-    Grid
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 // React Imports
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// Styles
-const useStyles = makeStyles((theme) => ({
-    container: {
-        width: 'auto',
-        marginTop: theme.spacing(3),
-        marginBottom: theme.spacing(3),
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        [theme.breakpoints.up(1000 + theme.spacing(2) * 2)]: {
-            width: 1000,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-        },
-    },
-    table: {
-        marginRight: theme.spacing(2),
-        marginLeft: theme.spacing(2),
-        maxWidth: 600,
-        padding: 15
-    },
-}));
 
-export default function InviteNewClient({ activeClientList }) {
-    const classes = useStyles();
+export default function InviteNewCoach() {
     const dispatch = useDispatch();
     const errors = useSelector(store => store.errors);
     // State for dialog. Is it open or closed?
@@ -50,7 +25,7 @@ export default function InviteNewClient({ activeClientList }) {
         setOpen(false);
         // Clear error state
         dispatch({
-            type: 'CLEAR_CLIENT_INPUT_ERROR'
+            type: 'CLEAR_REGISTRATION_ERROR'
         })
     }
     // Handle input change
@@ -63,12 +38,12 @@ export default function InviteNewClient({ activeClientList }) {
     // Handle dialog submit
     const handleSubmit = (e) => {
         // Check is both required field are entered
-        if (Object.keys(formState).length === 2) {
+        if (Object.keys(formState).length === 4) {
             // Close dialog
             setOpen(false);
             // Dispatch data to sage
             dispatch({
-                type: 'CREATE_CLIENT',
+                type: 'CREATE_COACH',
                 payload: formState
             })
             // Reset form state
@@ -76,73 +51,61 @@ export default function InviteNewClient({ activeClientList }) {
         } else {
             // Throw error
             dispatch({
-                type: 'CREATE_CLIENT_INPUT_ERROR'
+                type: 'REGISTRATION_INPUT_ERROR'
             })
         }
     }
 
     return (
         <div style={{ textAlign: 'center', marginTop: 10 }}>
-            {/* Page Title */}
             <Typography
                 variant="h3"
                 gutterBottom
             >
-                Coach Dashboard
+                Admin Dashboard
             </Typography>
-            <Grid
-                container
-                className={classes.container}
-                direction="row"
-                justify="center"
-                alignItems="center"
+            <Button
+                onClick={() => setOpen(true)}
+                variant="outlined"
             >
-                <Grid
-                    item
-                    component={Paper}
-                    className={classes.table}
-                >
-                    <Typography
-                        variant="h6"
-                        gutterBottom
-                    >
-                        You have {activeClientList.length} / 8 clients on your team
-                    </Typography>
-                    {/* Btn to invite new client */}
-                    {activeClientList.length < 8 ?
-                        <Button
-                            onClick={() => setOpen(true)}
-                            variant="outlined"
-                        >
-                            Invite a new client to your team
-                        </Button>
-                        :
-                        <Typography variant="h6">
-                            Your client list is full
-                        </Typography>
-                    }
-                </Grid>
-            </Grid>
+                Add a new coach
+            </Button>
             {/* Dialog */}
             <Dialog open={open} onClose={handleClose}>
                 {/* Title */}
                 <DialogTitle>
-                    Add a new client to your team
+                    Add a new coach
                 </DialogTitle>
                 <DialogContent>
                     {/* Helper text */}
                     <DialogContentText>
-                        We recommend using the name of your organization as the password.
+                        We recommend using the name of your organization as their password.
                     </DialogContentText>
                     {/* Errors */}
-                    {errors.createUserMessage && (
+                    {errors.registrationMessage && (
                         <h3 className="alert" role="alert">
-                            {errors.createUserMessage}
+                            {errors.registrationMessage}
                         </h3>
                     )}
+                    {/* First Name */}
+                    <TextField
+                        label="Coach's First Name"
+                        name="first_name"
+                        fullWidth
+                        required
+                        onChange={handleChange}
+                    />
+                    {/* Last Name */}
+                    <TextField
+                        label="Coach's Last Name"
+                        name="last_name"
+                        fullWidth
+                        required
+                        onChange={handleChange}
+                    />
                     {/* Email */}
                     <TextField
-                        label="Client's Email"
+                        label="Coach's Email"
                         name="email"
                         fullWidth
                         required
@@ -173,7 +136,7 @@ export default function InviteNewClient({ activeClientList }) {
                         variant="contained"
                         color="primary"
                     >
-                        Add Client
+                        Add Coach
                     </Button>
                 </DialogActions>
             </Dialog>

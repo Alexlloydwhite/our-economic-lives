@@ -13,7 +13,7 @@ import {
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 // React
 import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import ClientTableRow from './ClientTableRow';
 // Styles
 const useStyles = makeStyles((theme) => ({
@@ -61,11 +61,13 @@ export default function ClientTable({ clientList, deactivatedClientList, activeC
     const classes = useStyles();
     const dispatch = useDispatch();
     const [filter, setFilter] = useState(false);
+    const user = useSelector(store => store.user)
     // On page load, grab the client
     // data associated with coach
     useEffect(() => {
         dispatch({
-            type: 'FETCH_CLIENTS'
+            type: 'FETCH_CLIENTS',
+            coachId: user.id
         })
     }, [dispatch])
     return (

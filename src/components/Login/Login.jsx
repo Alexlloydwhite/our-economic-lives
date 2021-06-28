@@ -89,6 +89,10 @@ export default function Login() {
                     setEmail('testcoach');
                     setPassword('testcoach');
                 }}>coach</button>
+                <button onClick={() => {
+                    setEmail('programadmin');
+                    setPassword('programadmin');
+                }}>admin</button>
                 {/* Logo avatar */}
                 <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
                     <img src="/images/OELavatar.png" />
