@@ -9,7 +9,7 @@ export default function CoachTable() {
         dispatch({
             type: 'FETCH_COACHES'
         });
-    },[]);
+    },[dispatch]);
     return (
         <pre>
             {JSON.stringify(coachList, null, 2)}
