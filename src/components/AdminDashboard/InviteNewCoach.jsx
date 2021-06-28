@@ -38,7 +38,7 @@ export default function InviteNewCoach() {
         });
     }
     // Handle dialog submit
-    const handleSubmit = (e) => {
+    const handleSubmit = () => {
         // Check is both required field are entered
         if (Object.keys(formState).length === 4) {
             // Close dialog
