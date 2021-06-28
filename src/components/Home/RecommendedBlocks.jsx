@@ -49,7 +49,7 @@ export default function PyramidTier() {
                 {sample.map((recommended, i) => (
                     <Button 
                         key={i}
-                        variant="outlined" 
+                        variant="contained" 
                         color="primary" 
                         className={classes.content}
                         onClick={() => handleClick(i)}
