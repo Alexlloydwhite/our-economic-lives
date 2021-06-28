@@ -91,6 +91,7 @@ export default function Profile() {
         }
         // Dispatch edits to the update saga
         dispatch({type: 'UPDATE_CLIENT', payload: update })
+        history.push('/home')
     };
 
     return (
