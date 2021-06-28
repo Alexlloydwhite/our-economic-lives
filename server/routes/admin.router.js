@@ -2,9 +2,11 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const encryptLib = require('../modules/encryption');
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
-router.get('/career_path', (req, res) => {
-  if (req.user) {
+router.get('/career_path', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT * FROM career_path;`
     pool
       .query(queryText)
@@ -15,9 +17,6 @@ router.get('/career_path', (req, res) => {
         console.log('Error in /api/admin/career_path', error);
         res.sendStatus(500);
       })
-  } else {
-    res.sendStatus(403);
-  }
 });
 
 router.post('/create-career-path', (req, res) => {

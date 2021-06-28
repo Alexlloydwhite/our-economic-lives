@@ -50,9 +50,7 @@ export default function AddBlocks() {
                                 {setCareerPaths ?
                                     setCareerPaths.map((path) => (
                                         <MenuItem key={path.id} value={path.id}>{path.name}</MenuItem>
-                                    ))
-                                    :
-                                    <MenuItem>No Career Paths</MenuItem>
+                                    )) : <MenuItem>No Career Paths</MenuItem>
                                 }
                             </Select>
                         </FormControl>
