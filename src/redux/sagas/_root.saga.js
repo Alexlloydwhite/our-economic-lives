@@ -7,6 +7,7 @@ import fetchClients from './fetchClients.saga';
 import deactivateClient from './deactivateClient.saga';
 import fetchCareerPath from './fetchCareerPath.saga';
 import activateClient from './activateClient.saga';
+import createCoach from './createCoach.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -18,6 +19,7 @@ import activateClient from './activateClient.saga';
 export default function* rootSaga() {
   yield takeEvery('REGISTER_USER', registerNewUser);
   yield takeEvery('CREATE_CLIENT', createClient);
+  yield takeEvery('CREATE_COACH', createCoach);
   yield takeEvery('FETCH_CLIENTS', fetchClients);
   yield takeEvery('DEACTIVATE_CLIENT', deactivateClient);
   yield takeEvery('ACTIVATE_CLIENT', activateClient);
