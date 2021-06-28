@@ -73,6 +73,7 @@ export default function PyramidTier(props) {
   const tierNum = props.tier;
   const user = useSelector(store => store.user);
   const buildingBlocks = useSelector(store => store.buildingBlocks);
+  console.log('buildingBlocks:', buildingBlocks);
 
   const handleClick = (id) => {
     // console.log('Clicked slider', id);
@@ -85,16 +86,16 @@ export default function PyramidTier(props) {
     <div className={classes.root} >
       <ArrowBackIosIcon className={classes.arrow} />
       <GridList className={classes.gridList} cols={1.1} > 
-        {tileData.map((block, i) => (
-          <GridListTile key={i}>
+        {buildingBlocks ? buildingBlocks.map((block) => (
+          <GridListTile key={block.id}>
             <Card className={classes.card} variant="outlined"
-              onClick={(e) => handleClick(i)}>
+              onClick={(e) => handleClick(block.id)}>
               <CardContent className={classes.title}>
-                <Typography variant="h4">{block.title}</Typography>
+                <Typography variant="h4">{block.name}</Typography>
               </CardContent>
             </Card>
           </GridListTile>
-        ))}
+        )):''}
       </GridList>
       <ArrowForwardIosOutlinedIcon className={classes.arrow} />
     </div>
