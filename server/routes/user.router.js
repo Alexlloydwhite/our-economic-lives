@@ -81,37 +81,4 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
-// Handles PUT request, this is the end point
-// used when a client updates their profile
-router.put('/update', (req, res) => {
-  console.log(req.body, req.user.id);
-  const queryText = `
-  UPDATE "user" 
-  SET 
-    first_name=$1, 
-    last_name=$2,
-    email=$3,
-    phone_number=$4,
-    city=$5,
-    current_profession=$6,
-    desired_career=$7
-  WHERE id=$8`
-  pool
-    .query(queryText, [
-      req.body.firstName,
-      req.body.lastName,
-      req.body.email,
-      req.body.phoneNumber,
-      req.body.cityOfResidence,
-      req.body.currentProfession,
-      req.body.careerPyramid,
-      req.user.id
-    ])
-    .then(() => res.sendStatus(201))
-    .catch((err) => {
-      res.sendStatus(500);
-      console.log(`error registering user: ${err}`);
-    });
-});
-
 module.exports = router;
