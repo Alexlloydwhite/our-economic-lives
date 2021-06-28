@@ -108,8 +108,8 @@ export default function ClientTable({ clientList, deactivatedClientList, activeC
                                         value={filter}
                                         onChange={(e) => setFilter(e.target.value)}
                                     >
-                                        <MenuItem value={false}>Active Clients</MenuItem>
-                                        <MenuItem value={true}>Deactivated Clients</MenuItem>
+                                        <MenuItem value={false}>Active</MenuItem>
+                                        <MenuItem value={true}>Deactivated</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Grid>
@@ -117,9 +117,8 @@ export default function ClientTable({ clientList, deactivatedClientList, activeC
                         {/* Table to display clients */}
                         <Table>
                             <TableBody>
-                                {/* If filter is TRUE display not active clients */}
-                                {/* If filter is FALSE(default state) display ACTIVE clients */}
                                 {filter ?
+                                    // If filter is TRUE display not active clients 
                                     deactivatedClientList.map((client) => (
                                         <ClientTableRow
                                             key={client.id}
@@ -130,6 +129,7 @@ export default function ClientTable({ clientList, deactivatedClientList, activeC
                                         />
                                     ))
                                     :
+                                    // If filter is FALSE(default state) display ACTIVE clients 
                                     activeClientList.map((client) => (
                                         <ClientTableRow
                                             key={client.id}
