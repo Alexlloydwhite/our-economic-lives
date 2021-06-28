@@ -29,7 +29,12 @@ export default function AdminDashboard() {
     }, [dispatch]);
 
     return (
-        <Grid container>
+        <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+        >
             <Grid item>
                 <form onSubmit={addCareerPath} noValidate>
                     <Typography>
