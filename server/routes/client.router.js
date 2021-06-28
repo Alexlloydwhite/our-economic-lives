@@ -35,4 +35,46 @@ router.put('/update', (req, res) => {
       });
   });
 
-  module.exports = router;
+
+// Handles PUT request, this is the end point
+// used when a new user logins in for the first time
+router.put('/register', async (req, res) => {
+    const client = await pool.connect();
+      phone_number=$3,
+      city=$4,
+      current_profession=$5,
+      desired_career=$6,
+      is_registered='true'
+    WHERE id=$7`
+    let queryText1 = `SELECT building_block.id FROM building_block
+    JOIN career_path_building_block ON building_block.id = career_path_building_block.building_block_id
+    WHERE career_path_building_block.career_path_id = 1;`
+    let queryText2 = `INSERT INTO user_blocks ("user_id", "building_block_id")
+    VALUES ($1, $2);`
+    try {
+        pool
+        .query(queryText, [
+            req.body.firstName,
+            req.body.lastName,
+            req.body.phoneNumber,
+            req.body.cityOfResidence,
+            req.body.currentProfession,
+            req.body.careerPyramid,
+            req.user.id
+        ])
+        let buildingBlockId = await client.query(queryText1);
+        for (id of buildingBlockId.rows) {
+        await client.query(queryText2, [req.user.id, id.id])
+        } 
+        client.query('COMMIT')
+        res.sendStatus(201);
+    } catch (error) {
+        client.query('ROLLBACK');
+        console.log('Error PUT /api/client/register', error);
+        res.sendStatus(500);
+    } finally {
+        client.release();
+    } 
+});
+
+module.exports = router;

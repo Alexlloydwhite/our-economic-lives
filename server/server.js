@@ -11,11 +11,9 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const blockRouter = require('./routes/block.router.js');
 const uploadRouter = require('./routes/upload.router.js');
-const clientRouter = require('./routes/client.router.js');
 const adminRouter = require('./routes/admin.router.js');
-
 const coachRouter = require('./routes/coach.router');
-
+const clientRouter = require('./routes/client.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
