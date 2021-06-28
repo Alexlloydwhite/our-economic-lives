@@ -26,6 +26,7 @@ export default function CoachTableRow({ coach, coachList, StyledTableRow, classe
                 <ViewClients 
                     classes={classes}
                     coachList={coachList}
+                    coach={coach}
                 />
             </TableCell>
             <TableCell>
