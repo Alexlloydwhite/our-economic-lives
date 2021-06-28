@@ -29,10 +29,10 @@ router.post('/create-client', (req, res,) => {
 
 // Handles GET request for users that are
 // associated with a particular coach
-router.get('/client-list', (req, res) => {
+router.get('/client-list/:id', (req, res) => {
     if (req.user.authorization <= 2) {
         // Get coach id from req.user
-        const coachId = req.user.id;
+        const coachId = req.params.id;
         const queryText = `
     SELECT 
         u.id,
