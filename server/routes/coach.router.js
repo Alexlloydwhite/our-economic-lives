@@ -6,30 +6,6 @@ const encryptLib = require('../modules/encryption');
 // Handles POST request with new user data
 // This is the end point used when a coach
 // adds a new client to their team
-router.post('/create-client', (req, res) => {
-    if (req.user.authorization <= 2) {
-        console.log(`IN, create route`);
-        const email = req.body.email;
-        const authorization = 3;
-        const password = encryptLib.encryptPassword(req.body.password);
-        const coachId = req.user.id;
-        const queryText = `INSERT INTO "user" (email, password, "authorization", coach_id)
-          VALUES ($1, $2, $3, $4) RETURNING id`;
-        pool
-            .query(queryText, [email, password, authorization, coachId])
-            .then(() => res.sendStatus(201))
-            .catch((err) => {
-                console.log('User registration failed: ', err);
-                res.sendStatus(500);
-            });
-    } else {
-        res.sendStatus(403);
-    }
-});
-
-// Handles POST request with new user data
-// This is the end point used when a coach
-// adds a new client to their team
 router.post('/create-client', (req, res,) => {
     if (req.user.authorization <= 2) {
         console.log(`IN, create route`);
