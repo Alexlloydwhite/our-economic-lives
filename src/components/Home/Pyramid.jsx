@@ -174,7 +174,7 @@ function Tier(props) {
       <div className={classes.tierProgress}></div>
       <div className={classes.tierRemaining}></div>
       <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
-            <BlockSlider />
+            <BlockSlider tier={num} />
         </Backdrop>
     </div>
   )
@@ -186,6 +186,7 @@ export default function Home() {
 
   return (
     <div className={classes.pyramid}>
+      <Typography>Please Select Your Tier: </Typography>
       <div className={classes.row}>
         <div className={classes.tier6}>
           <Typography className={classes.tier6Title}>Tier 6</Typography>

@@ -1,16 +1,14 @@
-// React
-import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
-// MUI
-import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -68,11 +66,11 @@ const useStyles = makeStyles((theme) => ({
     },
   ];
  
-export default function PyramidTier() {
+export default function PyramidTier(props) {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
-  // const tier = useSelector((store) => store.tier);
+  const tierNum = props.tier;
 
   const handleClick = (id) => {
     // console.log('Clicked slider', id);
@@ -80,7 +78,7 @@ export default function PyramidTier() {
     history.push(`/blockDetail/${id}`);  
   }
 
-
+  console.log('in Block slider for tier', tierNum);
   return (
     <div className={classes.root} >
       <ArrowBackIosIcon className={classes.arrow} />
