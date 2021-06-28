@@ -49,7 +49,6 @@ export default function AdminDashboard() {
                         <TextField
                             variant="outlined"
                             margin="normal"
-                            size="small"
                             required
                             label="Career Path"
                             value={careerPath}
@@ -58,11 +57,10 @@ export default function AdminDashboard() {
                         />
                         {/* Submit btn */}
                         <Button
-                            style={{ marginTop: 15, marginBottom: 10 }}
+                            style={{ marginTop: 18, marginBottom: 12 }}
                             type="submit"
                             variant="contained"
                             color="primary"
-                            size="small"
                         >
                             Submit
                         </Button>

@@ -7,14 +7,21 @@ import {
     FormControl,
     Select,
     InputLabel,
-    MenuItem
+    MenuItem,
 } from '@material-ui/core/';
+import { makeStyles } from '@material-ui/core/styles';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 // React
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+// Styles
+const useStyles = makeStyles((theme) => ({
+    blockForm: {
+        marginTop: theme.spacing(1)
+    },
+}));
 export default function AddBlocks() {
+    const classes = useStyles();
     const dispatch = useDispatch();
     const [careerPath, setCareerPath] = useState(0);
     let routerPath = '/api/upload/' + careerPath;
@@ -31,11 +38,11 @@ export default function AddBlocks() {
             alignItems="center"
         >
             <Grid item>
+                <form action={routerPath} method="POST" encType="multipart/form-data">
                 <Typography>
                     Add New Building Block
                 </Typography>
-                <form action={routerPath} method="POST" encType="multipart/form-data">
-                    <Grid item>
+                    <Grid item className={classes.blockForm}>
                         <FormControl
                             variant="outlined"
                             required
@@ -55,12 +62,13 @@ export default function AddBlocks() {
                             </Select>
                         </FormControl>
                     </Grid>
-                    <Grid item>
+                    <Grid item className={classes.blockForm}>
                         <Button
                             variant="contained"
                             component="label"
                             color="primary"
                             startIcon={<CloudUploadIcon />}
+                            style={{ marginRight: 5 }}
                         >
                             Upload CSV
                             <input
@@ -74,7 +82,6 @@ export default function AddBlocks() {
                             type="submit"
                             color="primary"
                             variant="contained"
-                            fullWidth
                         >
                             Add Blocks
                         </Button>
