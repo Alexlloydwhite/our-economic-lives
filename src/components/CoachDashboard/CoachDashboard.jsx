@@ -12,7 +12,7 @@ export default function CoachDashboard() {
     // This is later passed to the TR component via props
     const activeClientList = clientList.filter((client) => client.is_active === true);
     return (
-        <div style={{marginTop: 80}}>
+        <div>
             {/* Page header / opens form to add new client */}
             <InviteNewClient
                 activeClientList={activeClientList}
