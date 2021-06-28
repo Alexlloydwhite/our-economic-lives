@@ -11,9 +11,6 @@ import {
     ListItemAvatar
 } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
-import PhoneIcon from '@material-ui/icons/Phone';
-import HomeIcon from '@material-ui/icons/Home';
-import WorkIcon from '@material-ui/icons/Work';
 import CloseIcon from '@material-ui/icons/Close';
 // React
 import { useDispatch, useSelector } from "react-redux"
@@ -54,9 +51,9 @@ export default function viewClients({ classes, coachList, coach }) {
                 {/* Dialog Body */}
                 <DialogContent>
                     <List>
-                        {/* Check is client details is !== null */}
+                        {/* Check if the coach has any clients */}
                         {clientList.length > 1 ?
-                            // Map over array to display data
+                            // If true map over array to display data
                             clientList.map((client) => (
                                 <div key={client.id}>
                                     {/* Client name */}
@@ -64,11 +61,14 @@ export default function viewClients({ classes, coachList, coach }) {
                                         <ListItemAvatar>
                                             <PersonIcon />
                                         </ListItemAvatar>
+                                        {/* Check is client is registered */}
                                         {client.is_registered ?
+                                            // If true, display name
                                             <ListItemText>
                                                 {client.first_name}{' '}{client.last_name}
                                             </ListItemText>
                                             :
+                                            // Else display email
                                             <ListItemText>
                                                 {client.email}
                                             </ListItemText>
@@ -78,6 +78,7 @@ export default function viewClients({ classes, coachList, coach }) {
                                 </div>
                             ))
                             :
+                            // Else display message
                             <ListItem>
                                 <ListItemText>
                                     This coach has no clients
