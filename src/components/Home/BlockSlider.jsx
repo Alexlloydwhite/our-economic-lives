@@ -43,28 +43,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
   }
 }));
-
-  // Sample Data
-  const tileData = [
-    {
-      title: 'Interpersonal Skills',
-    },
-    {
-        title: 'Initiative',
-    },
-    {
-        title: 'Ambition',
-    },
-    {
-        title: 'Adaptability & Flexibility',
-    },
-    {
-        title: 'Willingness to Take Risks',
-    },
-    {
-        title: 'Willingness to Learn',
-    },
-  ];
  
 export default function PyramidTier(props) {
   const classes = useStyles();
@@ -75,8 +53,8 @@ export default function PyramidTier(props) {
   const buildingBlocks = useSelector(store => store.buildingBlocks);
   console.log('buildingBlocks:', buildingBlocks);
 
+  // Click handler to capture block id and dispatch to detail store
   const handleClick = (id) => {
-    // console.log('Clicked slider', id);
     dispatch({ type: 'SET_DETAIL', payload: id });
     history.push(`/blockDetail/${id}`);  
   }
@@ -84,9 +62,12 @@ export default function PyramidTier(props) {
   console.log('in Block slider for tier', tierNum, 'as', user);
   return (
     <div className={classes.root} >
+      {/* Left Arrow */}
       <ArrowBackIosIcon className={classes.arrow} />
+      {/* List of Blocks */}
       <GridList className={classes.gridList} cols={1.1} > 
         {buildingBlocks ? buildingBlocks.map((block) => (
+          /* Invidual Blocks */
           <GridListTile key={block.id}>
             <Card className={classes.card} variant="outlined"
               onClick={(e) => handleClick(block.id)}>
@@ -97,6 +78,7 @@ export default function PyramidTier(props) {
           </GridListTile>
         )):''}
       </GridList>
+      {/* Right Arrow */}
       <ArrowForwardIosOutlinedIcon className={classes.arrow} />
     </div>
   );
