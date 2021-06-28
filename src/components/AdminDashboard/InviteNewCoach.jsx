@@ -12,8 +12,10 @@ import {
 // React Imports
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 export default function InviteNewCoach() {
+    const history = useHistory();
     const dispatch = useDispatch();
     const errors = useSelector(store => store.errors);
     // State for dialog. Is it open or closed?
@@ -67,8 +69,15 @@ export default function InviteNewCoach() {
             <Button
                 onClick={() => setOpen(true)}
                 variant="outlined"
+                style={{ marginRight: 10 }}
             >
                 Add a new coach
+            </Button>
+            <Button
+                variant="outlined"
+                onClick={() => history.push('/managepyramids')}
+            >
+                Manage Pyramids
             </Button>
             {/* Dialog */}
             <Dialog open={open} onClose={handleClose}>
