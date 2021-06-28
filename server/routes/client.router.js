@@ -40,6 +40,11 @@ router.put('/update', (req, res) => {
 // used when a new user logins in for the first time
 router.put('/register', async (req, res) => {
     const client = await pool.connect();
+    const queryText = `
+    UPDATE "user" 
+    SET 
+      first_name=$1, 
+      last_name=$2,
       phone_number=$3,
       city=$4,
       current_profession=$5,
