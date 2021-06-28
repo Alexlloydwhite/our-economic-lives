@@ -9,6 +9,7 @@ import fetchCareerPath from './fetchCareerPath.saga';
 import updateClient from './updateClient.saga';
 import activateClient from './activateClient.saga';
 import buildingBlocks from './buildingBlocks.saga';
+import fetchClientBlocks from './fetchClientBlocks.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -25,6 +26,7 @@ export default function* rootSaga() {
   yield takeEvery('ACTIVATE_CLIENT', activateClient);
   yield takeEvery('FETCH_CAREER_PATH', fetchCareerPath);
   yield takeEvery('UPDATE_CLIENT', updateClient);
+  yield takeEvery('FETCH_CLIENT_BLOCKS', fetchClientBlocks);
 
 
   yield all([
