@@ -12,8 +12,9 @@ import {
 } from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 // React
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import CoachTableRow from './CoachTableRow';
 // Styles
 const useStyles = makeStyles((theme) => ({
     container: {
