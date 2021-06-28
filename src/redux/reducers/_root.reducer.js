@@ -6,6 +6,7 @@ import career_path from './careerPath.reducer.js';
 import detail from './details.reducer';
 import coaches from './coaches.reducer';
 import buildingBlocks from './buildingBlocks.reducer';
+import clientBlocks from './clientBlocks.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -21,6 +22,8 @@ const rootReducer = combineReducers({
   career_path, //holds an array of all the career path data
   buildingBlocks, //holds array of buildingBlocks for tier slider
   detail, // holds an array of building block details
+  clientBlocks, // holds array of buildking blocks for specific client
+  
 });
 
 export default rootReducer;

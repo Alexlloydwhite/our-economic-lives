@@ -12,6 +12,7 @@ import createCoach from './createCoach.saga';
 import fetchCoaches from './fetchCoaches.saga';
 import buildingBlocks from './buildingBlocks.saga';
 import createCareerPath from './createCareerPath.saga';
+import fetchClientBlocks from './fetchClientBlocks.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -31,6 +32,7 @@ export default function* rootSaga() {
   yield takeEvery('FETCH_CAREER_PATH', fetchCareerPath);
   yield takeEvery('ADD_CAREER_PATH', createCareerPath);
   yield takeEvery('UPDATE_CLIENT', updateClient);
+  yield takeEvery('FETCH_CLIENT_BLOCKS', fetchClientBlocks);
   yield all([
     loginSaga(), // login saga is now registered
     userSaga(),

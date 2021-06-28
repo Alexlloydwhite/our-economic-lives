@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import RecommendedBlocks from './RecommendedBlocks';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -17,6 +18,9 @@ import Backdrop from '@material-ui/core/Backdrop';
 
 export default function RecommendedButton() {
   const classes = useStyles();
+  const id = useSelector(store => store.user.id);
+  const dispatch = useDispatch();
+  console.log('in recBB user', id);
 
   // Setting state for backdrop 
   const [open, setOpen] = useState(false);
@@ -24,7 +28,9 @@ export default function RecommendedButton() {
   const handleClose = () => {
     setOpen(false);
   };
+  // Grabbing Id and sending to DB to retrieve user/client building blocks
   const handleToggle = () => {
+    dispatch({ type: 'FETCH_CLIENT_BLOCKS', payload: {id: id}});
     setOpen(!open);
   };
 
