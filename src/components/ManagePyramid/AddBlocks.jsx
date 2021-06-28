@@ -40,7 +40,7 @@ export default function AddBlocks() {
             <Grid item>
                 <form action={routerPath} method="POST" encType="multipart/form-data">
                 <Typography>
-                    Add New Building Block
+                    Add New Building Blocks
                 </Typography>
                     <Grid item className={classes.blockForm}>
                         <FormControl

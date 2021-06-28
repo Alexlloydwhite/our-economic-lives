@@ -44,12 +44,13 @@ export default function AdminDashboard() {
                     <Typography>
                         Add New Career Path
                     </Typography>
-                    <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                    <Grid item xs={12}>
                         {/* Career Path Name Input */}
                         <TextField
                             variant="outlined"
                             margin="normal"
                             required
+                            fullWidth
                             label="Career Path"
                             value={careerPath}
                             onChange={(e) => setCareerPath(e.target.value)}
@@ -57,8 +58,9 @@ export default function AdminDashboard() {
                         />
                         {/* Submit btn */}
                         <Button
-                            style={{ marginTop: 18, marginBottom: 12 }}
+                            style={{ marginBottom: 12 }}
                             type="submit"
+                            fullWidth
                             variant="contained"
                             color="primary"
                         >
