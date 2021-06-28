@@ -11,7 +11,7 @@ import activateClient from './activateClient.saga';
 import createCoach from './createCoach.saga';
 import fetchCoaches from './fetchCoaches.saga';
 import buildingBlocks from './buildingBlocks.saga';
-
+import createCareerPath from './createCareerPath.saga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -28,6 +28,7 @@ export default function* rootSaga() {
   yield takeEvery('DEACTIVATE_CLIENT', deactivateClient);
   yield takeEvery('ACTIVATE_CLIENT', activateClient);
   yield takeEvery('FETCH_CAREER_PATH', fetchCareerPath);
+  yield takeEvery('CREATE_CAREER_PATH', createCareerPath);
   yield takeEvery('UPDATE_CLIENT', updateClient);
 
 
