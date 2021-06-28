@@ -97,10 +97,18 @@ export default function CoachTable() {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        {/* Table to display clients */}
+                        {/* Table to display coaches */}
                         <Table>
                             <TableBody>
-
+                                {coachList.map((coach) => (
+                                    <CoachTableRow 
+                                        key={coach.id}
+                                        coach={coach}
+                                        coachList={coachList}
+                                        StyledTableRow={StyledTableRow}
+                                        classes={classes}
+                                    />
+                                ))}
                             </TableBody>
                         </Table>
                     </Grid>
