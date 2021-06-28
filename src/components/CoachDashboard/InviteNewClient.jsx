@@ -13,7 +13,7 @@ import {
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-export default function InviteNewClient({ notFilteredClientList }) {
+export default function InviteNewClient({ activeClientList }) {
     const dispatch = useDispatch();
     const errors = useSelector(store => store.errors);
     // State for dialog. Is it open or closed?
@@ -60,10 +60,10 @@ export default function InviteNewClient({ notFilteredClientList }) {
         <div style={{ textAlign: 'center', marginTop: 10 }}>
             {/* Page Title */}
             <Typography variant="h5">
-                You have {notFilteredClientList.length} / 8 clients on your team
+                You have {activeClientList.length} / 8 clients on your team
             </Typography>
             {/* Btn to invite new client */}
-            {notFilteredClientList.length < 8 ?
+            {activeClientList.length < 8 ?
                 <Button
                     onClick={() => setOpen(true)}
                     variant="outlined"
