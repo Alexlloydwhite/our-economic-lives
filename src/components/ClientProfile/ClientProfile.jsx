@@ -14,7 +14,7 @@ import {
 import SaveIcon from '@material-ui/icons/Save';
 // React
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 // Styles
 const useStyles = makeStyles((theme) => ({
@@ -68,6 +68,12 @@ export default function Profile() {
     const [profession, setProfession] = useState(user.current_profession);
     const [career, setCareer] = useState(user.desired_career);
 
+    const careerPaths = useSelector(store => store.career_path);
+
+      useEffect(() => {
+        dispatch({ type: 'FETCH_CAREER_PATH'})
+    }, [])
+
     // Handles submit of form
     const saveEdit = (e) => {
         e.preventDefault();
@@ -85,6 +91,7 @@ export default function Profile() {
         }
         // Dispatch edits to the update saga
         dispatch({type: 'UPDATE_CLIENT', payload: update })
+        history.push('/home')
     };
 
     return (
@@ -210,10 +217,15 @@ export default function Profile() {
                         >
                             {/* TODO - pull pyramid data from Postgres to display here! */}
                             {/* Here, value is the id of the career pyramid. */}
-                            <MenuItem value={1}>Mechanic</MenuItem>
+                            {/* <MenuItem value={1}>Mechanic</MenuItem>
                             <MenuItem value={2}>Batman</MenuItem>
                             <MenuItem value={3}>Doctor</MenuItem>
-                            <MenuItem value={4}>Lawyer</MenuItem>
+                            <MenuItem value={4}>Lawyer</MenuItem> */}
+                          {careerPaths ? careerPaths.map(path => {
+                            return (
+                              <MenuItem value={path.id} key={path.id}>{path.name}</MenuItem>
+                            )
+                          }):''}
                         </Select>
                     </FormControl>
                     {/* Div sets margin/position for buttons */}
