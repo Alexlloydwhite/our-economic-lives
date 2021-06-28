@@ -62,7 +62,6 @@ export default function ClientTable({ clientList, deactivatedClientList, activeC
     const dispatch = useDispatch();
     const [filter, setFilter] = useState(false);
     const user = useSelector(store => store.user)
-    console.log(user.id);
     // On page load, grab the client
     // data associated with coach
     useEffect(() => {

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 
 export default function CoachDashboard() {
     // List of clients from store
-    const clientList = useSelector(store => store.clients)
+    const clientList = useSelector(store => store.clients);
     // Filter client list to display NOT active clients
     // This is later passed to the TR component via props
     const deactivatedClientList = clientList.filter((client) => client.is_active === false);
