@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
   clients, // holds array of client data for each coach
   career_path, //holds an array of all the career path data
   buildingBlocks, //holds array of buildingBlocks for tier slider
-  detail,
+  detail, // holds an array of building block details
 });
 
 export default rootReducer;
