@@ -7,8 +7,7 @@ router.get('/buildingBlocks/:id', (req, res) => {
   const queryText = `SELECT * FROM building_block 
     WHERE tier_id = $1
     ORDER BY tier_id ASC, id ASC;`;
-  console.log(req.params.id);
-  
+    
   pool.query(queryText, [req.params.id])
     .then(result => {
       res.send(result.rows)
