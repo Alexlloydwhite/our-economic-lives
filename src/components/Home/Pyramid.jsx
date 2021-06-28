@@ -1,10 +1,9 @@
-// React
-import React, {useState} from 'react'
-import BlockSlider from './BlockSlider'
-// MUI
 import { makeStyles, Typography } from "@material-ui/core"
-import { theme } from '../Theme/Theme'
 import Backdrop from '@material-ui/core/Backdrop'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { theme } from '../Theme/Theme'
+import BlockSlider from './BlockSlider'
 
 
 
@@ -110,6 +109,7 @@ const useStyles = makeStyles({
 });
 
 function Tier(props) {
+  const dispatch = useDispatch();
   let num = props.tier;
   const width = pyramidBaseWidth - ((num - 1) * 20);
 
@@ -162,7 +162,7 @@ function Tier(props) {
     setOpen(false);
   };
   const handleToggle = () => {
-    // console.log('clicked pyramid', num);
+    dispatch({ type: 'FETCH_BLOCKS', payload: {tier: num}});
     setOpen(!open);
   };
 
@@ -174,7 +174,7 @@ function Tier(props) {
       <div className={classes.tierProgress}></div>
       <div className={classes.tierRemaining}></div>
       <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
-            <BlockSlider />
+            <BlockSlider tier={num} />
         </Backdrop>
     </div>
   )
@@ -186,6 +186,7 @@ export default function Home() {
 
   return (
     <div className={classes.pyramid}>
+      <Typography>Please Select Your Tier: </Typography>
       <div className={classes.row}>
         <div className={classes.tier6}>
           <Typography className={classes.tier6Title}>Tier 6</Typography>

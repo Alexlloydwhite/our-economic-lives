@@ -1,16 +1,14 @@
-// React
-import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
-// MUI
-import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -68,11 +66,14 @@ const useStyles = makeStyles((theme) => ({
     },
   ];
  
-export default function PyramidTier() {
+export default function PyramidTier(props) {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
-  // const tier = useSelector((store) => store.tier);
+  const tierNum = props.tier;
+  const user = useSelector(store => store.user);
+  const buildingBlocks = useSelector(store => store.buildingBlocks);
+  console.log('buildingBlocks:', buildingBlocks);
 
   const handleClick = (id) => {
     // console.log('Clicked slider', id);
@@ -80,21 +81,21 @@ export default function PyramidTier() {
     history.push(`/blockDetail/${id}`);  
   }
 
-
+  console.log('in Block slider for tier', tierNum, 'as', user);
   return (
     <div className={classes.root} >
       <ArrowBackIosIcon className={classes.arrow} />
       <GridList className={classes.gridList} cols={1.1} > 
-        {tileData.map((block, i) => (
-          <GridListTile key={i}>
+        {buildingBlocks ? buildingBlocks.map((block) => (
+          <GridListTile key={block.id}>
             <Card className={classes.card} variant="outlined"
-              onClick={(e) => handleClick(i)}>
+              onClick={(e) => handleClick(block.id)}>
               <CardContent className={classes.title}>
-                <Typography variant="h4">{block.title}</Typography>
+                <Typography variant="h4">{block.name}</Typography>
               </CardContent>
             </Card>
           </GridListTile>
-        ))}
+        )):''}
       </GridList>
       <ArrowForwardIosOutlinedIcon className={classes.arrow} />
     </div>
