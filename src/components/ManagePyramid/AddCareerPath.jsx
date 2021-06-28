@@ -1,13 +1,10 @@
 // MUI
 import {
     Typography,
-    makeStyles,
-    Avatar,
     TextField,
     Button,
     Grid
 } from '@material-ui/core/';
-import { SettingsSystemDaydreamRounded } from '@material-ui/icons';
 // React
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,7 +18,7 @@ export default function AdminDashboard() {
 
     const addCareerPath = (e) => {
         e.preventDefault();
-        // check is name is not null
+        // check is career path input is not null
         if (careerPath) {
             dispatch({
                 type: 'ADD_CAREER_PATH',
@@ -43,13 +40,12 @@ export default function AdminDashboard() {
         >
             <Grid item>
                 <form onSubmit={addCareerPath} noValidate>
+                    {/* Form Header */}
                     <Typography>
                         Add New Career Path
                     </Typography>
-                    <pre>
-                        {JSON.stringify(careerPath, null, 2)}
-                    </pre>
                     <Grid item xs={12} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                        {/* Career Path Name Input */}
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -60,6 +56,7 @@ export default function AdminDashboard() {
                             onChange={(e) => setCareerPath(e.target.value)}
                             style={{ marginRight: 5 }}
                         />
+                        {/* Submit btn */}
                         <Button
                             style={{ marginTop: 15, marginBottom: 10 }}
                             type="submit"
@@ -71,24 +68,7 @@ export default function AdminDashboard() {
                         </Button>
                     </Grid>
                 </form>
-                <pre>
-                    {JSON.stringify(setCareerPaths, null, 2)}
-                </pre>
             </Grid>
         </Grid >
-    )
+    );
 }
-
-
-{/* <div>
-<form action={routerPath} method="POST" enctype="multipart/form-data">
-    <input type="file" name="file" accept=".csv" />
-    <select name="Career Path" onChange={(event) => setCareerPath(event.target.value)}>
-        <option>Choose a Career Path</option>
-        {setCareerPaths ? setCareerPaths.map((path, i) => {
-            return (<option key={i} value={path.id}>{path.name}</option>)
-        }) : <option>No Career Paths</option>}
-    </select>
-    <button type="submit">Add Blocks</button>
-</form>
-</div> */}
