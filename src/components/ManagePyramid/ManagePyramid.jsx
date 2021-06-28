@@ -1,7 +1,11 @@
 import AddCareerPath from './AddCareerPath';
+import AddBlocks from './AddBlocks';
 
 export default function ManagerPyramid() {
     return (
-        <AddCareerPath />
+        <div>
+            <AddCareerPath />
+            <AddBlocks />
+        </div>
     )
 }

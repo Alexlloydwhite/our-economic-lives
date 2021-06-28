@@ -1,5 +1,27 @@
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 export default function AddBlocks() {
+    const dispatch = useDispatch();
+    const [careerPath, setCareerPath] = useState(0);
+    let routerPath = '/api/upload/' + careerPath;
+    const setCareerPaths = useSelector(store => store.career_path)
+    useEffect(() => {
+        dispatch({ type: 'FETCH_CAREER_PATH' })
+    }, [dispatch])
+
     return (
-        <h3>asdf</h3>
+        <div>
+            <form action={routerPath} method="POST" encType="multipart/form-data">
+                <input type="file" name="file" accept=".csv" />
+                <select name="Career Path" onChange={(event) => setCareerPath(event.target.value)}>
+                    <option>Choose a Career Path</option>
+                    {setCareerPaths ? setCareerPaths.map((path, i) => {
+                        return (<option key={i} value={path.id}>{path.name}</option>)
+                    }) : <option>No Career Paths</option>}
+                </select>
+                <button type="submit">Add Blocks</button>
+            </form>
+        </div>
     )
 }
