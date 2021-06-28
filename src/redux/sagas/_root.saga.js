@@ -7,6 +7,7 @@ import fetchClients from './fetchClients.saga';
 import deactivateClient from './deactivateClient.saga';
 import fetchCareerPath from './fetchCareerPath.saga';
 import activateClient from './activateClient.saga';
+import buildingBlocks from './buildingBlocks.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -25,5 +26,6 @@ export default function* rootSaga() {
   yield all([
     loginSaga(), // login saga is now registered
     userSaga(),
+    buildingBlocks(),
   ]);
 }

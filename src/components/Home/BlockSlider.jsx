@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 
@@ -71,6 +71,8 @@ export default function PyramidTier(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   const tierNum = props.tier;
+  const user = useSelector(store => store.user);
+  const buildingBlocks = useSelector(store => store.buildingBlocks);
 
   const handleClick = (id) => {
     // console.log('Clicked slider', id);
@@ -78,7 +80,7 @@ export default function PyramidTier(props) {
     history.push(`/blockDetail/${id}`);  
   }
 
-  console.log('in Block slider for tier', tierNum);
+  console.log('in Block slider for tier', tierNum, 'as', user);
   return (
     <div className={classes.root} >
       <ArrowBackIosIcon className={classes.arrow} />

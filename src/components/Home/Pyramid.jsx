@@ -1,10 +1,9 @@
-// React
-import React, {useState} from 'react'
-import BlockSlider from './BlockSlider'
-// MUI
 import { makeStyles, Typography } from "@material-ui/core"
-import { theme } from '../Theme/Theme'
 import Backdrop from '@material-ui/core/Backdrop'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { theme } from '../Theme/Theme'
+import BlockSlider from './BlockSlider'
 
 
 
@@ -110,6 +109,7 @@ const useStyles = makeStyles({
 });
 
 function Tier(props) {
+  const dispatch = useDispatch();
   let num = props.tier;
   const width = pyramidBaseWidth - ((num - 1) * 20);
 
@@ -162,7 +162,7 @@ function Tier(props) {
     setOpen(false);
   };
   const handleToggle = () => {
-    // console.log('clicked pyramid', num);
+    dispatch({ type: 'FETCH_BLOCKS' });
     setOpen(!open);
   };
 
