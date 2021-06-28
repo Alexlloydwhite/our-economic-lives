@@ -45,14 +45,14 @@ function ProtectedRoute(props) {
       }
     }
     // is the user a coach?
-    if (user.authorization === 2 ) {
+    if (user.authorization === 2) {
       // if they are, show the coach dashboard
       ComponentToShow = CoachDashboard;
     }
     // is the user an admin?
-    if (user.authorization === 1 ) {
+    if (user.authorization === 1) {
       ComponentToShow = AdminDashboard;
-    } 
+    }
   } else {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage
