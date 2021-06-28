@@ -1,7 +1,7 @@
 // React
 import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-// MUI
+// M-UI
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
@@ -15,7 +15,7 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+// Styling
 const useStyles = makeStyles((theme) => ({
     root: {
       '& .MuiTextField-root': {
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.primary.light,
     },
     heading: {
-        textAlign: 'Center',
+        textAlign: 'Left',
         padding: theme.spacing(1),
         alignItems: 'center',
     },
@@ -87,7 +87,7 @@ export default function BlockDetail () {
         <>
         <Card >
           <Typography className={classes.title} variant="h4" >
-            Integrity
+            {detail.name}
           </Typography>
             {/* <List > */}
                 {/* <ListItem className={classes.heading}>
@@ -106,25 +106,32 @@ export default function BlockDetail () {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
-                    >
-                    <Typography >Displaying strong moral principles and work ethic.</Typography>
-                </AccordionSummary>
-                {sample.map( example => (
-                    <AccordionDetails ml={16} >
-                    
-                    <Typography className={classes.heading}>
-                        Ex. &nbsp;{example.title}
+                >
+                    <Typography>
+                        {detail.description}
                     </Typography>
-                   
+                </AccordionSummary>
+                <Box ml={2}>
+                    <Typography >
+                        Examples:
+                    </Typography>
+                {detail.value.map( example => {
+                    return (
+                    <AccordionDetails ml={16} >
+                    <Typography className={classes.heading}>
+                         &nbsp;{example}
+                    </Typography>
                 </AccordionDetails>
-                 ))}
+                    )
+                })}
+                </Box>
             </Accordion>
             </div>
         
         
         <Box className={classes.box}>
             <Typography >
-                How do you display Integrity in your daily life?
+                How do you display {detail.name} in your daily life?
             </Typography>
         <form className={classes.root} noValidate autoComplete="off" onSubmit={validateForm}>
             <TextField
@@ -141,19 +148,19 @@ export default function BlockDetail () {
                 size="large" 
                 onChange={(e) => setNewSkill(e.target.value)}
             >
-                Submit for coach review
+                Submit
             </Button>
         </form>
         </Box>
 
         <div className={classes.box}>
-        <Typography >Saved Skillz: 1 / 5</Typography>
+        <Typography >Saved Skills: 1 / 5</Typography>
         {/* <Typography >Saved Skillz: {savedSkills.length} / 5</Typography> */}
         <Box className={classes.root}>
             {/* {savedskills.map(skill => ( */}
             <>
             <TextField
-                label="My Jedi skillz are on point"
+                value="If a coworker asks for help, I will always do my best to help them."
                 multiline
                 rows={5}
                 variant="outlined"
