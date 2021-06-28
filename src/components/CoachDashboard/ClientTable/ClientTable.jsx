@@ -57,7 +57,7 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
-export default function ClientTable({ clientList, filteredClientList, notFilteredClientList }) {
+export default function ClientTable({ clientList, deactivatedClientList, activeClientList }) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const [filter, setFilter] = useState(false);
@@ -71,7 +71,7 @@ export default function ClientTable({ clientList, filteredClientList, notFiltere
     return (
         <div className={classes.container}>
             {/* Check is the coach has any clients */}
-            {clientList.length > 0 ?
+            {clientList.length > 0 &&
                 <Grid
                     container
                     direction="row"
@@ -119,22 +119,22 @@ export default function ClientTable({ clientList, filteredClientList, notFiltere
                             <TableBody>
                                 {filter ?
                                     // If filter is TRUE display not active clients 
-                                    filteredClientList.map((client) => (
+                                    deactivatedClientList.map((client) => (
                                         <ClientTableRow
                                             key={client.id}
                                             client={client}
-                                            clientList={filteredClientList}
+                                            clientList={deactivatedClientList}
                                             StyledTableRow={StyledTableRow}
                                             classes={classes}
                                         />
                                     ))
                                     :
                                     // If filter is FALSE(default state) display ACTIVE clients 
-                                    notFilteredClientList.map((client) => (
+                                    activeClientList.map((client) => (
                                         <ClientTableRow
                                             key={client.id}
                                             client={client}
-                                            clientList={notFilteredClientList}
+                                            clientList={activeClientList}
                                             StyledTableRow={StyledTableRow}
                                             classes={classes}
                                         />
@@ -145,9 +145,6 @@ export default function ClientTable({ clientList, filteredClientList, notFiltere
                         </Table>
                     </Grid>
                 </Grid>
-                :
-                // If client list is 0 return null, do not display an empty table
-                null
             }
         </div>
     )

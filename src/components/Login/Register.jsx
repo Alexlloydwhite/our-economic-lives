@@ -219,7 +219,7 @@ export default function Register() {
                         <Button
                             variant="outlined"
                             style={{ marginRight: 10 }}
-                            onClick={() => history.push('/login')}
+                            onClick={() => dispatch({ type: 'LOGOUT' })}
                         >
                             Cancel
                         </Button>

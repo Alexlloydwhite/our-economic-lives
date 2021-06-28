@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import {
   HashRouter as Router,
   Route,
+  Redirect
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -13,7 +14,7 @@ import Login from '../Login/Login';
 import Register from '../Login/Register';
 import Footer from '../Footer/Footer';
 import NavBar from './NavBar/NavBar';
-
+import CoachCritExpReview from '../CoachCritExpReview/CoachCritExpReview';
 // import './App.css';
 import BlockSlider from '../Home/BlockSlider';
 import BlockDetail from '../Home/BlockDetail';
@@ -31,22 +32,44 @@ export default function App() {
       <CssBaseline />
       <NavBar />
       <Router>
-        {/* <Redirect exact from="/" to="/home" /> */}
-        {/* Login View */}
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        {/* Register View */}
-        <Route exact path='/register'>
-          <Register />
-        </Route>
-        {/* Home Screen / Pyramid View */}
+        {/* Default direct to /home */}
+        <Redirect exact from="/" to="/home" />
+        {/* If authenticated, show /home as /login */}
         <ProtectedRoute
-          exact 
+          exact
+          path="/login"
+          authRedirect="/home"
+        >
+          <Login />
+        </ProtectedRoute>
+        {/* If authenticated, show /register as / */}
+        <ProtectedRoute
+          exact
+          path="/register"
+          authRedirect="/home"
+        >
+          <Register />
+        </ProtectedRoute>
+        {/* 
+          /home:
+          Client: Pyramid View
+          Coach: Dashboard
+          PA: Dashboard
+        */}
+        <ProtectedRoute
+          exact
           path='/home'
         >
           <Home />
         </ProtectedRoute>
+        <Route
+          exact
+          path='/crit-review/:id'
+        >
+          <CoachCritExpReview />
+        </Route>
+
+
         <Route exact path="/blockSlider">
           <BlockSlider />
         </Route>

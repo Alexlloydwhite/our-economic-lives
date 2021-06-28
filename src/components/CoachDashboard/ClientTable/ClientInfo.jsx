@@ -53,17 +53,17 @@ export default function ClientInfo({ clientList, client }) {
                 <DialogContent>
                     <List>
                         {/* Check is client details is !== null */}
-                        {clientDetailsClicked ?
+                        {clientDetailsClicked &&
                             // Map over array to display data
-                            clientDetailsClicked.map((idx) => (
-                                <div key={idx.id}>
+                            clientDetailsClicked.map((client) => (
+                                <div key={client.id}>
                                     {/* Client name */}
                                     <ListItem>
                                         <ListItemAvatar>
                                             <PersonIcon />
                                         </ListItemAvatar>
                                         <ListItemText>
-                                            {idx.first_name}{' '}{idx.last_name}
+                                            {client.first_name}{' '}{client.last_name}
                                         </ListItemText>
                                     </ListItem>
                                     {/* Client Phone Number */}
@@ -72,7 +72,7 @@ export default function ClientInfo({ clientList, client }) {
                                             <PhoneIcon />
                                         </ListItemAvatar>
                                         <ListItemText>
-                                            {idx.phone_number}
+                                            {client.phone_number}
                                         </ListItemText>
                                     </ListItem>
                                     {/* Client City */}
@@ -81,7 +81,7 @@ export default function ClientInfo({ clientList, client }) {
                                             <HomeIcon />
                                         </ListItemAvatar>
                                         <ListItemText>
-                                            {idx.city}
+                                            {client.city}
                                         </ListItemText>
                                     </ListItem>
                                     {/* Client Profession */}
@@ -90,13 +90,11 @@ export default function ClientInfo({ clientList, client }) {
                                             <WorkIcon />
                                         </ListItemAvatar>
                                         <ListItemText>
-                                            {idx.current_profession}
+                                            {client.current_profession}
                                         </ListItemText>
                                     </ListItem>
                                 </div>
                             ))
-                            :
-                            null
                         }
                     </List>
                 </DialogContent>

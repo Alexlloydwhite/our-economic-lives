@@ -7,21 +7,21 @@ export default function CoachDashboard() {
     const clientList = useSelector(store => store.clients)
     // Filter client list to display NOT active clients
     // This is later passed to the TR component via props
-    const filteredClientList = clientList.filter((client) => client.is_active === false);
+    const deactivatedClientList = clientList.filter((client) => client.is_active === false);
     // Filter client list to display only ACTIVE clients
     // This is later passed to the TR component via props
-    const notFilteredClientList = clientList.filter((client) => client.is_active === true);
+    const activeClientList = clientList.filter((client) => client.is_active === true);
     return (
         <div style={{marginTop: 80}}>
             {/* Page header / opens form to add new client */}
             <InviteNewClient
-                notFilteredClientList={notFilteredClientList}
+                activeClientList={activeClientList}
             />
             {/* Table of client data */}
             <ClientTable
                 clientList={clientList}
-                filteredClientList={filteredClientList}
-                notFilteredClientList={notFilteredClientList}
+                deactivatedClientList={deactivatedClientList}
+                activeClientList={activeClientList}
             />
         </div>
     );
