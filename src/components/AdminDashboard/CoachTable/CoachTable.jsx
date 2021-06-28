@@ -6,9 +6,6 @@ import {
     Paper,
     Typography,
     Grid,
-    Select,
-    MenuItem,
-    FormControl
 } from '@material-ui/core'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 // React

@@ -7,8 +7,13 @@ import {
     Menu,
     MenuItem,
 } from '@material-ui/core'
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+// React
+import { useState } from 'react';
 
 export default function CoachTableRow({ coach, coachList, StyledTableRow, classes }) {
+    const [anchorEl, setAnchorEl] = useState(null);
+
     return (
         <StyledTableRow>
             <TableCell>
@@ -16,6 +21,36 @@ export default function CoachTableRow({ coach, coachList, StyledTableRow, classe
                     {coach.first_name}{' '}{coach.last_name}
                 </Typography>
             </TableCell>
+            <TableCell>
+                <Button
+                    variant="outlined"
+                    className={classes.tableButton}
+                    size="small"
+                >
+                    View Clients
+                </Button>
+            </TableCell>
+            <TableCell>
+                {/* Kebob menu with options */}
+                <IconButton
+                    onClick={(e) => setAnchorEl(e.currentTarget)}
+                    className={classes.tableButton}
+                >
+                    <MoreHorizIcon />
+                </IconButton>
+                <Menu
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={() => setAnchorEl(null)}
+                    onClick={() => setAnchorEl(null)}
+                >
+                    {/* Opens dialog to display coach data */}
+                    <MenuItem>Info</MenuItem>
+                    {/* Opens dialog to confirm deactivate */}
+                    <MenuItem>Deactivate</MenuItem>
+                </Menu>
+            </TableCell>
         </StyledTableRow>
-    )
+    );
 }
