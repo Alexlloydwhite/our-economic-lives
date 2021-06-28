@@ -41,7 +41,7 @@ export default function AdminDashboard() {
             <Grid item>
                 <form onSubmit={addCareerPath} noValidate>
                     {/* Form Header */}
-                    <Typography>
+                    <Typography variant="h5">
                         Add New Career Path
                     </Typography>
                     <Grid item xs={12}>
