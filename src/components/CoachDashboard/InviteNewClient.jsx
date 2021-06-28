@@ -13,10 +13,9 @@ import {
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-export default function InviteNewClient() {
+export default function InviteNewClient({ activeClientList }) {
     const dispatch = useDispatch();
     const errors = useSelector(store => store.errors);
-    const clientList = useSelector(store => store.clients)
     // State for dialog. Is it open or closed?
     const [open, setOpen] = useState(false);
     // Local form state
@@ -58,13 +57,13 @@ export default function InviteNewClient() {
     }
 
     return (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center', marginTop: 10 }}>
             {/* Page Title */}
             <Typography variant="h5">
-                You have {clientList.length} / 8 clients on your team
+                You have {activeClientList.length} / 8 clients on your team
             </Typography>
             {/* Btn to invite new client */}
-            {clientList.length < 8 ?
+            {activeClientList.length < 8 ?
                 <Button
                     onClick={() => setOpen(true)}
                     variant="outlined"

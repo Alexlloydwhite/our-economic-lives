@@ -1,11 +1,11 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     content: { 
@@ -46,12 +46,13 @@ export default function PyramidTier() {
                 <Typography variant="h5" >
                     Your Recommended Building Blocks
                 </Typography>
-                {sample.map((recommended) => (
+                {sample.map((recommended, i) => (
                     <Button 
-                        variant="outlined" 
+                        key={i}
+                        variant="contained" 
                         color="primary" 
                         className={classes.content}
-                        onClick={() => handleClick(recommended.id)}
+                        onClick={() => handleClick(i)}
                         >
                         {recommended.block}
                     </Button>

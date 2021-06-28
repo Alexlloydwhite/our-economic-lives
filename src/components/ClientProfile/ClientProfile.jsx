@@ -11,9 +11,10 @@ import {
     InputLabel,
     FormControl
 } from '@material-ui/core/';
+import SaveIcon from '@material-ui/icons/Save';
 // React
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router';
 // Styles
 const useStyles = makeStyles((theme) => ({
@@ -52,52 +53,42 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Register() {
+export default function Profile() {
     const classes = useStyles();
     const history = useHistory();
-    const careerPath = useSelector(store => store.career_path);
     const errors = useSelector(store => store.errors);
     const dispatch = useDispatch();
+    const user = useSelector(store => store.user);
 
-    // Local form state
-    const [formState, setFormState] = useState({});
-
-    // Handles change for inputs
-    const handleChange = (e) => {
-        setFormState({
-            ...formState,
-            [e.target.name]: e.target.value
-        });
-    };
-    // GET 
-    useEffect(() => {
-        dispatch({
-            type: 'FETCH_CAREER_PATH'
-        })
-    }, []);
+    const [firstName, setFirstName] = useState(user.first_name);
+    const [lastName, setLastName] = useState(user.last_name);
+    const [email, setEmail] = useState(user.email);
+    const [phoneNum, setPhoneNum] = useState(user.phone_number);
+    const [city, setCity] = useState(user.city);
+    const [profession, setProfession] = useState(user.current_profession);
+    const [career, setCareer] = useState(user.desired_career);
 
     // Handles submit of form
-    const register = (e) => {
+    const saveEdit = (e) => {
         e.preventDefault();
-        // checks if the formState object 
-        // has all 6 required inputs
-        if (Object.keys(formState).length === 6) {
-            // send form data to saga
-            dispatch({
-                type: 'REGISTER_USER',
-                payload: formState
-            });
-            // Reload the page hack :)
-            location.reload();
-        } else {
-            // Dispatch errors reducer to display input error
-            dispatch({
-                type: 'REGISTRATION_INPUT_ERROR'
-            });
+       
+        // Putting all edit changes into a object
+        const update = {
+            id: user.id, // User can't edit id, so grabing it from reducer
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            phone_number: phoneNum,
+            city: city,
+            current_profession: profession,
+            desired_career: career,
         }
+        // Dispatch edits to the update saga
+        dispatch({type: 'UPDATE_CLIENT', payload: update })
     };
 
     return (
+
         <Grid
             container
             component="main"
@@ -120,7 +111,7 @@ export default function Register() {
                 </Typography>
                 <form
                     className={classes.form}
-                    onSubmit={register}
+                    onSubmit={saveEdit}
                     noValidate
                 >
                     {/* Helper instructions */}
@@ -129,8 +120,7 @@ export default function Register() {
                         align="center"
                         gutterBottom
                     >
-                        Please complete the following required fields
-                        in order to register your profile
+                        Update profile information below.
                     </Typography>
                     {/* hook into errors reducer to display msg */}
                     {errors.registrationMessage && (
@@ -145,8 +135,8 @@ export default function Register() {
                         required
                         fullWidth
                         label="First Name"
-                        placeholder="First Name"
-                        onChange={handleChange}
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
                         name="firstName"
                     />
                     {/* Last Name */}
@@ -154,11 +144,22 @@ export default function Register() {
                         variant="outlined"
                         margin="normal"
                         label="Last Name"
+                        value={lastName}
                         required
                         fullWidth
-                        placeholder="Last Name"
-                        onChange={handleChange}
+                        onChange={(e) => setLastName(e.target.value)}
                         name="lastName"
+                    />
+                    {/* Email */}
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        label="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        name="email"
                     />
                     {/* Phone Number */}
                     <TextField
@@ -167,8 +168,8 @@ export default function Register() {
                         required
                         fullWidth
                         label="Phone Number"
-                        placeholder="Phone Number"
-                        onChange={handleChange}
+                        value={phoneNum}
+                        onChange={(e) => setPhoneNum(e.target.value)}
                         name="phoneNumber"
                     />
                     {/* City of Residence */}
@@ -177,9 +178,9 @@ export default function Register() {
                         margin="normal"
                         required
                         fullWidth
-                        label="City of Residence"
-                        placeholder="City of Residence"
-                        onChange={handleChange}
+                        label="City"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
                         name="cityOfResidence"
                     />
                     {/* Current Profession */}
@@ -188,9 +189,9 @@ export default function Register() {
                         margin="normal"
                         required
                         fullWidth
-                        label="Current Profession"
-                        placeholder="Current Profession"
-                        onChange={handleChange}
+                        label="Profession"
+                        value={profession}
+                        onChange={(e) => setProfession(e.target.value)}
                         name="currentProfession"
                     />
                     {/* Desired Career */}
@@ -199,18 +200,20 @@ export default function Register() {
                         fullWidth
                         style={{ marginTop: 15 }}
                         required
-                        value={formState.careerPyramid}
+                        value={career}
                     >
                         <InputLabel>Desired Career</InputLabel>
                         <Select
-                            value={formState.careerPyramid || ''}
+                            value={career}
                             name="careerPyramid"
-                            onChange={handleChange}
+                            onChange={(e) => setCareer(e.target.value)}
                         >
-                            {/* Map array of careers paths, display each as a menu item */}
-                            {careerPath.map((path) => (
-                                <MenuItem value={path.id} key={path.id}>{path.name}</MenuItem>
-                            ))}
+                            {/* TODO - pull pyramid data from Postgres to display here! */}
+                            {/* Here, value is the id of the career pyramid. */}
+                            <MenuItem value={1}>Mechanic</MenuItem>
+                            <MenuItem value={2}>Batman</MenuItem>
+                            <MenuItem value={3}>Doctor</MenuItem>
+                            <MenuItem value={4}>Lawyer</MenuItem>
                         </Select>
                     </FormControl>
                     {/* Div sets margin/position for buttons */}
@@ -219,17 +222,18 @@ export default function Register() {
                         <Button
                             variant="outlined"
                             style={{ marginRight: 10 }}
-                            onClick={() => dispatch({ type: 'LOGOUT' })}
+                            onClick={() => history.push('/home')}
                         >
                             Cancel
                         </Button>
-                        {/* Submit btn */}
+                        {/* Save btn */}
                         <Button
                             variant="contained"
                             color="primary"
                             type="submit"
                         >
-                            Register
+                            <SaveIcon />
+                            &nbsp;Save
                         </Button>
                     </div>
                 </form>

@@ -64,7 +64,6 @@ export default function BlockDetail () {
     const validateForm = (e) => {
         e.preventDefault();
         setNewSkillError(false)
-       
         if (newSkill == ''){
             setNewSkillError(true)
         }
