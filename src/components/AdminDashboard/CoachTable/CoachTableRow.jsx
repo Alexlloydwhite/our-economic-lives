@@ -10,6 +10,7 @@ import {
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // React
 import { useState } from 'react';
+import ViewClients from './ViewClients';
 
 export default function CoachTableRow({ coach, coachList, StyledTableRow, classes }) {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -22,13 +23,10 @@ export default function CoachTableRow({ coach, coachList, StyledTableRow, classe
                 </Typography>
             </TableCell>
             <TableCell>
-                <Button
-                    variant="outlined"
-                    className={classes.tableButton}
-                    size="small"
-                >
-                    View Clients
-                </Button>
+                <ViewClients 
+                    classes={classes}
+                    coachList={coachList}
+                />
             </TableCell>
             <TableCell>
                 {/* Kebob menu with options */}
