@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Register() {
+export default function Profile() {
     const classes = useStyles();
     const history = useHistory();
     const errors = useSelector(store => store.errors);
@@ -67,25 +67,24 @@ export default function Register() {
     const [city, setCity] = useState(user.city);
     const [profession, setProfession] = useState(user.current_profession);
     const [career, setCareer] = useState(user.desired_career);
-    console.log('user', user);
 
     // Handles submit of form
-    const register = (e) => {
+    const saveEdit = (e) => {
         e.preventDefault();
        
-        console.log('clicked Save Edit', user.first_name, firstName);
+        // Putting all edit changes into a object
         const update = {
-            id: user.id, // User can't edit, so grabing from reducer
+            id: user.id, // User can't edit id, so grabing it from reducer
             first_name: firstName,
             last_name: lastName,
             email: email,
             phone_number: phoneNum,
             city: city,
             current_profession: profession,
+            desired_career: career,
         }
-        console.log('updated profile info', update);
-        // dispatch({type: 'UPDATE_BATCH', payload: updatedBatch})
-
+        // Dispatch edits to the update saga
+        dispatch({type: 'UPDATE_CLIENT', payload: update })
     };
 
     return (
@@ -112,7 +111,7 @@ export default function Register() {
                 </Typography>
                 <form
                     className={classes.form}
-                    onSubmit={register}
+                    onSubmit={saveEdit}
                     noValidate
                 >
                     {/* Helper instructions */}
