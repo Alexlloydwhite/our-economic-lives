@@ -21,7 +21,13 @@ export default function AdminDashboard() {
 
     const addCareerPath = (e) => {
         e.preventDefault();
-        console.log('clicked!');
+        // check is name is not null
+        if (name) {
+            dispatch({
+                type: 'ADD_CAREER_PATH',
+                payload: name
+            });
+        }
     }
 
     useEffect(() => {
