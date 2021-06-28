@@ -162,7 +162,7 @@ function Tier(props) {
     setOpen(false);
   };
   const handleToggle = () => {
-    dispatch({ type: 'FETCH_BLOCKS' });
+    dispatch({ type: 'FETCH_BLOCKS', payload: {tier: num}});
     setOpen(!open);
   };
 

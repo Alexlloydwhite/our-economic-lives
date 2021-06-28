@@ -1,9 +1,10 @@
 import axios from "axios";
 import { put, takeLatest } from "redux-saga/effects";
 
-function* fetchBlocks() {
+function* fetchBlocks(action) {
   try{
-    const blocks = yield axios.get(`api/pyramid/buildingBlocks`)
+    const tier = action.payload.tier;
+    const blocks = yield axios.get(`api/pyramid/buildingBlocks/${tier}`)
     yield put({ type: 'SET_BLOCKS', payload: blocks})
   } catch (error) {
     console.log('Unable to fetch building blocks:', error);
