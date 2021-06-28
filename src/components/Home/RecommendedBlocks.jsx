@@ -8,8 +8,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-
-
+// Styling
 const useStyles = makeStyles((theme) => ({
     content: { 
         margin: '1rem',
@@ -26,7 +25,7 @@ export default function RecommendedBlocks() {
 
     // send user to recommended block detail using history, params
     const handleClick = (id) => {
-        console.log('Recommended block clicked', id);
+        // dispatch selected block details to be stored detail reducer
         dispatch({ type: 'SET_DETAIL', payload: id });
         history.push(`/blockDetail/${id}`);  
     }
@@ -47,7 +46,7 @@ export default function RecommendedBlocks() {
                             variant="contained" 
                             color="primary" 
                             className={classes.content}
-                            onClick={() => handleClick(i)}
+                            onClick={() => handleClick(block)}
                             >
                             {block.name}
                         </Button>
