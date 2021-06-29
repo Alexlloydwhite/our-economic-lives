@@ -44,7 +44,7 @@ router.get('/client-list/:id', (req, res) => {
         u.authorization,
         u.coach_id,
         u.current_profession,
-        u.desired_career,
+        u.industry_pyramid,
         u.is_registered,
         u.is_active
     FROM "user" u
