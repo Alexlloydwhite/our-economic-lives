@@ -86,19 +86,23 @@ export default function InviteNewCoach() {
                     Add a new coach
                 </DialogTitle>
                 <DialogContent>
-                    {/* Helper text */}
-                    <DialogContentText>
-                        We recommend using the name of your organization as their password.
-                    </DialogContentText>
                     {/* Errors */}
                     {errors.registrationMessage && (
                         <h3 className="alert" role="alert">
                             {errors.registrationMessage}
                         </h3>
                     )}
+                    {/* Organization */}
+                    <TextField
+                        label="Organization"
+                        name="organization_name"
+                        fullWidth
+                        required
+                        onChange={handleChange}
+                    />
                     {/* First Name */}
                     <TextField
-                        label="Coach's First Name"
+                        label="First Name"
                         name="first_name"
                         fullWidth
                         required
@@ -106,22 +110,31 @@ export default function InviteNewCoach() {
                     />
                     {/* Last Name */}
                     <TextField
-                        label="Coach's Last Name"
+                        label="Last Name"
                         name="last_name"
+                        fullWidth
+                        required
+                        onChange={handleChange}
+                    />
+                    {/* Phone Number */}
+                    <TextField
+                        label="Phone Number"
+                        name="email"
                         fullWidth
                         required
                         onChange={handleChange}
                     />
                     {/* Email */}
                     <TextField
-                        label="Coach's Email"
-                        name="email"
+                        label="Email"
+                        name="phone_number"
                         fullWidth
                         required
                         onChange={handleChange}
                     />
                     {/* Password */}
                     <TextField
+                        helperText="We recommend using the name of your organization as their password."
                         label="Create a Password"
                         name="password"
                         fullWidth
