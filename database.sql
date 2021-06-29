@@ -14,15 +14,10 @@ CREATE TABLE "user" (
 	"authorization" INT NOT NULL,
 	"coach_id" INT,
 	"current_profession" VARCHAR (80),
-	"desired_career" INT,
+	"industry_pyramid" INT,
 	"is_registered" BOOLEAN DEFAULT FALSE,
 	"is_active" BOOLEAN DEFAULT TRUE
 ); 
-
-CREATE TABLE "user_type" (
-	"id" SERIAL PRIMARY KEY,
-	"role" VARCHAR (80) NOT NULL
-);
 
 CREATE TABLE "user_blocks"(
 	"id" SERIAL PRIMARY KEY,
@@ -31,10 +26,10 @@ CREATE TABLE "user_blocks"(
 	"is_recommended" BOOLEAN DEFAULT FALSE
 );
 
-CREATE TABLE "attachments"(
+CREATE TABLE "critical_experience"(
 	"id" SERIAL PRIMARY KEY,
 	"user_text" VARCHAR (300),
-	"picture" VARCHAR (80),
+	"attachment" VARCHAR (80),
 	"user_blocks_id" INT NOT NULL,
 	"coach_comments" VARCHAR (300),
 	"is_completed" BOOLEAN DEFAULT FALSE
@@ -63,11 +58,6 @@ CREATE TABLE "career_path"(
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR (80) NOT NULL
 );
-
-INSERT INTO "user" ("email", "password", "first_name", "last_name", "phone_number", "city", "authorization", "coach_id", "current_profession", "desired_career")
-VALUES ('test1', 'test1', 'Test', 'PA', '123', 'Minneapolis', 1, NULL, NULL, NULL),
-('test2', 'test2', 'Test', 'Coach', '123', 'Minneapolis', 2, NULL, NULL, NULL),
-('test3', 'test3', 'Test', 'User', '123', 'Minneapolis', 3, 2, 'Cashier', 2); 
 
 INSERT INTO "career_path" ("name")
 VALUES ('Generic'),
