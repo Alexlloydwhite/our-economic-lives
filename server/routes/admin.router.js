@@ -7,16 +7,16 @@ const {
 } = require('../modules/authentication-middleware');
 
 router.get('/career_path', rejectUnauthenticated, (req, res) => {
-    const queryText = `SELECT * FROM career_path;`
-    pool
-      .query(queryText)
-      .then((result) => {
-        res.send(result.rows);
-      })
-      .catch((error) => {
-        console.log('Error in /api/admin/career_path', error);
-        res.sendStatus(500);
-      })
+  const queryText = `SELECT * FROM career_path;`
+  pool
+    .query(queryText)
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((error) => {
+      console.log('Error in /api/admin/career_path', error);
+      res.sendStatus(500);
+    })
 });
 
 router.post('/create-career-path', (req, res) => {
@@ -59,14 +59,15 @@ router.post('/create_coach', (req, res) => {
       "authorization")
       VALUES ($1, $2, $3, $4, $5, $6, $7);`;
     pool
-      .query(queryText, 
-        [organization, 
-          firstName, 
-          lastName, 
-          phoneNumber, 
-          email, 
-          password, 
-          authorization])
+      .query(queryText, [
+        organization,
+        firstName,
+        lastName,
+        phoneNumber,
+        email,
+        password,
+        authorization
+      ])
       .then(() => res.sendStatus(201))
       .catch((err) => {
         console.log('adding new coach failed: ', err);

@@ -199,11 +199,11 @@ export default function Register() {
                         fullWidth
                         style={{ marginTop: 15 }}
                         required
-                        value={formState.careerPyramid}
+                        value={formState.industry_pyramid}
                     >
                         <InputLabel>Industry Pyramid</InputLabel>
                         <Select
-                            value={formState.careerPyramid || ''}
+                            value={formState.industry_pyramid || ''}
                             name="industry_pyramid"
                             onChange={handleChange}
                         >
