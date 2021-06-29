@@ -1,10 +1,13 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 // Handles PUT request, this is the end point
 // used when a client updates their profile
-router.put('/update', (req, res) => {
+router.put('/update', rejectUnauthenticated, (req, res) => {
   console.log(req.body, req.user.id);
   const queryText = `
     UPDATE "user" 
@@ -37,7 +40,7 @@ router.put('/update', (req, res) => {
 
 // Handles PUT request, this is the end point
 // used when a new user logins in for the first time
-router.put('/register', async (req, res) => {
+router.put('/register', rejectUnauthenticated, async (req, res) => {
   const client = await pool.connect();
   const queryText = `
     UPDATE "user" 
