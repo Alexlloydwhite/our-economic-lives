@@ -14,15 +14,11 @@ CREATE TABLE "user" (
 	"authorization" INT NOT NULL,
 	"coach_id" INT,
 	"current_profession" VARCHAR (80),
-	"desired_career" INT,
-	"Organization" VARCHAR (80),
-	"is_registered" BOOLEAN DEFAULT FALSE
+	"industry_pyramid" INT,
+	"organization_name" VARCHAR (80),
+	"is_registered" BOOLEAN DEFAULT FALSE,
+	"is_active" BOOLEAN DEFAULT TRUE
 ); 
-
-CREATE TABLE "user_type" (
-	"id" SERIAL PRIMARY KEY,
-	"role" VARCHAR (80) NOT NULL
-);
 
 CREATE TABLE "user_blocks"(
 	"id" SERIAL PRIMARY KEY,
@@ -33,8 +29,8 @@ CREATE TABLE "user_blocks"(
 
 CREATE TABLE "critical_experience"(
 	"id" SERIAL PRIMARY KEY,
-	"user_text" VARCHAR (500),
-	"picture" VARCHAR (80),
+	"user_text" VARCHAR (300),
+	"attachment" VARCHAR (80),
 	"user_blocks_id" INT NOT NULL,
 	"coach_comments" VARCHAR (300),
 	"is_completed" BOOLEAN DEFAULT FALSE
@@ -63,4 +59,3 @@ CREATE TABLE "industry_pyramid"(
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR (80) NOT NULL
 );
-

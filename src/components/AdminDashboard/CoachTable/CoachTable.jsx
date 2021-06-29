@@ -99,9 +99,10 @@ export default function CoachTable() {
                         <Table>
                             <TableBody>
                                 {coachList.map((coach) => (
-                                    <CoachTableRow 
+                                    <CoachTableRow
                                         key={coach.id}
                                         coach={coach}
+                                        coachList={coachList}
                                         StyledTableRow={StyledTableRow}
                                         classes={classes}
                                     />
