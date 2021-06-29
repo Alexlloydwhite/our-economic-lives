@@ -199,12 +199,12 @@ export default function Register() {
                         fullWidth
                         style={{ marginTop: 15 }}
                         required
-                        value={formState.careerPyramid}
+                        value={formState.industry_pyramid}
                     >
-                        <InputLabel>Desired Career</InputLabel>
+                        <InputLabel>Industry Pyramid</InputLabel>
                         <Select
-                            value={formState.careerPyramid || ''}
-                            name="careerPyramid"
+                            value={formState.industry_pyramid || ''}
+                            name="industry_pyramid"
                             onChange={handleChange}
                         >
                             {/* Map array of careers paths, display each as a menu item */}

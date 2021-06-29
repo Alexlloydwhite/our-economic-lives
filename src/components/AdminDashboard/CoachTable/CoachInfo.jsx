@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core'
 import PersonIcon from '@material-ui/icons/Person';
 import CloseIcon from '@material-ui/icons/Close';
+import PhoneIcon from '@material-ui/icons/Phone';
 // React
 import { useState } from 'react';
 
@@ -45,7 +46,7 @@ export default function CoachInfo({ coach, coachList }) {
                     <span
                         style={{ float: 'left', marginTop: 9, marginLeft: 8 }}
                     >
-                        Client Info
+                        Coach Info
                     </span>
                     <IconButton
                         onClick={() => setOpenDialog(false)}
@@ -69,6 +70,14 @@ export default function CoachInfo({ coach, coachList }) {
                                         </ListItemAvatar>
                                         <ListItemText>
                                             {coach.first_name}{' '}{coach.last_name}
+                                        </ListItemText>
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemAvatar>
+                                            <PhoneIcon />
+                                        </ListItemAvatar>
+                                        <ListItemText>
+                                            {coach.phone_number}
                                         </ListItemText>
                                     </ListItem>
                                 </div>

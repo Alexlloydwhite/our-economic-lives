@@ -1,11 +1,11 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
-router.get('/:id', async (req, res) => {
+router.get('/:id', rejectUnauthenticated, async (req, res) => {
   const client = await pool.connect()
   try {
     let queryText = `SELECT is_recommended, building_block.name, building_block.description, building_block.tier_id, building_block.id FROM "user_blocks"
@@ -44,10 +44,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-/**
- * POST route template
- */
-router.post('/', async (req, res) => {
+router.post('/', rejectUnauthenticated, async (req, res) => {
   let user_id = req.body.id;
   const client = await pool.connect();
   try {
