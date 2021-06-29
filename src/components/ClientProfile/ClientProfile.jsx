@@ -68,10 +68,10 @@ export default function Profile() {
     const [profession, setProfession] = useState(user.current_profession);
     const [career, setCareer] = useState(user.desired_career);
 
-    const careerPaths = useSelector(store => store.career_path);
+    const industryPyramids = useSelector(store => store.industry_pyramid);
 
       useEffect(() => {
-        dispatch({ type: 'FETCH_CAREER_PATH'})
+        dispatch({ type: 'FETCH_INDUSTRY_PYRAMID'})
     }, [])
 
     // Handles submit of form
@@ -217,7 +217,9 @@ export default function Profile() {
                         >
                             {/* TODO - pull pyramid data from Postgres to display here! */}
                             {/* Here, value is the id of the career pyramid. */}
-                          {careerPaths ? careerPaths.map(path => {
+                         
+                          {industryPyramids ? industryPyramids.map(path => {
+
                             return (
                               <MenuItem value={path.id} key={path.id}>{path.name}</MenuItem>
                             )
