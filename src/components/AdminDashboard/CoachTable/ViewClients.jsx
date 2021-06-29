@@ -45,11 +45,18 @@ export default function viewClients({ classes, coach }) {
                 open={openDialog}
             >
                 {/* Dialog Title */}
-                <DialogTitle>
-                    <IconButton onClick={() => setOpenDialog(false)}>
+                <DialogTitle style={{ marginBottom: -25 }}>
+                    <span
+                        style={{ float: 'left', marginTop: 9, marginLeft: 8 }}
+                    >
+                        Client List
+                    </span>
+                    <IconButton
+                        onClick={() => setOpenDialog(false)}
+                        style={{ float: 'right' }}
+                    >
                         <CloseIcon />
                     </IconButton>
-                    {"Client List"}
                 </DialogTitle>
                 {/* Dialog Body */}
                 <DialogContent>
