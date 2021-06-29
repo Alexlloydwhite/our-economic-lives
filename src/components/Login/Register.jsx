@@ -201,10 +201,10 @@ export default function Register() {
                         required
                         value={formState.careerPyramid}
                     >
-                        <InputLabel>Desired Career</InputLabel>
+                        <InputLabel>Industry Pyramid</InputLabel>
                         <Select
                             value={formState.careerPyramid || ''}
-                            name="careerPyramid"
+                            name="industry_pyramid"
                             onChange={handleChange}
                         >
                             {/* Map array of careers paths, display each as a menu item */}
