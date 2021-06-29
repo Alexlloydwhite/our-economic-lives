@@ -49,13 +49,13 @@ CREATE TABLE "competency"(
 	"building_block_id" INT NOT NULL
 );
 
-CREATE TABLE "career_path_building_block"(
+CREATE TABLE "industry_pyramid_building_block"(
 	"id" SERIAL PRIMARY KEY,
 	"building_block_id" INT NOT NULL,
-	"career_path_id" INT NOT NULL
+	"industry_pyramid_id" INT NOT NULL
 );
 
-CREATE TABLE "career_path"(
+CREATE TABLE "industry_pyramid"(
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR (80) NOT NULL
 );
