@@ -5,9 +5,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import List from '@material-ui/core/List';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -46,33 +43,36 @@ const useStyles = makeStyles((theme) => ({
 export default function BlockDetail () {
 
     const classes = useStyles();
-    // const savedSkills = useSelector((store) => store.savedskills);
+    const user_id = useSelector((store) => store.user.id);
     const detail = useSelector((store) => store.detail);
-    console.log('in detail', detail);
     const [newExp, setNewExp] = useState('');
-    const [newSkillError, setNewSkillError] = useState(false);
+    const [newExpError, setNewExpError] = useState(false);
+    const block_id = detail.id;
+    console.log('in detail', detail.id,  user_id, detail);
 
     // Validate skill form
     const validateForm = (e) => {
         e.preventDefault();
-        setNewSkillError(false)
-        if (newSkill == ''){
-            setNewSkillError(true)
+        setNewExpError(false)
+        if (newExp == ''){
+            setNewExpError(true)
         }
-        submitSkill();
+        submitExp();
     }
 
     // Once validated send new experience to saga
-    const submitExp = () => {
-        console.log('in submitExp');
-        dispatch({
-            type: 'ADD_SKILL', payload: {
-                            skill: newExp
-            }
-        })
-        // Clear skill form
-        setNewExp('');
-    }
+    // const submitExp = () => {
+    //     console.log('in submitExp');
+    //     dispatch({
+    //         type: 'CREATE_EXP', payload: { 
+    //             user_id: user_id,
+    //             block_id: detail.id,
+    //             user_text: newExp 
+    //         }
+    //     })
+    //     // Clear Critical Experience form
+    //     setNewExp('');
+    // }
 
 
     return (

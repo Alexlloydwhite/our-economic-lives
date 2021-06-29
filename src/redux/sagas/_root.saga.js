@@ -12,7 +12,11 @@ import createCoach from './createCoach.saga';
 import fetchCoaches from './fetchCoaches.saga';
 import buildingBlocks from './buildingBlocks.saga';
 import fetchClientBlocks from './fetchClientBlocks.saga';
+
+import createCritExp from './createCritExp.saga';
+
 import createIndustryPyramid from './createIndustryPyramid.saga';
+
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -33,6 +37,7 @@ export default function* rootSaga() {
   yield takeEvery('ADD_INDUSTRY_PYRAMID', createIndustryPyramid);
   yield takeEvery('UPDATE_CLIENT', updateClient);
   yield takeEvery('FETCH_CLIENT_BLOCKS', fetchClientBlocks);
+  yield takeEvery('CREATE_EXP', createCritExp);
   yield all([
     loginSaga(), // login saga is now registered
     userSaga(),
