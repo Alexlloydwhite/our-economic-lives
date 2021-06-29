@@ -93,7 +93,6 @@ export default function CoachTable() {
                                 >
                                     Coaches
                                 </Typography>
-                                {JSON.stringify(coachList)}
                             </Grid>
                         </Grid>
                         {/* Table to display coaches */}
