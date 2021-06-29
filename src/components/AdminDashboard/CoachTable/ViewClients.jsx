@@ -45,17 +45,24 @@ export default function viewClients({ classes, coach }) {
                 open={openDialog}
             >
                 {/* Dialog Title */}
-                <DialogTitle>
-                    <IconButton onClick={() => setOpenDialog(false)}>
+                <DialogTitle style={{ marginBottom: -25 }}>
+                    <span
+                        style={{ float: 'left', marginTop: 9, marginLeft: 8 }}
+                    >
+                        Client List
+                    </span>
+                    <IconButton
+                        onClick={() => setOpenDialog(false)}
+                        style={{ float: 'right' }}
+                    >
                         <CloseIcon />
                     </IconButton>
-                    {"Client List"}
                 </DialogTitle>
                 {/* Dialog Body */}
                 <DialogContent>
                     <List>
                         {/* Check if the coach has any clients */}
-                        {clientList.length > 1 ?
+                        {clientList.length >= 1 ?
                             // If the coach has clients map over array to display data
                             clientList.map((client) => (
                                 <div key={client.id}>
