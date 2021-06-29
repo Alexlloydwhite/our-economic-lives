@@ -34,6 +34,33 @@ router.post('/create-career-path', rejectUnauthorized, (req, res) => {
       res.sendStatus(500);
       console.log(`IN /admin/create-career-path, ${err}`);
     })
+
+router.get('/industry_pyramid', rejectUnauthenticated, (req, res) => {
+    const queryText = `SELECT * FROM industry_pyramid;`
+    pool
+      .query(queryText)
+      .then((result) => {
+        res.send(result.rows);
+      })
+      .catch((error) => {
+        console.log('Error in /api/admin/industry_pyramid', error);
+        res.sendStatus(500);
+      })
+});
+
+router.post('/create_industry_pyramid', rejectUnauthorized, (req, res) => {
+    console.log(req.body.name);
+    const industryPyramidName = req.body.name;
+    const queryText = `INSERT INTO industry_pyramid (name) VALUES ($1);`;
+    pool
+      .query(queryText, [industryPyramidName])
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        res.sendStatus(500);
+        console.log(`IN /admin/create_industry_pyramid, ${err}`);
+      })
 });
 
 router.post('/create_coach', rejectUnauthorized, (req, res) => {

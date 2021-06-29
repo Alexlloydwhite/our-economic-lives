@@ -35,7 +35,7 @@ router.post('/:id', rejectUnauthorized, async (req, res) => {
                 RETURNING id;`
             let queryText2 = `INSERT INTO "competency" ("value", "building_block_id")
                 VALUES ($1, $2)`
-            let queryText3 = `INSERT INTO "career_path_building_block" ("building_block_id", "career_path_id")
+            let queryText3 = `INSERT INTO "industry_pyramid_building_block" ("building_block_id", "industry_pyramid_id")
                 VALUES ($1, $2)`
             let previousBlockName = 'test';
             let buildingBlockId = 0;

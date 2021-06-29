@@ -49,8 +49,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
   const client = await pool.connect();
   try {
     let queryText1 = `SELECT building_block.id FROM building_block
-    JOIN career_path_building_block ON building_block.id = career_path_building_block.building_block_id
-    WHERE career_path_building_block.career_path_id = 1;`
+    JOIN industry_pyramid_building_block ON building_block.id = industry_pyramid_building_block.building_block_id
+    WHERE industry_pyramid_building_block.industry_pyramid_id = 1;`
     let queryText2 = `INSERT INTO user_blocks ("user_id", "building_block_id")
     VALUES ($1, $2);`
     let buildingBlockId = await client.query(queryText1);
