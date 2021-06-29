@@ -41,15 +41,25 @@ router.post('/create-career-path', (req, res) => {
 router.post('/create_coach', (req, res) => {
   if (req.user.authorization === 1) {
     console.log(`IN, create route`);
+    const organization = req.body.organization
     const firstName = req.body.first_name;
-    const lastName = req.body.last_name
+    const lastName = req.body.last_name;
+    const phoneNumber = req.body.phoneNumber;
     const email = req.body.email;
     const password = encryptLib.encryptPassword(req.body.password);
     const authorization = 2;
-    const queryText = `INSERT INTO "user" (first_name, last_name, email, password, "authorization")
-        VALUES ($1, $2, $3, $4, $5);`;
+    const queryText = `
+    INSERT INTO "user" (
+      organization_name,
+      first_name, 
+      last_name, 
+      phone_number,
+      email, 
+      password, 
+      "authorization")
+      VALUES ($1, $2, $3, $4, $5, $6, $7);`;
     pool
-      .query(queryText, [firstName, lastName, email, password, authorization])
+      .query(queryText, [organization, firstName, lastName, phoneNumber, email, password, authorization])
       .then(() => res.sendStatus(201))
       .catch((err) => {
         console.log('adding new coach failed: ', err);

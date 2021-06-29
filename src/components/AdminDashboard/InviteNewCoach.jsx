@@ -41,7 +41,7 @@ export default function InviteNewCoach() {
     // Handle dialog submit
     const handleSubmit = () => {
         // Check is both required field are entered
-        if (Object.keys(formState).length === 4) {
+        if (Object.keys(formState).length === 6) {
             // Close dialog
             setOpen(false);
             // Dispatch data to sage
