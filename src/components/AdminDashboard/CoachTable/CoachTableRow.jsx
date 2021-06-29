@@ -11,6 +11,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // React
 import { useState } from 'react';
 import ViewClients from './ViewClients';
+import CoachInfo from './CoachInfo';
 
 export default function CoachTableRow({ coach, coachList, StyledTableRow, classes }) {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -45,9 +46,7 @@ export default function CoachTableRow({ coach, coachList, StyledTableRow, classe
                     onClick={() => setAnchorEl(null)}
                 >
                     {/* Opens dialog to display coach data */}
-                    <MenuItem>Info</MenuItem>
-                    {/* Opens dialog to confirm deactivate */}
-                    <MenuItem>Deactivate</MenuItem>
+                    <CoachInfo />
                 </Menu>
             </TableCell>
         </StyledTableRow>
