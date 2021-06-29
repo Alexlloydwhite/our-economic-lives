@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Register() {
     const classes = useStyles();
     const history = useHistory();
-    const careerPath = useSelector(store => store.career_path);
+    const industryPyramid = useSelector(store => store.industry_pyramid);
     const errors = useSelector(store => store.errors);
     const dispatch = useDispatch();
 
@@ -72,7 +72,7 @@ export default function Register() {
     // GET 
     useEffect(() => {
         dispatch({
-            type: 'FETCH_CAREER_PATH'
+            type: 'FETCH_INDUSTRY_PYRAMID'
         })
     }, []);
 
@@ -208,7 +208,7 @@ export default function Register() {
                             onChange={handleChange}
                         >
                             {/* Map array of careers paths, display each as a menu item */}
-                            {careerPath.map((path) => (
+                            {industryPyramid.map((path) => (
                                 <MenuItem value={path.id} key={path.id}>{path.name}</MenuItem>
                             ))}
                         </Select>

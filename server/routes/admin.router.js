@@ -6,32 +6,32 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-router.get('/career_path', rejectUnauthenticated, (req, res) => {
-    const queryText = `SELECT * FROM career_path;`
+router.get('/industry_pyramid', rejectUnauthenticated, (req, res) => {
+    const queryText = `SELECT * FROM industry_pyramid;`
     pool
       .query(queryText)
       .then((result) => {
         res.send(result.rows);
       })
       .catch((error) => {
-        console.log('Error in /api/admin/career_path', error);
+        console.log('Error in /api/admin/industry_pyramid', error);
         res.sendStatus(500);
       })
 });
 
-router.post('/create-career-path', (req, res) => {
+router.post('/create_industry_pyramid', (req, res) => {
   if (req.user.authorization === 1) {
     console.log(req.body.name);
-    const careerPathName = req.body.name;
-    const queryText = `INSERT INTO career_path (name) VALUES ($1);`;
+    const industryPyramidName = req.body.name;
+    const queryText = `INSERT INTO industry_pyramid (name) VALUES ($1);`;
     pool
-      .query(queryText, [careerPathName])
+      .query(queryText, [industryPyramidName])
       .then(() => {
         res.sendStatus(200);
       })
       .catch((err) => {
         res.sendStatus(500);
-        console.log(`IN /admin/create-career-path, ${err}`);
+        console.log(`IN /admin/create_industry_pyramid, ${err}`);
       })
   } else {
     res.sendStatus(403);
