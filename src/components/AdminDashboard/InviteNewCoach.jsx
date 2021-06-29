@@ -6,9 +6,10 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle,
+    IconButton
 } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 // React Imports
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -82,8 +83,19 @@ export default function InviteNewCoach() {
             {/* Dialog */}
             <Dialog open={open} onClose={handleClose}>
                 {/* Title */}
-                <DialogTitle>
-                    Add a new coach
+                {/* Dialog Title */}
+                <DialogTitle style={{ marginBottom: -25 }}>
+                    <span
+                        style={{ float: 'left', marginTop: 9 }}
+                    >
+                        Add a new coach
+                    </span>
+                    <IconButton
+                        onClick={() => setOpenDialog(false)}
+                        style={{ float: 'right' }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
                 </DialogTitle>
                 <DialogContent>
                     {/* Errors */}
@@ -134,7 +146,7 @@ export default function InviteNewCoach() {
                     />
                     {/* Password */}
                     <TextField
-                        helperText="We recommend using the name of your organization as their password."
+                        helperText="We recommend using the name of their organization as a password."
                         label="Create a Password"
                         name="password"
                         fullWidth
