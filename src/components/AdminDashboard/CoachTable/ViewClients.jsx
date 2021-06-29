@@ -26,7 +26,7 @@ export default function viewClients({ classes, coach }) {
         setOpenDialog(true);
         // Dispatch to grab client list by coach ID
         dispatch({
-            type: 'FETCH_CLIENTS',
+            type: 'FETCH_CLIENTS_BY_ID',
             coachId: id
         });
     }
