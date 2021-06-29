@@ -234,9 +234,9 @@ export default function Profile() {
                             variant="contained"
                             color="primary"
                             type="submit"
+                            startIcon={<SaveIcon />}
                         >
-                            <SaveIcon />
-                            &nbsp;Save
+                            Save
                         </Button>
                     </div>
                 </form>
