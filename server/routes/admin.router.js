@@ -59,7 +59,14 @@ router.post('/create_coach', (req, res) => {
       "authorization")
       VALUES ($1, $2, $3, $4, $5, $6, $7);`;
     pool
-      .query(queryText, [organization, firstName, lastName, phoneNumber, email, password, authorization])
+      .query(queryText, 
+        [organization, 
+          firstName, 
+          lastName, 
+          phoneNumber, 
+          email, 
+          password, 
+          authorization])
       .then(() => res.sendStatus(201))
       .catch((err) => {
         console.log('adding new coach failed: ', err);
