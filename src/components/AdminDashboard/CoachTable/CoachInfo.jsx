@@ -70,6 +70,11 @@ export default function CoachInfo({ coach, coachList }) {
                                         <ListItemText>
                                             {coach.first_name}{' '}{coach.last_name}
                                         </ListItemText>
+                                        <ListItem>
+                                            <ListItemText>
+                                                {JSON.stringify(coach)}
+                                            </ListItemText>
+                                        </ListItem>
                                     </ListItem>
                                 </div>
                             ))

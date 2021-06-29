@@ -85,7 +85,9 @@ router.get('/coach-list', (req, res) => {
       u.id,
       u.email,
       u.first_name,
-      u.last_name
+      u.last_name,
+      u.organization_name,
+      u.phone_number
     FROM "user" u
     WHERE u.authorization=2;
     `;
