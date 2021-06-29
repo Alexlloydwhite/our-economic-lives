@@ -4,8 +4,11 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const fileUpload = require('express-fileupload');
 router.use(fileUpload());
+const {
+    rejectUnauthorized,
+  } = require('../modules/adminAuthorization-middleware');
 
-router.post('/:id', async (req, res) => {
+router.post('/:id', rejectUnauthorized, async (req, res) => {
     console.log('in upload POST');
     const client = await pool.connect();
     try {
