@@ -81,7 +81,7 @@ export default function InviteNewCoach() {
                 Manage Pyramids
             </Button>
             {/* Dialog */}
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={open}>
                 {/* Title */}
                 {/* Dialog Title */}
                 <DialogTitle style={{ marginBottom: -25 }}>
@@ -91,7 +91,7 @@ export default function InviteNewCoach() {
                         Add a new coach
                     </span>
                     <IconButton
-                        onClick={() => setOpenDialog(false)}
+                        onClick={handleClose}
                         style={{ float: 'right' }}
                     >
                         <CloseIcon />
