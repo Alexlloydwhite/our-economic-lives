@@ -10,8 +10,8 @@ router.post('/create-client', (req, res,) => {
     if (req.user.authorization <= 2) {
         console.log(`IN, /create-client route`);
         const email = req.body.email;
-        const authorization = 3;
         const password = encryptLib.encryptPassword(req.body.password);
+        const authorization = 3;
         const coachId = req.user.id;
         const queryText = `INSERT INTO "user" (email, password, "authorization", coach_id)
           VALUES ($1, $2, $3, $4) RETURNING id`;
