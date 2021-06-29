@@ -34,6 +34,7 @@ router.post('/create-career-path', rejectUnauthorized, (req, res) => {
       res.sendStatus(500);
       console.log(`IN /admin/create-career-path, ${err}`);
     })
+  })
 
 router.get('/industry_pyramid', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT * FROM industry_pyramid;`
