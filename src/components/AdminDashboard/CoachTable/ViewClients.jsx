@@ -62,7 +62,7 @@ export default function viewClients({ classes, coach }) {
                 <DialogContent>
                     <List>
                         {/* Check if the coach has any clients */}
-                        {clientList.length > 1 ?
+                        {clientList.length >= 1 ?
                             // If the coach has clients map over array to display data
                             clientList.map((client) => (
                                 <div key={client.id}>
