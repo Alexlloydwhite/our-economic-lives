@@ -213,7 +213,7 @@ export default function Profile() {
                             onChange={(e) => setCareer(e.target.value)}
                         >
                             {/* TODO - pull pyramid data from Postgres to display here! */}
-                            {/* Here, value is the id of the career pyramid. */
+                            {/* Here, value is the id of the career pyramid. */}
                           {industryPyramids ? industryPyramids.map(path => {
                             return (
                               <MenuItem value={path.id} key={path.id}>{path.name}</MenuItem>
