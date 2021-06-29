@@ -1,9 +1,12 @@
-import { AppBar, Button, IconButton, makeStyles, Toolbar, Typography, SwipeableDrawer, List, Divider, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import { useState } from 'react';
-import clsx from 'clsx';
-import MenuIcon from '@material-ui/icons/Menu';
+import {
+  AppBar,
+  makeStyles,
+  Toolbar,
+  Typography
+} from '@material-ui/core';
 import { theme } from '../../Theme/Theme';
 import Drawer from './Drawer';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
   root: {
@@ -21,15 +24,18 @@ const useStyles = makeStyles({
 
 export default function NavBar() {
   const classes = useStyles();
+  const user = useSelector(store => store.user)
 
-  return(
+  return (
     <div className={classes.root}>
       <AppBar className={classes.navbar}>
         <Toolbar>
-          <Drawer className={classes.menuButton} />
+          {user.first_name &&
+            <Drawer className={classes.menuButton} />
+          }
           <Typography>Our Economic Lives</Typography>
         </Toolbar>
-      </AppBar>   
+      </AppBar>
     </div>
   )
 }
