@@ -82,7 +82,6 @@ export default function InviteNewCoach() {
             </Button>
             {/* Dialog */}
             <Dialog open={open}>
-                {/* Title */}
                 {/* Dialog Title */}
                 <DialogTitle style={{ marginBottom: -25 }}>
                     <span
