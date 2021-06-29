@@ -41,7 +41,7 @@ router.post('/create-career-path', (req, res) => {
 router.post('/create_coach', (req, res) => {
   if (req.user.authorization === 1) {
     console.log(`IN, create route`);
-    const organization = req.body.organization
+    const organization = req.body.organization_name
     const firstName = req.body.first_name;
     const lastName = req.body.last_name;
     const phoneNumber = req.body.phoneNumber;

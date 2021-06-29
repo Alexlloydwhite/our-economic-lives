@@ -131,7 +131,7 @@ export default function InviteNewCoach() {
                     {/* Phone Number */}
                     <TextField
                         label="Phone Number"
-                        name="email"
+                        name="phone_number"
                         fullWidth
                         required
                         onChange={handleChange}
@@ -139,7 +139,7 @@ export default function InviteNewCoach() {
                     {/* Email */}
                     <TextField
                         label="Email"
-                        name="phone_number"
+                        name="email"
                         fullWidth
                         required
                         onChange={handleChange}
