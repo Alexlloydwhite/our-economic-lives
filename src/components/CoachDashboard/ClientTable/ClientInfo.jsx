@@ -27,7 +27,7 @@ export default function ClientInfo({ clientList, client }) {
         // Open the dialog
         setOpenDialog(true);
         // filter client list to grab client with matching ID
-        const clientClicked = (clientList.filter((client) => client.id === id));
+        const clientClicked = clientList.filter((client) => client.id === id);
         // set local state to result of filter 
         setClientDetailsClicked(clientClicked);
     }
@@ -47,7 +47,7 @@ export default function ClientInfo({ clientList, client }) {
                     <span
                         style={{ float: 'left', marginTop: 9, marginLeft: 8 }}
                     >
-                        {"Client Info"}
+                        Client Info
                     </span>
                     <IconButton
                         onClick={() => setOpenDialog(false)}

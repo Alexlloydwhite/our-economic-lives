@@ -93,15 +93,17 @@ export default function CoachTable() {
                                 >
                                     Coaches
                                 </Typography>
+                                {JSON.stringify(coachList)}
                             </Grid>
                         </Grid>
                         {/* Table to display coaches */}
                         <Table>
                             <TableBody>
                                 {coachList.map((coach) => (
-                                    <CoachTableRow 
+                                    <CoachTableRow
                                         key={coach.id}
                                         coach={coach}
+                                        coachList={coachList}
                                         StyledTableRow={StyledTableRow}
                                         classes={classes}
                                     />

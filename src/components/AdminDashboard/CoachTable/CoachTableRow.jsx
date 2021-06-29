@@ -24,7 +24,7 @@ export default function CoachTableRow({ coach, coachList, StyledTableRow, classe
                 </Typography>
             </TableCell>
             <TableCell>
-                <ViewClients 
+                <ViewClients
                     classes={classes}
                     coachList={coachList}
                     coach={coach}
@@ -46,7 +46,10 @@ export default function CoachTableRow({ coach, coachList, StyledTableRow, classe
                     onClick={() => setAnchorEl(null)}
                 >
                     {/* Opens dialog to display coach data */}
-                    <CoachInfo />
+                    <CoachInfo
+                        coachList={coachList}
+                        coach={coach}
+                    />
                 </Menu>
             </TableCell>
         </StyledTableRow>
