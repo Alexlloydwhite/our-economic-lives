@@ -80,7 +80,7 @@ export default function Profile() {
        
         // Putting all edit changes into a object
         const update = {
-            id: user.id, // User can't edit id, so grabing it from reducer
+            id: user.id, // User can't edit id, grabing it from reducer for query
             first_name: firstName,
             last_name: lastName,
             email: email,
@@ -196,7 +196,7 @@ export default function Profile() {
                         margin="normal"
                         required
                         fullWidth
-                        label="Profession"
+                        label="Current Profession"
                         value={profession}
                         onChange={(e) => setProfession(e.target.value)}
                         name="currentProfession"
@@ -212,15 +212,11 @@ export default function Profile() {
                         <InputLabel>Desired Career</InputLabel>
                         <Select
                             value={career}
-                            name="careerPyramid"
+                            name="Industry Pyramid"
                             onChange={(e) => setCareer(e.target.value)}
                         >
                             {/* TODO - pull pyramid data from Postgres to display here! */}
                             {/* Here, value is the id of the career pyramid. */}
-                            {/* <MenuItem value={1}>Mechanic</MenuItem>
-                            <MenuItem value={2}>Batman</MenuItem>
-                            <MenuItem value={3}>Doctor</MenuItem>
-                            <MenuItem value={4}>Lawyer</MenuItem> */}
                           {careerPaths ? careerPaths.map(path => {
                             return (
                               <MenuItem value={path.id} key={path.id}>{path.name}</MenuItem>

@@ -24,9 +24,13 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     title: {
-        textAlign: 'Center',
+        textAlign: 'Left',
+        marginLeft: '2em',
         padding: theme.spacing(1),
-        backgroundColor: theme.palette.primary.light,
+    },
+    examples: {
+        textAlign: 'Left',
+        marginLeft: '6em',
     },
     heading: {
         textAlign: 'Left',
@@ -39,25 +43,13 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-  const sample = [
-    {
-      title: 'Interpersonal Skills',
-    },
-    {
-        title: 'Initiative',
-    },
-    {
-        title: 'Ambition',
-    },
-  ];
-
 export default function BlockDetail () {
 
     const classes = useStyles();
     // const savedSkills = useSelector((store) => store.savedskills);
     const detail = useSelector((store) => store.detail);
     console.log('in detail', detail);
-    const [newSkill, setNewSkill] = useState('');
+    const [newExp, setNewExp] = useState('');
     const [newSkillError, setNewSkillError] = useState(false);
 
     // Validate skill form
@@ -70,76 +62,62 @@ export default function BlockDetail () {
         submitSkill();
     }
 
-    // Once validated send new skill to saga
-    const submitSkill = () => {
-        console.log('in submitSkill');
+    // Once validated send new experience to saga
+    const submitExp = () => {
+        console.log('in submitExp');
         dispatch({
             type: 'ADD_SKILL', payload: {
-                            skill: newSkill
+                            skill: newExp
             }
         })
         // Clear skill form
-        setNewSkill('');
+        setNewExp('');
     }
 
 
     return (
         <>
-        <Card >
-          <Typography className={classes.title} variant="h4" >
-            {detail.name}
-          </Typography>
-            {/* <List > */}
-                {/* <ListItem className={classes.heading}>
-                    <ListItemText primary="Displaying strong moral principles and work ethic"/>
-                </ListItem> */}
-                {/* {sample.map( example => (
-                    <ListItem className={classes.heading}>
-                        <ListItemText primary={example.title}/>
-                    </ListItem>
-                ))} */}
-            {/* </List> */}
-            </Card>
-            <div className={classes.rootz}>
-            <Accordion className={classes.rootz}>
+            <Accordion >
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
+                    className={classes.title}
                 >
-                    <Typography>
+                <Typography variant="h4" >
+                    {detail.name}
+                </Typography>
+                </AccordionSummary>
+
+                    <Typography className={classes.title}>
                         {detail.description}
                     </Typography>
-                </AccordionSummary>
-                <Box ml={2}>
-                    <Typography >
+                    <Typography className={classes.title}>
                         Examples:
                     </Typography>
-                {detail.value.map( example => {
-                    return (
-                    <AccordionDetails ml={16} >
-                    <Typography className={classes.heading}>
-                         &nbsp;{example}
-                    </Typography>
-                </AccordionDetails>
-                    )
-                })}
-                </Box>
+                    {detail.value.map( example => {
+                        return (
+                        <AccordionDetails >
+                            <Typography className={classes.examples}>
+                                {example}
+                            </Typography>
+                        </AccordionDetails>
+                        )
+                    })}
             </Accordion>
-            </div>
         
         
         <Box className={classes.box}>
             <Typography >
-                How do you display {detail.name} in your daily life?
+                Describe an instance that exemplifies {detail.name}.
             </Typography>
         <form className={classes.root} noValidate autoComplete="off" onSubmit={validateForm}>
             <TextField
-                label="Add a skill"
+                label="Add a Critical Experience"
                 multiline
                 rows={5}
                 variant="outlined"
-                value={newSkill}
+                value={newExp}
             />
             <Button 
                 type="submit" 
@@ -148,13 +126,13 @@ export default function BlockDetail () {
                 size="large" 
                 onChange={(e) => setNewSkill(e.target.value)}
             >
-                Submit
+                Submit for review
             </Button>
         </form>
         </Box>
 
         <div className={classes.box}>
-        <Typography >Saved Skills: 1 / 5</Typography>
+        <Typography >Saved Experiences: 1 / 5</Typography>
         {/* <Typography >Saved Skillz: {savedSkills.length} / 5</Typography> */}
         <Box className={classes.root}>
             {/* {savedskills.map(skill => ( */}

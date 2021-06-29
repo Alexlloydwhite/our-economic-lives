@@ -8,7 +8,7 @@ import Drawer from './Drawer';
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
-    marginBottom: 80
+    marginBottom: 58
   },
   navbar: {
     backgroundColor: theme.palette.primary.main,
