@@ -6,9 +6,10 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle,
+    IconButton
 } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 // React Imports
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,7 +41,7 @@ export default function InviteNewCoach() {
     // Handle dialog submit
     const handleSubmit = () => {
         // Check is both required field are entered
-        if (Object.keys(formState).length === 4) {
+        if (Object.keys(formState).length === 6) {
             // Close dialog
             setOpen(false);
             // Dispatch data to sage
@@ -80,25 +81,39 @@ export default function InviteNewCoach() {
                 Manage Pyramids
             </Button>
             {/* Dialog */}
-            <Dialog open={open} onClose={handleClose}>
-                {/* Title */}
-                <DialogTitle>
-                    Add a new coach
+            <Dialog open={open}>
+                {/* Dialog Title */}
+                <DialogTitle style={{ marginBottom: -25 }}>
+                    <span
+                        style={{ float: 'left', marginTop: 9 }}
+                    >
+                        Add a new coach
+                    </span>
+                    <IconButton
+                        onClick={handleClose}
+                        style={{ float: 'right' }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
                 </DialogTitle>
                 <DialogContent>
-                    {/* Helper text */}
-                    <DialogContentText>
-                        We recommend using the name of your organization as their password.
-                    </DialogContentText>
                     {/* Errors */}
                     {errors.registrationMessage && (
                         <h3 className="alert" role="alert">
                             {errors.registrationMessage}
                         </h3>
                     )}
+                    {/* Organization */}
+                    <TextField
+                        label="Organization"
+                        name="organization_name"
+                        fullWidth
+                        required
+                        onChange={handleChange}
+                    />
                     {/* First Name */}
                     <TextField
-                        label="Coach's First Name"
+                        label="First Name"
                         name="first_name"
                         fullWidth
                         required
@@ -106,15 +121,23 @@ export default function InviteNewCoach() {
                     />
                     {/* Last Name */}
                     <TextField
-                        label="Coach's Last Name"
+                        label="Last Name"
                         name="last_name"
+                        fullWidth
+                        required
+                        onChange={handleChange}
+                    />
+                    {/* Phone Number */}
+                    <TextField
+                        label="Phone Number"
+                        name="phone_number"
                         fullWidth
                         required
                         onChange={handleChange}
                     />
                     {/* Email */}
                     <TextField
-                        label="Coach's Email"
+                        label="Email"
                         name="email"
                         fullWidth
                         required
@@ -122,6 +145,7 @@ export default function InviteNewCoach() {
                     />
                     {/* Password */}
                     <TextField
+                        helperText="We recommend using the name of their organization as a password."
                         label="Create a Password"
                         name="password"
                         fullWidth

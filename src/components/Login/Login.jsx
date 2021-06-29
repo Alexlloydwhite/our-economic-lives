@@ -77,12 +77,12 @@ export default function Login() {
                 {/* Temp stuff */}
                 <h5>Temp testing buttons</h5>
                 <button onClick={() => {
-                    setEmail('test3');
-                    setPassword('test3');
+                    setEmail('test1');
+                    setPassword('test1');
                 }}>registered user</button>
                 <button onClick={() => {
-                    setEmail('test6');
-                    setPassword('test6');
+                    setEmail('test2');
+                    setPassword('test2');
                 }}>new user</button>
                 <button onClick={() => {
                     setEmail('testcoach');

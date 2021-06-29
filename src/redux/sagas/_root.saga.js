@@ -5,15 +5,18 @@ import userSaga from './user.saga';
 import registerNewUser from './register.saga';
 import fetchClients from './fetchClients.saga';
 import deactivateClient from './deactivateClient.saga';
-import fetchCareerPath from './fetchCareerPath.saga';
+import fetchIndustryPyramid from './fetchIndustryPyramid.saga';
 import updateClient from './updateClient.saga';
 import activateClient from './activateClient.saga';
 import createCoach from './createCoach.saga';
 import fetchCoaches from './fetchCoaches.saga';
 import buildingBlocks from './buildingBlocks.saga';
-import createCareerPath from './createCareerPath.saga';
 import fetchClientBlocks from './fetchClientBlocks.saga';
+
 import createCritExp from './createCritExp.saga';
+
+import createIndustryPyramid from './createIndustryPyramid.saga';
+
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -30,8 +33,8 @@ export default function* rootSaga() {
   yield takeEvery('FETCH_COACHES', fetchCoaches);
   yield takeEvery('DEACTIVATE_CLIENT', deactivateClient);
   yield takeEvery('ACTIVATE_CLIENT', activateClient);
-  yield takeEvery('FETCH_CAREER_PATH', fetchCareerPath);
-  yield takeEvery('ADD_CAREER_PATH', createCareerPath);
+  yield takeEvery('FETCH_INDUSTRY_PYRAMID', fetchIndustryPyramid);
+  yield takeEvery('ADD_INDUSTRY_PYRAMID', createIndustryPyramid);
   yield takeEvery('UPDATE_CLIENT', updateClient);
   yield takeEvery('FETCH_CLIENT_BLOCKS', fetchClientBlocks);
   yield takeEvery('CREATE_EXP', createCritExp);
