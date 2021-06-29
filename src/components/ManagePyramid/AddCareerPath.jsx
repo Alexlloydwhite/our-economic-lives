@@ -12,23 +12,23 @@ import { useSelector, useDispatch } from 'react-redux';
 export default function AdminDashboard() {
     const dispatch = useDispatch();
     // const [careerPath, setCareerPath] = useState(0);
-    const [careerPath, setCareerPath] = useState('');
-    let routerPath = '/api/upload/' + careerPath;
-    const setCareerPaths = useSelector(store => store.career_path)
+    const [industryPyramid, setIndustryPyramid] = useState('');
+    let routerPath = '/api/upload/' + industryPyramid;
+    const setIndustryPyramids = useSelector(store => store.industry_pyramid)
 
-    const addCareerPath = (e) => {
+    const addIndustryPyramid = (e) => {
         e.preventDefault();
-        // check is career path input is not null
-        if (careerPath) {
+        // check is industry pyramid input is not null
+        if (industryPyramid) {
             dispatch({
-                type: 'ADD_CAREER_PATH',
-                payload: careerPath
+                type: 'ADD_INDUSTRY_PYRAMID',
+                payload: industryPyramid
             });
         }
     }
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_CAREER_PATH' });
+        dispatch({ type: 'FETCH_INDUSTRY_PYRAMID' });
     }, [dispatch]);
 
     return (
@@ -39,21 +39,21 @@ export default function AdminDashboard() {
             alignItems="center"
         >
             <Grid item>
-                <form onSubmit={addCareerPath} noValidate>
+                <form onSubmit={addIndustryPyramid} noValidate>
                     {/* Form Header */}
                     <Typography variant="h5">
-                        Add New Career Path
+                        Add New Industry Pyramid
                     </Typography>
                     <Grid item xs={12}>
-                        {/* Career Path Name Input */}
+                        {/* Industry Pyramid Name Input */}
                         <TextField
                             variant="outlined"
                             margin="normal"
                             required
                             fullWidth
-                            label="Career Path"
-                            value={careerPath}
-                            onChange={(e) => setCareerPath(e.target.value)}
+                            label="Industry Pyramid"
+                            value={industryPyramid}
+                            onChange={(e) => setIndustryPyramid(e.target.value)}
                             style={{ marginRight: 5 }}
                         />
                         {/* Submit btn */}
