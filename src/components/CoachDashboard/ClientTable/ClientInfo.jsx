@@ -43,11 +43,18 @@ export default function ClientInfo({ clientList, client }) {
                 open={openDialog}
             >
                 {/* Dialog Title */}
-                <DialogTitle>
-                    <IconButton onClick={() => setOpenDialog(false)}>
+                <DialogTitle style={{ marginBottom: -25 }}>
+                    <span
+                        style={{ float: 'left', marginTop: 9, marginLeft: 8 }}
+                    >
+                        {"Client Info"}
+                    </span>
+                    <IconButton
+                        onClick={() => setOpenDialog(false)}
+                        style={{ float: 'right' }}
+                    >
                         <CloseIcon />
                     </IconButton>
-                    {"Client Info"}
                 </DialogTitle>
                 {/* Dialog Body */}
                 <DialogContent>
