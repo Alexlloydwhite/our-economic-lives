@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100vw',
-    marginTop: 70,
+    marginTop: 100,
   },
   row: {
     display: 'flex',
