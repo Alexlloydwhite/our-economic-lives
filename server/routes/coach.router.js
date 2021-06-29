@@ -8,7 +8,7 @@ const encryptLib = require('../modules/encryption');
 // adds a new client to their team
 router.post('/create-client', (req, res,) => {
     if (req.user.authorization <= 2) {
-        console.log(`IN, create route`);
+        console.log(`IN, /create-client route`);
         const email = req.body.email;
         const authorization = 3;
         const password = encryptLib.encryptPassword(req.body.password);
@@ -36,6 +36,7 @@ router.get('/client-list/:id', (req, res) => {
         const queryText = `
     SELECT 
         u.id,
+        u.organization_name,
         u.email,
         u.first_name,
         u.last_name,
@@ -44,7 +45,7 @@ router.get('/client-list/:id', (req, res) => {
         u.authorization,
         u.coach_id,
         u.current_profession,
-        u.desired_career,
+        u.industry_pyramid,
         u.is_registered,
         u.is_active
     FROM "user" u
