@@ -41,7 +41,7 @@ export default function InviteNewCoach() {
     // Handle dialog submit
     const handleSubmit = () => {
         // Check is both required field are entered
-        if (Object.keys(formState).length === 4) {
+        if (Object.keys(formState).length === 6) {
             // Close dialog
             setOpen(false);
             // Dispatch data to sage
@@ -82,7 +82,6 @@ export default function InviteNewCoach() {
             </Button>
             {/* Dialog */}
             <Dialog open={open}>
-                {/* Title */}
                 {/* Dialog Title */}
                 <DialogTitle style={{ marginBottom: -25 }}>
                     <span
@@ -131,7 +130,7 @@ export default function InviteNewCoach() {
                     {/* Phone Number */}
                     <TextField
                         label="Phone Number"
-                        name="email"
+                        name="phone_number"
                         fullWidth
                         required
                         onChange={handleChange}
@@ -139,7 +138,7 @@ export default function InviteNewCoach() {
                     {/* Email */}
                     <TextField
                         label="Email"
-                        name="phone_number"
+                        name="email"
                         fullWidth
                         required
                         onChange={handleChange}
