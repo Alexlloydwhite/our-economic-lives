@@ -131,11 +131,11 @@ export default function BlockDetail () {
         
         <Box className={classes.box}>
             <Typography >
-                How do you display {detail.name} in your daily life?
+                Describe an instance that exemplifies {detail.name}.
             </Typography>
         <form className={classes.root} noValidate autoComplete="off" onSubmit={validateForm}>
             <TextField
-                label="Add a skill"
+                label="Add a Critical Experience"
                 multiline
                 rows={5}
                 variant="outlined"
@@ -148,13 +148,13 @@ export default function BlockDetail () {
                 size="large" 
                 onChange={(e) => setNewSkill(e.target.value)}
             >
-                Submit
+                Submit for review
             </Button>
         </form>
         </Box>
 
         <div className={classes.box}>
-        <Typography >Saved Skills: 1 / 5</Typography>
+        <Typography >Saved Experiences: 1 / 5</Typography>
         {/* <Typography >Saved Skillz: {savedSkills.length} / 5</Typography> */}
         <Box className={classes.root}>
             {/* {savedskills.map(skill => ( */}
