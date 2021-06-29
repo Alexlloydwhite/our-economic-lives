@@ -15,6 +15,7 @@ CREATE TABLE "user" (
 	"coach_id" INT,
 	"current_profession" VARCHAR (80),
 	"industry_pyramid" INT,
+	"organization_name" VARCHAR (80),
 	"is_registered" BOOLEAN DEFAULT FALSE,
 	"is_active" BOOLEAN DEFAULT TRUE
 ); 
@@ -58,44 +59,3 @@ CREATE TABLE "career_path"(
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR (80) NOT NULL
 );
-
-INSERT INTO "career_path" ("name")
-VALUES ('Generic'),
-('Plumber'),
-('Store Manager'),
-('Pilot');
-
-INSERT INTO "building_block" ("name", "description", "tier_id")
-VALUES ('Integrity', 'Displaying strong moral principles and work ethic.', 1),
-('Professionalism', 'Maintaining a professional presence.', 1),
-('Initaitive', 'Demonstrating a commitment to effective job performance by taking action on one’s own and following through to get the job done.', 1);
-
-INSERT INTO "competency" ("value", "building_block_id")
-VALUES ('Behaving ethically', 1),
-('Acting fairly', 1),
-('Taking responsibility', 1),
-('Demonstrating self-control', 2),
-('Professional appearance', 2),
-('Social responsibility', 2),
-('Maintaining a positive attitiude', 2),
-('Persisting', 3),
-('Taking initiative', 3),
-('Setting challenging goals', 3),
-('Working independently', 3),
-('Achievement motivation', 3);
-
-INSERT INTO "career_path_building_block" ("building_block_id", "career_path_id")
-VALUES (1, 1),
-(1, 2),
-(1, 3),
-(2, 1),
-(2, 2),
-(2, 3),
-(3, 1),
-(3, 2),
-(3, 3);
-
-INSERT INTO "user_blocks" ("user_id", "building_block_id", "is_recommended")
-VALUES (3, 1, FALSE),
-(3, 2, FALSE),
-(3, 3, TRUE);
