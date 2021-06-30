@@ -28,8 +28,8 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
         });
     }
 
-    const handleCManageUserClick = (id) => {
-        history.push(`/manage/${id}`);
+    const handleManageClientClick = (id) => {
+        history.push(`/manage-client/${id}`);
     }
 
     return (
@@ -55,7 +55,7 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
                                     size="small"
                                     variant="outlined"
                                     className={classes.tableButton}
-                                    onClick={() => handleManageUserClick(client.id)}
+                                    onClick={() => handleManageClientClick(client.id)}
                                 >
                                     Manage
                                 </Button>
