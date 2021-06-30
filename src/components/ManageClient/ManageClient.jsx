@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 export default function ManageClient() {
     const dispatch = useDispatch();
     const params = useParams();
+    const pyramidData = useSelector(store => store.clientPyramid);
 
     useEffect(() => {
         dispatch({
@@ -14,8 +15,8 @@ export default function ManageClient() {
     }, [])
 
     return (
-        <div>
-            <h4>hello</h4>
-        </div>
+        <pre>
+            {JSON.stringify(pyramidData, null, 2)}
+        </pre>
     );
 }
