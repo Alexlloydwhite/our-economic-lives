@@ -66,8 +66,7 @@ export default function ClientTable({ clientList, deactivatedClientList, activeC
     // data associated with coach
     useEffect(() => {
         dispatch({
-            type: 'FETCH_CLIENTS',
-            coachId: user.id
+            type: 'FETCH_CLIENTS' 
         })
     }, [dispatch])
     return (

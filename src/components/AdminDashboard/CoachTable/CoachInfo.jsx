@@ -9,10 +9,12 @@ import {
     ListItemText,
     ListItemAvatar,
     IconButton
-} from '@material-ui/core'
+} from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import CloseIcon from '@material-ui/icons/Close';
 import PhoneIcon from '@material-ui/icons/Phone';
+import BusinessIcon from '@material-ui/icons/Business';
+import MailIcon from '@material-ui/icons/Mail';
 // React
 import { useState } from 'react';
 
@@ -63,6 +65,15 @@ export default function CoachInfo({ coach, coachList }) {
                             // Map over array to display data
                             coachDetailsClicked.map((coach) => (
                                 <div key={coach.id}>
+                                    {/* Coach Organization Name */}
+                                    <ListItem>
+                                        <ListItemAvatar>
+                                            <BusinessIcon />
+                                        </ListItemAvatar>
+                                        <ListItemText>
+                                            {coach.organization_name}
+                                        </ListItemText>
+                                    </ListItem>
                                     {/* Coach Name */}
                                     <ListItem>
                                         <ListItemAvatar>
@@ -72,12 +83,22 @@ export default function CoachInfo({ coach, coachList }) {
                                             {coach.first_name}{' '}{coach.last_name}
                                         </ListItemText>
                                     </ListItem>
+                                    {/* Coach Phone Number */}
                                     <ListItem>
                                         <ListItemAvatar>
                                             <PhoneIcon />
                                         </ListItemAvatar>
                                         <ListItemText>
                                             {coach.phone_number}
+                                        </ListItemText>
+                                    </ListItem>
+                                    {/* Coach Email */}
+                                    <ListItem>
+                                        <ListItemAvatar>
+                                            <MailIcon />
+                                        </ListItemAvatar>
+                                        <ListItemText>
+                                            {coach.email}
                                         </ListItemText>
                                     </ListItem>
                                 </div>
