@@ -68,8 +68,29 @@ router.get('/client-list/:id?', rejectUnauthorized, (req, res) => {
         });
 });
 
-router.get('/coach/client-pyramid/:id', rejectUnauthorized, (req, res) => {
-
+router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
+    const clientId = req.params.id;
+    const queryText1 = `
+    SELECT u.industry_pyramid 
+    FROM "user" u
+    WHERE id = $1;`;
+    const queryText2 = `
+    SELECT * 
+    FROM building_block bb
+    JOIN industry_pyramid_building_block ipbb ON bb.id = ipbb.building_block_id
+    WHERE ipbb.industry_pyramid_id = $1;`
+    const client = await pool.connect();
+    try {
+        let pyramidId = await client.query(queryText1, [clientId]);
+        pyramidId = pyramidId.rows[0].industry_pyramid;
+        const pyramidData = await client.query(queryText2, [pyramidId]);
+        res.send(pyramidData.rows);
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    } finally {
+        client.release();
+    }
 });
 
 
