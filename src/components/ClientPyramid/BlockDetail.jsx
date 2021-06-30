@@ -74,18 +74,18 @@ export default function BlockDetail () {
     }
 
     // Once validated send new experience to saga
-    // const submitExp = () => {
-    //     console.log('in submitExp');
-    //     dispatch({
-    //         type: 'CREATE_EXP', payload: { 
-    //             user_id: user_id,
-    //             block_id: detail.id,
-    //             user_text: newExp 
-    //         }
-    //     })
-    //     // Clear Critical Experience form
-    //     setNewExp('');
-    // }
+    const submitExp = () => {
+        console.log('in submitExp');
+        dispatch({
+            type: 'CREATE_EXP', payload: { 
+                user_id: user_id,
+                block_id: detail.id,
+                user_text: newExp 
+            }
+        })
+        // Clear Critical Experience form
+        setNewExp('');
+    }
 
     // Setting state for backdrop 
     const [open, setOpen] = useState(false);
