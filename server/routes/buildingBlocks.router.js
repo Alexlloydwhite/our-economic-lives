@@ -23,11 +23,11 @@ router.get('/info/:block_id', (req,res) => {
   })
 });
 
-router.get('/user-data/:block_id/:user_id', (req, res) => {
+router.get('/user-data/:block_id/', rejectUnauthenticated, (req, res) => {
   let queryText = `SELECT * FROM critical_experience
 	WHERE critical_experience.user_id = $1 AND building_block_id = $2;`
   let block_id = req.params.block_id;
-  let user_id=req.params.user_id;
+  let user_id=req.user.id;
   pool.query(queryText, [user_id, block_id])
   .then(result => {
     res.send(result.rows)
@@ -36,7 +36,5 @@ router.get('/user-data/:block_id/:user_id', (req, res) => {
     console.log('Unable to retrieve critical experiences', error);
   })
 })
-
-router.post()
 
 module.exports = router;
