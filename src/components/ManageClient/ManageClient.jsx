@@ -8,7 +8,7 @@ export default function ManageClient() {
 
     useEffect(() => {
         dispatch({
-            type: 'FETCH_CLIENT_BY_ID',
+            type: 'FETCH_CLIENT_PYRAMID',
             id: params.id
         });
     }, [])
