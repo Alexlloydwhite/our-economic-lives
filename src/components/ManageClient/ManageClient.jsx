@@ -28,7 +28,7 @@ export default function ManageClient() {
             </div>
             <div>
                 {pyramidData.map((block) => (
-                    <RecommendBuildingBlocks block={block} />
+                    <RecommendBuildingBlocks block={block} params={params} />
                 ))}
             </div>
         </div>
