@@ -8,8 +8,8 @@ export default function* toggleBuildingBlock(action) {
         yield axios.post('/api/coach/toggle-building-block', {
             user_id: Number(action.user_id),
             block_id: action.block_id
-        })
+        });
     } catch (err) {
-        
+        console.log(`IN toggleBuildingBlock saga ${err}`);
     }
 }
