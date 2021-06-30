@@ -13,8 +13,9 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import NavBar from './NavBar/NavBar';
 import Login from '../Login/Login';
-import Register from '../Login/Register';
 import Home from '../Home/Home';
+import ClientProfile from '../ClientProfile/ClientProfile';
+import BlockDetail from '../ClientPyramid/BlockDetail';
 
 export default function App() {
   console.log('%c Our Economic Lives!!', 'font-weight: bold; font-size: 50px;color: red; text-shadow: 3px 3px 0 rgb(217,31,38) , 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) , 12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) , 18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113)');
@@ -32,8 +33,24 @@ export default function App() {
 
         {/* Default direct to /home */}
         <Redirect exact from="/" to="/home" />
-        
-        {/* If authenticated, redirect /login to /home */}
+
+        {/* 
+          /Home redirects based on auth level
+          Clients see the pyramid
+          Coaches see dashboard
+          Admins see dashboard
+        */}
+        <ProtectedRoute
+          exact
+          path='/home'
+        >
+          <Home />
+        </ProtectedRoute>
+
+        {/* 
+          If authenticated, redirect /login to /home 
+          If user is not registered, shows register from
+        */}
         <ProtectedRoute
           exact
           path="/login"
@@ -42,12 +59,23 @@ export default function App() {
           <Login />
         </ProtectedRoute>
 
+        {/* Client Profile View */}
         <ProtectedRoute
           exact
-          path='/home'
+          path="/profile"
         >
-          <Home />
+          <ClientProfile />
         </ProtectedRoute>
+
+        {/* Client Critical Experience View */}
+        <ProtectedRoute
+          exact
+          path="/blockdetail/:id"
+        >
+          <BlockDetail />
+        </ProtectedRoute>
+
+        
 
       </Router>
     </ThemeProvider>
