@@ -12,6 +12,8 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Backdrop from '@material-ui/core/Backdrop';
+import CoachComments from './CoachComments';
 // Styling
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'Center',
         padding: theme.spacing(2),
     },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+      },
   }));
 
 export default function BlockDetail () {
@@ -73,6 +79,17 @@ export default function BlockDetail () {
     //     // Clear Critical Experience form
     //     setNewExp('');
     // }
+
+    // Setting state for backdrop 
+    const [open, setOpen] = useState(false);
+    // Setting handle functions for backdrop functionality
+    const handleClose = () => {
+        setOpen(false);
+    };
+    // Grabbing Id and sending to DB to retrieve user/client building blocks
+    const handleToggle = () => {
+        setOpen(!open);
+    };
 
 
     return (
@@ -155,10 +172,14 @@ export default function BlockDetail () {
                 type="submit" 
                 variant="contained" 
                 color="primary"
-                size="large" 
+                size="large"
+                onClick={handleToggle} 
             >
                 Comments
             </Button>
+            <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
+                <CoachComments />
+            </Backdrop>
             </>
              {/* ))} */}
         </Box>

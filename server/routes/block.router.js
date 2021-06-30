@@ -46,11 +46,13 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
 
 
 router.post('/block_detail', async (req, res) => {
+  console.log('req.body', req.body);
+  
   const client = await pool.connect()
   try {
-    let queryText1 = `SELECT critical_experience.user_text, user_block.id, critical_experience.coach_comments, critical_experience.is_completed  FROM "user_blocks"
+    let queryText1 = `SELECT critical_experience.user_text, user_blocks.id, critical_experience.coach_comments, critical_experience.is_completed,  building_block.name, building_block.description  FROM "user_blocks"
     JOIN building_block ON user_blocks.building_block_id = building_block.id 
-    JOIN critical_experience ON user_block.id = critical_experience.user_blocks_id              
+    JOIN critical_experience ON user_blocks.id = critical_experience.user_blocks_id              
     WHERE user_blocks.user_id = $1
     AND user_blocks.building_block_id = $2`
     let queryText2 = `SELECT value FROM competency
@@ -59,7 +61,7 @@ router.post('/block_detail', async (req, res) => {
     //gets a users critical experiences from the database
     let criticalExperience = await client.query(queryText1, [req.body.userId, req.body.buildingBlockId])
     criticalExperience = criticalExperience.rows
-    console.log(criticalExperience);
+    console.log('in critical exp', criticalExperience);
     //gets competency values for the building block from the database
     let result = await client.query(queryText2, [req.body.buildingBlockId])  
     result = result.rows; 
