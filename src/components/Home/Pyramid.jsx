@@ -1,7 +1,7 @@
 import { makeStyles, Typography } from "@material-ui/core"
 import Backdrop from '@material-ui/core/Backdrop'
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { theme } from '../Theme/Theme'
 import BlockSlider from './BlockSlider'
 
@@ -152,6 +152,7 @@ function Tier(props) {
       color: '#fff',
     },
   })
+  const user = useSelector(store => store.user);
 
   const classes = useStyles();
 
@@ -162,7 +163,7 @@ function Tier(props) {
     setOpen(false);
   };
   const handleToggle = () => {
-    dispatch({ type: 'FETCH_BLOCKS', payload: {tier: num}});
+    dispatch({ type: 'FETCH_BLOCKS', payload: {tier: num, pyramid: user.industry_pyramid}});
     setOpen(!open);
   };
 
