@@ -70,15 +70,13 @@ router.get('/client-list/:id?', rejectUnauthorized, (req, res) => {
 
 router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
     const clientId = req.params.id;
-    const queryText1 = `
-    SELECT u.industry_pyramid 
-    FROM "user" u
-    WHERE id = $1;`;
-    const queryText2 = `
-    SELECT * 
-    FROM building_block bb
+    
+    const queryText1 = `SELECT u.industry_pyramid FROM "user" u WHERE id = $1;`;
+
+    const queryText2 = `SELECT * FROM building_block bb
     JOIN industry_pyramid_building_block ipbb ON bb.id = ipbb.building_block_id
     WHERE ipbb.industry_pyramid_id = $1;`
+
     const client = await pool.connect();
     try {
         let pyramidId = await client.query(queryText1, [clientId]);
@@ -92,7 +90,6 @@ router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
         client.release();
     }
 });
-
 
 router.put('/deactivate-client/:id', rejectUnauthorized, (req, res) => {
     const clientId = req.params.id;
