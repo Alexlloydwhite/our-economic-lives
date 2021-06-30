@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router";
+import RecommendBuildingBlocks from './RecommendBuildBlocks/RecommendBuildingBlocks';
 
 export default function ManageClient() {
     const dispatch = useDispatch();
@@ -15,8 +16,8 @@ export default function ManageClient() {
     }, [])
 
     return (
-        <pre>
-            {JSON.stringify(pyramidData, null, 2)}
-        </pre>
+        <div>
+            <RecommendBuildingBlocks pyramidData={pyramidData} />
+        </div>
     );
 }
