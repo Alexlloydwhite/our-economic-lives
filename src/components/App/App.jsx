@@ -29,7 +29,6 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <NavBar />
 
         {/* Default direct to /home */}
         <Redirect exact from="/" to="/home" />
@@ -44,6 +43,7 @@ export default function App() {
           exact
           path='/home'
         >
+          <NavBar />
           <Home />
         </ProtectedRoute>
 
@@ -64,6 +64,7 @@ export default function App() {
           exact
           path="/profile"
         >
+          <NavBar />
           <ClientProfile />
         </ProtectedRoute>
 
@@ -72,10 +73,11 @@ export default function App() {
           exact
           path="/blockdetail/:id"
         >
+          <NavBar />
           <BlockDetail />
         </ProtectedRoute>
 
-        
+
 
       </Router>
     </ThemeProvider>
