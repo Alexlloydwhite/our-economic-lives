@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import {
   HashRouter as Router,
   Route,
-  Redirect
+  Redirect,
+  Switch
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { theme } from '../Theme/Theme';
@@ -33,72 +34,76 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        <Switch>
+          {/* Default direct to /home */}
+          <Redirect exact from="/" to="/home" />
 
-        {/* Default direct to /home */}
-        <Redirect exact from="/" to="/home" />
-
-        {/* 
+          {/* 
           /Home redirects based on auth level
           Clients see the pyramid
           Coaches see dashboard
           Admins see dashboard
         */}
-        <ClientProtectedRoute
-          exact
-          path='/home'
-        >
-          <NavBar />
-          <Home />
-        </ClientProtectedRoute>
+          <ClientProtectedRoute
+            exact
+            path='/home'
+          >
+            <NavBar />
+            <Home />
+          </ClientProtectedRoute>
 
-        {/* 
+          {/* 
           If authenticated, redirect /login to /home 
           If user is not registered, shows register from
         */}
-        <ClientProtectedRoute
-          exact
-          path="/login"
-          authRedirect="/home"
-        >
-          <Login />
-        </ClientProtectedRoute>
+          <ClientProtectedRoute
+            exact
+            path="/login"
+            authRedirect="/home"
+          >
+            <Login />
+          </ClientProtectedRoute>
 
-        {/* Client Profile View */}
-        <ClientProtectedRoute
-          exact
-          path="/profile"
-        >
-          <NavBar />
-          <ClientProfile />
-        </ClientProtectedRoute>
+          {/* Client Profile View */}
+          <ClientProtectedRoute
+            exact
+            path="/profile"
+          >
+            <NavBar />
+            <ClientProfile />
+          </ClientProtectedRoute>
 
-        {/* Client Critical Experience View */}
-        <ClientProtectedRoute
-          exact
-          path="/blockdetail/:id"
-        >
-          <NavBar />
-          <BlockDetail />
-        </ClientProtectedRoute>
+          {/* Client Critical Experience View */}
+          <ClientProtectedRoute
+            exact
+            path="/blockdetail/:id"
+          >
+            <NavBar />
+            <BlockDetail />
+          </ClientProtectedRoute>
 
-        {/* Coach Critical Experience Dashboard */}
-        <CoachProtectedRoute
-          exact
-          path="/crit-review/:id"
-        >
-          <NavBar />
-          <CoachCritReview />
-        </CoachProtectedRoute>
+          {/* Coach Critical Experience Dashboard */}
+          <CoachProtectedRoute
+            exact
+            path="/crit-review/:id"
+          >
+            <NavBar />
+            <CoachCritReview />
+          </CoachProtectedRoute>
 
-        {/* Admin Create Pyramid */}
-        <AdminProtectedRoute
-          exact
-          path="/managepyramids"
-        >
-          <NavBar />
-          <ManagePyramids />
-        </AdminProtectedRoute>
+          {/* Admin Create Pyramid */}
+          <AdminProtectedRoute
+            exact
+            path="/managepyramids"
+          >
+            <NavBar />
+            <ManagePyramids />
+          </AdminProtectedRoute>
 
+          <Route>
+            <h1 style={{ textAlign: 'center' }}>404 Error <br /> Sorry, the page you are looking for was not found</h1>
+          </Route>
+        </Switch>
       </Router>
     </ThemeProvider>
   );
