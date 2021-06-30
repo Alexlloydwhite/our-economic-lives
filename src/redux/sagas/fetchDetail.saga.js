@@ -4,11 +4,11 @@ import axios from 'axios';
 function* fetchDetail( action ) {
     // grab block details for specified block
     try {
-        details = yield axios.post( '/api/block', action.payload );
-        yield put({type: 'SET_DETAIL', payload: details});
+        const details = yield axios.post( '/api/block/block_detail', action.payload );
+        yield put({type: 'SET_DETAIL', payload: details.data});
     } catch (error) {
         // alert(`Sorry. Things aren't working at the moment.`);
-        console.log('Error adding batch', error);
+        console.log('Error grabbing details', error);
     }
 }
 
