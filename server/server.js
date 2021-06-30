@@ -15,6 +15,7 @@ const adminRouter = require('./routes/admin.router.js');
 const coachRouter = require('./routes/coach.router');
 const clientRouter = require('./routes/client.router');
 const pyramidRouter = require('./routes/pyramid.router.js');
+const buildingBlocksRouter = require('./routes/buildingBlocks.router.js');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -35,6 +36,7 @@ app.use('/api/admin', adminRouter);
 app.use('/api/coach', coachRouter);
 app.use('/api/client', clientRouter);
 app.use('/api/pyramid', pyramidRouter);
+app.use('/api/building-blocks', buildingBlocksRouter);
 
 // Serve static files
 app.use(express.static('build'));
