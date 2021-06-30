@@ -17,7 +17,9 @@ export default function ManageClient() {
 
     return (
         <div>
-            <RecommendBuildingBlocks pyramidData={pyramidData} />
+            {pyramidData.map((block) => (
+               <RecommendBuildingBlocks block={block} />
+            ))}
         </div>
     );
 }

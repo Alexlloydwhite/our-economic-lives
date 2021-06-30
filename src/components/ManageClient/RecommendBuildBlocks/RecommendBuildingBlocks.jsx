@@ -1,7 +1,18 @@
-export default function RecommendBuildingBlocks({ pyramidData }) {
+import Chip from '@material-ui/core/Chip';
+
+export default function RecommendBuildingBlocks({ block }) {
+
+    const handleBlockChipClick = () => {
+        console.log('clicked!');
+    }
+
     return (
-        <pre>
-            {JSON.stringify(pyramidData, null, 2)}
-        </pre>
-    )
+        <>
+            <Chip
+                key={block.id}
+                label={block.name}
+                onClick={handleBlockChipClick}
+            />
+        </>
+    );
 }
