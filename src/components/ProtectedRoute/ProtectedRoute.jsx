@@ -1,10 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import LoginPage from '../Login/Login';
-import Register from '../Login/Register';
-import CoachDashboard from '../CoachDashboard/CoachDashboard';
-import AdminDashboard from '../AdminDashboard/AdminDashboard';
-import { useSelector } from 'react-redux';
+import Login from '../Login/Login';
+import {useSelector} from 'react-redux';
 
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
@@ -31,33 +28,17 @@ function ProtectedRoute(props) {
   const ComponentToProtect = props.component || (() => props.children);
 
   let ComponentToShow;
-  // is the user is valid ?
+
   if (user.id) {
-    // is the user authorized as an end user?
-    if (user.authorization === 3) {
-      // is the user registered?
-      if (user.is_registered === true) {
-        // If they are registered, show /home 
-        ComponentToShow = ComponentToProtect;
-      } else {
-        // if they are not registered, show /register
-        ComponentToShow = Register;
-      }
-    }
-    // is the user a coach?
-    if (user.authorization === 2) {
-      // if they are, show the coach dashboard
-      ComponentToShow = CoachDashboard;
-    }
-    // is the user an admin?
-    if (user.authorization === 1) {
-      ComponentToShow = AdminDashboard;
-    }
+    // if the user is logged in (only logged in users have ids)
+    // show the component that is protected
+    ComponentToShow = ComponentToProtect;
   } else {
     // if they are not logged in, check the loginMode on Redux State
-    // if the mode is 'login', show the LoginPage
-    ComponentToShow = LoginPage;
+    // if the mode is 'login', show the login page
+    ComponentToShow = Login;
   }
+
 
   // redirect a logged in user if an authRedirect prop has been provided
   if (user.id && authRedirect != null) {
