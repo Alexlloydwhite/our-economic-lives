@@ -9,7 +9,7 @@ import { theme } from '../Theme/Theme';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import ClientProtectedRoute from '../ProtectedRoute/ClientProtectedRoute';
 import CoachProtectedRoute from '../ProtectedRoute/CoachProtectedRoute';
 import AdminProtectedRoute from '../ProtectedRoute/AdminProtectedRoute';
 
@@ -43,43 +43,43 @@ export default function App() {
           Coaches see dashboard
           Admins see dashboard
         */}
-        <ProtectedRoute
+        <ClientProtectedRoute
           exact
           path='/home'
         >
           <NavBar />
           <Home />
-        </ProtectedRoute>
+        </ClientProtectedRoute>
 
         {/* 
           If authenticated, redirect /login to /home 
           If user is not registered, shows register from
         */}
-        <ProtectedRoute
+        <ClientProtectedRoute
           exact
           path="/login"
           authRedirect="/home"
         >
           <Login />
-        </ProtectedRoute>
+        </ClientProtectedRoute>
 
         {/* Client Profile View */}
-        <ProtectedRoute
+        <ClientProtectedRoute
           exact
           path="/profile"
         >
           <NavBar />
           <ClientProfile />
-        </ProtectedRoute>
+        </ClientProtectedRoute>
 
         {/* Client Critical Experience View */}
-        <ProtectedRoute
+        <ClientProtectedRoute
           exact
           path="/blockdetail/:id"
         >
           <NavBar />
           <BlockDetail />
-        </ProtectedRoute>
+        </ClientProtectedRoute>
 
         {/* Coach Critical Experience Dashboard */}
         <CoachProtectedRoute
