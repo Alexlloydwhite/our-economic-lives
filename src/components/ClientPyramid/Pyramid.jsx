@@ -181,7 +181,7 @@ function Tier(props) {
   )
 }
 
-export default function Home() {
+export default function Pyramid() {
 
   const classes = useStyles();
 
