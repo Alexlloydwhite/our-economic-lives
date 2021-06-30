@@ -26,7 +26,7 @@ export default function viewClients({ classes, coach }) {
         setOpenDialog(true);
         // Dispatch to grab client list by coach ID
         dispatch({
-            type: 'FETCH_CLIENTS',
+            type: 'FETCH_CLIENTS_BY_ID',
             coachId: id
         });
     }
@@ -49,7 +49,7 @@ export default function viewClients({ classes, coach }) {
                     <span
                         style={{ float: 'left', marginTop: 9, marginLeft: 8 }}
                     >
-                        Client List
+                        Active Client List
                     </span>
                     <IconButton
                         onClick={() => setOpenDialog(false)}
@@ -66,32 +66,25 @@ export default function viewClients({ classes, coach }) {
                             // If the coach has clients map over array to display data
                             clientList.map((client) => (
                                 <div key={client.id}>
-                                    {/* Client name */}
-                                    <ListItem>
-                                        <ListItemAvatar>
-                                            <PersonIcon />
-                                        </ListItemAvatar>
-                                        {/* Check is client is registered */}
-                                        {client.is_registered ?
-                                            // If client is register display name
+                                    {/* If client is register display name */}
+                                    {client.is_registered &&
+                                        <ListItem>
+                                            <ListItemAvatar>
+                                                <PersonIcon />
+                                            </ListItemAvatar>
+                                            {/* Check is client is registered */}
                                             <ListItemText>
                                                 {client.first_name}{' '}{client.last_name}
                                             </ListItemText>
-                                            :
-                                            // if client is not registered display email
-                                            <ListItemText>
-                                                {client.email}
-                                            </ListItemText>
-                                        }
-
-                                    </ListItem>
+                                        </ListItem>
+                                    }
                                 </div>
                             ))
                             :
                             // If the coach does not have any clients display message
                             <ListItem>
                                 <ListItemText>
-                                    This coach has no clients
+                                    This coach has no active clients
                                 </ListItemText>
                             </ListItem>
                         }

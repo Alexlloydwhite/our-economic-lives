@@ -5,9 +5,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import List from '@material-ui/core/List';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -16,6 +13,8 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useParams } from 'react-router-dom';
+import Backdrop from '@material-ui/core/Backdrop';
+import CoachComments from './CoachComments';
 // Styling
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'Center',
         padding: theme.spacing(2),
     },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+      },
   }));
 
 export default function BlockDetail () {
@@ -57,29 +60,44 @@ export default function BlockDetail () {
     const detail = useSelector((store) => store.blockDetails);
     console.log('in detail', detail);
     const [newExp, setNewExp] = useState('');
-    const [newSkillError, setNewSkillError] = useState(false);
+    const [newExpError, setNewExpError] = useState(false);
+    const block_id = detail.id;
+    console.log('in detail', detail.id,  user_id, detail);
 
     // Validate skill form
     const validateForm = (e) => {
         e.preventDefault();
-        setNewSkillError(false)
-        if (newSkill == ''){
-            setNewSkillError(true)
+        setNewExpError(false)
+        if (newExp == ''){
+            setNewExpError(true)
         }
-        submitSkill();
+        submitExp();
     }
 
     // Once validated send new experience to saga
-    const submitExp = () => {
-        console.log('in submitExp');
-        dispatch({
-            type: 'ADD_SKILL', payload: {
-                            skill: newExp
-            }
-        })
-        // Clear skill form
-        setNewExp('');
-    }
+    // const submitExp = () => {
+    //     console.log('in submitExp');
+    //     dispatch({
+    //         type: 'CREATE_EXP', payload: { 
+    //             user_id: user_id,
+    //             block_id: detail.id,
+    //             user_text: newExp 
+    //         }
+    //     })
+    //     // Clear Critical Experience form
+    //     setNewExp('');
+    // }
+
+    // Setting state for backdrop 
+    const [open, setOpen] = useState(false);
+    // Setting handle functions for backdrop functionality
+    const handleClose = () => {
+        setOpen(false);
+    };
+    // Grabbing Id and sending to DB to retrieve user/client building blocks
+    const handleToggle = () => {
+        setOpen(!open);
+    };
 
 
     return (
@@ -162,10 +180,14 @@ export default function BlockDetail () {
                 type="submit" 
                 variant="contained" 
                 color="primary"
-                size="large" 
+                size="large"
+                onClick={handleToggle} 
             >
                 Comments
             </Button>
+            <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
+                <CoachComments />
+            </Backdrop>
             </>
              {/* ))} */}
         </Box>
