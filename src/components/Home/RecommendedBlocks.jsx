@@ -22,14 +22,23 @@ export default function RecommendedBlocks() {
     const history = useHistory();
     const dispatch = useDispatch();
     const blocks = useSelector((store) => store.clientBlocks);
-    console.log('in reBB', blocks);
+    const user_id = useSelector((store) => store.user.id);
+    console.log('in reBB block', blocks);
+    console.log('in reBB user', user_id);
 
     // send user to recommended block detail using history, params
     const handleClick = (id) => {
-        
+
+        // const id = {
+        //     buildingBlockId: block_id, 
+        //     userId: user_id 
+        // }
+        console.log('in rec click', id);
         // dispatch selected block details to be stored detail reducer
+        // dispatch({ type: 'FETCH_DETAIL', payload: id });
         dispatch({ type: 'SET_DETAIL', payload: id });
-        history.push(`/blockDetail/${id}`);  
+        history.push(`/blockDetail/${id.id}`); 
+        // history.push(`/blockDetail`); 
     }
 
     return (
