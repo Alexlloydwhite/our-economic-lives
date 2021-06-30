@@ -5,7 +5,6 @@ import {
     Button,
     IconButton,
     Menu,
-    MenuItem,
 } from '@material-ui/core'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // React
