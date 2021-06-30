@@ -2,7 +2,6 @@
 import {
     Typography,
     makeStyles,
-    Avatar,
     TextField,
     Button,
     Grid,
@@ -14,7 +13,7 @@ import {
 import SaveIcon from '@material-ui/icons/Save';
 // React
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 // Styles
 const useStyles = makeStyles((theme) => ({
@@ -68,13 +67,19 @@ export default function Profile() {
     const [profession, setProfession] = useState(user.current_profession);
     const [career, setCareer] = useState(user.desired_career);
 
+    const industryPyramids = useSelector(store => store.industry_pyramid);
+
+      useEffect(() => {
+        dispatch({ type: 'FETCH_INDUSTRY_PYRAMID'})
+    }, [])
+
     // Handles submit of form
     const saveEdit = (e) => {
         e.preventDefault();
-       
+
         // Putting all edit changes into a object
         const update = {
-            id: user.id, // User can't edit id, so grabing it from reducer
+            id: user.id, // User can't edit id, grabbing it from reducer for query
             first_name: firstName,
             last_name: lastName,
             email: email,
@@ -84,7 +89,8 @@ export default function Profile() {
             desired_career: career,
         }
         // Dispatch edits to the update saga
-        dispatch({type: 'UPDATE_CLIENT', payload: update })
+        dispatch({ type: 'UPDATE_CLIENT', payload: update })
+        history.push('/home')
     };
 
     return (
@@ -95,11 +101,7 @@ export default function Profile() {
             className={classes.layout}
         >
             <Grid item xs={12} className={classes.paper}>
-                {/* Logo */}
-                <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
-                    <img src="/images/OELavatar.png" />
-                </Avatar>
-                {/* Title */}
+                {/* Greeting */}
                 <Typography
                     component="h3"
                     variant="h4"
@@ -107,21 +109,23 @@ export default function Profile() {
                     gutterBottom
                     style={{ color: '#12ae5b' }}
                 >
-                    Our Economic Lives
+                    Hello, {user.first_name}{' '}{user.last_name}!
+                </Typography>
+                {/* Title */}
+                <Typography
+                    component="h3"
+                    variant="h5"
+                    align="center"
+                    gutterBottom
+                    style={{ color: '#12ae5b' }}
+                >
+                    Update you profile information
                 </Typography>
                 <form
                     className={classes.form}
                     onSubmit={saveEdit}
                     noValidate
                 >
-                    {/* Helper instructions */}
-                    <Typography
-                        variant="subtitle1"
-                        align="center"
-                        gutterBottom
-                    >
-                        Update profile information below.
-                    </Typography>
                     {/* hook into errors reducer to display msg */}
                     {errors.registrationMessage && (
                         <h3 className="alert" role="alert">
@@ -189,7 +193,7 @@ export default function Profile() {
                         margin="normal"
                         required
                         fullWidth
-                        label="Profession"
+                        label="Current Profession"
                         value={profession}
                         onChange={(e) => setProfession(e.target.value)}
                         name="currentProfession"
@@ -202,18 +206,19 @@ export default function Profile() {
                         required
                         value={career}
                     >
-                        <InputLabel>Desired Career</InputLabel>
+                        <InputLabel>Industry Pyramid</InputLabel>
                         <Select
                             value={career}
-                            name="careerPyramid"
+                            name="industry_pyramid"
                             onChange={(e) => setCareer(e.target.value)}
                         >
                             {/* TODO - pull pyramid data from Postgres to display here! */}
                             {/* Here, value is the id of the career pyramid. */}
-                            <MenuItem value={1}>Mechanic</MenuItem>
-                            <MenuItem value={2}>Batman</MenuItem>
-                            <MenuItem value={3}>Doctor</MenuItem>
-                            <MenuItem value={4}>Lawyer</MenuItem>
+                          {industryPyramids ? industryPyramids.map(path => {
+                            return (
+                              <MenuItem value={path.id} key={path.id}>{path.name}</MenuItem>
+                            )
+                          }):''}
                         </Select>
                     </FormControl>
                     {/* Div sets margin/position for buttons */}
@@ -231,9 +236,9 @@ export default function Profile() {
                             variant="contained"
                             color="primary"
                             type="submit"
+                            startIcon={<SaveIcon />}
                         >
-                            <SaveIcon />
-                            &nbsp;Save
+                            Save
                         </Button>
                     </div>
                 </form>

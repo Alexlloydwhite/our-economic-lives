@@ -4,7 +4,7 @@ import axios from 'axios';
 export default function* fetchClients(action) {
     try {
         // Get data from end point
-        const clients = yield axios.get(`/api/coach/client-list/${action.coachId}`);
+        const clients = yield axios.get(`/api/coach/client-list`);
         console.log(`IN fetchClients saga. Response from GET request ${clients.data}`);
         // Set reducer to store data
         yield put({ 

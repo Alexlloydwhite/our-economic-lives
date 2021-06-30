@@ -9,34 +9,35 @@ import {
     ListItemText,
     ListItemAvatar,
     IconButton
-} from '@material-ui/core'
+} from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
-import PhoneIcon from '@material-ui/icons/Phone';
-import HomeIcon from '@material-ui/icons/Home';
-import WorkIcon from '@material-ui/icons/Work';
 import CloseIcon from '@material-ui/icons/Close';
+import PhoneIcon from '@material-ui/icons/Phone';
+import BusinessIcon from '@material-ui/icons/Business';
+import MailIcon from '@material-ui/icons/Mail';
 // React
 import { useState } from 'react';
 
-export default function ClientInfo({ clientList, client }) {
-    // State of client detail dialog
-    const [clientDetailsClicked, setClientDetailsClicked] = useState(null);
+export default function CoachInfo({ coach, coachList }) {
+    // State of coach detail dialog
+    const [coachDetailsClicked, setCoachDetailsClicked] = useState(null);
     const [openDialog, setOpenDialog] = useState(false);
-    // Handles display of client data on click of "client info"
-    const handleOpenClientInfo = (id) => {
+    // Handles display of coach data on click of "info"
+    const handleOpenCoachInfo = (id) => {
         // Open the dialog
         setOpenDialog(true);
-        // filter client list to grab client with matching ID
-        const clientClicked = clientList.filter((client) => client.id === id);
-        // set local state to result of filter 
-        setClientDetailsClicked(clientClicked);
+        // filter coach list to grab coach with matching ID
+        const coachClicked = coachList.filter((coach) => coach.id === id);
+        // set local state to result of filter
+        setCoachDetailsClicked(coachList.filter((coach) => coach.id === id));
     }
+
     return (
         <>
             <MenuItem
-                onClick={() => handleOpenClientInfo(client.id)}
+                onClick={() => handleOpenCoachInfo(coach.id)}
             >
-                Client Info
+                Coach Info
             </MenuItem>
             {/* Dialog displays on click of menu item */}
             <Dialog
@@ -47,7 +48,7 @@ export default function ClientInfo({ clientList, client }) {
                     <span
                         style={{ float: 'left', marginTop: 9, marginLeft: 8 }}
                     >
-                        Client Info
+                        Coach Info
                     </span>
                     <IconButton
                         onClick={() => setOpenDialog(false)}
@@ -59,45 +60,45 @@ export default function ClientInfo({ clientList, client }) {
                 {/* Dialog Body */}
                 <DialogContent>
                     <List>
-                        {/* Check is client details is !== null */}
-                        {clientDetailsClicked &&
+                        {/* Check is coach details is !== null */}
+                        {coachDetailsClicked &&
                             // Map over array to display data
-                            clientDetailsClicked.map((client) => (
-                                <div key={client.id}>
-                                    {/* Client name */}
+                            coachDetailsClicked.map((coach) => (
+                                <div key={coach.id}>
+                                    {/* Coach Organization Name */}
+                                    <ListItem>
+                                        <ListItemAvatar>
+                                            <BusinessIcon />
+                                        </ListItemAvatar>
+                                        <ListItemText>
+                                            {coach.organization_name}
+                                        </ListItemText>
+                                    </ListItem>
+                                    {/* Coach Name */}
                                     <ListItem>
                                         <ListItemAvatar>
                                             <PersonIcon />
                                         </ListItemAvatar>
                                         <ListItemText>
-                                            {client.first_name}{' '}{client.last_name}
+                                            {coach.first_name}{' '}{coach.last_name}
                                         </ListItemText>
                                     </ListItem>
-                                    {/* Client Phone Number */}
+                                    {/* Coach Phone Number */}
                                     <ListItem>
                                         <ListItemAvatar>
                                             <PhoneIcon />
                                         </ListItemAvatar>
                                         <ListItemText>
-                                            {client.phone_number}
+                                            {coach.phone_number}
                                         </ListItemText>
                                     </ListItem>
-                                    {/* Client City */}
+                                    {/* Coach Email */}
                                     <ListItem>
                                         <ListItemAvatar>
-                                            <HomeIcon />
+                                            <MailIcon />
                                         </ListItemAvatar>
                                         <ListItemText>
-                                            {client.city}
-                                        </ListItemText>
-                                    </ListItem>
-                                    {/* Client Profession */}
-                                    <ListItem>
-                                        <ListItemAvatar>
-                                            <WorkIcon />
-                                        </ListItemAvatar>
-                                        <ListItemText>
-                                            {client.current_profession}
+                                            {coach.email}
                                         </ListItemText>
                                     </ListItem>
                                 </div>
@@ -107,5 +108,5 @@ export default function ClientInfo({ clientList, client }) {
                 </DialogContent>
             </Dialog>
         </>
-    )
+    );
 }

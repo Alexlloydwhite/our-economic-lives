@@ -23,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
 export default function AddBlocks() {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const [careerPath, setCareerPath] = useState(0);
-    let routerPath = '/api/upload/' + careerPath;
-    const setCareerPaths = useSelector(store => store.career_path)
+    const [industryPyramid, setIndustryPyramid] = useState(0);
+    let routerPath = '/api/upload/' + industryPyramid;
+    const setIndustryPyramids = useSelector(store => store.industry_pyramid)
     useEffect(() => {
-        dispatch({ type: 'FETCH_CAREER_PATH' })
+        dispatch({ type: 'FETCH_INDUSTRY_PYRAMID' })
     }, [dispatch])
 
     return (
@@ -48,16 +48,16 @@ export default function AddBlocks() {
                             required
                             fullWidth
                         >
-                            <InputLabel>Career Path</InputLabel>
+                            <InputLabel>Industry Pyramid</InputLabel>
                             <Select
-                                name="Career Path"
-                                value={careerPath || ''}
-                                onChange={(e) => setCareerPath(e.target.value)}
+                                name="Industry Pyramid"
+                                value={industryPyramid || ''}
+                                onChange={(e) => setIndustryPyramid(e.target.value)}
                             >
-                                {setCareerPaths ?
-                                    setCareerPaths.map((path) => (
+                                {setIndustryPyramids ?
+                                    setIndustryPyramids.map((path) => (
                                         <MenuItem key={path.id} value={path.id}>{path.name}</MenuItem>
-                                    )) : <MenuItem>No Career Paths</MenuItem>
+                                    )) : <MenuItem>No Industry Pyramids</MenuItem>
                                 }
                             </Select>
                         </FormControl>

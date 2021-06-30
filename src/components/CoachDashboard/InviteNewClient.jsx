@@ -6,12 +6,13 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle,
     Paper,
-    Grid
+    Grid,
+    IconButton
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import CloseIcon from '@material-ui/icons/Close';
 // React Imports
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -124,16 +125,22 @@ export default function InviteNewClient({ activeClientList }) {
                 </Grid>
             </Grid>
             {/* Dialog */}
-            <Dialog open={open} onClose={handleClose}>
-                {/* Title */}
-                <DialogTitle>
-                    Add a new client to your team
+            <Dialog open={open}>
+                {/* Dialog Title */}
+                <DialogTitle style={{ marginBottom: -25 }}>
+                    <span
+                        style={{ float: 'left', marginTop: 9 }}
+                    >
+                        Invite a new client
+                    </span>
+                    <IconButton
+                        onClick={handleClose}
+                        style={{ float: 'right' }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
                 </DialogTitle>
                 <DialogContent>
-                    {/* Helper text */}
-                    <DialogContentText>
-                        We recommend using the name of your organization as the password.
-                    </DialogContentText>
                     {/* Errors */}
                     {errors.createUserMessage && (
                         <h3 className="alert" role="alert">
@@ -142,7 +149,7 @@ export default function InviteNewClient({ activeClientList }) {
                     )}
                     {/* Email */}
                     <TextField
-                        label="Client's Email"
+                        label="Email"
                         name="email"
                         fullWidth
                         required
@@ -150,6 +157,7 @@ export default function InviteNewClient({ activeClientList }) {
                     />
                     {/* Password */}
                     <TextField
+                        helperText="We recommend using the name of your organization as the password."
                         label="Create a Password"
                         name="password"
                         fullWidth

@@ -75,8 +75,6 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
                                     onClose={() => setAnchorEl(null)}
                                     onClick={() => setAnchorEl(null)}
                                 >
-                                    {/* TODO: add this */}
-                                    <MenuItem>View Pyramid</MenuItem>
                                     {/* Opens dialog to display client data */}
                                     <ClientInfo client={client} clientList={clientList} />
                                     {/* Opens dialog to confirm deactivate */}

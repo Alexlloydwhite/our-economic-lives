@@ -5,19 +5,20 @@ import {
   Redirect
 } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { theme } from '../Theme/Theme';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Home from '../Home/Home';
-import Login from '../Login/Login';
-import Register from '../Login/Register';
-import Footer from '../Footer/Footer';
+
+import ClientProtectedRoute from '../ProtectedRoute/ClientProtectedRoute';
+import CoachProtectedRoute from '../ProtectedRoute/CoachProtectedRoute';
+import AdminProtectedRoute from '../ProtectedRoute/AdminProtectedRoute';
+
 import NavBar from './NavBar/NavBar';
-import CoachCritExpReview from '../CoachCritExpReview/CoachCritExpReview';
-import BlockSlider from '../Home/BlockSlider';
-import BlockDetail from '../Home/BlockDetail';
+import Login from '../Login/Login';
+import Home from '../Home/Home';
 import ClientProfile from '../ClientProfile/ClientProfile';
+import BlockDetail from '../ClientPyramid/BlockDetail';
+import CoachCritReview from '../CoachCritExpReview/CoachCritExpReview';
 import ManagePyramids from '../ManagePyramid/ManagePyramid';
 
 export default function App() {
@@ -31,58 +32,73 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <NavBar />
       <Router>
+
         {/* Default direct to /home */}
         <Redirect exact from="/" to="/home" />
-        {/* If authenticated, show /home as /login */}
-        <ProtectedRoute
+
+        {/* 
+          /Home redirects based on auth level
+          Clients see the pyramid
+          Coaches see dashboard
+          Admins see dashboard
+        */}
+        <ClientProtectedRoute
+          exact
+          path='/home'
+        >
+          <NavBar />
+          <Home />
+        </ClientProtectedRoute>
+
+        {/* 
+          If authenticated, redirect /login to /home 
+          If user is not registered, shows register from
+        */}
+        <ClientProtectedRoute
           exact
           path="/login"
           authRedirect="/home"
         >
           <Login />
-        </ProtectedRoute>
-        {/* If authenticated, show /register as / */}
-        <ProtectedRoute
+        </ClientProtectedRoute>
+
+        {/* Client Profile View */}
+        <ClientProtectedRoute
           exact
-          path="/register"
-          authRedirect="/home"
+          path="/profile"
         >
-          <Register />
-        </ProtectedRoute>
-        {/* 
-          /home:
-          Client: Pyramid View
-          Coach: Dashboard
-          PA: Dashboard
-        */}
-        <ProtectedRoute
-          exact
-          path='/home'
-        >
-          <Home />
-        </ProtectedRoute>
-        <Route
-          exact
-          path='/crit-review/:id'
-        >
-          <CoachCritExpReview />
-        </Route>
-        <Route exact path="/managepyramids">
-          <ManagePyramids />
-        </Route>
-        <Route exact path="/blockSlider">
-          <BlockSlider />
-        </Route>
-        {/* Building Block Detail - Client */}
-        <Route exact path="/blockDetail/:id">
-          <BlockDetail />
-        </Route>
-        <Route exact path="/profile">
+          <NavBar />
           <ClientProfile />
-        </Route>
-        <Footer />
+        </ClientProtectedRoute>
+
+        {/* Client Critical Experience View */}
+        <ClientProtectedRoute
+          exact
+          path="/blockdetail/:id"
+        >
+          <NavBar />
+          <BlockDetail />
+        </ClientProtectedRoute>
+
+        {/* Coach Critical Experience Dashboard */}
+        <CoachProtectedRoute
+          exact
+          path="/crit-review/:id"
+        >
+          <NavBar />
+          <CoachCritReview />
+        </CoachProtectedRoute>
+
+        {/* Admin Create Pyramid */}
+        <AdminProtectedRoute
+          exact
+          path="/managepyramids"
+        >
+          <NavBar />
+          <ManagePyramids />
+        </AdminProtectedRoute>
+
       </Router>
     </ThemeProvider>
   );
