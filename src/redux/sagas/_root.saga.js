@@ -1,6 +1,6 @@
 import { all, takeEvery } from 'redux-saga/effects';
 import loginSaga from './login.saga';
-import createClient from './createClient.saga';
+import createClient from './CreateClient.saga';
 import userSaga from './user.saga';
 import registerNewUser from './register.saga';
 import fetchClients from './fetchClients.saga';
@@ -15,6 +15,7 @@ import fetchClientBlocks from './fetchClientBlocks.saga';
 import fetchClientsById from './fetchClientById.saga';
 import createCritExp from './createCritExp.saga';
 import createIndustryPyramid from './createIndustryPyramid.saga';
+import blockDetails from './blockDetails.saga';
 import fetchDetail from './fetchDetail.saga';
 
 // rootSaga is the primary saga.
@@ -44,5 +45,6 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     userSaga(),
     buildingBlocks(),
+    blockDetails(),
   ]);
 }
