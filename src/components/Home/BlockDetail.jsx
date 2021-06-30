@@ -62,7 +62,6 @@ export default function BlockDetail () {
     const [newExp, setNewExp] = useState('');
     const [newExpError, setNewExpError] = useState(false);
     const block_id = detail.id;
-    console.log('in detail', detail.id,  user_id, detail);
 
     // Validate skill form
     const validateForm = (e) => {
