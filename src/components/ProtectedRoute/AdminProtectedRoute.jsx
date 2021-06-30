@@ -31,11 +31,13 @@ function ProtectedRoute(props) {
     let ComponentToShow;
 
     if (user.id) {
+        // Check is user has admin auth
         if (user.authorization === 1) {
             // if the user is logged in (only logged in users have ids)
             // show the component that is protected
             ComponentToShow = ComponentToProtect;
         } else {
+            // if the user does not have coach auth, show ACCESS DENIED
             ComponentToShow = AccessDenied;
         }
     } else {
