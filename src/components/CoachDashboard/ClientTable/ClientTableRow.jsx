@@ -28,8 +28,8 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
         });
     }
 
-    const handleCritExpClick = (id) => {
-        history.push(`/crit-review/${id}`);
+    const handleCManageUserClick = (id) => {
+        history.push(`/manage/${id}`);
     }
 
     return (
@@ -55,9 +55,9 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
                                     size="small"
                                     variant="outlined"
                                     className={classes.tableButton}
-                                    onClick={() => handleCritExpClick(client.id)}
+                                    onClick={() => handleManageUserClick(client.id)}
                                 >
-                                    Critical Experiences
+                                    Manage
                                 </Button>
                             </TableCell>
                             <TableCell>
