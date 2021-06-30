@@ -37,6 +37,4 @@ router.get('/user-data/:block_id/:user_id', (req, res) => {
   })
 })
 
-router.post()
-
 module.exports = router;
