@@ -10,8 +10,10 @@ import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+
 import NavBar from './NavBar/NavBar';
 import Login from '../Login/Login';
+import Register from '../Login/Register';
 import Home from '../Home/Home';
 
 export default function App() {
@@ -27,8 +29,10 @@ export default function App() {
       <CssBaseline />
       <Router>
         <NavBar />
+
         {/* Default direct to /home */}
         <Redirect exact from="/" to="/home" />
+        
         {/* If authenticated, redirect /login to /home */}
         <ProtectedRoute
           exact
