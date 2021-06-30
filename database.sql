@@ -29,11 +29,11 @@ CREATE TABLE "user_blocks"(
 
 CREATE TABLE "critical_experience"(
 	"id" SERIAL PRIMARY KEY,
-	"user_text" VARCHAR (300),
-	"attachment" VARCHAR (80),
-	"user_blocks_id" INT NOT NULL,
-	"coach_comments" VARCHAR (300),
-	"is_completed" BOOLEAN DEFAULT FALSE
+	"user_id" INT NOT NULL,
+	"building_block_id" INT NOT NULL,
+	"user_text" VARCHAR (1500),
+	"coach_comments" VARCHAR (1500),
+	"is_approved" BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE "building_block"(
