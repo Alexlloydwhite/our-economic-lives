@@ -131,7 +131,7 @@ export default function InviteNewClient({ activeClientList }) {
                     <span
                         style={{ float: 'left', marginTop: 9 }}
                     >
-                        Add a new client to your team
+                        Invite a new client
                     </span>
                     <IconButton
                         onClick={handleClose}

@@ -74,24 +74,6 @@ export default function Login() {
     return (
         <Grid container component="main" className={classes.layout}>
             <Grid item xs={12} className={classes.paper}>
-                {/* Temp stuff */}
-                <h5>Temp testing buttons</h5>
-                <button onClick={() => {
-                    setEmail('test1');
-                    setPassword('test1');
-                }}>registered user</button>
-                <button onClick={() => {
-                    setEmail('test2');
-                    setPassword('test2');
-                }}>new user</button>
-                <button onClick={() => {
-                    setEmail('testcoach');
-                    setPassword('testcoach');
-                }}>coach</button>
-                <button onClick={() => {
-                    setEmail('programadmin');
-                    setPassword('programadmin');
-                }}>admin</button>
                 {/* Logo avatar */}
                 <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
                     <img src="/images/OELavatar.png" />
@@ -151,6 +133,24 @@ export default function Login() {
                         Login
                     </Button>
                 </form>
+                {/* Temp stuff */}
+                <h5>Temp testing buttons</h5>
+                <button onClick={() => {
+                    setEmail('test1');
+                    setPassword('test1');
+                }}>registered user</button>
+                <button onClick={() => {
+                    setEmail('test2');
+                    setPassword('test2');
+                }}>new user</button>
+                <button onClick={() => {
+                    setEmail('testcoach');
+                    setPassword('testcoach');
+                }}>coach</button>
+                <button onClick={() => {
+                    setEmail('programadmin');
+                    setPassword('programadmin');
+                }}>admin</button>
             </Grid>
         </Grid>
     );
