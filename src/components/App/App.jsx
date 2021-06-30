@@ -79,6 +79,7 @@ export default function App() {
           <BlockDetail />
         </ProtectedRoute>
 
+        {/* Coach Critical Experience Dashboard */}
         <CoachProtectedRoute
           exact
           path="/crit-review/:id"
@@ -86,6 +87,8 @@ export default function App() {
           <NavBar />
           <CoachCritReview />
         </CoachProtectedRoute>
+
+        {/* Admin Create Pyramid */}
 
 
       </Router>
