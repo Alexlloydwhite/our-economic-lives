@@ -18,6 +18,7 @@ import createIndustryPyramid from './createIndustryPyramid.saga';
 import blockDetails from './blockDetails.saga';
 import fetchDetail from './fetchDetail.saga';
 import fetchClientPyramid from './fetchClientPyramid.saga';
+import toggleBuildingBlock from './toggleBuildingBlock.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -42,6 +43,7 @@ export default function* rootSaga() {
   yield takeEvery('CREATE_EXP', createCritExp);
   yield takeEvery('FETCH_DETAIL', fetchDetail);
   yield takeEvery('FETCH_CLIENT_PYRAMID', fetchClientPyramid);
+  yield takeEvery('TOGGLE_RECOMMENDED_BLOCK', toggleBuildingBlock);
 
   yield all([
     loginSaga(), // login saga is now registered

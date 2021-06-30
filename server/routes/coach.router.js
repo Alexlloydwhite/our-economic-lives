@@ -26,6 +26,10 @@ router.post('/create-client', rejectUnauthorized, (req, res,) => {
         });
 });
 
+router.post('/toggle-building-block', rejectUnauthorized, (req,res) => {
+    console.log(req.body);
+});
+
 // Handles GET request for users that are
 // associated with a particular coach
 router.get('/client-list/:id?', rejectUnauthorized, (req, res) => {
@@ -90,6 +94,7 @@ router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
         client.release();
     }
 });
+
 
 router.put('/deactivate-client/:id', rejectUnauthorized, (req, res) => {
     const clientId = req.params.id;
