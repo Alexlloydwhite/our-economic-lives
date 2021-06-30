@@ -1,3 +1,7 @@
 export default function AccessDenied() {
-    return <h4>ACCESS DENIED!!!!!!!</h4>
+    return (
+        <div style={{ backgroundColor: 'red' }}>
+            <h4>ACCESS DENIED!!!!!!!</h4>
+        </div>
+    );
 }
