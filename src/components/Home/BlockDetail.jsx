@@ -119,7 +119,7 @@ export default function BlockDetail () {
                     <Typography className={classes.title}>
                         Examples:
                     </Typography>
-                    {/* {detail ? detail.value.map( example => {
+                    {detail ? detail.array_agg.map( example => {
                         return (
                         <AccordionDetails >
                             <Typography className={classes.examples}>
@@ -127,7 +127,7 @@ export default function BlockDetail () {
                             </Typography>
                         </AccordionDetails>
                         )
-                    }):''} */}
+                    }):''}
             </Accordion>
         
         
