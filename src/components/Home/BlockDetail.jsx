@@ -15,6 +15,7 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { useParams } from 'react-router-dom';
 // Styling
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,10 +45,16 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 export default function BlockDetail () {
+  const dispatch = useDispatch();
+  let { id } = useParams();
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_BLOCK_DETAIL', payload: id})
+  }, [])
 
     const classes = useStyles();
     // const savedSkills = useSelector((store) => store.savedskills);
-    const detail = useSelector((store) => store.detail);
+    const detail = useSelector((store) => store.blockDetails);
     console.log('in detail', detail);
     const [newExp, setNewExp] = useState('');
     const [newSkillError, setNewSkillError] = useState(false);
@@ -95,7 +102,7 @@ export default function BlockDetail () {
                     <Typography className={classes.title}>
                         Examples:
                     </Typography>
-                    {detail.value.map( example => {
+                    {/* {detail ? detail.value.map( example => {
                         return (
                         <AccordionDetails >
                             <Typography className={classes.examples}>
@@ -103,7 +110,7 @@ export default function BlockDetail () {
                             </Typography>
                         </AccordionDetails>
                         )
-                    })}
+                    }):''} */}
             </Accordion>
         
         

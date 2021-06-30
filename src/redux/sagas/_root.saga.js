@@ -13,6 +13,7 @@ import fetchCoaches from './fetchCoaches.saga';
 import buildingBlocks from './buildingBlocks.saga';
 import fetchClientBlocks from './fetchClientBlocks.saga';
 import createIndustryPyramid from './createIndustryPyramid.saga';
+import blockDetails from './blockDetails.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -37,5 +38,6 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     userSaga(),
     buildingBlocks(),
+    blockDetails(),
   ]);
 }
