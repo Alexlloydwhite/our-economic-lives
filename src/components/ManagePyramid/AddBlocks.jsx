@@ -1,7 +1,6 @@
 // MUI
 import {
     Typography,
-    TextField,
     Button,
     Grid,
     FormControl,
@@ -9,19 +8,13 @@ import {
     InputLabel,
     MenuItem,
 } from '@material-ui/core/';
-import { makeStyles } from '@material-ui/core/styles';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 // React
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// Styles
-const useStyles = makeStyles((theme) => ({
-    blockForm: {
-        marginTop: theme.spacing(1)
-    },
-}));
-export default function AddBlocks() {
-    const classes = useStyles();
+
+
+export default function AddBlocks({ classes }) {
     const dispatch = useDispatch();
     const [industryPyramid, setIndustryPyramid] = useState(0);
     let routerPath = '/api/upload/' + industryPyramid;
