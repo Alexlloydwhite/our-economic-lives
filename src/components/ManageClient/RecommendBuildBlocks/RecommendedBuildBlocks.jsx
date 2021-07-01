@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router";
 
@@ -39,7 +39,7 @@ export default function RecommendedBuildBlocks() {
             type: 'FETCH_CLIENT_PYRAMID',
             id: params.id
         });
-    }, [])
+    }, []);
 
     return (
         <div className={classes.container}>
@@ -58,11 +58,12 @@ export default function RecommendedBuildBlocks() {
                         Recommend Building Blocks
                     </Typography>
                     <Typography>
-                        You may recommend up to 3 building blocks for you client to complete
+                        We suggest recommending 3 blocks at a time
                     </Typography>
                 </Grid>
                 {pyramidData.map((block) => (
                     <BuildingBlockChip
+                        key={block.id}
                         block={block}
                         params={params}
                         classes={classes}
