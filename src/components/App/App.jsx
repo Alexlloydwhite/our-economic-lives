@@ -19,7 +19,7 @@ import Login from '../Login/Login';
 import Home from '../Home/Home';
 import ClientProfile from '../ClientProfile/ClientProfile';
 import BlockDetail from '../ClientPyramid/BlockDetail';
-import CoachCritReview from '../CoachCritExpReview/CoachCritExpReview';
+import CoachCritReview from '../ManageClient/CoachCritExpReview';
 import ManagePyramids from '../ManagePyramid/ManagePyramid';
 import ManageClient from '../ManageClient/ManageClient';
 
