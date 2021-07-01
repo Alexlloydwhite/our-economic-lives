@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
+        textAlign: 'center',
     },
 }));
 
@@ -39,13 +39,11 @@ export default function ManageClient() {
     }
 
     return (
-        <div className={classes.rot}>
-            <AppBar position="static">
-                <Tabs value={value} onChange={handleTabChange}>
-                    <Tab label="Recommend Building Blocks" />
-                    <Tab label="Critical Experiences" />
-                </Tabs>
-            </AppBar>
+        <div className={classes.root}>
+            <Tabs value={value} onChange={handleTabChange} centered>
+                <Tab label="Recommend Building Blocks" />
+                <Tab label="Critical Experiences" />
+            </Tabs>
             <TabPanel value={value} index={0}>
                 <RecommendedBuildBlocks />
             </TabPanel>
