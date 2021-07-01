@@ -165,9 +165,9 @@ export default function InviteNewCoach() {
                     {/* Add client btn */}
                     <Button
                         size="small"
-                        onClick={handleSubmit}
                         variant="contained"
                         color="primary"
+                        onClick={handleSubmit}
                     >
                         Add Coach
                     </Button>

@@ -1,6 +1,5 @@
 import { all, takeEvery } from 'redux-saga/effects';
 import loginSaga from './login.saga';
-import createClient from './CreateClient.saga';
 import userSaga from './user.saga';
 import registerNewUser from './register.saga';
 import fetchClients from './fetchClients.saga';
