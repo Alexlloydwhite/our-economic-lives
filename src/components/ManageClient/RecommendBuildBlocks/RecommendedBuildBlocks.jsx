@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     chip: {
+        padding: theme.spacing(0.5)
+    },
+    header: {
         padding: theme.spacing(1)
     }
 }));
@@ -46,7 +49,11 @@ export default function RecommendedBuildBlocks() {
                 variant="outlined"
                 direction="row"
             >
-                <Grid item xs={12}>
+                <Grid
+                    item
+                    xs={12}
+                    className={classes.header}
+                >
                     <Typography variant="h4">
                         Recommend Building Blocks
                     </Typography>

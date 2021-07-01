@@ -10,7 +10,7 @@ import Drawer from './Drawer';
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
-    marginBottom: 58
+    marginBottom: 70
   },
   navbar: {
     backgroundColor: theme.palette.primary.main,
