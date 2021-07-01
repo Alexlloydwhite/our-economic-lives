@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
             marginLeft: 'auto',
             marginRight: 'auto',
         },
+    },
+    chip: {
+        padding: theme.spacing(1)
     }
 }));
 
@@ -37,20 +40,27 @@ export default function RecommendedBuildBlocks() {
 
     return (
         <div className={classes.container}>
-            <Grid container component={Paper} variant="outlined">
-                <Grid item>
-                    <Typography>
+            <Grid
+                container
+                component={Paper}
+                variant="outlined"
+                direction="row"
+            >
+                <Grid item xs={12}>
+                    <Typography variant="h4">
                         Recommend Building Blocks
                     </Typography>
                     <Typography>
                         You may recommend up to 3 building blocks to your client
                     </Typography>
                 </Grid>
-                <Grid item>
-                    {pyramidData.map((block) => (
-                        <BuildingBlockChip block={block} params={params} />
-                    ))}
-                </Grid>
+                {pyramidData.map((block) => (
+                    <BuildingBlockChip
+                        block={block}
+                        params={params}
+                        classes={classes}
+                    />
+                ))}
             </Grid>
         </div>
     )
