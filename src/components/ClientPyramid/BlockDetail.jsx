@@ -122,6 +122,15 @@ export default function BlockDetail () {
                     <Typography className={classes.title}>
                         Examples:
                     </Typography>
+                    <Typography className={classes.title}>
+                        Situational awareness
+                    </Typography>
+                    <Typography className={classes.title}>
+                        Business Ethics
+                    </Typography>
+                    <Typography className={classes.title}>
+                        Communicating
+                    </Typography>
                     
                     {/* {detail ? detail.map( examples => {
                         return (
