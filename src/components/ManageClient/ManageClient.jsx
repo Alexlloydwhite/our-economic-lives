@@ -1,22 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from "react-router";
-import RecommendBuildingBlocks from './RecommendBuildBlocks/RecommendBuildingBlocks';
-import { Typography } from '@material-ui/core';
+import RecommendedBuildBlocks from "./RecommendBuildBlocks/RecommendedBuildBlocks";
 
 export default function ManageClient() {
-    const dispatch = useDispatch();
-    const params = useParams();
-    const pyramidData = useSelector(store => store.clientPyramid);
-
-    useEffect(() => {
-        dispatch({
-            type: 'FETCH_CLIENT_PYRAMID',
-            id: params.id
-        });
-    }, [])
-
+ 
     return (
-
+        <div>
+            <RecommendedBuildBlocks />
+        </div>
     );
 }
