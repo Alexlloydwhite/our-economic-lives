@@ -20,12 +20,6 @@ import CommentIcon from '@material-ui/icons/Comment';
 import EditIcon from '@material-ui/icons/Edit';
 // Styling
 const useStyles = makeStyles((theme) => ({
-    root: {
-      '& .MuiTextField-root': {
-        margin: theme.spacing(2),
-        width: '90%',
-      },
-    },
     title: {
         textAlign: 'Left',
         marginLeft: '2em',
@@ -35,14 +29,14 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'Left',
         marginLeft: '6em',
     },
-    heading: {
-        textAlign: 'Left',
-        padding: theme.spacing(1),
-        alignItems: 'center',
-    },
-    box: {
+    field: {
         textAlign: 'Center',
-        padding: theme.spacing(2),
+        marginLeft: '10%',
+        marginTop: '2rem',
+        width: '80%',
+    },
+    button: {
+        textAlign: 'Center',
     },
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
@@ -55,11 +49,12 @@ export default function BlockDetail () {
   let { id } = useParams();
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_BLOCK_DETAIL', payload: id})
+    dispatch({ type: 'FETCH_BLOCK_DETAIL', payload: id })
+    dispatch({ type: 'FETCH_UNAPPROVED', id: user_id })
   }, [])
 
     const classes = useStyles();
-    // const savedSkills = useSelector((store) => store.savedskills);
+    const savedExp = useSelector((store) => store.unapprovedExp);
     const detail = useSelector((store) => store.blockDetails);
     const user = useSelector((store) => store.user);
     console.log('in detail', detail);
@@ -67,6 +62,8 @@ export default function BlockDetail () {
     const [newExpError, setNewExpError] = useState(false);
     const user_id = user.id;
     const block_id = detail.id;
+    console.log('in saveXP', savedExp);
+
 
     // Validate skill form
     const validateForm = (e) => {
@@ -117,19 +114,22 @@ export default function BlockDetail () {
                 </AccordionSummary>
 
                     <Typography className={classes.title}>
+                        <i>Description:</i>
+                    </Typography>
+                    <Typography className={classes.title}>
                         {detail.description}
                     </Typography>
                     <Typography className={classes.title}>
-                        Examples:
+                        <i>Examples:</i>
                     </Typography>
                     <Typography className={classes.title}>
-                        Situational awareness
+                    • Situational awareness
                     </Typography>
                     <Typography className={classes.title}>
-                        Business Ethics
+                    • Business Ethics
                     </Typography>
                     <Typography className={classes.title}>
-                        Communicating
+                    • Communicating
                     </Typography>
                     
                     {/* {detail ? detail.map( examples => {
@@ -142,14 +142,15 @@ export default function BlockDetail () {
                         )
                     }):''} */}
             </Accordion>
-        
-        
-        <Box className={classes.box}>
+
+        <div style={{ textAlign: 'center', marginTop: '2rem', paddingLeft: '1rem', paddingRight: '1rem' }}> 
             <Typography >
                 Describe an instance that exemplifies {detail.name}.
             </Typography>
-        <form className={classes.root} noValidate autoComplete="off" onSubmit={validateForm}>
+        </div>
+        <form noValidate autoComplete="off" onSubmit={validateForm}>
             <TextField
+                className={classes.field}
                 label="Add a Critical Experience"
                 multiline
                 rows={5}
@@ -157,6 +158,7 @@ export default function BlockDetail () {
                 value={newExp}
                 onChange={(e) => setNewExp(e.target.value)}
             />
+            <Box className={classes.button}>
             <Button 
                 type="submit" 
                 variant="contained" 
@@ -165,21 +167,24 @@ export default function BlockDetail () {
             >
                <PublishIcon />&nbsp; Submit 
             </Button>
+            </Box>
         </form>
-        </Box>
-
-        <div className={classes.box}>
-        <Typography >Saved Experiences: 1 / 5</Typography>
-        {/* <Typography >Saved Skillz: {savedSkills.length} / 5</Typography> */}
-        <Box className={classes.root}>
-            {/* {savedskills.map(skill => ( */}
+        
+        <div style={{ textAlign: 'center', marginTop: '3rem' }}> 
+            <Typography >Saved Experiences: {savedExp.length} / 5</Typography>
+        </div>
+        <div>
+            {savedExp.map(xp => (
             <>
             <TextField
-                value="If a coworker asks for help, I will always do my best to help them."
+                className={classes.field}
+                label={detail.name}
+                value={xp.user_text}
                 multiline
                 rows={5}
                 variant="outlined"
             />
+            <Box className={classes.button}>
              <Button 
                 type="submit" 
                 variant="contained" 
@@ -197,12 +202,12 @@ export default function BlockDetail () {
             >
                 <CommentIcon />
             </Button>
+            </Box>
             <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
                 <CoachComments />
             </Backdrop>
             </>
-             {/* ))} */}
-        </Box>
+            ))}
         </div>
     </>
     )
