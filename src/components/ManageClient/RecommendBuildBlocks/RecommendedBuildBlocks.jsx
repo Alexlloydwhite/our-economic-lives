@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 
 import BuildingBlockChip from './BuildingBlockChip';
 
-import { Typography } from '@material-ui/core';
+import { Typography, Grid, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 // Styles
 const useStyles = makeStyles((theme) => ({
@@ -37,19 +37,21 @@ export default function RecommendedBuildBlocks() {
 
     return (
         <div className={classes.container}>
-            <div style={{ textAlign: 'center' }}>
-                <Typography>
-                    Recommend Building Blocks
-                </Typography>
-                <Typography>
-                    You may recommend up to 3 building blocks to your client
-                </Typography>
-            </div>
-            <div>
-                {pyramidData.map((block) => (
-                    <BuildingBlockChip block={block} params={params} />
-                ))}
-            </div>
+            <Grid container component={Paper} variant="outlined">
+                <Grid item>
+                    <Typography>
+                        Recommend Building Blocks
+                    </Typography>
+                    <Typography>
+                        You may recommend up to 3 building blocks to your client
+                    </Typography>
+                </Grid>
+                <Grid item>
+                    {pyramidData.map((block) => (
+                        <BuildingBlockChip block={block} params={params} />
+                    ))}
+                </Grid>
+            </Grid>
         </div>
     )
 }
