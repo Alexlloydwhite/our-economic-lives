@@ -58,10 +58,11 @@ export default function BlockDetail () {
     const classes = useStyles();
     // const savedSkills = useSelector((store) => store.savedskills);
     const detail = useSelector((store) => store.blockDetails);
-    const user_id = useSelector((store) => store.user.id);
+    const user = useSelector((store) => store.user);
     console.log('in detail', detail);
     const [newExp, setNewExp] = useState('');
     const [newExpError, setNewExpError] = useState(false);
+    const user_id = user.id;
     const block_id = detail.id;
 
     // Validate skill form
@@ -76,15 +77,12 @@ export default function BlockDetail () {
 
     // Once validated send new experience to saga
     const submitExp = () => {
-        console.log('in submitExp', user_id, detail.id, newExp);
-
-        const exp = {
-                user_id: user_id,
-                block_id: detail.id,
+        dispatch({ type: 'CREATE_EXP', payload: {
+                 user_id: user_id,
+                block_id: block_id,
                 user_text: newExp 
         }
-        console.log('exp', exp);
-        dispatch({ type: 'CREATE_EXP', payload: exp })
+    })
         // Clear Critical Experience form
         setNewExp('');
     }
