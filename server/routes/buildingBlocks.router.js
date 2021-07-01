@@ -37,9 +37,9 @@ router.get('/user-data/:block_id/', rejectUnauthenticated, (req, res) => {
   })
 })
 
+
 router.post('/add_critical_experience', rejectUnauthenticated, async (req, res) => {
   console.log('add CE', req.body);
-  
   const client = await pool.connect();
   try{
     let queryText1 = `INSERT INTO critical_experience ("user_text", "user_blocks_id")
