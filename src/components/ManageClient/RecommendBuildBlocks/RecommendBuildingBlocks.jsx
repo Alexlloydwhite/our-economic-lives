@@ -8,7 +8,6 @@ export default function RecommendBuildingBlocks({ block, params }) {
     const [color, setColor] = useState('default');
 
     const handleBlockChipClick = (block) => {
-        color === 'default' ? setColor('primary') : setColor('default');
         dispatch({
             type: 'TOGGLE_RECOMMENDED_BLOCK',
             user_id: params.id,
@@ -18,12 +17,22 @@ export default function RecommendBuildingBlocks({ block, params }) {
 
     return (
         <>
+        {block.is_recommended ?
             <Chip
                 key={block.id}
                 label={block.name}
                 onClick={() => handleBlockChipClick(block)}
-                color={color}
+                color="primary"
             />
+            :
+            <Chip
+                key={block.id}
+                label={block.name}
+                onClick={() => handleBlockChipClick(block)}
+                color="default"
+            />
+        }
+
         </>
     );
 }

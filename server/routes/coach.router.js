@@ -26,19 +26,47 @@ router.post('/create-client', rejectUnauthorized, (req, res,) => {
         });
 });
 
-router.post('/toggle-building-block', rejectUnauthorized, (req, res) => {
-    console.log(req.body);
-    const queryText = `
+router.post('/toggle-building-block', rejectUnauthorized, async (req, res) => {
+    const blockId = req.body.block_id;
+    const userId = req.body.user_id;
+
+    const queryText1 = `
+    SELECT * 
+    FROM "user_blocks" 
+    WHERE building_block_id = $1 AND "user_id" = $2;`
+
+    const queryText2 = `
+    UPDATE "user_blocks" 
+    SET is_recommended = $1 
+    WHERE building_block_id = $2 AND "user_id" = $3`
+
+    const queryText3 = `
     INSERT INTO user_blocks ("user_id", building_block_id, is_recommended)
-    VALUES ($1, $2, $3);`;
-    pool
-        .query(queryText, [req.body.user_id, req.body.block_id, true])
-        .then(() => {
-            res.sendStatus(200);
-        })
-        .catch((err) => {
-            console.log(`IN /coach/toggle-building-block ${err}`);
-        });
+    VALUES ($1, $2, true);`;
+
+    const client = await pool.connect();
+    try {
+        const checkBlock = await client.query(queryText1, [blockId, userId]);
+        if (checkBlock.rows[0]) {
+            console.log(`in if 1`)
+            if (checkBlock.rows[0].is_recommended === false) {
+                console.log(`in if 1`)
+                console.log(checkBlock.rows[0].is_recommended);
+                await client.query(queryText2, [true, blockId, userId]);
+            } else {
+                console.log(`in else 1`)
+                await client.query(queryText2, [false, blockId, userId]);
+            }
+        } else {
+            console.log(`in else 2`)
+            await client.query(queryText3, [userId, blockId]);
+        }
+        res.sendStatus(200);
+    } catch (err) {
+        console.log(`IN /coach/toggle-building-block ${err}`);
+    } finally {
+        client.release();
+    }
 });
 
 // Handles GET request for users that are
@@ -88,7 +116,9 @@ router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
 
     const queryText1 = `SELECT u.industry_pyramid FROM "user" u WHERE id = $1;`;
 
-    const queryText2 = `SELECT * FROM building_block bb
+    const queryText2 = `
+    SELECT bb.id, bb.name, ipbb.industry_pyramid_id, ub.is_recommended 
+    FROM building_block bb
     JOIN industry_pyramid_building_block ipbb ON bb.id = ipbb.building_block_id
     LEFT JOIN "user_blocks" ub 
         ON ub.building_block_id = bb.id
