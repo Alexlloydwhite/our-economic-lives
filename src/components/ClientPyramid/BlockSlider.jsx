@@ -11,6 +11,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
+import BlockSliderButton from './BlockSliderButton';
+
 // Styling
 const useStyles = makeStyles((theme) => ({
   root: { // root styles the div, background of building block list
@@ -26,23 +28,16 @@ const useStyles = makeStyles((theme) => ({
     padding: '.5rem',
     width: '80%',
   },
-  card: { // card styles the building blocks
-    width: '95%',
-    height: '95%',
-    background: 'linear-gradient(45deg, #3ca6fe 40%, #cdecfa 90%)',
-    margin: '.5rem',
-    textAlign: 'center',
-  },
-  title: {
-    marginTop: '2',
-    color: theme.palette.primary, 
-  },
   arrow: {
     marginTop: '18%',
     fontSize: 35,
     color: theme.palette.primary.main,
   }
 }));
+
+  const currentColor = () => {
+    return 'linear-gradient(45deg, #3ca6fe 40%, #cdecfa 90%)'
+  }
  
 export default function PyramidTier(props) {
   const classes = useStyles();
@@ -69,12 +64,7 @@ export default function PyramidTier(props) {
         {buildingBlocks ? buildingBlocks.map((block) => (
           /* Invidual Blocks */
           <GridListTile key={block.id}>
-            <Card className={classes.card} variant="outlined"
-              onClick={(e) => handleClick(block.id)}>
-              <CardContent className={classes.title}>
-                <Typography variant="h4">{block.name}</Typography>
-              </CardContent>
-            </Card>
+            <BlockSliderButton block={block} />
           </GridListTile>
         )):''}
       </GridList>
