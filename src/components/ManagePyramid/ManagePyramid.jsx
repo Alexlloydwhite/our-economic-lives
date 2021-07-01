@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
             marginRight: 'auto',
         },
     },
+    addBlocks: {
+        marginBottom: theme.spacing(2)
+    }
 }));
 export default function ManagerPyramid() {
     const classes = useStyles();
@@ -29,9 +32,14 @@ export default function ManagerPyramid() {
             className={classes.container}
             component={Paper}
             variant="outlined"
+            spacing={10}
         >
-            <AddCareerPath />
-            <AddBlocks classes={classes} />
+            <Grid item xs={12} sm={6}>
+                <AddCareerPath />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+                <AddBlocks classes={classes} />
+            </Grid>
         </Grid>
     )
 }

@@ -29,6 +29,7 @@ export default function AddBlocks({ classes }) {
             direction="row"
             justify="center"
             alignItems="center"
+            className={classes.addBlocks}
         >
             <Grid item>
                 <form action={routerPath} method="POST" encType="multipart/form-data">
