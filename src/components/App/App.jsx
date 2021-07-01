@@ -49,7 +49,6 @@ export default function App() {
             exact
             path='/home'
           >
-            <NavBar />
             <Home />
           </ClientProtectedRoute>
 

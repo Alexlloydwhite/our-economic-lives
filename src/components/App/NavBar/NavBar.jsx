@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function NavBar() {
+export default function NavBar({ text }) {
   const classes = useStyles();
 
   return (
@@ -29,7 +29,7 @@ export default function NavBar() {
       <AppBar className={classes.navbar} elevation={1}>
         <Toolbar>
           <Drawer className={classes.menuButton} />
-          <Typography>Our Economic Lives</Typography>
+          <Typography>{text}</Typography>
         </Toolbar>
       </AppBar>
     </div>
