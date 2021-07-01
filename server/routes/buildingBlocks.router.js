@@ -37,28 +37,30 @@ router.get('/user-data/:block_id/', rejectUnauthenticated, (req, res) => {
   })
 })
 
-router.post('/add_critical_experience', rejectUnauthenticated, async, (req, res) => {
+
+router.post('/add_critical_experience', rejectUnauthenticated, async (req, res) => {
+  console.log('add CE', req.body);
   const client = await pool.connect();
   try{
     let queryText1 = `INSERT INTO critical_experience ("user_text", "user_blocks_id")
     VALUES ($1, $2);`;
     let queryText2 = `SELECT id FROM user_blocks
     WHERE user_id = $1 AND building_block_id = $2;`;
-    let queryText3 = `INSERT INTO user_blocks ("user_id", "builidng_block_id")
+    let queryText3 = `INSERT INTO user_blocks ("user_id", "building_block_id")
     VALUES ($1, $2)
     RETURNING id;`;
-    let userBlocksId = await client.query(queryText2, [req.body.user_id, req.body.building_block_id]);
+    let userBlocksId = await client.query(queryText2, [req.body.user_id, req.body.block_id]);
     userBlocksId = userBlocksId.rows;
     if (userBlocksId) {
-      await client.query(queryText1, [req.body.user_text, userBlocksId]);
+      await client.query(queryText1, [req.body.user_text, userBlocksId[0].id]);
     } else {
-      userBlocksId = await client.query(queryText3, [req.body.user_id, req.body.building_block_id]);
-      await client.query(queryText1, [req.body.user_text, userBlocksId]);
+      userBlocksId = await client.query(queryText3, [req.body.user_id, req.body.block_id]);
+      await client.query(queryText1, [req.body.user_text, userBlocksId[0].id]);
     };
     res.sendStatus(200);
   } catch (error) {
     await client.query('ROLLBACK')
-    console.log('ERROR GET /api/building-blocks/add_critical_experience', error);
+    console.log('ERROR POST /api/building-blocks/add_critical_experience', error);
     res.sendStatus(500);
   } finally {
     client.release();
