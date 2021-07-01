@@ -28,13 +28,12 @@ const useStyles = makeStyles((theme) => ({
   card: { // card styles the building blocks
     width: '95%',
     height: '95%',
-    padding: '.5rem',
     background: 'linear-gradient(45deg, #3ca6fe 40%, #cdecfa 90%)',
     margin: '.5rem',
     textAlign: 'center',
   },
   title: {
-    marginTop: '1rem',
+    marginTop: '2',
     color: theme.palette.primary, 
   },
   arrow: {
