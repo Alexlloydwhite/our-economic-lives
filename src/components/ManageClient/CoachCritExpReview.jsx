@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         textAlign: 'Center',
         marginLeft: '10%',
-        marginTop: '2em',
+        marginTop: '2rem',
         width: '80%',
     },
     button: {
@@ -37,7 +37,7 @@ export default function CoachCritExpReview() {
 
     return (
         <div>
-            <div style={{ textAlign: 'center', marginTop: '5rem' }}>
+            <div style={{ textAlign: 'center', marginTop: '6rem' }}>
                 <Typography variant='h6'>
                    <b>Critical Experiences Awaiting Review</b> 
                 </Typography>
@@ -58,7 +58,6 @@ export default function CoachCritExpReview() {
                     <Box className={classes.button}>
                     {/* Approve */}
                     <Button 
-                        className={classes.button}
                         type="submit" 
                         variant="contained" 
                         color="primary"
@@ -68,7 +67,6 @@ export default function CoachCritExpReview() {
                     </Button>
                     {/* Comment */}
                     <Button 
-                        className={classes.button}
                         type="submit" 
                         variant="contained" 
                         color="primary"

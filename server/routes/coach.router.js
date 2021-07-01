@@ -153,7 +153,8 @@ router.put('/activate-client/:id', rejectUnauthorized, (req, res) => {
         });
 });
 
-router.get('/unapproved_Exp/:id', rejectUnauthorized, (req, res) => {
+// Removed rejectUnauthorized so unapproved_Exp router/saga could be reused from client side block detail
+router.get('/unapproved_Exp/:id', (req, res) => {
     const user_id = req.params.id;
     let queryText = ` SELECT * FROM critical_experience
     JOIN user_blocks on user_blocks.id = critical_experience.user_blocks_id

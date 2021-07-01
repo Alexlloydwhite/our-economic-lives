@@ -51,11 +51,13 @@ export default function PyramidTier(props) {
   const tierNum = props.tier;
   const user = useSelector(store => store.user);
   const buildingBlocks = useSelector(store => store.buildingBlocks);
+  const user_id = user.id;
   console.log('buildingBlocks:', buildingBlocks);
 
   // Click handler to capture block id and dispatch to detail store
   const handleClick = (id) => {
     dispatch({ type: 'SET_DETAIL', payload: id });
+    dispatch({ type: 'FETCH_UNAPPROVED', id: user_id });
     history.push(`/blockDetail/${id}`);  
   }
 
