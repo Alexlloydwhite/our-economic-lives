@@ -1,11 +1,8 @@
 import Chip from '@material-ui/core/Chip';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-export default function RecommendBuildingBlocks({ block, params }) {
+export default function BuildingBlockChip({ block, params }) {
     const dispatch = useDispatch();
-    // Color of chips
-    const [color, setColor] = useState('default');
 
     const handleBlockChipClick = (block) => {
         dispatch({
