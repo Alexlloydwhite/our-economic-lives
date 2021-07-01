@@ -20,17 +20,16 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
       queryText = `SELECT value FROM competency
       WHERE building_block_id = $1`
       //gets competency values for each building block from the database
-      let result = await client.query(queryText, [Number(buildingBlocks[i].id)])  
-      result = result.rows; 
-      console.log(result);  
+      let result = await client.query(queryText, [Number(buildingBlocks[i].id)])
+      result = result.rows;
       let valueArray = []
       //loops through the values and put them into a temporary array
       for (let i = 0; i < result.length; i++) {
         valueArray.push(result[i].value)
       }
       //creates a new attribute in the building block object and assigns the value array to it
-      buildingBlocks[i].value = valueArray; 
-    }    
+      buildingBlocks[i].value = valueArray;
+    }
     console.log(buildingBlocks);
     await client.query('COMMIT')
     //sends the array of building blocks back to the client side code
@@ -44,10 +43,9 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
   }
 });
 
-
 router.post('/block_detail', async (req, res) => {
   console.log('req.body', req.body);
-  
+
   const client = await pool.connect()
   try {
     let queryText1 = `SELECT critical_experience.user_text, user_blocks.id, critical_experience.coach_comments, critical_experience.is_completed,  building_block.name, building_block.description  FROM "user_blocks"
@@ -61,14 +59,12 @@ router.post('/block_detail', async (req, res) => {
     //gets a users critical experiences from the database
     let criticalExperience = await client.query(queryText1, [req.body.userId, req.body.buildingBlockId])
     criticalExperience = criticalExperience.rows
-    console.log('in critical exp', criticalExperience);
     //gets competency values for the building block from the database
-    let result = await client.query(queryText2, [req.body.buildingBlockId])  
-    result = result.rows; 
-    console.log(result);  
+    let result = await client.query(queryText2, [req.body.buildingBlockId])
+    result = result.rows;
     await client.query('COMMIT')
     //sends the array of building blocks back to the client side code
-    res.send({criticalExperience: criticalExperience, competencies: result})
+    res.send({ criticalExperience: criticalExperience, competencies: result })
   } catch (error) {
     await client.query('ROLLBACK')
     console.log('ERROR GET /api/block/block_detail', error);
@@ -77,7 +73,6 @@ router.post('/block_detail', async (req, res) => {
     client.release();
   }
 })
-
 
 router.post('/', rejectUnauthenticated, async (req, res) => {
   let user_id = req.body.id;
@@ -91,10 +86,10 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     let buildingBlockId = await client.query(queryText1);
     for (id of buildingBlockId.rows) {
       await client.query(queryText2, [user_id, id.id])
-    } 
+    }
     client.query('COMMIT')
     res.sendStatus(201);
-  } catch (error){
+  } catch (error) {
     await client.query('ROLLBACK')
     console.log('Error POST /api/block', error);
     res.sendStatus(500);

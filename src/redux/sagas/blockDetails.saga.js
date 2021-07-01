@@ -7,10 +7,9 @@ function* fetchBlockDetails(action) {
   try {
     let details = yield axios.get(`/api/building-blocks/info/${block_id}`)
     yield put({ type: 'SET_BLOCK_DETAILS', payload: details.data[0] })
-    
   } catch (error) {
     console.log('Unable to fetch block details', error);
-    
+
   }
 }
 

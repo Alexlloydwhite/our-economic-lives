@@ -3,10 +3,9 @@ import axios from 'axios';
 
 export default function* updateClient(action) {
     try {
-        console.log(`IN updateClient saga. Data:`, action.payload);
         yield axios.put('/api/client/update', action.payload);
         // Set reducer to store data
-        yield put({ 
+        yield put({
             type: 'SET_USER',
             payload: action.payload
         });
@@ -14,6 +13,3 @@ export default function* updateClient(action) {
         console.log(`IN updateClient saga. Error on PUT request ${err}`);
     }
 }
-
-
-

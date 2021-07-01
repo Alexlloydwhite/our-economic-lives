@@ -4,7 +4,6 @@ import axios from 'axios';
 // worker Saga: will be fired on "REGISTER" actions
 export default function* createClient(action) {
   try {
-    console.log(`IN createClient Saga`);
     // passes the username and password from the payload to the server
     yield axios.post('/api/coach/create-client', action.payload);
     yield put({ type: 'FETCH_CLIENTS' });
