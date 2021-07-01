@@ -133,7 +133,6 @@ router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
     }
 });
 
-
 router.put('/deactivate-client/:id', rejectUnauthorized, (req, res) => {
     const clientId = req.params.id;
     const queryText = `UPDATE "user" u SET is_active=false WHERE u.id=$1`

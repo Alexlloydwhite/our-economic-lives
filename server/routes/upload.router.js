@@ -6,7 +6,7 @@ const fileUpload = require('express-fileupload');
 router.use(fileUpload());
 const {
     rejectUnauthorized,
-  } = require('../modules/adminAuthorization-middleware');
+} = require('../modules/adminAuthorization-middleware');
 
 router.post('/:id', rejectUnauthorized, async (req, res) => {
     console.log('in upload POST');
@@ -40,7 +40,7 @@ router.post('/:id', rejectUnauthorized, async (req, res) => {
             let previousBlockName = 'test';
             let buildingBlockId = 0;
             //loops through the array of json object
-            for (const block of jsonObj ) {
+            for (const block of jsonObj) {
                 //switch statement to check if the previous block name is the same so it only creates the competency if it is.
                 switch (block.Name) {
                     case previousBlockName:
