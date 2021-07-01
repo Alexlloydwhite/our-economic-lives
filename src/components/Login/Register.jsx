@@ -9,7 +9,8 @@ import {
     Select,
     MenuItem,
     InputLabel,
-    FormControl
+    FormControl,
+    Paper
 } from '@material-ui/core/';
 // React
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
         width: 'auto',
         marginLeft: theme.spacing(2),
         marginRight: theme.spacing(2),
-        marginTop: theme.spacing(0),
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
         [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
             width: 600,
             marginLeft: 'auto',
@@ -102,6 +104,8 @@ export default function Register() {
             container
             component="main"
             className={classes.layout}
+            component={Paper}
+            variant="outlined"
         >
             <Grid item xs={12} className={classes.paper}>
                 {/* Logo */}
