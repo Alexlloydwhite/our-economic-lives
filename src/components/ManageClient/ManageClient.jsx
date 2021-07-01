@@ -41,14 +41,14 @@ export default function ManageClient() {
     return (
         <div className={classes.root}>
             <Tabs value={value} onChange={handleTabChange} centered>
-                <Tab label="Recommend Building Blocks" />
                 <Tab label="Critical Experiences" />
+                <Tab label="Building Blocks" />
             </Tabs>
             <TabPanel value={value} index={0}>
-                <RecommendedBuildBlocks />
+                <CoachCritExpReview />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <CoachCritExpReview />
+                <RecommendedBuildBlocks />
             </TabPanel>
         </div>
     );
