@@ -1,3 +1,8 @@
+// React
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+// M-UI
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import GridList from '@material-ui/core/GridList';
@@ -6,11 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-
-
+// Styling
 const useStyles = makeStyles((theme) => ({
   root: { // root styles the div, background of building block list
     display: 'flex',
@@ -28,13 +29,12 @@ const useStyles = makeStyles((theme) => ({
   card: { // card styles the building blocks
     width: '95%',
     height: '95%',
-    padding: '.5rem',
     background: 'linear-gradient(45deg, #3ca6fe 40%, #cdecfa 90%)',
     margin: '.5rem',
     textAlign: 'center',
   },
   title: {
-    marginTop: '1rem',
+    marginTop: '2',
     color: theme.palette.primary, 
   },
   arrow: {
@@ -59,7 +59,7 @@ export default function PyramidTier(props) {
     history.push(`/blockDetail/${id}`);  
   }
 
-  console.log('in Block slider for tier', tierNum, 'as', user);
+  // console.log('in Block slider for tier', tierNum, 'as', user);
   return (
     <div className={classes.root} >
       {/* Left Arrow */}

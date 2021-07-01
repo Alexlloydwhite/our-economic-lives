@@ -15,6 +15,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useParams } from 'react-router-dom';
 import Backdrop from '@material-ui/core/Backdrop';
 import CoachComments from './CoachComments';
+import PublishIcon from '@material-ui/icons/Publish';
+import CommentIcon from '@material-ui/icons/Comment';
+import EditIcon from '@material-ui/icons/Edit';
 // Styling
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -119,12 +122,22 @@ export default function BlockDetail () {
                     <Typography className={classes.title}>
                         Examples:
                     </Typography>
-                    {/* {detail ? detail.value.map( example => {
+                    <Typography className={classes.title}>
+                        Situational awareness
+                    </Typography>
+                    <Typography className={classes.title}>
+                        Business Ethics
+                    </Typography>
+                    <Typography className={classes.title}>
+                        Communicating
+                    </Typography>
+                    
+                    {/* {detail ? detail.map( examples => {
                         return (
-                        <AccordionDetails >
-                            <Typography className={classes.examples}>
-                                {example}
-                            </Typography>
+                            <AccordionDetails >
+                             <Typography className={classes.examples}>
+                                 {examples}
+                             </Typography>
                         </AccordionDetails>
                         )
                     }):''} */}
@@ -150,7 +163,7 @@ export default function BlockDetail () {
                 color="primary"
                 size="large" 
             >
-                Submit for review
+               <PublishIcon />&nbsp; Submit 
             </Button>
         </form>
         </Box>
@@ -173,7 +186,7 @@ export default function BlockDetail () {
                 color="primary"
                 size="large" 
             >
-                Edit
+                < EditIcon />
             </Button>
             <Button 
                 type="submit" 
@@ -182,7 +195,7 @@ export default function BlockDetail () {
                 size="large"
                 onClick={handleToggle} 
             >
-                Comments
+                <CommentIcon />
             </Button>
             <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
                 <CoachComments />
