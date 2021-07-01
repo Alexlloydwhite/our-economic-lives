@@ -7,7 +7,10 @@ const {
 
 //takes the block id from the path and use it to retrieve the static data for a pyramid block
 router.get('/info/:block_id', (req, res) => {
-  const queryText = `SELECT building_block.id, building_block."name", building_block.description, ARRAY_AGG(competency."value") FROM building_block
+  const queryText = `
+  SELECT building_block.id, building_block."name", 
+  building_block.description, ARRAY_AGG(competency."value") 
+  FROM building_block
 	JOIN competency ON building_block.id = competency.building_block_id
 	WHERE building_block.id = $1
 	GROUP BY building_block.id;`

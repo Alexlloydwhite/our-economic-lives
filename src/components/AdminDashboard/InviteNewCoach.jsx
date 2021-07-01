@@ -61,12 +61,6 @@ export default function InviteNewCoach() {
 
     return (
         <div style={{ textAlign: 'center', marginTop: 10 }}>
-            <Typography
-                variant="h3"
-                gutterBottom
-            >
-                Admin Dashboard
-            </Typography>
             <Button
                 onClick={() => setOpen(true)}
                 variant="outlined"
@@ -165,9 +159,9 @@ export default function InviteNewCoach() {
                     {/* Add client btn */}
                     <Button
                         size="small"
-                        onClick={handleSubmit}
                         variant="contained"
                         color="primary"
+                        onClick={handleSubmit}
                     >
                         Add Coach
                     </Button>

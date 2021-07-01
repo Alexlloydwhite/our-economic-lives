@@ -5,7 +5,8 @@ import {
     Avatar,
     TextField,
     Button,
-    Grid
+    Grid,
+    Paper
 } from '@material-ui/core/';
 // React
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
         width: 'auto',
         marginLeft: theme.spacing(2),
         marginRight: theme.spacing(2),
+        marginTop: theme.spacing(2),
         [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
             width: 600,
             marginLeft: 'auto',
@@ -72,8 +74,18 @@ export default function Login() {
     };
 
     return (
-        <Grid container component="main" className={classes.layout}>
-            <Grid item xs={12} className={classes.paper}>
+        <Grid
+            container
+            component="main"
+            className={classes.layout}
+            component={Paper}
+            variant="outlined"
+        >
+            <Grid
+                item
+                xs={12}
+                className={classes.paper}
+            >
                 {/* Logo avatar */}
                 <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
                     <img src="/images/OELavatar.png" />
@@ -88,7 +100,11 @@ export default function Login() {
                 >
                     Our Economic Lives
                 </Typography>
-                <form className={classes.form} onSubmit={login} noValidate>
+                <form
+                    className={classes.form}
+                    onSubmit={login}
+                    noValidate
+                >
                     {/* Errors display */}
                     {errors.loginMessage && (
                         <h3 className="alert" role="alert">

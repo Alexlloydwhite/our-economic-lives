@@ -8,7 +8,11 @@ const {
 router.get('/:id', rejectUnauthenticated, async (req, res) => {
   const client = await pool.connect()
   try {
-    let queryText = `SELECT is_recommended, building_block.name, building_block.description, building_block.tier_id, building_block.id FROM "user_blocks"
+    let queryText = `
+    SELECT 
+    is_recommended, building_block.name, 
+    building_block.description, building_block.tier_id, building_block.id 
+    FROM "user_blocks"
     JOIN building_block ON user_blocks.building_block_id = building_block.id               
     WHERE user_id = $1;`
     await client.query('BEGIN');
@@ -27,7 +31,8 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
       for (let i = 0; i < result.length; i++) {
         valueArray.push(result[i].value)
       }
-      //creates a new attribute in the building block object and assigns the value array to it
+      //creates a new attribute in the building block object 
+      // and assigns the value array to it
       buildingBlocks[i].value = valueArray;
     }
     console.log(buildingBlocks);
@@ -48,7 +53,12 @@ router.post('/block_detail', async (req, res) => {
 
   const client = await pool.connect()
   try {
-    let queryText1 = `SELECT critical_experience.user_text, user_blocks.id, critical_experience.coach_comments, critical_experience.is_completed,  building_block.name, building_block.description  FROM "user_blocks"
+    let queryText1 = `
+    SELECT 
+    critical_experience.user_text, user_blocks.id, 
+    critical_experience.coach_comments, critical_experience.is_completed,  
+    building_block.name, building_block.description  
+    FROM "user_blocks"
     JOIN building_block ON user_blocks.building_block_id = building_block.id 
     JOIN critical_experience ON user_blocks.id = critical_experience.user_blocks_id              
     WHERE user_blocks.user_id = $1
@@ -79,7 +89,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
   const client = await pool.connect();
   try {
     let queryText1 = `SELECT building_block.id FROM building_block
-    JOIN industry_pyramid_building_block ON building_block.id = industry_pyramid_building_block.building_block_id
+    JOIN industry_pyramid_building_block 
+    ON building_block.id = industry_pyramid_building_block.building_block_id
     WHERE industry_pyramid_building_block.industry_pyramid_id = 1;`
     let queryText2 = `INSERT INTO user_blocks ("user_id", "building_block_id")
     VALUES ($1, $2);`

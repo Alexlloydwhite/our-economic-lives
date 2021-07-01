@@ -28,21 +28,20 @@ router.post('/create-client', rejectUnauthorized, (req, res,) => {
 router.post('/toggle-building-block', rejectUnauthorized, async (req, res) => {
     const blockId = req.body.block_id;
     const userId = req.body.user_id;
-
+    // First query checks if the user has been assign block
     const queryText1 = `
     SELECT * 
     FROM "user_blocks" 
     WHERE building_block_id = $1 AND "user_id" = $2;`
-
+    // Second query toggles recommended true / false
     const queryText2 = `
     UPDATE "user_blocks" 
     SET is_recommended = $1 
     WHERE building_block_id = $2 AND "user_id" = $3`
-
+    // Third query add user block
     const queryText3 = `
     INSERT INTO user_blocks ("user_id", building_block_id, is_recommended)
     VALUES ($1, $2, true);`;
-
     const client = await pool.connect();
     try {
         const checkBlock = await client.query(queryText1, [blockId, userId]);
@@ -107,9 +106,9 @@ router.get('/client-list/:id?', rejectUnauthorized, (req, res) => {
 
 router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
     const clientId = req.params.id;
-
+    // First query gets ID of pyramid from user
     const queryText1 = `SELECT u.industry_pyramid FROM "user" u WHERE id = $1;`;
-
+    // Second query grabs data for that pyramid
     const queryText2 = `
     SELECT bb.id, bb.name, ipbb.industry_pyramid_id, ub.is_recommended 
     FROM building_block bb
@@ -118,7 +117,6 @@ router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
         ON ub.building_block_id = bb.id
         AND ub.user_id = $1
     WHERE ipbb.industry_pyramid_id = $2;`
-
     const client = await pool.connect();
     try {
         let pyramidId = await client.query(queryText1, [clientId]);
