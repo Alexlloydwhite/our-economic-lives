@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
       card: { // card styles the building blocks
         width: '95%',
         height: '95%',
-        background: 'linear-gradient(45deg, #12ae5b 40%, #44bc74 90%)',
+        background: 'linear-gradient(45deg, #12ae5b 30%, #44bc74 50%)',
         margin: '.5rem',
         textAlign: 'center',
       },
@@ -65,7 +65,7 @@ export default function RecommendedBlocks() {
         console.log('in rec click', id);
         // dispatch selected block details to be stored detail reducer
         dispatch({ type: 'SET_DETAIL', payload: id });
-        history.push(`/blockDetail/${id.id}`); 
+        history.push(`/blockDetail/${id}`); 
     }
 
     return (
@@ -95,7 +95,7 @@ export default function RecommendedBlocks() {
         // </Card>
 
         
-        <div className={classes.root} >
+    <div className={classes.root} >
       {/* Left Arrow */}
       <ArrowBackIosIcon className={classes.arrow} />
       {/* List of Blocks */}
@@ -106,19 +106,18 @@ export default function RecommendedBlocks() {
           /* Invidual Blocks */
           <GridListTile key={block.id}>
             <Card className={classes.card} variant="outlined"
-               onClick={() => handleClick(block)}>
+                onClick={() => handleClick(block.id)}>
               <CardContent className={classes.title}>
                 <Typography variant="h4">{block.name}</Typography>
               </CardContent>
             </Card>
           </GridListTile>
-            )
+          )
         }
         }):''}
       </GridList>
       {/* Right Arrow */}
       <ArrowForwardIosOutlinedIcon className={classes.arrow} />
     </div>
-
     )
 }
