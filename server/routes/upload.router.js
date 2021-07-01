@@ -41,28 +41,20 @@ router.post('/:id', rejectUnauthorized, async (req, res) => {
             let buildingBlockId = 0;
             //loops through the array of json object
             for (const block of jsonObj ) {
-                console.log('Beginning', buildingBlockId);
                 //switch statement to check if the previous block name is the same so it only creates the competency if it is.
                 switch (block.Name) {
                     case previousBlockName:
-                        console.log(block.Name, 'in case', previousBlockName, buildingBlockId);
                         await client.query(queryText2, [block.value, buildingBlockId]);
-                        console.log('after case competency', buildingBlockId);
                         break;
                     default:
-                        console.log(previousBlockName, 'in default', block.Name, buildingBlockId);
                         previousBlockName = block.Name;
                         //Creates a new Building Block
                         const buildingBlockResults = await client.query(queryText1, [block.Name, block.Description, block.tier_id]);
-                        console.log('before set', buildingBlockId);
                         buildingBlockId = buildingBlockResults.rows[0].id;
-                        console.log('after set', buildingBlockId);
                         //Creates a competency
                         await client.query(queryText2, [block.value, buildingBlockId]);
-                        console.log('after default competency', buildingBlockId);
                         //Inserts into the join table
                         await client.query(queryText3, [buildingBlockId, req.params.id]);
-                        console.log('after default join', buildingBlockId);
                 }// end switch statement
             }; //end forEach loop
         }); //end csvtojson .then
@@ -75,7 +67,5 @@ router.post('/:id', rejectUnauthorized, async (req, res) => {
         client.release();
     }
 })
-
-
 
 module.exports = router;

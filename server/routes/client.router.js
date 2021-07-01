@@ -8,7 +8,6 @@ const {
 // Handles PUT request, this is the end point
 // used when a client updates their profile
 router.put('/update', rejectUnauthenticated, (req, res) => {
-  console.log(req.body, req.user.id);
   const queryText = `
     UPDATE "user" 
     SET 

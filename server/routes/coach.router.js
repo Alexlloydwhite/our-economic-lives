@@ -10,7 +10,6 @@ const {
 // This is the end point used when a coach
 // adds a new client to their team
 router.post('/create-client', rejectUnauthorized, (req, res,) => {
-    console.log(`IN, /create-client route`);
     const email = req.body.email;
     const password = encryptLib.encryptPassword(req.body.password);
     const authorization = 3;
@@ -48,17 +47,12 @@ router.post('/toggle-building-block', rejectUnauthorized, async (req, res) => {
     try {
         const checkBlock = await client.query(queryText1, [blockId, userId]);
         if (checkBlock.rows[0]) {
-            console.log(`in if 1`)
             if (checkBlock.rows[0].is_recommended === false) {
-                console.log(`in if 1`)
-                console.log(checkBlock.rows[0].is_recommended);
                 await client.query(queryText2, [true, blockId, userId]);
             } else {
-                console.log(`in else 1`)
                 await client.query(queryText2, [false, blockId, userId]);
             }
         } else {
-            console.log(`in else 2`)
             await client.query(queryText3, [userId, blockId]);
         }
         res.sendStatus(200);

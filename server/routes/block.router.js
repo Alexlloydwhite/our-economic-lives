@@ -22,7 +22,6 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
       //gets competency values for each building block from the database
       let result = await client.query(queryText, [Number(buildingBlocks[i].id)])  
       result = result.rows; 
-      console.log(result);  
       let valueArray = []
       //loops through the values and put them into a temporary array
       for (let i = 0; i < result.length; i++) {
@@ -44,7 +43,6 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
   }
 });
 
-
 router.post('/block_detail', async (req, res) => {
   console.log('req.body', req.body);
   
@@ -61,11 +59,9 @@ router.post('/block_detail', async (req, res) => {
     //gets a users critical experiences from the database
     let criticalExperience = await client.query(queryText1, [req.body.userId, req.body.buildingBlockId])
     criticalExperience = criticalExperience.rows
-    console.log('in critical exp', criticalExperience);
     //gets competency values for the building block from the database
     let result = await client.query(queryText2, [req.body.buildingBlockId])  
     result = result.rows; 
-    console.log(result);  
     await client.query('COMMIT')
     //sends the array of building blocks back to the client side code
     res.send({criticalExperience: criticalExperience, competencies: result})
@@ -77,7 +73,6 @@ router.post('/block_detail', async (req, res) => {
     client.release();
   }
 })
-
 
 router.post('/', rejectUnauthenticated, async (req, res) => {
   let user_id = req.body.id;

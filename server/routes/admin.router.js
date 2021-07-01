@@ -50,7 +50,6 @@ router.get('/industry_pyramid', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/create_industry_pyramid', rejectUnauthorized, (req, res) => {
-    console.log(req.body.name);
     const industryPyramidName = req.body.name;
     const queryText = `INSERT INTO industry_pyramid (name) VALUES ($1);`;
     pool
@@ -65,7 +64,6 @@ router.post('/create_industry_pyramid', rejectUnauthorized, (req, res) => {
 });
 
 router.post('/create_coach', rejectUnauthorized, (req, res) => {
-  console.log(`IN, create route`);
   const organization = req.body.organization_name
   const firstName = req.body.first_name;
   const lastName = req.body.last_name;
@@ -102,7 +100,6 @@ router.post('/create_coach', rejectUnauthorized, (req, res) => {
 
 
 router.post('/create_admin', (req, res) => {
-    console.log(`IN, create route`);
     const firstName = req.body.first_name;
     const lastName = req.body.last_name
     const email = req.body.email;
