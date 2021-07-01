@@ -5,7 +5,7 @@ export default function* fetchClientPyramid(action) {
     try {
         // Get data from end point
         const pyramid = yield axios.get(`/api/coach/client-pyramid/${action.id}`);
-        console.log(`IN fetchClientPyramid saga. Response from GET request ${pyramid.data}`);
+        console.log(`IN fetchClientPyramid saga.`);
         yield put({
             type: 'SET_CLIENT_PYRAMID',
             payload: pyramid.data

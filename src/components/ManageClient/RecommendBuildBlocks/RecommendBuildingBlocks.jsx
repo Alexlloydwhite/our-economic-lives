@@ -17,7 +17,7 @@ export default function RecommendBuildingBlocks({ block, params }) {
     }
 
     return (
-        <>
+        <div style={{ textAlign: 'center' }}>
             {block.is_recommended ?
                 <Chip
                     key={block.id}
@@ -33,6 +33,6 @@ export default function RecommendBuildingBlocks({ block, params }) {
                     color="default"
                 />
             }
-        </>
+        </div>
     );
 }
