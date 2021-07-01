@@ -8,7 +8,6 @@ const {
 // Handles PUT request, this is the end point
 // used when a client updates their profile
 router.put('/update', rejectUnauthenticated, (req, res) => {
-  console.log(req.body, req.user.id);
   const queryText = `
     UPDATE "user" 
     SET 
@@ -53,11 +52,6 @@ router.put('/register', rejectUnauthenticated, async (req, res) => {
       industry_pyramid=$6,
       is_registered='true'
     WHERE id=$7`
-    let queryText1 = `SELECT building_block.id FROM building_block
-    JOIN industry_pyramid_building_block ON building_block.id = industry_pyramid_building_block.building_block_id
-    WHERE industry_pyramid_building_block.industry_pyramid_id = 1;`
-    let queryText2 = `INSERT INTO user_blocks ("user_id", "building_block_id")
-    VALUES ($1, $2);`
   try {
     pool
       .query(queryText, [
@@ -69,10 +63,6 @@ router.put('/register', rejectUnauthenticated, async (req, res) => {
         req.body.industry_pyramid,
         req.user.id
       ])
-    let buildingBlockId = await client.query(queryText1);
-    for (id of buildingBlockId.rows) {
-      await client.query(queryText2, [req.user.id, id.id])
-    }
     client.query('COMMIT')
     res.sendStatus(201);
   } catch (error) {

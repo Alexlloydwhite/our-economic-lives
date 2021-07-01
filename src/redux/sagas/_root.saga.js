@@ -1,6 +1,5 @@
 import { all, takeEvery } from 'redux-saga/effects';
 import loginSaga from './login.saga';
-import createClient from './createClient.saga';
 import userSaga from './user.saga';
 import registerNewUser from './register.saga';
 import fetchClients from './fetchClients.saga';
@@ -19,6 +18,7 @@ import blockDetails from './blockDetails.saga';
 import fetchDetail from './fetchDetail.saga';
 import fetchClientPyramid from './fetchClientPyramid.saga';
 import toggleBuildingBlock from './toggleBuildingBlock.saga';
+import createClient from './createClient.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.

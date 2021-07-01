@@ -13,11 +13,11 @@ router.get('/buildingBlocks/:tier/:pyramid', rejectUnauthenticated, (req, res) =
 	ORDER BY building_block."name" ASC;`;
 
   let pyramidId = 0;
-    if (req.params.tier < 4) {
-      pyramidId = 1;
-    } else {
-      pyramidId = req.params.pyramid
-    };
+  if (req.params.tier < 4) {
+    pyramidId = 1;
+  } else {
+    pyramidId = req.params.pyramid
+  };
 
   pool.query(queryText, [req.params.tier, pyramidId])
     .then(result => {
