@@ -69,7 +69,7 @@ export default function App() {
             exact
             path="/profile"
           >
-            <NavBar />
+            <NavBar text="Your Profile"/>
             <ClientProfile />
           </ClientProtectedRoute>
 
@@ -78,7 +78,7 @@ export default function App() {
             exact
             path="/blockdetail/:id"
           >
-            <NavBar />
+            <NavBar text="Critical Experiences" />
             <BlockDetail />
           </ClientProtectedRoute>
 
@@ -87,7 +87,7 @@ export default function App() {
             exact
             path="/crit-review/:id"
           >
-            <NavBar />
+            <NavBar text="Review Critical Experiences"/>
             <CoachCritExpReview />
           </CoachProtectedRoute>
 
@@ -95,7 +95,7 @@ export default function App() {
             exact
             path="/manage-client/:id"
           >
-            <NavBar />
+            <NavBar text="Manage Client"/>
             <ManageClient />
           </CoachProtectedRoute>
 
@@ -104,7 +104,7 @@ export default function App() {
             exact
             path="/managepyramids"
           >
-            <NavBar />
+            <NavBar text="Manage Pyramids" />
             <ManagePyramids />
           </AdminProtectedRoute>
 

@@ -84,13 +84,6 @@ export default function InviteNewClient({ activeClientList }) {
 
     return (
         <div style={{ textAlign: 'center', marginTop: 10 }}>
-            {/* Page Title */}
-            <Typography
-                variant="h3"
-                gutterBottom
-            >
-                Coach Dashboard
-            </Typography>
             <Grid
                 container
                 className={classes.container}

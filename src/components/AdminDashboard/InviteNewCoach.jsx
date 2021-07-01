@@ -61,12 +61,6 @@ export default function InviteNewCoach() {
 
     return (
         <div style={{ textAlign: 'center', marginTop: 10 }}>
-            <Typography
-                variant="h3"
-                gutterBottom
-            >
-                Admin Dashboard
-            </Typography>
             <Button
                 onClick={() => setOpen(true)}
                 variant="outlined"

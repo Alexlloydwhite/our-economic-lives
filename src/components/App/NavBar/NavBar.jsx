@@ -29,7 +29,9 @@ export default function NavBar({ text }) {
       <AppBar className={classes.navbar} elevation={1}>
         <Toolbar>
           <Drawer className={classes.menuButton} />
-          <Typography>{text}</Typography>
+          <Typography variant="h5">
+            {text}
+          </Typography>
         </Toolbar>
       </AppBar>
     </div>
