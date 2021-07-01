@@ -5,7 +5,6 @@ import {
     Button,
     IconButton,
     Menu,
-    MenuItem,
 } from '@material-ui/core'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // React
@@ -28,8 +27,8 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
         });
     }
 
-    const handleCritExpClick = (id) => {
-        history.push(`/crit-review/${id}`);
+    const handleManageClientClick = (id) => {
+        history.push(`/manage-client/${id}`);
     }
 
     return (
@@ -55,9 +54,17 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
                                     size="small"
                                     variant="outlined"
                                     className={classes.tableButton}
-                                    onClick={() => handleCritExpClick(client.id)}
+                                    onClick={() => history.push(`/crit-review/${client.id}`)}
                                 >
-                                    Critical Experiences
+                                    Crit xp
+                                </Button>
+                                <Button
+                                    size="small"
+                                    variant="outlined"
+                                    className={classes.tableButton}
+                                    onClick={() => handleManageClientClick(client.id)}
+                                >
+                                    Manage
                                 </Button>
                             </TableCell>
                             <TableCell>

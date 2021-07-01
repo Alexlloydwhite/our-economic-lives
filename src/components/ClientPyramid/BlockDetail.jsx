@@ -58,9 +58,11 @@ export default function BlockDetail () {
     const classes = useStyles();
     // const savedSkills = useSelector((store) => store.savedskills);
     const detail = useSelector((store) => store.blockDetails);
+    const user = useSelector((store) => store.user);
     console.log('in detail', detail);
     const [newExp, setNewExp] = useState('');
     const [newExpError, setNewExpError] = useState(false);
+    const user_id = user.id;
     const block_id = detail.id;
 
     // Validate skill form
@@ -74,18 +76,16 @@ export default function BlockDetail () {
     }
 
     // Once validated send new experience to saga
-    // const submitExp = () => {
-    //     console.log('in submitExp');
-    //     dispatch({
-    //         type: 'CREATE_EXP', payload: { 
-    //             user_id: user_id,
-    //             block_id: detail.id,
-    //             user_text: newExp 
-    //         }
-    //     })
-    //     // Clear Critical Experience form
-    //     setNewExp('');
-    // }
+    const submitExp = () => {
+        dispatch({ type: 'CREATE_EXP', payload: {
+                 user_id: user_id,
+                block_id: block_id,
+                user_text: newExp 
+        }
+    })
+        // Clear Critical Experience form
+        setNewExp('');
+    }
 
     // Setting state for backdrop 
     const [open, setOpen] = useState(false);
@@ -142,13 +142,13 @@ export default function BlockDetail () {
                 rows={5}
                 variant="outlined"
                 value={newExp}
+                onChange={(e) => setNewExp(e.target.value)}
             />
             <Button 
                 type="submit" 
                 variant="contained" 
                 color="primary"
                 size="large" 
-                onChange={(e) => setNewSkill(e.target.value)}
             >
                 Submit for review
             </Button>

@@ -26,6 +26,10 @@ router.post('/create-client', rejectUnauthorized, (req, res,) => {
         });
 });
 
+router.post('/toggle-building-block', rejectUnauthorized, (req,res) => {
+    console.log(req.body);
+});
+
 // Handles GET request for users that are
 // associated with a particular coach
 router.get('/client-list/:id?', rejectUnauthorized, (req, res) => {
@@ -67,6 +71,30 @@ router.get('/client-list/:id?', rejectUnauthorized, (req, res) => {
             console.log(`IN /api/coach GET router. ${err}`);
         });
 });
+
+router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
+    const clientId = req.params.id;
+    
+    const queryText1 = `SELECT u.industry_pyramid FROM "user" u WHERE id = $1;`;
+
+    const queryText2 = `SELECT * FROM building_block bb
+    JOIN industry_pyramid_building_block ipbb ON bb.id = ipbb.building_block_id
+    WHERE ipbb.industry_pyramid_id = $1;`
+
+    const client = await pool.connect();
+    try {
+        let pyramidId = await client.query(queryText1, [clientId]);
+        pyramidId = pyramidId.rows[0].industry_pyramid;
+        const pyramidData = await client.query(queryText2, [pyramidId]);
+        res.send(pyramidData.rows);
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    } finally {
+        client.release();
+    }
+});
+
 
 router.put('/deactivate-client/:id', rejectUnauthorized, (req, res) => {
     const clientId = req.params.id;

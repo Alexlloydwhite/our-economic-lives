@@ -1,7 +1,7 @@
 import { put } from 'redux-saga/effects';
 import axios from 'axios';
 
-export default function* fetchClients(action) {
+export default function* fetchClients() {
     try {
         // Get data from end point
         const clients = yield axios.get(`/api/coach/client-list`);
