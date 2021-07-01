@@ -12,27 +12,27 @@ export default function RecommendBuildingBlocks({ block, params }) {
             type: 'TOGGLE_RECOMMENDED_BLOCK',
             user_id: params.id,
             block_id: block.id,
+            client_id: params.id
         });
     }
 
     return (
         <>
-        {block.is_recommended ?
-            <Chip
-                key={block.id}
-                label={block.name}
-                onClick={() => handleBlockChipClick(block)}
-                color="primary"
-            />
-            :
-            <Chip
-                key={block.id}
-                label={block.name}
-                onClick={() => handleBlockChipClick(block)}
-                color="default"
-            />
-        }
-
+            {block.is_recommended ?
+                <Chip
+                    key={block.id}
+                    label={block.name}
+                    onClick={() => handleBlockChipClick(block)}
+                    color="primary"
+                />
+                :
+                <Chip
+                    key={block.id}
+                    label={block.name}
+                    onClick={() => handleBlockChipClick(block)}
+                    color="default"
+                />
+            }
         </>
     );
 }
