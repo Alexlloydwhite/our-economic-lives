@@ -26,7 +26,7 @@ export default function NavBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar className={classes.navbar}>
+      <AppBar className={classes.navbar} elevation={1}>
         <Toolbar>
           <Drawer className={classes.menuButton} />
           <Typography>Our Economic Lives</Typography>

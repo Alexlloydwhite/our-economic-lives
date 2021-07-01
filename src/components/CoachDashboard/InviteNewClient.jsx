@@ -101,6 +101,7 @@ export default function InviteNewClient({ activeClientList }) {
                 <Grid
                     item
                     component={Paper}
+                    variant="outlined"
                     className={classes.table}
                 >
                     <Typography

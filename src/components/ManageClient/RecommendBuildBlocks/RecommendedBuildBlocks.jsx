@@ -58,7 +58,7 @@ export default function RecommendedBuildBlocks() {
                         Recommend Building Blocks
                     </Typography>
                     <Typography>
-                        You may recommend up to 3 building blocks to your client
+                        You may recommend up to 3 building blocks for you client to complete
                     </Typography>
                 </Grid>
                 {pyramidData.map((block) => (
