@@ -26,8 +26,19 @@ router.post('/create-client', rejectUnauthorized, (req, res,) => {
         });
 });
 
-router.post('/toggle-building-block', rejectUnauthorized, (req,res) => {
+router.post('/toggle-building-block', rejectUnauthorized, (req, res) => {
     console.log(req.body);
+    const queryText = `
+    INSERT INTO user_blocks ("user_id", building_block_id, is_recommended)
+    VALUES ($1, $2, $3);`;
+    pool
+        .query(queryText, [req.body.user_id, req.body.block_id, true])
+        .then(() => {
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log(`IN /coach/toggle-building-block ${err}`);
+        })
 });
 
 // Handles GET request for users that are
@@ -74,7 +85,7 @@ router.get('/client-list/:id?', rejectUnauthorized, (req, res) => {
 
 router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
     const clientId = req.params.id;
-    
+
     const queryText1 = `SELECT u.industry_pyramid FROM "user" u WHERE id = $1;`;
 
     const queryText2 = `SELECT * FROM building_block bb

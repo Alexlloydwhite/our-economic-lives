@@ -13,7 +13,7 @@ export default function RecommendBuildingBlocks({ block, params }) {
             type: 'TOGGLE_RECOMMENDED_BLOCK',
             user_id: params.id,
             block_id: block.id,
-        })
+        });
     }
 
     return (
