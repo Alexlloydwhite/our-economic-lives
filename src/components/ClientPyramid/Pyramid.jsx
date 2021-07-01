@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { theme } from '../Theme/Theme'
 import BlockSlider from './BlockSlider'
+import PopulateDatabaseButton from "./PopulateDatabaseButton"
 
 
 
@@ -207,6 +208,7 @@ export default function Pyramid() {
       <Tier tier={3} />
       <Tier tier={2} />
       <Tier tier={1} />
+      <PopulateDatabaseButton />
     </div>
   )
 }
