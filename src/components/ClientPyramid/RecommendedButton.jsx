@@ -10,9 +10,12 @@ import Backdrop from '@material-ui/core/Backdrop';
       zIndex: theme.zIndex.drawer + 1,
       color: '#fff',
     },
-    button: {
+    div: {
       textAlign: 'center',
       margin: '1rem',
+    },
+    button: {
+      background: theme.palette.info.light,
     }
   }));
 
@@ -20,7 +23,7 @@ export default function RecommendedButton() {
   const classes = useStyles();
   const id = useSelector(store => store.user.id);
   const dispatch = useDispatch();
-  console.log('in recBB user', id);
+  // console.log('in recBB user', id);
 
   // Setting state for backdrop 
   const [open, setOpen] = useState(false);
@@ -36,10 +39,11 @@ export default function RecommendedButton() {
 
   return (
     <>
-     <div className={classes.button}>
+     <div className={classes.div}>
         <Button 
           variant="contained" 
           color="primary"
+          // className={classes.button}
           onClick={handleToggle}
           >
             Recommended Building Blocks
