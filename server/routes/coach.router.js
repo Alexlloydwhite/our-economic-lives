@@ -118,4 +118,19 @@ router.put('/activate-client/:id', rejectUnauthorized, (req, res) => {
         });
 });
 
+router.get('/unapproved_Exp/:id', rejectUnauthorized, (req, res) => {
+    const user_id = req.params.id;
+    let queryText = ` SELECT * FROM critical_experience
+    JOIN user_blocks on user_blocks.id = critical_experience.user_blocks_id
+    JOIN building_block on building_block.id = user_blocks.building_block_id
+	WHERE user_blocks.user_id = $1 AND critical_experience.is_approved = false;`
+    pool.query(queryText, [user_id])
+    .then(result => {
+      res.send(result.rows)
+    })
+    .catch(error => {
+      console.log('Unable to retrieve critical experiences', error);
+    })
+  })
+
 module.exports = router;
