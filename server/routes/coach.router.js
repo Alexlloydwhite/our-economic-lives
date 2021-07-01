@@ -38,7 +38,7 @@ router.post('/toggle-building-block', rejectUnauthorized, (req, res) => {
         })
         .catch((err) => {
             console.log(`IN /coach/toggle-building-block ${err}`);
-        })
+        });
 });
 
 // Handles GET request for users that are
@@ -90,13 +90,16 @@ router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
 
     const queryText2 = `SELECT * FROM building_block bb
     JOIN industry_pyramid_building_block ipbb ON bb.id = ipbb.building_block_id
-    WHERE ipbb.industry_pyramid_id = $1;`
+    LEFT JOIN "user_blocks" ub 
+        ON ub.building_block_id = bb.id
+        AND ub.user_id = $1
+    WHERE ipbb.industry_pyramid_id = $2;`
 
     const client = await pool.connect();
     try {
         let pyramidId = await client.query(queryText1, [clientId]);
         pyramidId = pyramidId.rows[0].industry_pyramid;
-        const pyramidData = await client.query(queryText2, [pyramidId]);
+        const pyramidData = await client.query(queryText2, [clientId, pyramidId]);
         res.send(pyramidData.rows);
     } catch (err) {
         console.log(err);

@@ -31,6 +31,9 @@ export default function ManageClient() {
                     <RecommendBuildingBlocks block={block} params={params} />
                 ))}
             </div>
+            <pre>
+                {JSON.stringify(pyramidData, null, 2)}
+            </pre>
         </div>
     );
 }
