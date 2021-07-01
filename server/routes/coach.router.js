@@ -168,6 +168,20 @@ router.get('/unapproved_Exp/:id', rejectUnauthorized, (req, res) => {
     .catch(error => {
       console.log('Unable to retrieve critical experiences', error);
     })
-  })
+});
+
+router.post('/add_coach_comments', rejectUnauthorized, (req, res) => {
+    const coach_comments = req.body.coach_comments;
+    const critical_experience_id = req.body.id;
+    let queryText = `UPDATE "critical_experience"
+    SET coach_comments = $1
+    WHERE id = $2;`;
+    pool.query(queryText, [coach_comments, critical_experience_id])
+        .then(() => res.sendStatus(200))
+        .catch((err) => {
+            console.log(`Error in /api/coach/add_coach_comments`, err);
+            res.sendStatus(500);
+        })
+});
 
 module.exports = router;
