@@ -3,7 +3,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 // M-UI
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,10 +13,6 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 // Styling
 const useStyles = makeStyles((theme) => ({
-    // content: { 
-    //     margin: '1rem',
-    //     alignItems: 'center'
-    // },
     root: { // root styles the div, background of building block list
         display: 'flex',
         flexWrap: 'wrap',
@@ -56,12 +51,9 @@ export default function RecommendedBlocks() {
     const dispatch = useDispatch();
     const blocks = useSelector((store) => store.clientBlocks);
     const user_id = useSelector((store) => store.user.id);
-    console.log('in reBB block', blocks);
-    console.log('in reBB user', user_id);
 
     // send user to recommended block detail using history, params
     const handleClick = (id) => {
-
         console.log('in rec click', id);
         // dispatch selected block details to be stored detail reducer
         dispatch({ type: 'SET_DETAIL', payload: id });
@@ -69,31 +61,6 @@ export default function RecommendedBlocks() {
     }
 
     return (
-        // <Card >
-        //     <CardContent>
-        //         {/* Helper Text */}
-        //         <Typography variant="h5" >
-        //             Recommended Building Blocks:
-        //         </Typography>
-        //         {/* Iterate through client blocks to check if recommended, and render if true */}
-        //         {blocks.map((block, i) => {
-        //             if( block.is_recommended === true ) {
-        //                 return (
-        //                     <Button 
-        //                     key={i}
-        //                     variant="contained" 
-        //                     color="primary" 
-        //                     className={classes.content}
-        //                     onClick={() => handleClick(block)}
-        //                     >
-        //                     {block.name}
-        //                 </Button>
-        //                 )
-        //             }
-        //         })}
-        //     </CardContent>
-        // </Card>
-
         
     <div className={classes.root} >
       {/* Left Arrow */}
@@ -114,10 +81,10 @@ export default function RecommendedBlocks() {
           </GridListTile>
           )
         }
-        }):''}
+        }):'No recommended building blocks!'}
       </GridList>
       {/* Right Arrow */}
       <ArrowForwardIosOutlinedIcon className={classes.arrow} />
     </div>
-    )
+  )
 }
