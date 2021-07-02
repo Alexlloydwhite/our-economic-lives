@@ -38,13 +38,15 @@ export default function CritExpReviewCard({ experience, classes }) {
     }
 
     const addComment = (experienceId) => {
-        console.log(experienceId);
-        dispatch({
-            type: 'ADD_COACH_COMMENT',
-            coachComment: coachComment,
-            id: experienceId
-        });
-        setOpenDialog(false);
+        if (coachComment) {
+            dispatch({
+                type: 'ADD_COACH_COMMENT',
+                coachComment: coachComment,
+                id: experienceId,
+                userId: params.id
+            });
+            setOpenDialog(false);
+        }
     }
 
     return (
@@ -54,14 +56,14 @@ export default function CritExpReviewCard({ experience, classes }) {
                     {experience.name}
                 </Typography>
                 <Typography variant="subtitle2">
-                    <b>Client submitted critical experience:</b>
+                    <b>Client submitted critical experience:</b>{' '}
                     "{experience.user_text}"
                 </Typography>
                 {experience.coach_comments &&
                     <>
                         <Divider style={{ marginTop: 10, marginBottom: 10 }} />
                         <Typography variant="subtitle2" >
-                            <b>Your comment:</b>
+                            <b>Your comment:</b>{' '}
                             {experience.coach_comments}
                         </Typography>
                     </>

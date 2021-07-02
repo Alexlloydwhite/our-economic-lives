@@ -14,7 +14,8 @@ router.get('/critical-experience/:id', rejectUnauthorized, (req, res) => {
     FROM critical_experience cr
     JOIN user_blocks ub ON cr.user_blocks_id = ub.id
     JOIN building_block bb ON bb.id = ub.building_block_id
-    WHERE ub.user_id = $1 AND cr.is_approved = false;`
+    WHERE ub.user_id = $1 AND cr.is_approved = false
+    ORDER BY cr.id ASC;`
     pool
         .query(queryText, [req.params.id])
         .then((result) => res.send(result.rows))
