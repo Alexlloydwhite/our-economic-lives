@@ -22,7 +22,7 @@ export default function CoachCritExpReview({ classes }) {
     const dispatch = useDispatch();
     const params = useParams();
     const [openDialog, setOpenDialog] = useState(false);
-    const experiences = useSelector(store => store.unapprovedExp);
+    const experiences = useSelector(store => store.criticalExperiences);
 
     // Grabbing unapproved experiences from DB on page load
     useEffect(() => {

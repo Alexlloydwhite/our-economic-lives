@@ -14,7 +14,7 @@ router.get('/critical-experience/:id', rejectUnauthorized, (req, res) => {
     WHERE ub.user_id = $1;`
     pool
         .query(queryText, [req.params.id])
-        .then(() => res.send(result.rows))
+        .then((result) => res.send(result.rows))
         .catch((err) => {
             res.sendStatus(500);
             console.log(`IN /coach/critical-experience/${req.params.id}: ${err}`)
