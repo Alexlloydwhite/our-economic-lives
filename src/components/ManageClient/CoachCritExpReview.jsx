@@ -9,7 +9,11 @@ import {
     Button,
     Box,
     Grid,
-    Paper
+    Paper,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
 } from '@material-ui/core';
 import CommentIcon from '@material-ui/icons/Comment';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
@@ -17,15 +21,16 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 export default function CoachCritExpReview({ classes }) {
     const dispatch = useDispatch();
     const params = useParams();
+    const [openDialog, setOpenDialog] = useState(false);
     const experiences = useSelector(store => store.unapprovedExp);
 
     // Grabbing unapproved experiences from DB on page load
     useEffect(() => {
         dispatch({
-            type: 'FETCH_UNAPPROVED',
+            type: 'FETCH_CRIT_EXP',
             id: params.id
         });
-    }, [])
+    }, []);
 
     return (
         <div className={classes.container}>
@@ -73,6 +78,7 @@ export default function CoachCritExpReview({ classes }) {
                                     variant="contained"
                                     color="primary"
                                     size="large"
+                                    onClick={() => setOpenDialog(true)}
                                 >
                                     <CommentIcon />
                                 </Button>
@@ -81,6 +87,11 @@ export default function CoachCritExpReview({ classes }) {
                     ))}
                 </Grid>
             </Grid>
+            <Dialog open={openDialog}>
+                <DialogTitle>
+                    Coach Comment
+                </DialogTitle>
+            </Dialog>
         </div >
     );
 }
