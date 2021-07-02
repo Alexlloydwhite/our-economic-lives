@@ -152,8 +152,8 @@ export default function Login() {
                 {/* Temp stuff */}
                 <h5>Temp testing buttons</h5>
                 <button onClick={() => {
-                    setEmail('test1');
-                    setPassword('test1');
+                    setEmail('kheart@hotmail.com');
+                    setPassword('1234567890');
                 }}>registered user</button>
                 <button onClick={() => {
                     setEmail('test2');

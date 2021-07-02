@@ -19,8 +19,8 @@ import fetchDetail from './fetchDetail.saga';
 import fetchClientPyramid from './fetchClientPyramid.saga';
 import toggleBuildingBlock from './toggleBuildingBlock.saga';
 import unapprovedExp from './unapprovedExp.saga';
-import createClient from './createClient.saga';
 import fetchCritExp from './fetchCritExp.saga';
+import createClient from './createClient.saga';
 import approveCritExp from './approveCritExp.saga';
 import addCoachComment from './addCoachComment.saga';
 
