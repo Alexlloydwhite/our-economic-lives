@@ -116,13 +116,29 @@ router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
     LEFT JOIN "user_blocks" ub 
         ON ub.building_block_id = bb.id
         AND ub.user_id = $1
-    WHERE ipbb.industry_pyramid_id = $2;`
+    WHERE ipbb.industry_pyramid_id = $2
+    ORDER BY bb.name ASC;`
+    const queryText3 = `
+    SELECT bb.id, bb.name, ipbb.industry_pyramid_id, ub.is_recommended 
+    FROM building_block bb
+    JOIN industry_pyramid_building_block ipbb ON bb.id = ipbb.building_block_id
+    LEFT JOIN "user_blocks" ub 
+    ON ub.building_block_id = bb.id
+    AND ub.user_id = $1
+    WHERE ipbb.industry_pyramid_id = $2 OR ipbb.industry_pyramid_id = 1
+    ORDER BY bb.name ASC;`;
+
     const client = await pool.connect();
     try {
         let pyramidId = await client.query(queryText1, [clientId]);
         pyramidId = pyramidId.rows[0].industry_pyramid;
-        const pyramidData = await client.query(queryText2, [clientId, pyramidId]);
-        res.send(pyramidData.rows);
+        if (pyramidId === 1) {
+            const pyramidData = await client.query(queryText2, [clientId, pyramidId]);
+            res.send(pyramidData.rows);
+        } else {
+            const allBuildingBlocks = await client.query(queryText3, [clientId, pyramidId]);
+            res.send(allBuildingBlocks.rows);
+        }
     } catch (err) {
         console.log(err);
         res.sendStatus(500);

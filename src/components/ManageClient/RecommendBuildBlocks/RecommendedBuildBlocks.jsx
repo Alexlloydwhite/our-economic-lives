@@ -1,35 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router";
 
 import BuildingBlockChip from './BuildingBlockChip';
 
-import { Typography, Grid, Paper } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-// Styles
-const useStyles = makeStyles((theme) => ({
-    container: {
-        width: 'auto',
-        marginTop: theme.spacing(3),
-        marginBottom: theme.spacing(3),
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        [theme.breakpoints.up(1000 + theme.spacing(2) * 2)]: {
-            width: 1000,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-        },
-    },
-    chip: {
-        padding: theme.spacing(0.5)
-    },
-    header: {
-        padding: theme.spacing(1)
-    }
-}));
+import {
+    Typography,
+    Grid,
+    Paper
+} from '@material-ui/core';
 
-export default function RecommendedBuildBlocks() {
-    const classes = useStyles();
+export default function RecommendedBuildBlocks({ classes }) {
     const dispatch = useDispatch();
     const params = useParams();
     const pyramidData = useSelector(store => store.clientPyramid);

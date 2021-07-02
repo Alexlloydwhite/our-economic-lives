@@ -22,7 +22,7 @@ router.get('/info/:block_id', (req, res) => {
     })
     .catch(error => {
       console.log('Unable to get building block info', error);
-    })
+    });
 });
 
 router.get('/user-data/:block_id/', rejectUnauthenticated, (req, res) => {
@@ -36,8 +36,8 @@ router.get('/user-data/:block_id/', rejectUnauthenticated, (req, res) => {
     })
     .catch(error => {
       console.log('Unable to retrieve critical experiences', error);
-    })
-})
+    });
+});
 
 router.post('/add_critical_experience', rejectUnauthenticated, async (req, res) => {
   const client = await pool.connect();

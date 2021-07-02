@@ -3,29 +3,21 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router";
 // M-UI
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography, TextField, Button, Box } from '@material-ui/core';
+import {
+    Typography,
+    TextField,
+    Button,
+    Box,
+    Grid,
+    Paper
+} from '@material-ui/core';
 import CommentIcon from '@material-ui/icons/Comment';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-// Styling
-const useStyles = makeStyles((theme) => ({
-    root: {
-        textAlign: 'Center',
-        marginLeft: '10%',
-        marginTop: '2rem',
-        width: '80%',
-    },
-    button: {
-        textAlign: 'Center',
-    },
-  }));
 
-export default function CoachCritExpReview() {
-    const classes = useStyles();
+export default function CoachCritExpReview({ classes }) {
     const dispatch = useDispatch();
     const params = useParams();
     const experiences = useSelector(store => store.unapprovedExp);
-    // console.log('experiences', experiences);
 
     // Grabbing unapproved experiences from DB on page load
     useEffect(() => {
@@ -36,49 +28,60 @@ export default function CoachCritExpReview() {
     }, [])
 
     return (
-        <div>
-            <div style={{ textAlign: 'center', marginTop: '6rem' }}>
-                <Typography variant='h6'>
-                   <b>Critical Experiences Awaiting Review</b> 
-                </Typography>
-            </div>
-            <div>
-                {experiences.map((experience, i) => (
-                    <>
-                    {/* Critical Experience */}
-                    <TextField
-                        key={i}
-                        className={classes.root}
-                        label={experience.name}
-                        multiline
-                        rows={5}
-                        variant="outlined"
-                        value={experience.user_text}
-                    />
-                    <Box className={classes.button}>
-                    {/* Approve */}
-                    <Button 
-                        type="submit" 
-                        variant="contained" 
-                        color="primary"
-                        size="large" 
-                        >
-                        <ThumbUpIcon />
-                    </Button>
-                    {/* Comment */}
-                    <Button 
-                        type="submit" 
-                        variant="contained" 
-                        color="primary"
-                        size="large" 
-                        >
-                        <CommentIcon />
-                    </Button>
-                    </Box>
-                    </>
-                ))}
-            </div>
-        </div>
+        <div className={classes.container}>
+            <Grid
+                container
+                component={Paper}
+                variant="outlined"
+                direction="row"
+            >
+                <Grid
+                    item
+                    xs={12}
+                    className={classes.header}
+                >
+                    <Typography variant="h4">
+                        Review Critical Experiences
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    {experiences.map((experience, i) => (
+                        <>
+                            {/* Critical Experience */}
+                            <TextField
+                                key={i}
+                                className={classes.root}
+                                label={experience.name}
+                                multiline
+                                rows={5}
+                                variant="outlined"
+                                value={experience.user_text}
+                            />
+                            <Box className={classes.button}>
+                                {/* Approve */}
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    size="large"
+                                >
+                                    <ThumbUpIcon />
+                                </Button>
+                                {/* Comment */}
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    size="large"
+                                >
+                                    <CommentIcon />
+                                </Button>
+                            </Box>
+                        </>
+                    ))}
+                </Grid>
+            </Grid>
+        </div >
     );
 }
 

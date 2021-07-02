@@ -15,6 +15,24 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         textAlign: 'center',
     },
+    container: {
+        width: 'auto',
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3),
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        [theme.breakpoints.up(1000 + theme.spacing(2) * 2)]: {
+            width: 1000,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        },
+    },
+    chip: {
+        padding: theme.spacing(0.5)
+    },
+    header: {
+        padding: theme.spacing(1)
+    }
 }));
 
 function TabPanel(props) {
@@ -40,15 +58,19 @@ export default function ManageClient() {
 
     return (
         <div className={classes.root}>
-            <Tabs value={value} onChange={handleTabChange} centered>
+            <Tabs
+                value={value}
+                onChange={handleTabChange}
+                centered
+            >
                 <Tab label="Critical Experiences" />
                 <Tab label="Building Blocks" />
             </Tabs>
             <TabPanel value={value} index={0}>
-                <CoachCritExpReview />
+                <CoachCritExpReview classes={classes} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <RecommendedBuildBlocks />
+                <RecommendedBuildBlocks classes={classes} />
             </TabPanel>
         </div>
     );
