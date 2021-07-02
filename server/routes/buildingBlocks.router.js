@@ -22,7 +22,7 @@ router.get('/info/:block_id', (req, res) => {
     })
     .catch(error => {
       console.log('Unable to get building block info', error);
-    })
+    });
 });
 
 router.get('/user-data/:block_id/', rejectUnauthenticated, (req, res) => {
@@ -36,10 +36,11 @@ router.get('/user-data/:block_id/', rejectUnauthenticated, (req, res) => {
     })
     .catch(error => {
       console.log('Unable to retrieve critical experiences', error);
-    })
-})
+    });
+});
 
 router.post('/add_critical_experience', rejectUnauthenticated, async (req, res) => {
+  console.log(req.body);
   const client = await pool.connect();
   try {
     let queryText1 = `INSERT INTO critical_experience ("user_text", "user_blocks_id")
@@ -51,11 +52,12 @@ router.post('/add_critical_experience', rejectUnauthenticated, async (req, res) 
     RETURNING id;`;
     let userBlocksId = await client.query(queryText2, [req.body.user_id, req.body.block_id]);
     userBlocksId = userBlocksId.rows;
-    if (userBlocksId) {
+    console.log(userBlocksId);
+    if (userBlocksId.id) {
       await client.query(queryText1, [req.body.user_text, userBlocksId[0].id]);
     } else {
-      userBlocksId = await client.query(queryText3, [req.body.user_id, req.body.block_id]);
-      await client.query(queryText1, [req.body.user_text, userBlocksId[0].id]);
+      const samsVar = await client.query(queryText3, [req.body.user_id, req.body.block_id]);
+      await client.query(queryText1, [req.body.user_text, samsVar.rows[0].id]);
     };
     res.sendStatus(200);
   } catch (error) {

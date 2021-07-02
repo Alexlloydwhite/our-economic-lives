@@ -50,20 +50,17 @@ export default function BlockDetail () {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_BLOCK_DETAIL', payload: id })
-    // dispatch({ type: 'FETCH_UNAPPROVED', id: user_id })
+    dispatch({ type: 'FETCH_UNAPPROVED', id: user_id, bbId: id })
   }, [])
 
     const classes = useStyles();
     const savedExp = useSelector((store) => store.unapprovedExp);
     const detail = useSelector((store) => store.blockDetails);
     const user = useSelector((store) => store.user);
-    console.log('in detail', detail);
     const [newExp, setNewExp] = useState('');
     const [newExpError, setNewExpError] = useState(false);
     const user_id = user.id;
     const block_id = detail.id;
-    console.log('in saveXP', savedExp);
-
 
     // Validate skill form
     const validateForm = (e) => {

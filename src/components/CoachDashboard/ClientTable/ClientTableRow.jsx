@@ -49,15 +49,6 @@ export default function ClientTableRow({ client, clientList, StyledTableRow, cla
                     {client.is_active ?
                         <>
                             <TableCell>
-                                {/* Btn to open critical experiences view */}
-                                <Button
-                                    size="small"
-                                    variant="outlined"
-                                    className={classes.tableButton}
-                                    onClick={() => history.push(`/crit-review/${client.id}`)}
-                                >
-                                    Crit xp
-                                </Button>
                                 <Button
                                     size="small"
                                     variant="outlined"

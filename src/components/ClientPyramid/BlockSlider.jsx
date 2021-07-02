@@ -57,7 +57,6 @@ export default function PyramidTier(props) {
   // Click handler to capture block id and dispatch to detail store
   const handleClick = (id) => {
     dispatch({ type: 'SET_DETAIL', payload: id });
-    dispatch({ type: 'FETCH_UNAPPROVED', id: user_id });
     history.push(`/blockDetail/${id}`);  
   }
 

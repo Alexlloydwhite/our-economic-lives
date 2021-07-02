@@ -6,6 +6,24 @@ const {
     rejectUnauthorized,
 } = require('../modules/coachAuthorization-middleware');
 
+router.get('/critical-experience/:id', rejectUnauthorized, (req, res) => {
+    const queryText = `
+    SELECT 
+        cr.id, cr.user_text, cr.is_approved, cr.coach_comments, cr.user_blocks_id,
+	    ub.building_block_id, ub.user_id, bb.name  
+    FROM critical_experience cr
+    JOIN user_blocks ub ON cr.user_blocks_id = ub.id
+    JOIN building_block bb ON bb.id = ub.building_block_id
+    WHERE ub.user_id = $1;`
+    pool
+        .query(queryText, [req.params.id])
+        .then((result) => res.send(result.rows))
+        .catch((err) => {
+            res.sendStatus(500);
+            console.log(`IN /coach/critical-experience/${req.params.id}: ${err}`)
+        });
+});
+
 // Handles POST request with new user data
 // This is the end point used when a coach
 // adds a new client to their team
@@ -116,13 +134,28 @@ router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
     LEFT JOIN "user_blocks" ub 
         ON ub.building_block_id = bb.id
         AND ub.user_id = $1
-    WHERE ipbb.industry_pyramid_id = $2;`
+    WHERE ipbb.industry_pyramid_id = $2
+    ORDER BY bb.name ASC;`
+    const queryText3 = `
+    SELECT bb.id, bb.name, ipbb.industry_pyramid_id, ub.is_recommended 
+    FROM building_block bb
+    JOIN industry_pyramid_building_block ipbb ON bb.id = ipbb.building_block_id
+    LEFT JOIN "user_blocks" ub 
+    ON ub.building_block_id = bb.id
+    AND ub.user_id = $1
+    WHERE ipbb.industry_pyramid_id = $2 OR ipbb.industry_pyramid_id = 1
+    ORDER BY bb.name ASC;`;
     const client = await pool.connect();
     try {
         let pyramidId = await client.query(queryText1, [clientId]);
         pyramidId = pyramidId.rows[0].industry_pyramid;
-        const pyramidData = await client.query(queryText2, [clientId, pyramidId]);
-        res.send(pyramidData.rows);
+        if (pyramidId === 1) {
+            const pyramidData = await client.query(queryText2, [clientId, pyramidId]);
+            res.send(pyramidData.rows);
+        } else {
+            const allBuildingBlocks = await client.query(queryText3, [clientId, pyramidId]);
+            res.send(allBuildingBlocks.rows);
+        }
     } catch (err) {
         console.log(err);
         res.sendStatus(500);
@@ -154,19 +187,21 @@ router.put('/activate-client/:id', rejectUnauthorized, (req, res) => {
 });
 
 // Removed rejectUnauthorized so unapproved_Exp router/saga could be reused from client side block detail
-router.get('/unapproved_Exp/:id', (req, res) => {
+router.get('/unapproved_Exp/:id/:bbId', (req, res) => {
     const user_id = req.params.id;
-    let queryText = ` SELECT * FROM critical_experience
+    const buildingBlockId = req.params.bbId;
+    let queryText = `SELECT * FROM critical_experience
     JOIN user_blocks on user_blocks.id = critical_experience.user_blocks_id
-    JOIN building_block on building_block.id = user_blocks.building_block_id
-	WHERE user_blocks.user_id = $1 AND critical_experience.is_approved = false;`
-    pool.query(queryText, [user_id])
-    .then(result => {
-      res.send(result.rows)
-    })
-    .catch(error => {
-      console.log('Unable to retrieve critical experiences', error);
-    })
+    WHERE user_blocks.user_id = $1 
+    AND critical_experience.is_approved = false 
+    AND user_blocks.building_block_id = $2;`
+    pool.query(queryText, [user_id, buildingBlockId])
+        .then(result => {
+            res.send(result.rows)
+        })
+        .catch(error => {
+            console.log('Unable to retrieve critical experiences', error);
+        })
 });
 
 router.post('/add_coach_comments', rejectUnauthorized, (req, res) => {
