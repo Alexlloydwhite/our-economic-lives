@@ -14,7 +14,8 @@ router.get('/critical-experience/:id', rejectUnauthorized, (req, res) => {
     FROM critical_experience cr
     JOIN user_blocks ub ON cr.user_blocks_id = ub.id
     JOIN building_block bb ON bb.id = ub.building_block_id
-    WHERE ub.user_id = $1;`
+    WHERE ub.user_id = $1 AND cr.is_approved = false
+    ORDER BY cr.id ASC;`
     pool
         .query(queryText, [req.params.id])
         .then((result) => res.send(result.rows))
@@ -186,6 +187,18 @@ router.put('/activate-client/:id', rejectUnauthorized, (req, res) => {
         });
 });
 
+router.put('/approve-crit-experience/:id', rejectUnauthorized, (req, res) => {
+    console.log(req.params);
+    const queryText = `UPDATE critical_experience SET is_approved = true WHERE id=$1;`
+    pool
+        .query(queryText, [req.params.id])
+        .then(() => res.sendStatus(200))
+        .catch((err) => {
+            console.log(`IN /approve-crit-experience/${req.params.id}: ${err}`);
+            res.sendStatus(500);
+        });
+});
+
 // Removed rejectUnauthorized so unapproved_Exp router/saga could be reused from client side block detail
 router.get('/unapproved_Exp/:id/:bbId', (req, res) => {
     const user_id = req.params.id;
@@ -204,10 +217,12 @@ router.get('/unapproved_Exp/:id/:bbId', (req, res) => {
         })
 });
 
-router.post('/add_coach_comments', rejectUnauthorized, (req, res) => {
+router.put('/add_coach_comments', rejectUnauthorized, (req, res) => {
     const coach_comments = req.body.coach_comments;
     const critical_experience_id = req.body.id;
-    let queryText = `UPDATE "critical_experience"
+    console.log(`in add coach comments`);
+    let queryText = `
+    UPDATE "critical_experience"
     SET coach_comments = $1
     WHERE id = $2;`;
     pool.query(queryText, [coach_comments, critical_experience_id])
