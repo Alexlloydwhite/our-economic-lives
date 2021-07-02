@@ -11,17 +11,20 @@ import { theme } from '../Theme/Theme'
 
 export default function BlockSliderButton(props) {
   const block = props.block
-  const [color, setColor] = useState('');
 
-  function isComplete() {
-
-  }
+  const getColor = () => {
+    if (block.approved != 5) {
+      return theme.palette.primary.main;
+    } else {
+      return theme.palette.success.main;
+    };
+  };
 
   const useStyles = makeStyles({
     card: { // card styles the building blocks
       width: '95%',
       height: '95%',
-      background: 'linear-gradient(45deg, #3ca6fe 40%, #cdecfa 90%)',
+      background: getColor(),
       margin: '.5rem',
       textAlign: 'center',
     },
