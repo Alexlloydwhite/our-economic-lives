@@ -6,6 +6,21 @@ const {
     rejectUnauthorized,
 } = require('../modules/coachAuthorization-middleware');
 
+router.get('/critical-experience/:id', rejectUnauthorized, (req, res) => {
+    const queryText = `
+    SELECT * FROM critical_experience cr
+    JOIN user_blocks ub ON cr.user_blocks_id = ub.id
+    JOIN building_block bb ON bb.id = ub.building_block_id
+    WHERE ub.user_id = $1;`
+    pool
+        .query(queryText, [req.params.id])
+        .then(() => res.send(result.rows))
+        .catch((err) => {
+            res.sendStatus(500);
+            console.log(`IN /coach/critical-experience/${req.params.id}: ${err}`)
+        });
+});
+
 // Handles POST request with new user data
 // This is the end point used when a coach
 // adds a new client to their team
