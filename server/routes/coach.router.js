@@ -127,7 +127,6 @@ router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
     AND ub.user_id = $1
     WHERE ipbb.industry_pyramid_id = $2 OR ipbb.industry_pyramid_id = 1
     ORDER BY bb.name ASC;`;
-
     const client = await pool.connect();
     try {
         let pyramidId = await client.query(queryText1, [clientId]);
