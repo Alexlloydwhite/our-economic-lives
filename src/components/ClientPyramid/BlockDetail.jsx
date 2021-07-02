@@ -20,63 +20,57 @@ import CommentIcon from "@material-ui/icons/Comment";
 import EditIcon from "@material-ui/icons/Edit";
 // Styling
 const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(2),
-      width: "90%",
+    title: {
+        textAlign: 'Left',
+        marginLeft: '2em',
+        padding: theme.spacing(1),
     },
-  },
-  title: {
-    textAlign: "Left",
-    marginLeft: "2em",
-    padding: theme.spacing(1),
-  },
-  examples: {
-    textAlign: "Left",
-    marginLeft: "6em",
-  },
-  heading: {
-    textAlign: "Left",
-    padding: theme.spacing(1),
-    alignItems: "center",
-  },
-  box: {
-    textAlign: "Center",
-    padding: theme.spacing(2),
-  },
-  backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
-    color: "#fff",
-  },
-}));
+    examples: {
+        textAlign: 'Left',
+        marginLeft: '6em',
+    },
+    field: {
+        textAlign: 'Center',
+        marginLeft: '10%',
+        marginTop: '2rem',
+        width: '80%',
+    },
+    button: {
+        textAlign: 'Center',
+    },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+      },
+  }));
 
 export default function BlockDetail() {
   const dispatch = useDispatch();
   let { id } = useParams();
 
   useEffect(() => {
-    dispatch({ type: "FETCH_BLOCK_DETAIL", payload: id });
-  }, []);
+    dispatch({ type: 'FETCH_BLOCK_DETAIL', payload: id })
+    dispatch({ type: 'FETCH_UNAPPROVED', id: user_id, bbId: id })
+  }, [])
 
-  const classes = useStyles();
-  // const savedSkills = useSelector((store) => store.savedskills);
-  const detail = useSelector((store) => store.blockDetails);
-  const user = useSelector((store) => store.user);
-  console.log("in detail", detail);
-  const [newExp, setNewExp] = useState("");
-  const [newExpError, setNewExpError] = useState(false);
-  const user_id = user.id;
-  const block_id = detail.id;
+    const classes = useStyles();
+    const savedExp = useSelector((store) => store.unapprovedExp);
+    const detail = useSelector((store) => store.blockDetails);
+    const user = useSelector((store) => store.user);
+    const [newExp, setNewExp] = useState('');
+    const [newExpError, setNewExpError] = useState(false);
+    const user_id = user.id;
+    const block_id = detail.id;
 
-  // Validate skill form
-  const validateForm = (e) => {
-    e.preventDefault();
-    setNewExpError(false);
-    if (newExp == "") {
-      setNewExpError(true);
+    // Validate skill form
+    const validateForm = (e) => {
+        e.preventDefault();
+        setNewExpError(false)
+        if (newExp == ''){
+            setNewExpError(true)
+        }
+        submitExp();
     }
-    submitExp();
-  };
 
   // Once validated send new experience to saga
   const submitExp = () => {
@@ -91,17 +85,17 @@ export default function BlockDetail() {
     // Clear Critical Experience form
     setNewExp("");
   };
-
-  // Setting state for backdrop
-  const [open, setOpen] = useState(false);
-  // Setting handle functions for backdrop functionality
-  const handleClose = () => {
-    setOpen(false);
-  };
-  // Grabbing Id and sending to DB to retrieve user/client building blocks
-  const handleToggle = () => {
-    setOpen(!open);
-  };
+    // Setting state for backdrop 
+    const [open, setOpen] = useState(false);
+    // Setting handle functions for backdrop functionality
+    const handleClose = () => {
+        setOpen(false);
+    };
+    // Grabbing Id and sending to DB to retrieve user/client building blocks
+    const handleToggle = (xp) => {
+        // dispatch({ type: 'SET_COMMENT_CLIENT', payload: xp })
+        setOpen(!open);
+    };
 
   return (
     <>
@@ -114,13 +108,24 @@ export default function BlockDetail() {
         >
           <Typography variant="h4">{detail.name}</Typography>
         </AccordionSummary>
-
-        <Typography className={classes.title}>{detail.description}</Typography>
-        <Typography className={classes.title}>Examples:</Typography>
-        <Typography className={classes.title}>Situational awareness</Typography>
-        <Typography className={classes.title}>Business Ethics</Typography>
-        <Typography className={classes.title}>Communicating</Typography>
-        {/* {detail ? detail.array_agg.map( example => {
+                    <Typography className={classes.title}>
+                        <i>Description:</i>
+                    </Typography>
+                    <Typography className={classes.title}>
+                        {detail.description}
+                    </Typography>
+                    <Typography className={classes.title}>
+                        <i>Examples:</i>
+                    </Typography>
+                    <Typography className={classes.title}>
+                    • Situational awareness
+                    </Typography>
+                    <Typography className={classes.title}>
+                    • Business Ethics
+                    </Typography>
+                    <Typography className={classes.title}>
+                    • Communicating
+                    </Typography>
                     
                     {/* {detail ? detail.map( examples => {
                         return (
@@ -131,78 +136,74 @@ export default function BlockDetail() {
                         </AccordionDetails>
                         )
                     }):''} */}
-      </Accordion>
+            </Accordion>
 
-      <Box className={classes.box}>
-        <Typography>
-          Describe an instance that exemplifies {detail.name}.
-        </Typography>
-        <form
-          className={classes.root}
-          noValidate
-          autoComplete="off"
-          onSubmit={validateForm}
-        >
-          <TextField
-            label="Add a Critical Experience"
-            multiline
-            rows={5}
-            variant="outlined"
-            value={newExp}
-            onChange={(e) => setNewExp(e.target.value)}
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            size="large"
-          >
-            <PublishIcon />
-            &nbsp; Submit
-          </Button>
-        </form>
-      </Box>
-
-      <div className={classes.box}>
-        <Typography>Saved Experiences: 1 / 5</Typography>
-        {/* <Typography >Saved Skillz: {savedSkills.length} / 5</Typography> */}
-        <Box className={classes.root}>
-          {/* {savedskills.map(skill => ( */}
-          <>
+        <div style={{ textAlign: 'center', marginTop: '2rem', paddingLeft: '1rem', paddingRight: '1rem' }}> 
+            <Typography >
+                Describe an instance that exemplifies {detail.name}.
+            </Typography>
+        </div>
+        <form noValidate autoComplete="off" onSubmit={validateForm}>
             <TextField
-              value="If a coworker asks for help, I will always do my best to help them."
-              multiline
-              rows={5}
-              variant="outlined"
+                className={classes.field}
+                label="Add a Critical Experience"
+                multiline
+                rows={5}
+                variant="outlined"
+                value={newExp}
+                onChange={(e) => setNewExp(e.target.value)}
             />
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              size="large"
+            <Box className={classes.button}>
+            <Button 
+                type="submit" 
+                variant="contained" 
+                color="primary"
+                size="large" 
+            >
+               <PublishIcon />&nbsp; Submit 
+            </Button>
+            </Box>
+        </form>
+        
+        <div style={{ textAlign: 'center', marginTop: '3rem' }}> 
+            <Typography >Saved Experiences: {savedExp.length} / 5</Typography>
+        </div>
+        <div>
+            {savedExp.map(xp => (
+            <>
+            <TextField
+                className={classes.field}
+                label={detail.name}
+                value={xp.user_text}
+                multiline
+                rows={5}
+                variant="outlined"
+            />
+            <Box className={classes.button}>
+             <Button 
+                type="submit" 
+                variant="contained" 
+                color="primary"
+                size="large" 
             >
               <EditIcon />
             </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              size="large"
-              onClick={handleToggle}
+            <Button 
+                type="submit" 
+                variant="contained" 
+                color="primary"
+                size="large"
+                onClick={() => handleToggle(xp)} 
             >
               <CommentIcon />
             </Button>
-            <Backdrop
-              className={classes.backdrop}
-              open={open}
-              onClick={handleClose}
-            >
-              <CoachComments />
+            </Box>
+            <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
+                <CoachComments />
             </Backdrop>
-          </>
-          {/* ))} */}
-        </Box>
-      </div>
+            </>
+            ))}
+        </div>
     </>
   );
 }

@@ -1,36 +1,75 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from "react-router";
-import RecommendBuildingBlocks from './RecommendBuildBlocks/RecommendBuildingBlocks';
-import { Typography } from '@material-ui/core';
+import RecommendedBuildBlocks from "./RecommendBuildBlocks/RecommendedBuildBlocks";
+import CoachCritExpReview from './CoachCritExpReviews/CoachCritExpReview'
+import { useState } from 'react';
+// MUI
+import {
+    Tab,
+    Tabs,
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+// Styles
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+        textAlign: 'center',
+    },
+    container: {
+        width: 'auto',
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3),
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        [theme.breakpoints.up(1000 + theme.spacing(2) * 2)]: {
+            width: 1000,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        },
+    },
+    chip: {
+        padding: theme.spacing(0.5)
+    },
+    header: {
+        padding: theme.spacing(1)
+    }
+}));
 
-export default function ManageClient() {
-    const dispatch = useDispatch();
-    const params = useParams();
-    const pyramidData = useSelector(store => store.clientPyramid);
-
-    useEffect(() => {
-        dispatch({
-            type: 'FETCH_CLIENT_PYRAMID',
-            id: params.id
-        });
-    }, [])
-
+function TabPanel(props) {
+    const { children, value, index } = props;
     return (
         <div>
-            <div style={{ textAlign: 'center' }}>
-                <Typography>
-                    Recommend Building Blocks
-                </Typography>
-                <Typography>
-                    You may recommend up to 3 building blocks to your client
-                </Typography>
-            </div>
-            <div>
-                {pyramidData.map((block) => (
-                    <RecommendBuildingBlocks block={block} params={params} />
-                ))}
-            </div>
+            {value === index && (
+                <>
+                    {children}
+                </>
+            )}
+        </div>
+    );
+}
+
+export default function ManageClient() {
+    const classes = useStyles();
+    const [value, setValue] = useState(0);
+
+    const handleTabChange = (e, value) => {
+        setValue(value);
+    }
+
+    return (
+        <div className={classes.root}>
+            <Tabs
+                value={value}
+                onChange={handleTabChange}
+                centered
+            >
+                <Tab label="Critical Experiences" />
+                <Tab label="Building Blocks" />
+            </Tabs>
+            <TabPanel value={value} index={0}>
+                <CoachCritExpReview classes={classes} />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <RecommendedBuildBlocks classes={classes} />
+            </TabPanel>
         </div>
     );
 }

@@ -84,6 +84,7 @@ export default function ClientTable({ clientList, deactivatedClientList, activeC
                         className={classes.table}
                         xs={12}
                         component={Paper}
+                        variant="outlined"
                     >
                         <Grid
                             container

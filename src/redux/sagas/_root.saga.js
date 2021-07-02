@@ -1,6 +1,5 @@
 import { all, takeEvery } from 'redux-saga/effects';
 import loginSaga from './login.saga';
-import createClient from './CreateClient.saga';
 import userSaga from './user.saga';
 import registerNewUser from './register.saga';
 import fetchClients from './fetchClients.saga';
@@ -20,6 +19,8 @@ import fetchDetail from './fetchDetail.saga';
 import fetchClientPyramid from './fetchClientPyramid.saga';
 import toggleBuildingBlock from './toggleBuildingBlock.saga';
 import unapprovedExp from './unapprovedExp.saga';
+import fetchCritExp from './fetchCritExp.saga';
+import createClient from './createClient.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -46,6 +47,7 @@ export default function* rootSaga() {
   yield takeEvery('FETCH_CLIENT_PYRAMID', fetchClientPyramid);
   yield takeEvery('TOGGLE_RECOMMENDED_BLOCK', toggleBuildingBlock);
   yield takeEvery('FETCH_UNAPPROVED', unapprovedExp);
+  yield takeEvery('FETCH_CRIT_EXP', fetchCritExp);
 
   yield all([
     loginSaga(), // login saga is now registered

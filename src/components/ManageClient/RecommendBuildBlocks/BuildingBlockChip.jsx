@@ -1,11 +1,9 @@
 import Chip from '@material-ui/core/Chip';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Grid } from '@material-ui/core';
 
-export default function RecommendBuildingBlocks({ block, params }) {
+export default function BuildingBlockChip({ block, params, classes }) {
     const dispatch = useDispatch();
-    // Color of chips
-    const [color, setColor] = useState('default');
 
     const handleBlockChipClick = (block) => {
         dispatch({
@@ -17,7 +15,10 @@ export default function RecommendBuildingBlocks({ block, params }) {
     }
 
     return (
-        <div style={{ textAlign: 'center' }}>
+        <Grid
+            item
+            className={classes.chip}
+        >
             {block.is_recommended ?
                 <Chip
                     key={block.id}
@@ -33,6 +34,6 @@ export default function RecommendBuildingBlocks({ block, params }) {
                     color="default"
                 />
             }
-        </div>
+        </Grid>
     );
 }

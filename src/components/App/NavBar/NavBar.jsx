@@ -10,7 +10,7 @@ import Drawer from './Drawer';
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
-    marginBottom: 58
+    marginBottom: 70
   },
   navbar: {
     backgroundColor: theme.palette.primary.main,
@@ -21,15 +21,17 @@ const useStyles = makeStyles({
   },
 });
 
-export default function NavBar() {
+export default function NavBar({ text }) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <AppBar className={classes.navbar}>
+      <AppBar className={classes.navbar} elevation={1}>
         <Toolbar>
           <Drawer className={classes.menuButton} />
-          <Typography>Our Economic Lives</Typography>
+          <Typography variant="h5">
+            {text}
+          </Typography>
         </Toolbar>
       </AppBar>
     </div>
