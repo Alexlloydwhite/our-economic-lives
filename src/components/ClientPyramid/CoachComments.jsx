@@ -1,18 +1,29 @@
+import {useDispatch, useSelector} from 'react-redux';
+
 import { Typography, TextField } from "@material-ui/core";
+import Card from '@material-ui/core/Card';
+
 
 
 
 export default function CoachComments() {
+
+    const comments = useSelector((store) => store.comments);
+
+    console.log('in cc', comments);
+
     return (
-        <div>
-            <Typography >Coach Comments!</Typography>
+       <div>
+        <Card>
+            <Typography >{comments.name}</Typography>
             <TextField
-                label="Add a Critical Experience"
+                label="Coach comment here"
                 multiline
                 rows={5}
                 variant="outlined"
-                // value={newExp}
+                value={comments.coach_comments}
             />
-        </div>
+       </Card>
+    </div>
     )
 }
