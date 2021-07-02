@@ -54,12 +54,9 @@ router.post('/add_critical_experience', rejectUnauthenticated, async (req, res) 
     userBlocksId = userBlocksId.rows;
     console.log(userBlocksId);
     if (userBlocksId.id) {
-      console.log(`in if`);
       await client.query(queryText1, [req.body.user_text, userBlocksId[0].id]);
     } else {
-      console.log(`in else`);
       const samsVar = await client.query(queryText3, [req.body.user_id, req.body.block_id]);
-      console.log(samsVar);
       await client.query(queryText1, [req.body.user_text, samsVar.rows[0].id]);
     };
     res.sendStatus(200);

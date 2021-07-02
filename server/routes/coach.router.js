@@ -8,7 +8,10 @@ const {
 
 router.get('/critical-experience/:id', rejectUnauthorized, (req, res) => {
     const queryText = `
-    SELECT * FROM critical_experience cr
+    SELECT 
+        cr.id, cr.user_text, cr.is_approved, cr.coach_comments, cr.user_blocks_id,
+	    ub.building_block_id, ub.user_id, bb.name  
+    FROM critical_experience cr
     JOIN user_blocks ub ON cr.user_blocks_id = ub.id
     JOIN building_block bb ON bb.id = ub.building_block_id
     WHERE ub.user_id = $1;`
@@ -193,12 +196,12 @@ router.get('/unapproved_Exp/:id/:bbId', (req, res) => {
     AND critical_experience.is_approved = false 
     AND user_blocks.building_block_id = $2;`
     pool.query(queryText, [user_id, buildingBlockId])
-    .then(result => {
-      res.send(result.rows)
-    })
-    .catch(error => {
-      console.log('Unable to retrieve critical experiences', error);
-    })
+        .then(result => {
+            res.send(result.rows)
+        })
+        .catch(error => {
+            console.log('Unable to retrieve critical experiences', error);
+        })
 });
 
 router.post('/add_coach_comments', rejectUnauthorized, (req, res) => {
