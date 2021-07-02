@@ -27,12 +27,13 @@ export default function CritExpReviewCard({ experience, classes }) {
     const [openDialog, setOpenDialog] = useState(false);
     const [coachComment, setCoachComment] = useState('');
 
-    const approveExperience = (id) => {
+    const approveExperience = (experienceId) => {
         dispatch({
             type: 'APPROVE_EXPERIENCE',
-            expId: id,
+            expId: experienceId,
             id: params.id
         });
+        setOpenApproveDialog(false);
     } 
 
     return (

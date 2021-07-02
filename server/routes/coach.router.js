@@ -14,7 +14,7 @@ router.get('/critical-experience/:id', rejectUnauthorized, (req, res) => {
     FROM critical_experience cr
     JOIN user_blocks ub ON cr.user_blocks_id = ub.id
     JOIN building_block bb ON bb.id = ub.building_block_id
-    WHERE ub.user_id = $1;`
+    WHERE ub.user_id = $1 AND cr.is_approved = false;`
     pool
         .query(queryText, [req.params.id])
         .then((result) => res.send(result.rows))
@@ -187,6 +187,7 @@ router.put('/activate-client/:id', rejectUnauthorized, (req, res) => {
 });
 
 router.put('/approve-crit-experience/:id', rejectUnauthorized, (req, res) => {
+    console.log(req.params);
     const queryText = `UPDATE critical_experience SET is_approved = true WHERE id=$1;`
     pool
         .query(queryText, [req.params.id])
