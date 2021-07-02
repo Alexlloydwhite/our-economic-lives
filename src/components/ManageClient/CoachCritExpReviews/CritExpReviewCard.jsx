@@ -56,7 +56,7 @@ export default function CritExpReviewCard({ experience, classes }) {
                     <span
                         style={{ float: 'left', marginTop: 9 }}
                     >
-                        {experience.name}
+                        Critical Experience
                     </span>
                     <IconButton
                         onClick={() => setOpenDialog(false)}
@@ -67,7 +67,6 @@ export default function CritExpReviewCard({ experience, classes }) {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Critical Experience: <br />
                         {experience.user_text}
                     </DialogContentText>
                     <TextField

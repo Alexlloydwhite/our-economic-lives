@@ -56,10 +56,10 @@ export default function CoachCritExpReview({ classes }) {
                         item
                         xs={12}
                         md={6}
-                        style={{padding: 10}}
+                        style={{ padding: 10 }}
+                        key={experience.id}
                     >
                         <CritExpReviewCard
-                            key={experience.id}
                             experience={experience}
                             classes={classes}
                         />
