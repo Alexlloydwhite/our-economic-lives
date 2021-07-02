@@ -50,7 +50,6 @@ export default function BlockDetail () {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_BLOCK_DETAIL', payload: id })
-    // dispatch({ type: 'FETCH_UNAPPROVED', id: user_id })
   }, [])
 
     const classes = useStyles();
@@ -95,7 +94,7 @@ export default function BlockDetail () {
     };
     // Grabbing Id and sending to DB to retrieve user/client building blocks
     const handleToggle = (xp) => {
-        // dispatch({ type: 'SET_COMMENT_CLIENT', payload: xp })
+        dispatch({ type: 'SET_COMMENT_CLIENT', payload: xp })
         setOpen(!open);
     };
 
