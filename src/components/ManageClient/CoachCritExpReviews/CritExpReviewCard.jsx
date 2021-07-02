@@ -2,9 +2,6 @@ import {
     Typography,
     TextField,
     Button,
-    Box,
-    Grid,
-    Paper,
     Dialog,
     DialogActions,
     DialogContent,
@@ -20,10 +17,23 @@ import CommentIcon from '@material-ui/icons/Comment';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from "react-router";
 
 export default function CritExpReviewCard({ experience, classes }) {
+    const dispatch = useDispatch();
+    const params = useParams();
+    const [openApproveDialog, setOpenApproveDialog] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
     const [coachComment, setCoachComment] = useState('');
+
+    const approveExperience = (id) => {
+        dispatch({
+            type: 'APPROVE_EXPERIENCE',
+            expId: id,
+            id: params.id
+        });
+    } 
 
     return (
         <Card variant="outlined">
@@ -39,6 +49,7 @@ export default function CritExpReviewCard({ experience, classes }) {
                 <Button
                     size="small"
                     endIcon={<ThumbUpIcon />}
+                    onClick={() => setOpenApproveDialog(true)}
                 >
                     Approve
                 </Button>
@@ -81,6 +92,30 @@ export default function CritExpReviewCard({ experience, classes }) {
                 <DialogActions>
                     <Button>
                         Add Comment
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <Dialog open={openApproveDialog}>
+                <DialogTitle>
+                    {"Approve this critical experience?"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Approving this critical experience will mark it complete.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    {/* Cancel btn, closes dialog */}
+                    <Button
+                        onClick={() => setOpenApproveDialog(false)}
+                    >
+                        Cancel
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        onClick={() => approveExperience(experience.id)}
+                    >
+                        Approve
                     </Button>
                 </DialogActions>
             </Dialog>

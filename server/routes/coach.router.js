@@ -186,6 +186,17 @@ router.put('/activate-client/:id', rejectUnauthorized, (req, res) => {
         });
 });
 
+router.put('/approve-crit-experience/:id', rejectUnauthorized, (req, res) => {
+    const queryText = `UPDATE critical_experience SET is_approved = true WHERE id=$1;`
+    pool
+        .query(queryText, [req.params.id])
+        .then(() => res.sendStatus(200))
+        .catch((err) => {
+            console.log(`IN /approve-crit-experience/${req.params.id}: ${err}`);
+            res.sendStatus(500);
+        });
+});
+
 // Removed rejectUnauthorized so unapproved_Exp router/saga could be reused from client side block detail
 router.get('/unapproved_Exp/:id/:bbId', (req, res) => {
     const user_id = req.params.id;

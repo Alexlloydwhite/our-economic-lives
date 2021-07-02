@@ -1,24 +1,13 @@
 // React
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router";
 // M-UI
 import {
     Typography,
-    TextField,
-    Button,
-    Box,
     Grid,
     Paper,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    IconButton
 } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
-import CommentIcon from '@material-ui/icons/Comment';
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import CritExpReviewCard from './CritExpReviewCard';
 
 export default function CoachCritExpReview({ classes }) {
