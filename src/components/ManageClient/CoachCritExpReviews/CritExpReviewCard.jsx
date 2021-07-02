@@ -10,7 +10,8 @@ import {
     IconButton,
     Card,
     CardActions,
-    CardContent
+    CardContent,
+    Divider
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import CommentIcon from '@material-ui/icons/Comment';
@@ -34,7 +35,7 @@ export default function CritExpReviewCard({ experience, classes }) {
             id: params.id
         });
         setOpenApproveDialog(false);
-    } 
+    }
 
     const addComment = (experienceId) => {
         console.log(experienceId);
@@ -53,8 +54,18 @@ export default function CritExpReviewCard({ experience, classes }) {
                     {experience.name}
                 </Typography>
                 <Typography variant="subtitle2">
+                    <b>Client submitted critical experience:</b>
                     "{experience.user_text}"
                 </Typography>
+                {experience.coach_comments &&
+                    <>
+                        <Divider style={{ marginTop: 10, marginBottom: 10 }} />
+                        <Typography variant="subtitle2" >
+                            <b>Your comment:</b>
+                            {experience.coach_comments}
+                        </Typography>
+                    </>
+                }
             </CardContent>
             <CardActions>
                 <Button
