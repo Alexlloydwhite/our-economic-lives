@@ -22,6 +22,7 @@ import unapprovedExp from './unapprovedExp.saga';
 import createClient from './createClient.saga';
 import fetchCritExp from './fetchCritExp.saga';
 import approveCritExp from './approveCritExp.saga';
+import addCoachComment from './addCoachComment.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -50,6 +51,7 @@ export default function* rootSaga() {
   yield takeEvery('FETCH_UNAPPROVED', unapprovedExp);
   yield takeEvery('FETCH_CRIT_EXP', fetchCritExp);
   yield takeEvery('APPROVE_EXPERIENCE', approveCritExp);
+  yield takeEvery('ADD_COACH_COMMENT', addCoachComment);
 
   yield all([
     loginSaga(), // login saga is now registered
