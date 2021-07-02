@@ -36,6 +36,16 @@ export default function CritExpReviewCard({ experience, classes }) {
         setOpenApproveDialog(false);
     } 
 
+    const addComment = (experienceId) => {
+        console.log(experienceId);
+        dispatch({
+            type: 'ADD_COACH_COMMENT',
+            coachComment: coachComment,
+            id: experienceId
+        });
+        setOpenDialog(false);
+    }
+
     return (
         <Card variant="outlined">
             <CardContent>
@@ -91,7 +101,9 @@ export default function CritExpReviewCard({ experience, classes }) {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button>
+                    <Button
+                        onClick={() => addComment(experience.id)}
+                    >
                         Add Comment
                     </Button>
                 </DialogActions>

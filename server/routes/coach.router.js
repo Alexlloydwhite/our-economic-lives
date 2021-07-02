@@ -219,7 +219,8 @@ router.get('/unapproved_Exp/:id/:bbId', (req, res) => {
 router.post('/add_coach_comments', rejectUnauthorized, (req, res) => {
     const coach_comments = req.body.coach_comments;
     const critical_experience_id = req.body.id;
-    let queryText = `UPDATE "critical_experience"
+    let queryText = `
+    UPDATE "critical_experience"
     SET coach_comments = $1
     WHERE id = $2;`;
     pool.query(queryText, [coach_comments, critical_experience_id])
