@@ -169,13 +169,15 @@ router.put('/activate-client/:id', rejectUnauthorized, (req, res) => {
 });
 
 // Removed rejectUnauthorized so unapproved_Exp router/saga could be reused from client side block detail
-router.get('/unapproved_Exp/:id', (req, res) => {
+router.get('/unapproved_Exp/:id/:bbId', (req, res) => {
     const user_id = req.params.id;
-    let queryText = ` SELECT * FROM critical_experience
+    const buildingBlockId = req.params.bbId;
+    let queryText = `SELECT * FROM critical_experience
     JOIN user_blocks on user_blocks.id = critical_experience.user_blocks_id
-    JOIN building_block on building_block.id = user_blocks.building_block_id
-	WHERE user_blocks.user_id = $1 AND critical_experience.is_approved = false;`
-    pool.query(queryText, [user_id])
+    WHERE user_blocks.user_id = $1 
+    AND critical_experience.is_approved = false 
+    AND user_blocks.building_block_id = $2;`
+    pool.query(queryText, [user_id, buildingBlockId])
     .then(result => {
       res.send(result.rows)
     })
