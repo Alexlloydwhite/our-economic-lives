@@ -20,9 +20,9 @@ import fetchClientPyramid from './fetchClientPyramid.saga';
 import toggleBuildingBlock from './toggleBuildingBlock.saga';
 import unapprovedExp from './unapprovedExp.saga';
 import fetchCritExp from './fetchCritExp.saga';
-import createClient from './createClient.saga';
 import approveCritExp from './approveCritExp.saga';
 import addCoachComment from './addCoachComment.saga';
+import createClient from './createClient.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
