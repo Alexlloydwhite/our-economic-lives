@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
       card: { // card styles the building blocks
         width: '95%',
         height: '95%',
-        background: 'linear-gradient(45deg, #12ae5b 30%, #44bc74 50%)',
+        background: theme.palette.primary.main,
         margin: '.5rem',
         textAlign: 'center',
       },

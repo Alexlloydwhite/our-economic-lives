@@ -14,9 +14,6 @@ import Backdrop from '@material-ui/core/Backdrop';
       textAlign: 'center',
       margin: '1rem',
     },
-    button: {
-      background: theme.palette.info.light,
-    }
   }));
 
 export default function RecommendedButton() {

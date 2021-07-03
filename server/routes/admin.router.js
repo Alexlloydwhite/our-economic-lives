@@ -98,7 +98,6 @@ router.post('/create_coach', rejectUnauthorized, (req, res) => {
     });
 });
 
-
 router.post('/create_admin', (req, res) => {
   const firstName = req.body.first_name;
   const lastName = req.body.last_name

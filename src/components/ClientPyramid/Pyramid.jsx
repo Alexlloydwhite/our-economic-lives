@@ -1,5 +1,6 @@
 import { makeStyles, Typography } from "@material-ui/core"
 import Backdrop from '@material-ui/core/Backdrop'
+import { LowPriorityTwoTone } from "@material-ui/icons"
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { theme } from '../Theme/Theme'
@@ -164,6 +165,7 @@ function Tier(props) {
   };
   const handleToggle = () => {
     dispatch({ type: 'FETCH_BLOCKS', payload: {tier: num, pyramid: user.industry_pyramid}});
+    console.log(num, user.industry_pyramid);
     setOpen(!open);
   };
 

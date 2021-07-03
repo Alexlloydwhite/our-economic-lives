@@ -79,6 +79,7 @@ export default function CoachTable() {
                         className={classes.table}
                         xs={12}
                         component={Paper}
+                        variant="outlined"
                     >
                         <Grid
                             container
