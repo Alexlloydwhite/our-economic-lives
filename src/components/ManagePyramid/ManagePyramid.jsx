@@ -1,5 +1,8 @@
+// Local imports
+import PreviewTable from './PreviewTable';
 import AddCareerPath from './AddCareerPath';
 import AddBlocks from './AddBlocks';
+// MUI
 import { Grid, Paper } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 // Styles
@@ -39,6 +42,11 @@ export default function ManagerPyramid() {
             </Grid>
             <Grid item xs={12} sm={6}>
                 <AddBlocks classes={classes} />
+            </Grid>
+            <Grid container>
+                <Grid item xs={12}>
+                    <PreviewTable />
+                </Grid>
             </Grid>
         </Grid>
     )
