@@ -9,7 +9,6 @@ const {
 } = require('../modules/adminAuthorization-middleware');
 
 router.post('/:id', rejectUnauthorized, async (req, res) => {
-    console.log('in upload POST');
     const client = await pool.connect();
     try {
         client.query('BEGIN')

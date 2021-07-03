@@ -12,16 +12,33 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 // React
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import axios from 'axios';
 
 export default function AddBlocks({ classes }) {
     const dispatch = useDispatch();
     const [industryPyramid, setIndustryPyramid] = useState(0);
+    const [csv, setCsv] = useState(null);
     let routerPath = '/api/upload/' + industryPyramid;
     const setIndustryPyramids = useSelector(store => store.industry_pyramid)
     useEffect(() => {
         dispatch({ type: 'FETCH_INDUSTRY_PYRAMID' })
-    }, [dispatch])
+    }, [dispatch]);
+
+    const formData = new FormData();
+
+    const handleFileChange = (e) => {
+        setCsv(e.target.files[0]);
+    }
+
+    const handleUpload = (e) => {
+        e.preventDefault();
+        formData.append('file', csv);
+        axios.post(`/api/upload/${industryPyramid}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+    }
 
     return (
         <Grid
@@ -32,10 +49,10 @@ export default function AddBlocks({ classes }) {
             className={classes.addBlocks}
         >
             <Grid item>
-                <form action={routerPath} method="POST" encType="multipart/form-data">
-                <Typography variant="h5">
-                    Add New Building Blocks
-                </Typography>
+                <form onSubmit={handleUpload}>
+                    <Typography variant="h5">
+                        Add New Building Blocks
+                    </Typography>
                     <Grid item className={classes.blockForm}>
                         <FormControl
                             variant="outlined"
@@ -70,6 +87,7 @@ export default function AddBlocks({ classes }) {
                                 name="file"
                                 accept=".csv"
                                 hidden
+                                onChange={(e) => handleFileChange(e)}
                             />
                         </Button>
                         <Button
