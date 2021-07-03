@@ -1,7 +1,7 @@
 import { makeStyles, Typography } from "@material-ui/core"
 import Backdrop from '@material-ui/core/Backdrop'
 import { LowPriorityTwoTone } from "@material-ui/icons"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { theme } from '../Theme/Theme'
 import BlockSlider from './BlockSlider'
@@ -31,7 +31,7 @@ const getRightBoarderColor = (rightWidth) => {
   }
 }
 
-let progress = [1, 0.8, 0.6, 0.4, 0.2, 0.4, 0.6]
+let progress = [1, 0.8, 0.6, 0.4, 0.2, 0.4, 0.6];
 
 const useStyles = makeStyles({
   pyramid: {
@@ -113,10 +113,10 @@ function Tier(props) {
   const dispatch = useDispatch();
   let num = props.tier;
   const width = pyramidBaseWidth - ((num - 1) * 20);
-
+  
   const tierProgress = progress[num -1];
   const tierRemaining = 1 - progress[num -1];
-
+  
   const useStyles = makeStyles({
     tier: {
       display: 'flex',
@@ -154,9 +154,9 @@ function Tier(props) {
     },
   })
   const user = useSelector(store => store.user);
-
+  
   const classes = useStyles();
-
+  
   // Setting state for backdrop 
   const [open, setOpen] = useState(false);
   // Setting handle functions for backdrop functionality
@@ -168,7 +168,7 @@ function Tier(props) {
     console.log(num, user.industry_pyramid);
     setOpen(!open);
   };
-
+  
   return (
     <div className={classes.tier}  onClick={handleToggle}>
       <div className={classes.tierTitle}>
@@ -184,11 +184,19 @@ function Tier(props) {
 }
 
 export default function Pyramid() {
-
+  const dispatch = useDispatch();
+  let futureProgress = useSelector(store =>store.pyramidProgress)
+  
+  useEffect(() => {
+    dispatch({ type: 'FETCH_PYRAMID_PROGRESS' });
+  }, [])
+  
+  
   const classes = useStyles();
 
   return (
     <div className={classes.pyramid}>
+      {JSON.stringify(futureProgress)}
       <Typography>Please Select Your Tier: </Typography>
       <div className={classes.row}>
         <div className={classes.tier6}>

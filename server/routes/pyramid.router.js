@@ -36,8 +36,6 @@ router.get(
       for (let i = 0; i < tier.length; i++) {
         let approved = 0;
         let block_id = tier[i].id;
-        console.log('tier tier tier tier tier tier tier tier tier tier tier tier tier tier tier tier tier tier ', tier);
-
         const queryTextLoop = `SELECT user_blocks.user_id, user_blocks.building_block_id, COUNT(critical_experience.is_approved = 'true') AS approved FROM user_blocks
         JOIN critical_experience ON user_blocks.id = critical_experience.user_blocks_id
         WHERE user_blocks.user_id = $1 AND user_blocks.building_block_id = $2
@@ -48,14 +46,8 @@ router.get(
         } else {
           approved = Number(result2.rows[0].approved);
         }
-        console.log('approved approved approved approved approved approved approved approved approved approved approved approved approved approved approved approved approved approved approved ', approved);
-        
-        console.log('tier[i] tier[i] tier[i] tier[i] tier[i] tier[i] tier[i] tier[i] tier[i] tier[i] tier[i] tier[i] tier[i] tier[i] tier[i] tier[i] tier[i] tier[i] tier[i] ', tier[i]);
-        
         (tier[i]).approved = approved;
-        
       } // end for loop
-
       client.query("COMMIT");
       res.send(tier);
     } catch (error) {
@@ -66,5 +58,22 @@ router.get(
     }
   }
 );
+
+router.get('/progress/:pyramid', rejectUnauthenticated, async (req, res) => {
+  const client = await pool.connect();
+  const pyramidId = req.params.pyramid;
+  try{
+    client.query('BEGIN');
+    const queryText = `SELECT * FROM industry_pyramid ip
+      WHERE ip.id = ${pyramidId}`;
+    const progress = await client.query(queryText);
+    client.query('COMMIT');
+    res.send(progress.rows);
+  } catch (error) {
+    console.log('Cannot get pyramid progress', error);
+  } finally {
+    client.release();
+  }
+});
 
 module.exports = router;
