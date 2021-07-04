@@ -10,7 +10,6 @@ import clientBlocks from './clientBlocks.reducer';
 import blockDetails from './blockDetails.reducer';
 import clientPyramid from './clientPyramid.reducer';
 import unapprovedExp from './unapprovedExp.reducer';
-import comments from './comments.reducer';
 import criticalExperiences from './criticalExperiences.reducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -31,7 +30,6 @@ const rootReducer = combineReducers({
   blockDetails, // static info for block details page
   clientPyramid, // data of clients current industry pyramid
   unapprovedExp, // holds list of clients unnaproved critical experiences
-  comments, // holds client experinence details for pulling comments
   criticalExperiences, // holds data of critical experiences, needs client ID
 });
 

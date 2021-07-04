@@ -28,18 +28,21 @@ import CommentIcon from "@material-ui/icons/Comment";
 // Styling
 const useStyles = makeStyles((theme) => ({
     title: {
-        textAlign: 'Left',
-        marginLeft: '1rem',
+        marginLeft: '3rem',
         padding: theme.spacing(1),
     },
+    description: {
+      textAlign: 'Left',
+      marginLeft: '1rem',
+      padding: theme.spacing(1),
+  },
     examples: {
         textAlign: 'Left',
         marginLeft: '4em',
     },
     field: {
-        textAlign: 'Center',
         marginLeft: '10%',
-        marginTop: '3rem',
+        marginTop: '2rem',
         width: '80%',
     },
     unapproved: {
@@ -125,15 +128,15 @@ export default function BlockDetail() {
           id="panel1a-header"
           className={classes.title}
         >
-          <Typography variant="h4">{detail.name}</Typography>
+          <Typography variant="h5">{detail.name}</Typography>
         </AccordionSummary >
-                    <Typography className={classes.title}>
+                    <Typography className={classes.description}>
                         <b>Description:</b>
                     </Typography>
-                    <Typography className={classes.title}>
+                    <Typography className={classes.description}>
                         {detail.description}
                     </Typography>
-                    <Typography className={classes.title}>
+                    <Typography className={classes.description}>
                         <b>Examples:</b>
                     </Typography>
                     {/* {detail ? detail.array_agg.map( examples => {
@@ -148,7 +151,7 @@ export default function BlockDetail() {
             </Accordion>
 
         <div style={{ textAlign: 'center', marginTop: '2rem', paddingLeft: '1rem', paddingRight: '1rem' }}>
-            <Typography >
+            <Typography variant="h6">
               Describe an instance that exemplifies {detail.name}.
             </Typography>
         </div>
@@ -180,7 +183,7 @@ export default function BlockDetail() {
         </Grid>
       </Grid>
         <div style={{ textAlign: 'center', marginTop: '4rem' }}> 
-            <Typography >Submitted Experiences: <b>{experiences.length} / 5</b></Typography>
+            <Typography variant="h6">Submitted Experiences: <b>{experiences.length} / 5</b></Typography>
         </div>
             {experiences.map((xp) => { 
             if( xp.is_approved === false ) {
@@ -215,7 +218,7 @@ export default function BlockDetail() {
                 {/* Dialog Title */}
                 <DialogTitle style={{ marginBottom: -25 }}>
                     <span
-                        style={{ float: 'left', marginTop: 7 }}
+                        style={{ float: 'left', marginTop: 9 }}
                     >
                         {detail.name}
                     </span>
