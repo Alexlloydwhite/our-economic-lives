@@ -35,12 +35,12 @@ import CheckIcon from '@material-ui/icons/Check';
 const useStyles = makeStyles((theme) => ({
     title: {
         textAlign: 'Left',
-        marginLeft: '2em',
+        marginLeft: '1rem',
         padding: theme.spacing(1),
     },
     examples: {
         textAlign: 'Left',
-        marginLeft: '6em',
+        marginLeft: '4em',
     },
     field: {
         textAlign: 'Center',
@@ -116,7 +116,7 @@ export default function BlockDetail() {
           className={classes.title}
         >
           <Typography variant="h4">{detail.name}</Typography>
-        </AccordionSummary>
+        </AccordionSummary >
                     <Typography className={classes.title}>
                         <b>Description:</b>
                     </Typography>
@@ -150,6 +150,7 @@ export default function BlockDetail() {
                 rows={5}
                 variant="outlined"
                 value={newExp}
+                error={newExpError}
                 onChange={(e) => setNewExp(e.target.value)}
             />
             <Button 
@@ -171,7 +172,8 @@ export default function BlockDetail() {
             {experiences.map((xp) => { 
             if( xp.is_approved === false ) {
               return (
-                <> 
+                <>
+            <div onClick={() => handleReview(xp.user_text)}>
             <TextField
                 className={classes.field}
                 label={detail.name}
@@ -186,11 +188,12 @@ export default function BlockDetail() {
                 size="large"
                 className={classes.unapproved}
                 style={{ float: 'right', marginRight: '10%' }}
-                onClick={() => handleReview(xp.user_text)} 
+                 
                 endIcon={<ThumbDownIcon />}
             >
               Unapproved
             </Button>
+            </div>
             <Dialog open={openDialog}>
                 {/* Dialog Title */}
                 <DialogTitle style={{ marginBottom: -25 }}>
@@ -209,13 +212,13 @@ export default function BlockDetail() {
                 <form noValidate autoComplete="off" >
                 <DialogContent>
                     <DialogContentText>
-                        <b>Coach: "{xp.coach_comments}"</b>
+                        {xp.coach_comments ? <b>Coach: "{xp.coach_comments}"</b> : <b>Awaiting Review...</b>}
                     </DialogContentText>
                     <TextField
                         fullWidth
                         variant="outlined"
                         multiline
-                        rows={4}
+                        rows={5}
                         value={editExp}
                         onChange={(e) => setEditExp(e.target.value)}
                     />
