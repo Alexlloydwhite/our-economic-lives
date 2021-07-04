@@ -5,6 +5,8 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
+//router that gets all of the block information for a specific user's blocks
+//everything but the critical experiences.
 router.get('/:id', rejectUnauthenticated, async (req, res) => {
   const client = await pool.connect()
   try {
@@ -48,6 +50,8 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
   }
 });
 
+//router that gets the specific critical experiences for a block
+//and to get the competencies for that block as well
 router.post('/block_detail', async (req, res) => {
   console.log('req.body', req.body);
 
@@ -84,29 +88,5 @@ router.post('/block_detail', async (req, res) => {
   }
 })
 
-router.post('/', rejectUnauthenticated, async (req, res) => {
-  let user_id = req.body.id;
-  const client = await pool.connect();
-  try {
-    let queryText1 = `SELECT building_block.id FROM building_block
-    JOIN industry_pyramid_building_block 
-    ON building_block.id = industry_pyramid_building_block.building_block_id
-    WHERE industry_pyramid_building_block.industry_pyramid_id = 1;`
-    let queryText2 = `INSERT INTO user_blocks ("user_id", "building_block_id")
-    VALUES ($1, $2);`
-    let buildingBlockId = await client.query(queryText1);
-    for (id of buildingBlockId.rows) {
-      await client.query(queryText2, [user_id, id.id])
-    }
-    client.query('COMMIT')
-    res.sendStatus(201);
-  } catch (error) {
-    await client.query('ROLLBACK')
-    console.log('Error POST /api/block', error);
-    res.sendStatus(500);
-  } finally {
-    client.release();
-  }
-});
 
 module.exports = router;

@@ -9,33 +9,8 @@ const {
   rejectUnauthorized,
 } = require('../modules/adminAuthorization-middleware');
 
-router.get('/career_path', rejectUnauthenticated, (req, res) => {
-  const queryText = `SELECT * FROM career_path;`
-  pool
-    .query(queryText)
-    .then((result) => {
-      res.send(result.rows);
-    })
-    .catch((error) => {
-      console.log('Error in /api/admin/career_path', error);
-      res.sendStatus(500);
-    })
-});
 
-router.post('/create-career-path', rejectUnauthorized, (req, res) => {
-  const careerPathName = req.body.name;
-  const queryText = `INSERT INTO career_path (name) VALUES ($1);`;
-  pool
-    .query(queryText, [careerPathName])
-    .then(() => {
-      res.sendStatus(200);
-    })
-    .catch((err) => {
-      res.sendStatus(500);
-      console.log(`IN /admin/create-career-path, ${err}`);
-    })
-})
-
+//route to get the list of industry_pyramids
 router.get('/industry_pyramid', rejectUnauthenticated, (req, res) => {
   const queryText = `SELECT * FROM industry_pyramid;`
   pool
@@ -49,6 +24,7 @@ router.get('/industry_pyramid', rejectUnauthenticated, (req, res) => {
     })
 });
 
+//route to create the name of an industry pyramid
 router.post('/create_industry_pyramid', rejectUnauthorized, (req, res) => {
   const industryPyramidName = req.body.name;
   const queryText = `INSERT INTO industry_pyramid (name) VALUES ($1);`;
@@ -63,6 +39,7 @@ router.post('/create_industry_pyramid', rejectUnauthorized, (req, res) => {
     })
 });
 
+//route to create a coach
 router.post('/create_coach', rejectUnauthorized, (req, res) => {
   const organization = req.body.organization_name
   const firstName = req.body.first_name;
@@ -98,23 +75,25 @@ router.post('/create_coach', rejectUnauthorized, (req, res) => {
     });
 });
 
-router.post('/create_admin', (req, res) => {
-  const firstName = req.body.first_name;
-  const lastName = req.body.last_name
-  const email = req.body.email;
-  const password = encryptLib.encryptPassword(req.body.password);
-  const authorization = 1;
-  const queryText = `INSERT INTO "user" (first_name, last_name, email, password, "authorization")
-        VALUES ($1, $2, $3, $4, $5);`;
-  pool
-    .query(queryText, [firstName, lastName, email, password, authorization])
-    .then(() => res.sendStatus(201))
-    .catch((err) => {
-      console.log('adding new coach failed: ', err);
-      res.sendStatus(500);
-    });
-});
+//route to create an admin through postman or a similar service
+// router.post('/create_admin', (req, res) => {
+//   const firstName = req.body.first_name;
+//   const lastName = req.body.last_name
+//   const email = req.body.email;
+//   const password = encryptLib.encryptPassword(req.body.password);
+//   const authorization = 1;
+//   const queryText = `INSERT INTO "user" (first_name, last_name, email, password, "authorization")
+//         VALUES ($1, $2, $3, $4, $5);`;
+//   pool
+//     .query(queryText, [firstName, lastName, email, password, authorization])
+//     .then(() => res.sendStatus(201))
+//     .catch((err) => {
+//       console.log('adding new coach failed: ', err);
+//       res.sendStatus(500);
+//     });
+// });
 
+//router to get the list of coaches that exist in the database
 router.get('/coach-list', rejectUnauthorized, (req, res) => {
   const queryText = `
     SELECT 
