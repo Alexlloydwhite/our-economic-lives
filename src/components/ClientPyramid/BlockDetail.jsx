@@ -10,7 +10,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import {
   Typography,
   TextField,
-  Box,
+  Grid,
   Button,
   Dialog,
   DialogActions,
@@ -18,10 +18,6 @@ import {
   DialogContentText,
   DialogTitle,
   IconButton,
-  Card,
-  CardActions,
-  CardContent,
-  Divider
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -29,8 +25,6 @@ import PublishIcon from "@material-ui/icons/Publish";
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import CommentIcon from "@material-ui/icons/Comment";
-import EditIcon from "@material-ui/icons/Edit";
-import CheckIcon from '@material-ui/icons/Check';
 // Styling
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -153,12 +147,13 @@ export default function BlockDetail() {
                     }):''} */}
             </Accordion>
 
-        <div style={{ textAlign: 'center', marginTop: '2rem', paddingLeft: '1rem', paddingRight: '1rem' }}> 
+        <div style={{ textAlign: 'center', marginTop: '2rem', paddingLeft: '1rem', paddingRight: '1rem' }}>
             <Typography >
               Describe an instance that exemplifies {detail.name}.
             </Typography>
         </div>
-        <form noValidate autoComplete="off" onSubmit={validateForm}>
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
             <TextField
                 className={classes.field}
                 label="Add a Critical Experience"
@@ -169,27 +164,30 @@ export default function BlockDetail() {
                 error={newExpError}
                 onChange={(e) => setNewExp(e.target.value)}
             />
+          </Grid>
+          <Grid item xs={12} >
             <Button 
                 type="submit" 
                 variant="contained" 
                 color="primary"
                 size="large"
-                style={{ float: 'right', marginRight: '10%'}}
+                style={{ float: 'right', marginRight: '10%', width: '45%'}}
                 endIcon={<PublishIcon />}
+                onClick={validateForm}
             >
                Submit &nbsp;
             </Button>
-        </form>
-        
-        <div style={{ textAlign: 'center', marginTop: '5rem' }}> 
+        </Grid>
+      </Grid>
+        <div style={{ textAlign: 'center', marginTop: '4rem' }}> 
             <Typography >Submitted Experiences: <b>{experiences.length} / 5</b></Typography>
         </div>
-        <div>
             {experiences.map((xp) => { 
             if( xp.is_approved === false ) {
               return (
                 <>
-            <div onClick={() => handleReview(xp.user_text)}>
+         <Grid container spacing={1}>
+          <Grid item xs={12}>
             <TextField
                 className={classes.field}
                 label={detail.name}
@@ -198,23 +196,26 @@ export default function BlockDetail() {
                 rows={5}
                 variant="outlined"
             />
+          </Grid>
+          <Grid item xs={12} >
             <Button 
                 type="submit" 
                 variant="contained" 
                 size="large"
                 className={classes.unapproved}
-                style={{ float: 'right', marginRight: '10%' }}
-                 
+                style={{ float: 'right', marginRight: '10%', width: '45%' }}
+                onClick={() => handleReview(xp.user_text)}
                 endIcon={<ThumbDownIcon />}
             >
               Unapproved
             </Button>
-            </div>
+          </Grid>
+          </Grid>
             <Dialog open={openDialog}>
                 {/* Dialog Title */}
                 <DialogTitle style={{ marginBottom: -25 }}>
                     <span
-                        style={{ float: 'left', marginTop: 9 }}
+                        style={{ float: 'left', marginTop: 7 }}
                     >
                         {detail.name}
                     </span>
@@ -225,16 +226,15 @@ export default function BlockDetail() {
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
-                <form noValidate autoComplete="off" onSubmit={submitEditExp}>
                 <DialogContent>
                     <DialogContentText>
-                        {xp.coach_comments ? <b>Coach: "{xp.coach_comments}"</b> : <b>Awaiting Review...</b>}
+                        {xp.coach_comments ? <b>Coach: "{xp.coach_comments}"</b> : <b>Awaiting Coach Review...</b>}
                     </DialogContentText>
                     <TextField
                         fullWidth
                         variant="outlined"
                         multiline
-                        rows={5}
+                        rows={6}
                         value={editExp}
                         onChange={(e) => setEditExp(e.target.value)}
                     />
@@ -246,17 +246,20 @@ export default function BlockDetail() {
                         endIcon={<PublishIcon />}
                         variant="contained"
                         color="primary"
+                        onClick={submitEditExp}
+                        style={{ float: 'right', marginRight: '5%', width: '50%'}}
                     >
                         Resubmit
                     </Button>
                   </DialogActions>
-                  </form>
-                </Dialog>
+                </Dialog>    
                 </>
               )
             } else {
               return (
-              <> 
+              <>
+          <Grid container spacing={1}>
+            <Grid item xs={12}> 
               <TextField
                   className={classes.field}
                   label={detail.name}
@@ -265,21 +268,24 @@ export default function BlockDetail() {
                   rows={5}
                   variant="outlined"
               />
+            </Grid>
+            <Grid item xs={12}>  
               <Button 
                   type="submit"
                   size="large"
                   variant="contained" 
                   className={classes.approved}
-                  style={{ float: 'right', marginRight: '10%' }}
+                  style={{ float: 'right', marginRight: '10%', width: '45%' }}
                   endIcon={<ThumbUpIcon />}
               >
                 Approved! &nbsp;
               </Button>
+            </Grid>
+          </Grid>
               </>
               )
               }
           })}
-        </div>
     </>
   );
 }
