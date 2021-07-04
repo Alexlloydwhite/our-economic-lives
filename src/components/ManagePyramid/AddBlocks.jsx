@@ -7,31 +7,36 @@ import {
     Select,
     InputLabel,
     MenuItem,
+    Snackbar,
+    IconButton,
 } from '@material-ui/core/';
+import CloseIcon from '@material-ui/icons/Close';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 // React
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import Papa from 'papaparse';
+import React from 'react';
 
-export default function AddBlocks({ classes }) {
+export default function AddBlocks({ classes, setPreview }) {
+    const formData = new FormData();
     const dispatch = useDispatch();
     const [industryPyramid, setIndustryPyramid] = useState(0);
     const [csv, setCsv] = useState(null);
-    const [preview, setPreview] = useState(null);
-    const setIndustryPyramids = useSelector(store => store.industry_pyramid)
+    const [openSnackBar, setOpenSnackBar] = useState(false);
+    const setIndustryPyramids = useSelector(store => store.industry_pyramid);
+
     useEffect(() => {
         dispatch({ type: 'FETCH_INDUSTRY_PYRAMID' })
     }, [dispatch]);
 
-    const formData = new FormData();
-
     const handleFileChange = (e) => {
         setCsv(e.target.files[0]);
         Papa.parse(e.target.files[0], {
+            header: true,
             complete: function (results) {
-                setPreview(results.data);
+                setPreview(results.data)
             }
         });
     }
@@ -44,8 +49,17 @@ export default function AddBlocks({ classes }) {
                 'Content-Type': 'multipart/form-data'
             }
         });
+        setOpenSnackBar(true);
         setIndustryPyramid(0);
         setCsv(null);
+        setPreview('');
+    }
+
+    const handleCloseSnackBar = (e, reason) => {
+        if(reason === 'clickaway') {
+            return;
+        }
+        setOpenSnackBar(false);
     }
 
     return (
@@ -61,9 +75,6 @@ export default function AddBlocks({ classes }) {
                     <Typography variant="h5">
                         Add New Building Blocks
                     </Typography>
-                    <pre>
-                        {JSON.stringify(preview, null, 2)}
-                    </pre>
                     <Grid item className={classes.blockForm}>
                         <FormControl
                             variant="outlined"
@@ -114,6 +125,23 @@ export default function AddBlocks({ classes }) {
                         }
                     </Grid>
                 </form>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={openSnackBar}
+                    autoHideDuration={6000}
+                    onClose={handleCloseSnackBar}
+                    message="Building Blocks Created"
+                    action={
+                        <React.Fragment>
+                            <IconButton size="small" aria-label="close" color="inherit" onClick={handleCloseSnackBar}>
+                                <CloseIcon fontSize="small" />
+                            </IconButton>
+                        </React.Fragment>
+                    }
+                />
             </Grid>
         </Grid>
     )

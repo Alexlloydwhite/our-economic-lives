@@ -5,6 +5,8 @@ import AddBlocks from './AddBlocks';
 // MUI
 import { Grid, Paper } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
+// React
+import { useState } from 'react';
 // Styles
 const useStyles = makeStyles((theme) => ({
     blockForm: {
@@ -28,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function ManagerPyramid() {
     const classes = useStyles();
+    const [preview, setPreview] = useState('');
 
     return (
         <Grid
@@ -41,11 +44,11 @@ export default function ManagerPyramid() {
                 <AddCareerPath />
             </Grid>
             <Grid item xs={12} sm={6}>
-                <AddBlocks classes={classes} />
+                <AddBlocks classes={classes} setPreview={setPreview} />
             </Grid>
             <Grid container>
                 <Grid item xs={12}>
-                    <PreviewTable />
+                    <PreviewTable preview={preview} />
                 </Grid>
             </Grid>
         </Grid>
