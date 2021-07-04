@@ -1,13 +1,14 @@
 import { makeStyles, Typography } from "@material-ui/core"
 import Backdrop from '@material-ui/core/Backdrop'
 import { LowPriorityTwoTone } from "@material-ui/icons"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { theme } from '../Theme/Theme'
 import BlockSlider from './BlockSlider'
 
 
 
+export default function Pyramid(props) {
 //these settings can be used to adjust the pyramid dimensions 
 let pyramidTierHeight = 50;
 let pyramidTierMargin = 10;
@@ -31,7 +32,9 @@ const getRightBoarderColor = (rightWidth) => {
   }
 }
 
-let progress = [1, 0.8, 0.6, 0.4, 0.2, 0.4, 0.6]
+// let progress = [1, 0.8, 0.6, 0.4, 0.2, 0.4, 0.6];
+  let progress = props.progress;
+
 
 const useStyles = makeStyles({
   pyramid: {
@@ -113,10 +116,10 @@ function Tier(props) {
   const dispatch = useDispatch();
   let num = props.tier;
   const width = pyramidBaseWidth - ((num - 1) * 20);
-
+  
   const tierProgress = progress[num -1];
   const tierRemaining = 1 - progress[num -1];
-
+  
   const useStyles = makeStyles({
     tier: {
       display: 'flex',
@@ -154,9 +157,9 @@ function Tier(props) {
     },
   })
   const user = useSelector(store => store.user);
-
+  
   const classes = useStyles();
-
+  
   // Setting state for backdrop 
   const [open, setOpen] = useState(false);
   // Setting handle functions for backdrop functionality
@@ -168,7 +171,7 @@ function Tier(props) {
     console.log(num, user.industry_pyramid);
     setOpen(!open);
   };
-
+  
   return (
     <div className={classes.tier}  onClick={handleToggle}>
       <div className={classes.tierTitle}>
@@ -183,30 +186,33 @@ function Tier(props) {
   )
 }
 
-export default function Pyramid() {
-
+  const dispatch = useDispatch();
+  let liveProgress = useSelector(store =>store.pyramidProgress)
+  const user = useSelector(store => store.user);
+  
   const classes = useStyles();
 
   return (
     <div className={classes.pyramid}>
+      {JSON.stringify(liveProgress)}
       <Typography>Please Select Your Tier: </Typography>
       <div className={classes.row}>
         <div className={classes.tier6}>
-          <Typography className={classes.tier6Title}>Tier 6</Typography>
+          <Typography progress={liveProgress} className={classes.tier6Title}>Tier 6</Typography>
           <div className={classes.tier6Remaining}></div>
           <div className={classes.tier6Progress}></div>
         </div>
         <div className={classes.tier7}>
-          <Typography className={classes.tier7Title}>Tier 7</Typography>
+          <Typography progress={liveProgress} className={classes.tier7Title}>Tier 7</Typography>
           <div className={classes.tier7Remaining}></div>
           <div className={classes.tier7Progress}></div>
         </div>
       </div>
-      <Tier tier={5} />
-      <Tier tier={4} />
-      <Tier tier={3} />
-      <Tier tier={2} />
-      <Tier tier={1} />
+      <Tier progress={liveProgress} tier={5} />
+      <Tier progress={liveProgress} tier={4} />
+      <Tier progress={liveProgress} tier={3} />
+      <Tier progress={liveProgress} tier={2} />
+      <Tier progress={liveProgress} tier={1} />
     </div>
   )
 }

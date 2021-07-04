@@ -12,6 +12,7 @@ import clientPyramid from './clientPyramid.reducer';
 import unapprovedExp from './unapprovedExp.reducer';
 import comments from './comments.reducer';
 import criticalExperiences from './criticalExperiences.reducer';
+import pyramidProgress from './pyramidProgross.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   unapprovedExp, // holds list of clients unnaproved critical experiences
   comments, // holds client experinence details for pulling comments
   criticalExperiences, // holds data of critical experiences, needs client ID
+  pyramidProgress, //completion progress for current pyramid"
 });
 
 export default rootReducer;
