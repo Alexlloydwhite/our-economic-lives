@@ -27,6 +27,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import PublishIcon from "@material-ui/icons/Publish";
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import CommentIcon from "@material-ui/icons/Comment";
 import EditIcon from "@material-ui/icons/Edit";
 import CheckIcon from '@material-ui/icons/Check';
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     field: {
         textAlign: 'Center',
         marginLeft: '10%',
-        marginTop: '2rem',
+        marginTop: '3rem',
         width: '80%',
     },
     unapproved: {
@@ -165,10 +166,11 @@ export default function BlockDetail() {
                 type="submit" 
                 variant="contained" 
                 color="primary"
+                size="large"
                 style={{ float: 'right', marginRight: '10%'}}
                 endIcon={<PublishIcon />}
             >
-               Submit 
+               Submit &nbsp;
             </Button>
         </form>
         
@@ -191,6 +193,7 @@ export default function BlockDetail() {
             <Button 
                 type="submit" 
                 variant="contained" 
+                size="large"
                 className={classes.unapproved}
                 style={{ float: 'right', marginRight: '10%' }}
                 onClick={() => handleReview(xp.user_text)} 
@@ -230,6 +233,7 @@ export default function BlockDetail() {
                 <DialogActions >
                     <Button
                         type="submit"
+                        size="large"
                         endIcon={<PublishIcon />}
                         variant="contained"
                         color="primary"
@@ -253,13 +257,14 @@ export default function BlockDetail() {
                   variant="outlined"
               />
               <Button 
-                  type="submit" 
+                  type="submit"
+                  size="large"
                   variant="contained" 
                   className={classes.approved}
-                  style={{ float: 'right', marginRight: '10%', marginBottom: '10%'}}
-                  endIcon={<CheckIcon />}
+                  style={{ float: 'right', marginRight: '10%' }}
+                  endIcon={<ThumbUpIcon />}
               >
-                Approved
+                Approved! &nbsp;
               </Button>
               </>
               )
