@@ -58,12 +58,12 @@ export default function AddBlocks({ classes, setPreview }) {
     }
     // Handle closes of success snack bar
     const handleCloseSnackBar = (e, reason) => {
-        if(reason === 'clickaway') {
+        if (reason === 'clickaway') {
             return;
         }
         setOpenSnackBar(false);
     }
-    
+
     return (
         <Grid
             container
@@ -131,25 +131,25 @@ export default function AddBlocks({ classes, setPreview }) {
                         }
                     </Grid>
                 </form>
-                {/* Add New Building Block SUCCESS snackbar alert */}
-                <Snackbar
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                    }}
-                    open={openSnackBar}
-                    autoHideDuration={6000}
-                    onClose={handleCloseSnackBar}
-                    message="Building Blocks Created"
-                    action={
-                        <React.Fragment>
-                            <IconButton size="small" aria-label="close" color="inherit" onClick={handleCloseSnackBar}>
-                                <CloseIcon fontSize="small" />
-                            </IconButton>
-                        </React.Fragment>
-                    }
-                />
             </Grid>
+            {/* Add New Building Block SUCCESS snackbar alert */}
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                open={openSnackBar}
+                autoHideDuration={6000}
+                onClose={handleCloseSnackBar}
+                message="Building Blocks Created"
+                action={
+                    <React.Fragment>
+                        <IconButton size="small" aria-label="close" color="inherit" onClick={handleCloseSnackBar}>
+                            <CloseIcon fontSize="small" />
+                        </IconButton>
+                    </React.Fragment>
+                }
+            />
         </Grid>
     );
 }
