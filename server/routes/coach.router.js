@@ -206,7 +206,8 @@ router.get('/unapproved_Exp/:id/:bbId', (req, res) => {
     let queryText = `SELECT cr.id, cr.user_text, cr.user_blocks_id, cr.coach_comments, cr.is_approved, ub.user_id, ub.building_block_id FROM critical_experience cr
     JOIN user_blocks ub on ub.id = cr.user_blocks_id
     WHERE ub.user_id = $1 
-    AND ub.building_block_id = $2;`
+    AND ub.building_block_id = $2
+    ORDER BY cr.is_approved ASC;`
     pool.query(queryText, [user_id, buildingBlockId])
         .then(result => {
             res.send(result.rows)
