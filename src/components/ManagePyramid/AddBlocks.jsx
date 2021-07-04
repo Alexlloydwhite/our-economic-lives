@@ -26,11 +26,12 @@ export default function AddBlocks({ classes, setPreview }) {
     const [csv, setCsv] = useState(null);
     const [openSnackBar, setOpenSnackBar] = useState(false);
     const setIndustryPyramids = useSelector(store => store.industry_pyramid);
-
+    // Grab list of industry pyramids to display in select
     useEffect(() => {
         dispatch({ type: 'FETCH_INDUSTRY_PYRAMID' })
     }, [dispatch]);
-
+    // Handles files change of CSV
+    // Creates Preview state to display CSV for review
     const handleFileChange = (e) => {
         setCsv(e.target.files[0]);
         Papa.parse(e.target.files[0], {
@@ -40,7 +41,8 @@ export default function AddBlocks({ classes, setPreview }) {
             }
         });
     }
-
+    // Handles upload of CSV, sends data to server,
+    // On success, resets inputs and displays message
     const handleUpload = (e) => {
         e.preventDefault();
         formData.append('file', csv);
@@ -54,14 +56,14 @@ export default function AddBlocks({ classes, setPreview }) {
         setCsv(null);
         setPreview('');
     }
-
+    // Handle closes of success snack bar
     const handleCloseSnackBar = (e, reason) => {
         if(reason === 'clickaway') {
             return;
         }
         setOpenSnackBar(false);
     }
-
+    
     return (
         <Grid
             container
@@ -72,6 +74,7 @@ export default function AddBlocks({ classes, setPreview }) {
         >
             <Grid item>
                 <form onSubmit={handleUpload}>
+                    {/* Header */}
                     <Typography variant="h5">
                         Add New Building Blocks
                     </Typography>
@@ -81,6 +84,7 @@ export default function AddBlocks({ classes, setPreview }) {
                             required
                             fullWidth
                         >
+                            {/* Select Industry Pyramid */}
                             <InputLabel>Industry Pyramid</InputLabel>
                             <Select
                                 name="Industry Pyramid"
@@ -96,6 +100,7 @@ export default function AddBlocks({ classes, setPreview }) {
                         </FormControl>
                     </Grid>
                     <Grid item className={classes.blockForm}>
+                        {/* Btn displays if industry pyramid is selected */}
                         {industryPyramid !== 0 &&
                             <Button
                                 variant="contained"
@@ -114,6 +119,7 @@ export default function AddBlocks({ classes, setPreview }) {
                                 />
                             </Button>
                         }
+                        {/* Btn displays if CSV is selected */}
                         {csv !== null &&
                             <Button
                                 type="submit"
@@ -125,6 +131,7 @@ export default function AddBlocks({ classes, setPreview }) {
                         }
                     </Grid>
                 </form>
+                {/* Add New Building Block SUCCESS snackbar alert */}
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'bottom',
@@ -144,5 +151,5 @@ export default function AddBlocks({ classes, setPreview }) {
                 />
             </Grid>
         </Grid>
-    )
+    );
 }
