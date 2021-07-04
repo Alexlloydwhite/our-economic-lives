@@ -1,23 +1,35 @@
 // React
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 // M-UI
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
+import {
+  Typography,
+  TextField,
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+  Card,
+  CardActions,
+  CardContent,
+  Divider
+} from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { useParams } from "react-router-dom";
-import Backdrop from "@material-ui/core/Backdrop";
-import CoachComments from "./CoachComments";
 import PublishIcon from "@material-ui/icons/Publish";
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import CommentIcon from "@material-ui/icons/Comment";
 import EditIcon from "@material-ui/icons/Edit";
+import CheckIcon from '@material-ui/icons/Check';
 // Styling
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -35,12 +47,11 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '2rem',
         width: '80%',
     },
-    button: {
-        textAlign: 'Center',
-    },
-    backdrop: {
-        zIndex: theme.zIndex.drawer + 1,
-        color: '#fff',
+    unapproved: {
+        backgroundColor: theme.palette.error.main,
+      },
+    approved: {
+        backgroundColor: theme.palette.success.main,
       },
   }));
 
@@ -54,13 +65,16 @@ export default function BlockDetail() {
   }, [])
 
     const classes = useStyles();
-    const savedExp = useSelector((store) => store.unapprovedExp);
+    const experiences = useSelector((store) => store.unapprovedExp);
     const detail = useSelector((store) => store.blockDetails);
     const user = useSelector((store) => store.user);
     const [newExp, setNewExp] = useState('');
     const [newExpError, setNewExpError] = useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
+    const [editExp, setEditExp] = useState('');
     const user_id = user.id;
     const block_id = detail.id;
+    console.log('in experiences', experiences);
 
     // Validate skill form
     const validateForm = (e) => {
@@ -85,17 +99,11 @@ export default function BlockDetail() {
     // Clear Critical Experience form
     setNewExp("");
   };
-    // Setting state for backdrop 
-    const [open, setOpen] = useState(false);
-    // Setting handle functions for backdrop functionality
-    const handleClose = () => {
-        setOpen(false);
-    };
-    // Grabbing Id and sending to DB to retrieve user/client building blocks
-    const handleToggle = (xp) => {
-        dispatch({ type: 'SET_COMMENT_CLIENT', payload: xp })
-        setOpen(!open);
-    };
+  
+  const handleReview = (user_text) => {
+    setOpenDialog(true), 
+    setEditExp(user_text)
+  }
 
   return (
     <>
@@ -109,13 +117,13 @@ export default function BlockDetail() {
           <Typography variant="h4">{detail.name}</Typography>
         </AccordionSummary>
                     <Typography className={classes.title}>
-                        <i>Description:</i>
+                        <b>Description:</b>
                     </Typography>
                     <Typography className={classes.title}>
                         {detail.description}
                     </Typography>
                     <Typography className={classes.title}>
-                        <i>Examples:</i>
+                        <b>Examples:</b>
                     </Typography>
                     <Typography className={classes.title}>
                     • Situational awareness
@@ -140,7 +148,7 @@ export default function BlockDetail() {
 
         <div style={{ textAlign: 'center', marginTop: '2rem', paddingLeft: '1rem', paddingRight: '1rem' }}> 
             <Typography >
-                Describe an instance that exemplifies {detail.name}.
+              Describe an instance that exemplifies {detail.name}.
             </Typography>
         </div>
         <form noValidate autoComplete="off" onSubmit={validateForm}>
@@ -153,24 +161,25 @@ export default function BlockDetail() {
                 value={newExp}
                 onChange={(e) => setNewExp(e.target.value)}
             />
-            <Box className={classes.button}>
             <Button 
                 type="submit" 
                 variant="contained" 
                 color="primary"
-                size="large" 
+                style={{ float: 'right', marginRight: '10%'}}
+                endIcon={<PublishIcon />}
             >
-               <PublishIcon />&nbsp; Submit 
+               Submit 
             </Button>
-            </Box>
         </form>
         
-        <div style={{ textAlign: 'center', marginTop: '3rem' }}> 
-            <Typography >Saved Experiences: {savedExp.length} / 5</Typography>
+        <div style={{ textAlign: 'center', marginTop: '5rem' }}> 
+            <Typography >Submitted Experiences: <b>{experiences.length} / 5</b></Typography>
         </div>
         <div>
-            {savedExp.map(xp => (
-            <>
+            {experiences.map((xp) => { 
+            if( xp.is_approved === false ) {
+              return (
+                <> 
             <TextField
                 className={classes.field}
                 label={detail.name}
@@ -179,30 +188,83 @@ export default function BlockDetail() {
                 rows={5}
                 variant="outlined"
             />
-            <Box className={classes.button}>
-             <Button 
-                type="submit" 
-                variant="contained" 
-                color="primary"
-                size="large" 
-            >
-              <EditIcon />
-            </Button>
             <Button 
                 type="submit" 
                 variant="contained" 
-                color="primary"
-                size="large"
-                onClick={() => handleToggle(xp)} 
+                className={classes.unapproved}
+                style={{ float: 'right', marginRight: '10%' }}
+                onClick={() => handleReview(xp.user_text)} 
+                endIcon={<ThumbDownIcon />}
             >
-              <CommentIcon />
+              Unapproved
             </Button>
-            </Box>
-            <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
-                <CoachComments />
-            </Backdrop>
-            </>
-            ))}
+            <Dialog open={openDialog}>
+                {/* Dialog Title */}
+                <DialogTitle style={{ marginBottom: -25 }}>
+                    <span
+                        style={{ float: 'left', marginTop: 9 }}
+                    >
+                        {detail.name}
+                    </span>
+                    <IconButton
+                        onClick={() => setOpenDialog(false)}
+                        style={{ float: 'right' }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                </DialogTitle>
+                <form noValidate autoComplete="off" >
+                <DialogContent>
+                    <DialogContentText>
+                        <b>Coach: "{xp.coach_comments}"</b>
+                    </DialogContentText>
+                    <TextField
+                        fullWidth
+                        variant="outlined"
+                        multiline
+                        rows={4}
+                        value={editExp}
+                        onChange={(e) => setEditExp(e.target.value)}
+                    />
+                </DialogContent>
+                <DialogActions >
+                    <Button
+                        type="submit"
+                        endIcon={<PublishIcon />}
+                        variant="contained"
+                        color="primary"
+                    >
+                        Resubmit
+                    </Button>
+                  </DialogActions>
+                  </form>
+                </Dialog>
+                </>
+              )
+            } else {
+              return (
+              <> 
+              <TextField
+                  className={classes.field}
+                  label={detail.name}
+                  value={xp.user_text}
+                  multiline
+                  rows={5}
+                  variant="outlined"
+              />
+              <Button 
+                  type="submit" 
+                  variant="contained" 
+                  className={classes.approved}
+                  style={{ float: 'right', marginRight: '10%', marginBottom: '10%'}}
+                  endIcon={<CheckIcon />}
+              >
+                Approved
+              </Button>
+              </>
+              )
+              }
+          })}
         </div>
     </>
   );
