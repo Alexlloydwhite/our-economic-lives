@@ -76,15 +76,18 @@ export default function BlockDetail() {
     const user_id = user.id;
     const block_id = detail.id;
     console.log('in experiences', experiences);
+    console.log('in detail', detail);
 
     // Validate skill form
     const validateForm = (e) => {
         e.preventDefault();
         setNewExpError(false)
-        if (newExp == ''){
-            setNewExpError(true)
+        if (newExp === ''){
+          setNewExpError(true)
         }
-        submitExp();
+        else {
+          submitExp();
+        }
     }
 
   // Once validated send new experience to saga
@@ -106,6 +109,19 @@ export default function BlockDetail() {
     setEditExp(user_text)
   }
 
+  // Once validated send new experience to saga
+  const submitEditExp = () => {
+    dispatch({
+      type: "CREATE_EXP",
+      payload: {
+        user_id: user_id,
+        block_id: block_id,
+        user_text: editExp,
+      },
+    });
+    setOpenDialog(false)
+  };
+
   return (
     <>
       <Accordion>
@@ -126,7 +142,7 @@ export default function BlockDetail() {
                     <Typography className={classes.title}>
                         <b>Examples:</b>
                     </Typography>
-                    {detail ? detail.array_agg.map( examples => {
+                    {/* {detail ? detail.array_agg.map( examples => {
                         return (
                             <AccordionDetails >
                              <Typography className={classes.examples}>
@@ -134,7 +150,7 @@ export default function BlockDetail() {
                              </Typography>
                         </AccordionDetails>
                         )
-                    }):''}
+                    }):''} */}
             </Accordion>
 
         <div style={{ textAlign: 'center', marginTop: '2rem', paddingLeft: '1rem', paddingRight: '1rem' }}> 
@@ -209,7 +225,7 @@ export default function BlockDetail() {
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
-                <form noValidate autoComplete="off" >
+                <form noValidate autoComplete="off" onSubmit={submitEditExp}>
                 <DialogContent>
                     <DialogContentText>
                         {xp.coach_comments ? <b>Coach: "{xp.coach_comments}"</b> : <b>Awaiting Review...</b>}
