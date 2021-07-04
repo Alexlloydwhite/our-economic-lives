@@ -126,25 +126,15 @@ export default function BlockDetail() {
                     <Typography className={classes.title}>
                         <b>Examples:</b>
                     </Typography>
-                    <Typography className={classes.title}>
-                    • Situational awareness
-                    </Typography>
-                    <Typography className={classes.title}>
-                    • Business Ethics
-                    </Typography>
-                    <Typography className={classes.title}>
-                    • Communicating
-                    </Typography>
-                    
-                    {/* {detail ? detail.map( examples => {
+                    {detail ? detail.array_agg.map( examples => {
                         return (
                             <AccordionDetails >
                              <Typography className={classes.examples}>
-                                 {examples}
+                              • {examples}
                              </Typography>
                         </AccordionDetails>
                         )
-                    }):''} */}
+                    }):''}
             </Accordion>
 
         <div style={{ textAlign: 'center', marginTop: '2rem', paddingLeft: '1rem', paddingRight: '1rem' }}> 
