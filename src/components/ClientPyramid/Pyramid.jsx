@@ -1,7 +1,6 @@
 import { makeStyles, Typography } from "@material-ui/core"
 import Backdrop from '@material-ui/core/Backdrop'
-import { LowPriorityTwoTone } from "@material-ui/icons"
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { theme } from '../Theme/Theme'
 import BlockSlider from './BlockSlider'
@@ -43,7 +42,6 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     width: '100vw',
-    marginTop: 100,
   },
   row: {
     display: 'flex',
@@ -194,7 +192,6 @@ function Tier(props) {
 
   return (
     <div className={classes.pyramid}>
-      {JSON.stringify(liveProgress)}
       <Typography>Please Select Your Tier: </Typography>
       <div className={classes.row}>
         <div className={classes.tier6}>

@@ -119,8 +119,12 @@ router.get('/progress/:pyramid', rejectUnauthenticated, async (req, res) => {
           tierProgress = 0;
         }
         progress.push(tierProgress);
+
       }
-    client.query('COMMIT');
+      const selectedPyramid = await client.query(`SELECT name FROM industry_pyramid
+        WHERE id=$1`, [pyramidId]);
+      progress = { progress: progress, pyramid: selectedPyramid.rows[0].name }
+      client.query('COMMIT');
     res.send(progress);
   } catch (error) {
     console.log('Cannot get pyramid progress', error);
