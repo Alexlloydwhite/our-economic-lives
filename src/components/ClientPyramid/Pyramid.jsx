@@ -8,6 +8,7 @@ import BlockSlider from './BlockSlider'
 
 
 
+export default function Pyramid(props) {
 //these settings can be used to adjust the pyramid dimensions 
 let pyramidTierHeight = 50;
 let pyramidTierMargin = 10;
@@ -31,7 +32,9 @@ const getRightBoarderColor = (rightWidth) => {
   }
 }
 
-let progress = [1, 0.8, 0.6, 0.4, 0.2, 0.4, 0.6];
+// let progress = [1, 0.8, 0.6, 0.4, 0.2, 0.4, 0.6];
+  let progress = props.progress;
+
 
 const useStyles = makeStyles({
   pyramid: {
@@ -183,38 +186,33 @@ function Tier(props) {
   )
 }
 
-export default function Pyramid() {
   const dispatch = useDispatch();
-  let futureProgress = useSelector(store =>store.pyramidProgress)
-  
-  useEffect(() => {
-    dispatch({ type: 'FETCH_PYRAMID_PROGRESS' });
-  }, [])
-  
+  let liveProgress = useSelector(store =>store.pyramidProgress)
+  const user = useSelector(store => store.user);
   
   const classes = useStyles();
 
   return (
     <div className={classes.pyramid}>
-      {JSON.stringify(futureProgress)}
+      {JSON.stringify(liveProgress)}
       <Typography>Please Select Your Tier: </Typography>
       <div className={classes.row}>
         <div className={classes.tier6}>
-          <Typography className={classes.tier6Title}>Tier 6</Typography>
+          <Typography progress={liveProgress} className={classes.tier6Title}>Tier 6</Typography>
           <div className={classes.tier6Remaining}></div>
           <div className={classes.tier6Progress}></div>
         </div>
         <div className={classes.tier7}>
-          <Typography className={classes.tier7Title}>Tier 7</Typography>
+          <Typography progress={liveProgress} className={classes.tier7Title}>Tier 7</Typography>
           <div className={classes.tier7Remaining}></div>
           <div className={classes.tier7Progress}></div>
         </div>
       </div>
-      <Tier tier={5} />
-      <Tier tier={4} />
-      <Tier tier={3} />
-      <Tier tier={2} />
-      <Tier tier={1} />
+      <Tier progress={liveProgress} tier={5} />
+      <Tier progress={liveProgress} tier={4} />
+      <Tier progress={liveProgress} tier={3} />
+      <Tier progress={liveProgress} tier={2} />
+      <Tier progress={liveProgress} tier={1} />
     </div>
   )
 }

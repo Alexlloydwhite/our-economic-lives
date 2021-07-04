@@ -120,8 +120,6 @@ router.get('/progress/:pyramid', rejectUnauthenticated, async (req, res) => {
         }
         progress.push(tierProgress);
       }
-      console.log(progress);
-      
     client.query('COMMIT');
     res.send(progress);
   } catch (error) {
