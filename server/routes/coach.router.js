@@ -6,6 +6,7 @@ const {
     rejectUnauthorized,
 } = require('../modules/coachAuthorization-middleware');
 
+//gets all the critical experience created by a specific user
 router.get('/critical-experience/:id', rejectUnauthorized, (req, res) => {
     const queryText = `
     SELECT 
@@ -123,6 +124,7 @@ router.get('/client-list/:id?', rejectUnauthorized, (req, res) => {
         });
 });
 
+//grabs all the blocks a specific client's current pyramid
 router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
     const clientId = req.params.id;
     // First query gets ID of pyramid from user
@@ -148,12 +150,15 @@ router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
     ORDER BY bb.name ASC;`;
     const client = await pool.connect();
     try {
+        //gets the pyramid_id
         let pyramidId = await client.query(queryText1, [clientId]);
         pyramidId = pyramidId.rows[0].industry_pyramid;
         if (pyramidId === 1) {
+            //if the pyramid_id is the generic pyramid then we only need the generic pyramid blocks
             const pyramidData = await client.query(queryText2, [clientId, pyramidId]);
             res.send(pyramidData.rows);
         } else {
+            //if the pyramid_id is not from the generic pyramid we nee 
             const allBuildingBlocks = await client.query(queryText3, [clientId, pyramidId]);
             res.send(allBuildingBlocks.rows);
         }
@@ -165,6 +170,7 @@ router.get('/client-pyramid/:id', rejectUnauthorized, async (req, res) => {
     }
 });
 
+//deactivates a client
 router.put('/deactivate-client/:id', rejectUnauthorized, (req, res) => {
     const clientId = req.params.id;
     const queryText = `UPDATE "user" u SET is_active=false WHERE u.id=$1`
@@ -176,6 +182,7 @@ router.put('/deactivate-client/:id', rejectUnauthorized, (req, res) => {
         });
 });
 
+//activates a client
 router.put('/activate-client/:id', rejectUnauthorized, (req, res) => {
     const clientId = req.params.id;
     const queryText = `UPDATE "user" u SET is_active=true WHERE u.id=$1`
@@ -187,6 +194,7 @@ router.put('/activate-client/:id', rejectUnauthorized, (req, res) => {
         });
 });
 
+//updates a critical experience to approved
 router.put('/approve-crit-experience/:id', rejectUnauthorized, (req, res) => {
     console.log(req.params);
     const queryText = `UPDATE critical_experience SET is_approved = true WHERE id=$1;`
@@ -217,6 +225,7 @@ router.get('/unapproved_Exp/:id/:bbId', (req, res) => {
         })
 });
 
+//allows coaches to add comments
 router.put('/add_coach_comments', rejectUnauthorized, (req, res) => {
     const coach_comments = req.body.coach_comments;
     const critical_experience_id = req.body.id;
