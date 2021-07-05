@@ -207,7 +207,7 @@ router.get('/unapproved_Exp/:id/:bbId', (req, res) => {
     JOIN user_blocks ub on ub.id = cr.user_blocks_id
     WHERE ub.user_id = $1 
     AND ub.building_block_id = $2
-    ORDER BY cr.is_approved ASC;`
+    ORDER BY cr.is_approved ASC, cr.id DESC;`
     pool.query(queryText, [user_id, buildingBlockId])
         .then(result => {
             res.send(result.rows)
