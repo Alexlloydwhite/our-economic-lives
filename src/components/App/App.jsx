@@ -99,6 +99,10 @@ export default function App() {
             <ManagePyramids />
           </AdminProtectedRoute>
 
+          <ClientProtectedRoute>
+            <Messaging />
+          </ClientProtectedRoute>
+
           <Route>
             <h1 style={{ textAlign: 'center' }}>404 Error <br /> Sorry, the page you are looking for was not found</h1>
           </Route>

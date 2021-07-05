@@ -31,6 +31,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory';
+import ChatIcon from '@material-ui/icons/Chat';
 
 const useStyles = makeStyles({
   list: {
@@ -133,6 +134,9 @@ export default function Drawer() {
           }
           {user.authorization === 1 &&
             <ListItemLink to="/managepyramids" primary="Manage Pyramids" icon={<ChangeHistoryIcon />} />
+          }
+          {user.authorization === 3 &&
+            <ListItemLink to="/message" primary="Chat With Coach" icon={<ChatIcon />} />
           }
         </List>
         {/* This divider renders a dividing line between the page nagivation links and the user account links */}
