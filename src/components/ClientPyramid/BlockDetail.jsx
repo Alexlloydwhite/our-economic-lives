@@ -38,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
   },
     examples: {
         textAlign: 'Left',
-        marginLeft: '3em',
+        marginLeft: '6em',
+        marginTop: '-4%'
     },
     field: {
         marginLeft: '10%',
@@ -140,25 +141,23 @@ export default function BlockDetail() {
         >
           <Typography variant="h5">{detail.name}</Typography>
         </AccordionSummary >
-                    <Typography className={classes.description}>
-                        <b>Description:</b>
+          <Typography className={classes.description}>
+              <b>Description:</b>
+              {' '}{detail.description}
+          </Typography>
+          <Typography className={classes.description}>
+              <b>Examples:</b>
+          </Typography>
+          {detail.array_agg ? detail.array_agg.map( examples => {
+              return (
+                  <AccordionDetails >
+                    <Typography className={classes.examples}>
+                    • {examples}
                     </Typography>
-                    <Typography className={classes.description}>
-                        {detail.description}
-                    </Typography>
-                    <Typography className={classes.description}>
-                        <b>Examples:</b>
-                    </Typography>
-                    {detail.array_agg ? detail.array_agg.map( examples => {
-                        return (
-                            <AccordionDetails >
-                             <Typography className={classes.examples}>
-                              • {examples}
-                             </Typography>
-                        </AccordionDetails>
-                        )
-                    }):''}
-            </Accordion>
+              </AccordionDetails>
+              )
+          }):''}
+      </Accordion>
 
         <div style={{ textAlign: 'center', marginTop: '2rem', paddingLeft: '1rem', paddingRight: '1rem' }}>
             <Typography variant="h6">

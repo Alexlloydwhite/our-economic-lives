@@ -10,7 +10,7 @@ An application was needed to guide people through developing a more complete pic
 ![Here is an example of the application](gifox file here)
 
 # EDA Project
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`)
 
 ## Prerequisites
 Before you get started, make sure you have the following software installed on your computer:
@@ -20,7 +20,7 @@ Before you get started, make sure you have the following software installed on y
 - [Nodemon](https://nodemon.io/)
 
 ## Create database and table
-Create a new database called `our_economic_lives` (a full list of tables can be found in `database.sql`):
+Create a new database called `our_economic_lives` (a full list of tables can be found in `database.sql`)
 
 ## Development Setup Instructions
 - Run `npm install`
@@ -56,4 +56,4 @@ Directory Structure:
 Thanks to Jessie Williams for the opportunity to build this application. Prime Digital Academy who equipped us with the necessary tools to make this application a reality.
 
 ## Support
-If you have suggestions or issues, please email alexlloydwhite@gmail.com, johnturner4004@gmail.com, sam@moudry.net kjepsen86@gmail.com
+If you have suggestions or issues, please email alexlloydwhite@gmail.com, johnturner4004@gmail.com, sam@moudry.net, kjepsen86@gmail.com
