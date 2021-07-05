@@ -24,7 +24,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import PublishIcon from "@material-ui/icons/Publish";
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-import CommentIcon from "@material-ui/icons/Comment";
+import EditIcon from "@material-ui/icons/Edit";
 // Styling
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -38,13 +38,18 @@ const useStyles = makeStyles((theme) => ({
   },
     examples: {
         textAlign: 'Left',
-        marginLeft: '4em',
+        marginLeft: '3em',
     },
     field: {
         marginLeft: '10%',
         marginTop: '2rem',
         width: '80%',
     },
+    field2: {
+      marginLeft: '10%',
+      marginTop: '1%',
+      width: '80%',
+  },
     unapproved: {
         backgroundColor: theme.palette.error.main,
       },
@@ -70,10 +75,11 @@ export default function BlockDetail() {
     const [newExpError, setNewExpError] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
     const [editExp, setEditExp] = useState('');
+    const [editId, setEditId] = useState('');
     const user_id = user.id;
     const block_id = detail.id;
-    console.log('in experiences', experiences);
-    console.log('in detail', detail);
+    // console.log('in experiences', experiences);
+    // console.log('in detail', detail);
 
     // Validate skill form
     const validateForm = (e) => {
@@ -101,19 +107,23 @@ export default function BlockDetail() {
     setNewExp("");
   };
   
-  const handleReview = (user_text) => {
+  const handleReview = (xp) => {
+    console.log('in handle review', xp);
     setOpenDialog(true), 
-    setEditExp(user_text)
+    setEditExp(xp.user_text)
+    setEditId(xp.id)
   }
 
   // Once validated send new experience to saga
   const submitEditExp = () => {
+    console.log('xp', id);
     dispatch({
-      type: "CREATE_EXP",
+      type: "EDIT_EXP",
       payload: {
         user_id: user_id,
         block_id: block_id,
         user_text: editExp,
+        id: editId,
       },
     });
     setOpenDialog(false)
@@ -139,7 +149,7 @@ export default function BlockDetail() {
                     <Typography className={classes.description}>
                         <b>Examples:</b>
                     </Typography>
-                    {/* {detail ? detail.array_agg.map( examples => {
+                    {detail.array_agg ? detail.array_agg.map( examples => {
                         return (
                             <AccordionDetails >
                              <Typography className={classes.examples}>
@@ -147,7 +157,7 @@ export default function BlockDetail() {
                              </Typography>
                         </AccordionDetails>
                         )
-                    }):''} */}
+                    }):''}
             </Accordion>
 
         <div style={{ textAlign: 'center', marginTop: '2rem', paddingLeft: '1rem', paddingRight: '1rem' }}>
@@ -174,7 +184,7 @@ export default function BlockDetail() {
                 variant="contained" 
                 color="primary"
                 size="large"
-                style={{ float: 'right', marginRight: '10%', width: '45%'}}
+                style={{ float: 'right', marginRight: '10%', width: '40%'}}
                 endIcon={<PublishIcon />}
                 onClick={validateForm}
             >
@@ -182,7 +192,7 @@ export default function BlockDetail() {
             </Button>
         </Grid>
       </Grid>
-        <div style={{ textAlign: 'center', marginTop: '4rem' }}> 
+        <div style={{ textAlign: 'center', marginTop: '3rem' }}> 
             <Typography variant="h6">Submitted Experiences: <b>{experiences.length} / 5</b></Typography>
         </div>
             {experiences.map((xp) => { 
@@ -191,9 +201,11 @@ export default function BlockDetail() {
                 <>
          <Grid container spacing={1}>
           <Grid item xs={12}>
+            <Typography style={{ textAlign: 'left', marginLeft: '10%', marginTop: '2rem', marginRight: '10%' }}>
+                {xp.coach_comments ? <><b>Coach:</b> <i>"{xp.coach_comments}"</i></> : <i>Awaiting Review...</i>}
+              </Typography>
             <TextField
-                className={classes.field}
-                label={detail.name}
+                className={classes.field2}
                 value={xp.user_text}
                 multiline
                 rows={5}
@@ -205,8 +217,19 @@ export default function BlockDetail() {
                 type="submit" 
                 variant="contained" 
                 size="large"
+                color="primary"
+                style={{ float: 'right', marginRight: '10%', width: '39%' }}
+                onClick={() => handleReview(xp)}
+                endIcon={<EditIcon />}
+            >
+              Edit
+            </Button>
+            <Button 
+                type="submit" 
+                variant="contained" 
+                size="large"
                 className={classes.unapproved}
-                style={{ float: 'right', marginRight: '10%', width: '45%' }}
+                style={{ float: 'left', marginLeft: '10%', width: '39%', marginBottom: '1rem' }}
                 onClick={() => handleReview(xp.user_text)}
                 endIcon={<ThumbDownIcon />}
             >
@@ -250,7 +273,7 @@ export default function BlockDetail() {
                         variant="contained"
                         color="primary"
                         onClick={submitEditExp}
-                        style={{ float: 'right', marginRight: '5%', width: '50%'}}
+                        style={{ float: 'right', marginRight: '5%', width: '40%'}}
                     >
                         Resubmit
                     </Button>
@@ -262,10 +285,12 @@ export default function BlockDetail() {
               return (
               <>
           <Grid container spacing={1}>
-            <Grid item xs={12}> 
+            <Grid item xs={12}>
+              <Typography style={{ textAlign: 'left', marginLeft: '10%', marginTop: '2rem' }}>
+              {xp.coach_comments ? <><b>Coach:</b> <i>"{xp.coach_comments}"</i></> : <i>Awaiting Review...</i>}
+              </Typography> 
               <TextField
-                  className={classes.field}
-                  label={detail.name}
+                  className={classes.field2}
                   value={xp.user_text}
                   multiline
                   rows={5}
@@ -278,17 +303,17 @@ export default function BlockDetail() {
                   size="large"
                   variant="contained" 
                   className={classes.approved}
-                  style={{ float: 'right', marginRight: '10%', width: '45%' }}
+                  style={{ float: 'right', marginRight: '10%', width: '80%', marginBottom: '1rem' }}
                   endIcon={<ThumbUpIcon />}
               >
                 Approved! &nbsp;
               </Button>
             </Grid>
           </Grid>
-              </>
-              )
-              }
-          })}
+          </>
+            )
+          }
+        })}
     </>
   );
 }
