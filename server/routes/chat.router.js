@@ -6,14 +6,31 @@ const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
+router.get('/', rejectUnauthenticated, (req, res) => {
+    const queryText = `
+        SELECT * FROM messages m
+        JOIN users_messages um ON um.id_message = m.id
+        WHERE m.id_sender = $1 AND um.id_recipient = $2;
+    `;
+
+    pool
+        .query(queryText, [req.user.id, 7])
+        .then((result) => {
+            res.send(result.row);
+        })
+        .catch((err) => {
+            res.sendStatus(500);
+            console.log(`IN GET chat router: ${err}`);
+        })
+});
+
 router.post('/', rejectUnauthenticated, async (req, res) => {
     const queryText1 = `
-        INSERT INTO messages ("id_sender", "text")
-        VALUES ($1, $2)
-        RETURNING id;`;
+        INSERT INTO messages ("id_sender", "text") VALUES ($1, $2) RETURNING id;
+    `;
     const queryText2 = `
-        INSERT INTO users_messages("id_recipient", "id_message")
-        VALUES ($1, $2);`;
+        INSERT INTO users_messages("id_recipient", "id_message") VALUES ($1, $2);
+    `;
 
     const client = await pool.connect();
     try {
