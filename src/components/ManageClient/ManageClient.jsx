@@ -1,5 +1,6 @@
 import RecommendedBuildBlocks from "./RecommendBuildBlocks/RecommendedBuildBlocks";
-import CoachCritExpReview from './CoachCritExpReviews/CoachCritExpReview'
+import CoachCritExpReview from './CoachCritExpReviews/CoachCritExpReview';
+import Messaging from '../Messaging/Messaging';
 import { useState } from 'react';
 // MUI
 import {
@@ -61,13 +62,17 @@ export default function ManageClient() {
                 onChange={handleTabChange}
                 centered
             >
+                <Tab label="Chat" />
                 <Tab label="Critical Experiences" />
                 <Tab label="Building Blocks" />
             </Tabs>
             <TabPanel value={value} index={0}>
-                <CoachCritExpReview classes={classes} />
+                <Messaging />
             </TabPanel>
             <TabPanel value={value} index={1}>
+                <CoachCritExpReview classes={classes} />
+            </TabPanel>
+            <TabPanel value={value} index={2}>
                 <RecommendedBuildBlocks classes={classes} />
             </TabPanel>
         </div>
