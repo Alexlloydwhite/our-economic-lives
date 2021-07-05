@@ -20,20 +20,26 @@ export default function SendMessageForm() {
             message: message,
             clientId: params.id
         });
+        setMessage('');
     }
 
     return (
-        <Grid container>
-            <Grid item xs={12} style={{ padding: 10 }}>
+        <Grid container style={{padding: 10}}>
+            <Grid xs={11}>
                 <TextField
                     variant="outlined"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
+                    fullWidth
                 />
+            </Grid>
+            <Grid xs={1}>
                 <Button
-                    variant="outlined"
+                    variant="contained"
                     style={{ marginLeft: 5 }}
                     onClick={sendMessage}
+                    style={{ height: 54 }}
+                    color="primary"
                 >
                     Send
                 </Button>
