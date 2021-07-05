@@ -131,7 +131,7 @@ export default function BlockDetail() {
 
   return (
     <>
-      <Accordion>
+      <Accordion style={{ marginTop: '-1rem'}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
