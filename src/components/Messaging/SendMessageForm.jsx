@@ -14,10 +14,10 @@ export default function SendMessageForm() {
 
     const sendMessage = () => {
         dispatch({
-            type: 'SEND_MESSAGE', message
+            type: 'POST_MESSAGE', message
         });
     }
-    
+
     return (
         <Grid container>
             <Grid item xs={12} style={{ padding: 10 }}>

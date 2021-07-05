@@ -1,10 +1,12 @@
 const express = require('express');
-const {
-  rejectUnauthenticated,
-} = require('../modules/authentication-middleware');
+const router = express.Router();
 const pool = require('../modules/pool');
 
-router.post('/', rejectUnauthenticated, async (req,res) => {
+const {
+    rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
+
+router.post('/', rejectUnauthenticated, async (req, res) => {
     const queryText1 = `
         INSERT INTO messages ("id_sender", "text")
         VALUES ($1, $2)
@@ -13,7 +15,7 @@ router.post('/', rejectUnauthenticated, async (req,res) => {
         INSERT INTO users_messages("id_recipient", "id_message")
         VALUES ($1, $2);`;
 
-    const client =  await pool.connect();
+    const client = await pool.connect();
     try {
         await client.query(queryText1, [req.user.id, req.body.message]);
         res.sendStatus(200);
