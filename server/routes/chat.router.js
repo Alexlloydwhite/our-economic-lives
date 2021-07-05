@@ -17,9 +17,14 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
     const client = await pool.connect();
     try {
-        await client.query(queryText1, [req.user.id, req.body.message]);
+        // Post new message to messages table
+        const newMessage = await client.query(queryText1, [req.user.id, req.body.message]);
+        // Grab id of new message
+        const newMessageId = newMessage.rows[0].id;
+        // Post new message to users_messages table
+        await client.query(queryText2, [7, newMessageId]);
         res.sendStatus(200);
-    } catch (error) {
+    } catch (err) {
         console.log(`IN chat post router, ${err}`);
         res.sendStatus(500);
     } finally {

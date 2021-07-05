@@ -5,7 +5,7 @@ export default function* postMessage(action) {
     console.log(`in postMessage saga`);
     try {
         yield axios.post('/api/chat', {message: action.message} );
-    } catch (error) {
+    } catch (err) {
         console.log(`IN postMessage Saga: ${err}`);
     }
 }
