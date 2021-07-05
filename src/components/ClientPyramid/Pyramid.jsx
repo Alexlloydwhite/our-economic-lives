@@ -17,13 +17,13 @@ export default function Pyramid(props) {
     if (leftWidth > 0) {
       return pyramidTierHeight + "px solid " + theme.palette.success.main;
     } else {
-      return pyramidTierHeight + "px solid " + theme.palette.secondary.main;
+      return pyramidTierHeight + "px solid " + theme.palette.secondary.light;
     }
   };
 
   const getRightBoarderColor = (rightWidth) => {
     if (rightWidth > 0) {
-      return pyramidTierHeight + "px solid " + theme.palette.secondary.main;
+      return pyramidTierHeight + "px solid " + theme.palette.secondary.light;
     } else {
       return pyramidTierHeight + "px solid " + theme.palette.success.main;
     }
@@ -67,7 +67,7 @@ export default function Pyramid(props) {
         pyramidTier67Height -
         pyramidTier67Height * progress[6 - 1] +
         "px solid " +
-        theme.palette.secondary.main,
+        theme.palette.secondary.light,
       borderLeft: 20 - 20 * progress[6 - 1] + "px solid transparent",
       zIndex: 500,
       position: "absolute",
@@ -104,7 +104,7 @@ export default function Pyramid(props) {
         pyramidTier67Height -
         pyramidTier67Height * progress[7 - 1] +
         "px solid " +
-        theme.palette.secondary.main,
+        theme.palette.secondary.light,
       borderRight: 20 - 20 * progress[7 - 1] + "px solid transparent",
       zIndex: 500,
       position: "absolute",
@@ -202,10 +202,12 @@ export default function Pyramid(props) {
       setOpen(!open);
     };
 
+    let percent = Math.floor(tierProgress*100)
+
     return (
       <div className={classes.tier} onClick={handleToggle}>
         <div className={classes.tierTitle}>
-          <Typography>Tier {num}</Typography>
+          <Typography className="outlineText">Tier {num}: {percent}%</Typography>
         </div>
         <div className={classes.tierProgress}></div>
         <div className={classes.tierRemaining}></div>
@@ -226,13 +228,16 @@ export default function Pyramid(props) {
 
   const classes = useStyles();
 
+  let percent6 = Math.floor(progress[5] * 100)
+  let percent7 = Math.floor(progress[6] * 100)
+
   return (
     <div className={classes.pyramid}>
       <Typography>Please Select Your Tier: </Typography>
       <div className={classes.row}>
         <div className={classes.tier6} onClick={() => handleToggle(6)}>
           <Typography progress={liveProgress} className={classes.tier6Title}>
-            Tier 6
+            Tier 6: <br />{percent6}%
           </Typography>
           <div className={classes.tier6Remaining}></div>
           <div className={classes.tier6Progress}></div>
@@ -246,7 +251,7 @@ export default function Pyramid(props) {
         </div>
         <div className={classes.tier7} onClick={() => handleToggle(7)}>
           <Typography progress={liveProgress} className={classes.tier7Title}>
-            Tier 7
+            Tier 7: <br />{percent7}%
           </Typography>
           <div className={classes.tier7Remaining}></div>
           <div className={classes.tier7Progress}></div>

@@ -15,7 +15,8 @@ export const theme = createMuiTheme(
             },
             // grey
             secondary: {
-                main: '#4d5965'
+                main: '#4d5965',
+                light: '#c3cbd5'
             },
             success: {
                 main: '#2dfa21',

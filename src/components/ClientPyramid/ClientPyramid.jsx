@@ -37,7 +37,6 @@ export default function ClientPyramid() {
   const pyramidProgress = useSelector((store) => store.pyramidProgress);
   const pyramidList = useSelector((store) => store.industry_pyramid);
   const [currentPyramid, setCurrentPyramid] = useState(user.industry_pyramid);
-
   const handleChange = (event) => {
     setCurrentPyramid(event.target.value);
     dispatch({ type: "FETCH_PYRAMID_PROGRESS", payload: event.target.value });
