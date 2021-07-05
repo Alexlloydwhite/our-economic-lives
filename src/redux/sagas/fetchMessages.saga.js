@@ -1,10 +1,10 @@
 import { put } from 'redux-saga/effects';
 import axios from 'axios';
 
-export default function* fetchMessages() {
+export default function* fetchMessages(action) {
     try {
         // Get data from end point
-        const messages = yield axios.get('/api/chat');
+        const messages = yield axios.get(`/api/chat/${action.clientId}`);
         // Set reducer to store data
         yield put({
             type: 'SET_MESSAGES',

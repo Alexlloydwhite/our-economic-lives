@@ -6,17 +6,27 @@ const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/:id?', rejectUnauthenticated, (req, res) => {
+    let recipientId;
+    
+    if (req.user.authorization === 3) {
+        recipientId = user.coach_id; 
+    } else {
+        recipientId = req.params.id;
+    }
+    
     const queryText = `
-        SELECT * FROM messages m
-        JOIN users_messages um ON um.id_message = m.id
-        WHERE m.id_sender = $1 AND um.id_recipient = $2;
+    SELECT * FROM messages m
+    JOIN users_messages um ON um.id_message = m.id
+    WHERE m.id_sender = $1 AND um.id_recipient = $2;
     `;
+    
+    console.log(`in chat get router sendId ${req.user.id}, ${recipientId}`);
 
     pool
-        .query(queryText, [req.user.id, 7])
+        .query(queryText, [req.user.id, recipientId])
         .then((result) => {
-            res.send(result.row);
+            res.send(result.rows);
         })
         .catch((err) => {
             res.sendStatus(500);
