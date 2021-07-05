@@ -18,7 +18,7 @@ router.get('/:id?', rejectUnauthenticated, (req, res) => {
     const queryText = `
     SELECT * FROM messages m
     JOIN users_messages um ON um.id_message = m.id
-    WHERE m.id_sender = $1 AND um.id_recipient = $2;
+    WHERE m.id_sender = $1 OR m.id_sender = $2;
     `;
     
     console.log(`in chat get router sendId ${req.user.id}, ${recipientId}`);

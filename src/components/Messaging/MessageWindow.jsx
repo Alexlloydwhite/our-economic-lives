@@ -1,8 +1,9 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom";
+import { Typography, Box } from "@material-ui/core";
 
-export default function MessageWindow() {
+export default function MessageWindow({ classes }) {
     const dispatch = useDispatch();
     const params = useParams();
     const messages = useSelector(store => store.messages);
@@ -15,8 +16,30 @@ export default function MessageWindow() {
     }, []);
 
     return (
-        <pre>
-            {JSON.stringify(messages, null, 2)}
-        </pre>
+        <Box height={450} overflow="auto"> 
+            {messages.map((message) => (
+                <>
+                    {message.id_sender === Number(params.id) ?
+                        <div className={classes.messageLeft}>
+                            <Typography variant="caption">
+                                {message.send_date}
+                            </Typography>
+                            <Typography variant="h6">
+                                {message.text}
+                            </Typography>
+                        </div>
+                        :
+                        <div className={classes.messageRight}>
+                            <Typography variant="caption">
+                                {message.send_date}
+                            </Typography>
+                            <Typography variant="h6">
+                                {message.text}
+                            </Typography>
+                        </div>
+                    }
+                </>
+            ))}
+        </Box>
     );
 }

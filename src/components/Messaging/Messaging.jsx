@@ -26,6 +26,15 @@ const useStyles = makeStyles((theme) => ({
     },
     header: {
         padding: theme.spacing(1)
+    },
+    messageRight: {
+        textAlign: 'right',
+        padding: 10,
+        marginRight: 10,
+    },
+    messageLeft: {
+        textAlign: 'left',
+        padding: 10,
     }
 }));
 
@@ -49,7 +58,7 @@ export default function Messaging() {
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                    <MessageWindow />
+                    <MessageWindow classes={classes} />
                 </Grid>
                 <Grid item xs={12}>
                     <SendMessageForm />
