@@ -15,34 +15,31 @@ export default function SendMessageForm() {
     const params = useParams();
 
     const sendMessage = () => {
-        dispatch({
-            type: 'POST_MESSAGE',
-            message: message,
-            clientId: params.id
-        });
-        setMessage('');
+        if (message) {
+            dispatch({
+                type: 'POST_MESSAGE',
+                message: message,
+                clientId: params.id
+            });
+            setMessage('');
+        }
     }
 
     return (
-        <Grid container style={{padding: 10}}>
-            <Grid xs={11}>
+        <Grid container style={{ padding: 10 }}>
+            <Grid item xs={12}>
                 <TextField
                     variant="outlined"
+                    fullWidth
+                    placeholder="Press enter to send message"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    fullWidth
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            sendMessage();
+                        }
+                    }}
                 />
-            </Grid>
-            <Grid xs={1}>
-                <Button
-                    variant="contained"
-                    style={{ marginLeft: 5 }}
-                    onClick={sendMessage}
-                    style={{ height: 54 }}
-                    color="primary"
-                >
-                    Send
-                </Button>
             </Grid>
         </Grid>
     );
