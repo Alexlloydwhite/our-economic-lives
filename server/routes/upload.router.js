@@ -8,8 +8,9 @@ const {
     rejectUnauthorized,
 } = require('../modules/adminAuthorization-middleware');
 
+
+//This route takes the CSV and turns it into string then JSON and queries that JSON array of objects into the database
 router.post('/:id', rejectUnauthorized, async (req, res) => {
-    console.log('in upload POST');
     const client = await pool.connect();
     try {
         client.query('BEGIN')

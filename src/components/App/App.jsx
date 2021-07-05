@@ -21,6 +21,7 @@ import ClientProfile from '../ClientProfile/ClientProfile';
 import BlockDetail from '../ClientPyramid/BlockDetail';
 import ManagePyramids from '../ManagePyramid/ManagePyramid';
 import ManageClient from '../ManageClient/ManageClient';
+import Messaging from '../Messaging/Messaging';
 
 export default function App() {
   console.log('%c Our Economic Lives!!', 'font-weight: bold; font-size: 50px;color: red; text-shadow: 3px 3px 0 rgb(217,31,38) , 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) , 12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) , 18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113)');
@@ -68,7 +69,7 @@ export default function App() {
             exact
             path="/profile"
           >
-            <NavBar text="Your Profile"/>
+            <NavBar text="Your Profile" />
             <ClientProfile />
           </ClientProtectedRoute>
 
@@ -85,7 +86,7 @@ export default function App() {
             exact
             path="/manage-client/:id"
           >
-            <NavBar text="Manage Client"/>
+            <NavBar text="Manage Client" />
             <ManageClient />
           </CoachProtectedRoute>
 
@@ -99,7 +100,7 @@ export default function App() {
           </AdminProtectedRoute>
 
           <Route>
-            <h1 style={{textAlign: 'center'}}>404 Error <br /> Sorry, the page you are looking for was not found</h1>
+            <h1 style={{ textAlign: 'center' }}>404 Error <br /> Sorry, the page you are looking for was not found</h1>
           </Route>
         </Switch>
       </Router>

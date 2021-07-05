@@ -7,14 +7,12 @@ import {
 } from '@material-ui/core/';
 // React
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export default function AdminDashboard() {
     const dispatch = useDispatch();
     // const [careerPath, setCareerPath] = useState(0);
     const [industryPyramid, setIndustryPyramid] = useState('');
-    let routerPath = '/api/upload/' + industryPyramid;
-    const setIndustryPyramids = useSelector(store => store.industry_pyramid)
 
     const addIndustryPyramid = (e) => {
         e.preventDefault();
@@ -29,7 +27,7 @@ export default function AdminDashboard() {
 
     useEffect(() => {
         dispatch({ type: 'FETCH_INDUSTRY_PYRAMID' });
-    }, [dispatch]);
+    }, []);
 
     return (
         <Grid
