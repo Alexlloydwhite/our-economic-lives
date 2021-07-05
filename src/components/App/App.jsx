@@ -100,8 +100,15 @@ export default function App() {
           </AdminProtectedRoute>
 
           <ClientProtectedRoute>
-            <NavBar text="Chat With Coach" />
-            <Messaging />
+            <>
+              <NavBar text="Chat With Coach" />
+              <div style={{
+                flexGrow: 1,
+                textAlign: 'center'
+              }}>
+                <Messaging />
+              </div>
+            </>
           </ClientProtectedRoute>
 
           <Route>

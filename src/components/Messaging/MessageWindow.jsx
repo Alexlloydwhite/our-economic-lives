@@ -25,13 +25,16 @@ export default function MessageWindow({ classes }) {
     }, []);
 
     return (
-        <Box height={450} overflow="auto">
+        <Box height={500} overflow="auto">
             {messages.map((message) => (
                 <>
                     {user.authorization_level === 2 ?
                         <>
                             {message.id_sender === Number(params.id) ?
-                                <div className={classes.messageLeft}>
+                                <div
+                                    key={message.id}
+                                    className={classes.messageLeft}
+                                >
                                     <Typography variant="caption">
                                         {moment(message.send_date).format('h:mm a, MMMM Do YYYY')}
                                     </Typography>
@@ -40,7 +43,10 @@ export default function MessageWindow({ classes }) {
                                     </Typography>
                                 </div>
                                 :
-                                <div className={classes.messageRight}>
+                                <div
+                                    key={message.id}
+                                    className={classes.messageRight}
+                                >
                                     <Typography variant="caption">
                                         {moment(message.send_date).format('h:mm a, MMMM Do YYYY')}
                                     </Typography>
@@ -53,7 +59,10 @@ export default function MessageWindow({ classes }) {
                         :
                         <>
                             {message.id_sender === user.id ?
-                                <div className={classes.messageRight}>
+                                <div
+                                    key={message.id}
+                                    className={classes.messageRight}
+                                >
                                     <Typography variant="caption">
                                         {moment(message.send_date).format('h:mm a, MMMM Do YYYY')}
                                     </Typography>
@@ -62,7 +71,10 @@ export default function MessageWindow({ classes }) {
                                     </Typography>
                                 </div>
                                 :
-                                <div className={classes.messageLeft}>
+                                <div
+                                    key={message.id}
+                                    className={classes.messageLeft}
+                                >
                                     <Typography variant="caption">
                                         {moment(message.send_date).format('h:mm a, MMMM Do YYYY')}
                                     </Typography>
