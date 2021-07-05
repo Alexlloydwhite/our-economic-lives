@@ -14,7 +14,7 @@ export default function BlockSliderButton(props) {
 
   const getColor = () => {
     if (block.approved != 5) {
-      return theme.palette.primary.main;
+      return theme.palette.secondary.light;
     } else {
       return theme.palette.success.main;
     };
