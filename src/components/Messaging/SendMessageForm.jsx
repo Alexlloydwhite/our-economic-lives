@@ -1,16 +1,23 @@
+// MUI
 import {
     Grid,
     TextField,
     Button
 } from '@material-ui/core';
+// React
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 export default function SendMessageForm() {
+    const dispatch = useDispatch();
     const [message, setMessage] = useState('');
 
     const sendMessage = () => {
-        
+        dispatch({
+            type: 'SEND_MESSAGE', message
+        });
     }
+    
     return (
         <Grid container>
             <Grid item xs={12} style={{ padding: 10 }}>
