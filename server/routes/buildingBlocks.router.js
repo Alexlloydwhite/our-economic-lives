@@ -69,4 +69,28 @@ router.post('/add_critical_experience', rejectUnauthenticated, async (req, res) 
   };
 });
 
+router.put('/edit_critical_experience', rejectUnauthenticated, async (req, res) => {
+const client = await pool.connect();
+console.log('req.body', req.body);
+const queryText = `
+    UPDATE critical_experience 
+    SET user_text=$1 
+    WHERE critical_experience.id = $2;`
+  try {
+    pool
+      .query(queryText, [
+        req.body.user_text,
+        req.user.id
+      ])
+    client.query('COMMIT')
+    res.sendStatus(201);
+  } catch (error) {
+    client.query('ROLLBACK');
+    console.log('Error PUT /api/client/register', error);
+    res.sendStatus(500);
+  } finally {
+    client.release();
+  }
+});
+
 module.exports = router;
