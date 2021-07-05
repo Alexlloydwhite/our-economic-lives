@@ -5,7 +5,6 @@ function* fetchBlocks(action) {
   const tier = action.payload.tier;
   const pyramid = action.payload.pyramid;
   try {
-    // const tier = action.payload.tier;
     const blocks = yield axios.get(`/api/pyramid/buildingBlocks/${tier}/${pyramid}`)
     yield put({ type: 'SET_BLOCKS', payload: blocks.data })
   } catch (error) {
