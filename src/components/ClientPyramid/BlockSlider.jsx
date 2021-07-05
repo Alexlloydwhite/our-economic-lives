@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap', // makes the list horizontal
     transform: 'translateZ(0)', // recommended by m-ui
     padding: '.5rem',
+    overflow: 'scroll',
     width: '80%',
   },
   arrow: {
