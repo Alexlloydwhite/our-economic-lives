@@ -2,6 +2,14 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom";
 import { Typography, Box } from "@material-ui/core";
+import moment from 'moment';
+import { useRef } from 'react';
+
+const AlwaysScrollToBottom = () => {
+    const elementRef = useRef();
+    useEffect(() => elementRef.current.scrollIntoView());
+    return <div ref={elementRef} />;
+}
 
 export default function MessageWindow({ classes }) {
     const dispatch = useDispatch();
@@ -25,7 +33,7 @@ export default function MessageWindow({ classes }) {
                             {message.id_sender === Number(params.id) ?
                                 <div className={classes.messageLeft}>
                                     <Typography variant="caption">
-                                        {message.send_date}
+                                        {moment(message.send_date).format('h:mm a, MMMM Do YYYY')}
                                     </Typography>
                                     <Typography variant="h6">
                                         {message.text}
@@ -34,7 +42,7 @@ export default function MessageWindow({ classes }) {
                                 :
                                 <div className={classes.messageRight}>
                                     <Typography variant="caption">
-                                        {message.send_date}
+                                        {moment(message.send_date).format('h:mm a, MMMM Do YYYY')}
                                     </Typography>
                                     <Typography variant="h6">
                                         {message.text}
@@ -47,7 +55,7 @@ export default function MessageWindow({ classes }) {
                             {message.id_sender === user.id ?
                                 <div className={classes.messageRight}>
                                     <Typography variant="caption">
-                                        {message.send_date}
+                                        {moment(message.send_date).format('h:mm a, MMMM Do YYYY')}
                                     </Typography>
                                     <Typography variant="h6">
                                         {message.text}
@@ -56,7 +64,7 @@ export default function MessageWindow({ classes }) {
                                 :
                                 <div className={classes.messageLeft}>
                                     <Typography variant="caption">
-                                        {message.send_date}
+                                        {moment(message.send_date).format('h:mm a, MMMM Do YYYY')}
                                     </Typography>
                                     <Typography variant="h6">
                                         {message.text}
@@ -67,6 +75,7 @@ export default function MessageWindow({ classes }) {
                     }
                 </>
             ))}
+            <AlwaysScrollToBottom />
         </Box>
     );
 }
