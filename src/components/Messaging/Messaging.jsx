@@ -21,11 +21,14 @@ const useStyles = makeStyles((theme) => ({
             marginRight: 'auto',
         },
     },
-    chip: {
-        padding: theme.spacing(0.5)
+    messageRight: {
+        textAlign: 'right',
+        padding: 10,
+        marginRight: 10,
     },
-    header: {
-        padding: theme.spacing(1)
+    messageLeft: {
+        textAlign: 'left',
+        padding: 10,
     }
 }));
 
@@ -43,13 +46,14 @@ export default function Messaging() {
                 <Grid item xs={12}>
                     <Typography
                         style={{ textAlign: 'center' }}
-                        variant="h5"
+                        variant="h4"
+                        gutterBottom
                     >
                         Messaging
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                    <MessageWindow />
+                    <MessageWindow classes={classes} />
                 </Grid>
                 <Grid item xs={12}>
                     <SendMessageForm />

@@ -8,6 +8,10 @@ export default function* postMessage(action) {
             message: action.message,
             clientId: action.clientId
         });
+        yield put({
+            type: 'FETCH_MESSAGES',
+            clientId: action.clientId
+        });
     } catch (err) {
         console.log(`IN postMessage Saga: ${err}`);
     }
