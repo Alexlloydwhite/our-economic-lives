@@ -1,4 +1,4 @@
-import { makeStyles, Typography } from "@material-ui/core";
+import { makeStyles, Typography, Card, Container } from "@material-ui/core";
 import Backdrop from "@material-ui/core/Backdrop";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,6 +40,8 @@ export default function Pyramid(props) {
       justifyContent: "center",
       alignItems: "center",
       width: "100vw",
+      margin: 0,
+      padding: 0,
     },
     row: {
       display: "flex",
@@ -216,7 +218,9 @@ export default function Pyramid(props) {
           open={open}
           onClick={handleClose}
         >
-          <BlockSlider tier={num} />
+          <Card className={classes.card}>
+            <BlockSlider tier={num} />
+          </Card>
         </Backdrop>
       </div>
     );
@@ -232,7 +236,7 @@ export default function Pyramid(props) {
   let percent7 = Math.floor(progress[6] * 100)
 
   return (
-    <div className={classes.pyramid}>
+    <Container className={classes.pyramid}>
       <Typography>Please Select Your Tier: </Typography>
       <div className={classes.row}>
         <div className={classes.tier6} onClick={() => handleToggle(6)}>
@@ -269,6 +273,6 @@ export default function Pyramid(props) {
       <Tier progress={liveProgress} tier={3} />
       <Tier progress={liveProgress} tier={2} />
       <Tier progress={liveProgress} tier={1} />
-    </div>
+    </Container>
   );
 }

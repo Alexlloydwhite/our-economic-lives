@@ -25,12 +25,14 @@ const useStyles = makeStyles((theme) => ({
   gridList: { // gridList styles the list of building blocks
     flexWrap: 'nowrap', // makes the list horizontal
     transform: 'translateZ(0)', // recommended by m-ui
-    padding: '.5rem',
+    padding: '.4rem',
     overflow: 'scroll',
-    width: '80%',
+    width: '70vw',
   },
   arrow: {
     marginTop: '18%',
+    marginLeft: '5px',
+    marginRight: '5px',
     fontSize: 35,
     color: theme.palette.primary.main,
   }

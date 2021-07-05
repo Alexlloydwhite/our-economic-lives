@@ -17,7 +17,7 @@ export default function ClientPyramid() {
       width:'100vw',
     },
     selectText: {
-      fontSize: '5vh',
+      fontSize: '4vh',
     }
   });
 
