@@ -20,6 +20,7 @@ export default function SendMessageForm() {
             message: message,
             clientId: params.id
         });
+        setMessage('');
     }
 
     return (
@@ -37,7 +38,7 @@ export default function SendMessageForm() {
                     variant="contained"
                     style={{ marginLeft: 5 }}
                     onClick={sendMessage}
-                    style={{ height: 55 }}
+                    style={{ height: 54 }}
                     color="primary"
                 >
                     Send
