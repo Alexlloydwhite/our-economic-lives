@@ -7,14 +7,18 @@ import {
 // React
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 export default function SendMessageForm() {
     const dispatch = useDispatch();
     const [message, setMessage] = useState('');
+    const params = useParams();
 
     const sendMessage = () => {
         dispatch({
-            type: 'POST_MESSAGE', message
+            type: 'POST_MESSAGE',
+            message: message,
+            clientId: params.id
         });
     }
 

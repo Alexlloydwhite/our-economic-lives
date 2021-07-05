@@ -25,6 +25,14 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/', rejectUnauthenticated, async (req, res) => {
+    let recipientId;
+
+    if (req.user.authorization === 3) {
+        recipientId = user.coach_id; 
+    } else {
+        recipientId = req.body.clientId;
+    }
+
     const queryText1 = `
         INSERT INTO messages ("id_sender", "text") VALUES ($1, $2) RETURNING id;
     `;
@@ -39,7 +47,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         // Grab id of new message
         const newMessageId = newMessage.rows[0].id;
         // Post new message to users_messages table
-        await client.query(queryText2, [7, newMessageId]);
+        await client.query(queryText2, [recipientId, newMessageId]);
         res.sendStatus(200);
     } catch (err) {
         console.log(`IN chat post router, ${err}`);
