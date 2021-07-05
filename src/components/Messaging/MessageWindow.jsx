@@ -7,6 +7,7 @@ export default function MessageWindow({ classes }) {
     const dispatch = useDispatch();
     const params = useParams();
     const messages = useSelector(store => store.messages);
+    const user = useSelector(store => store.user);
 
     useEffect(() => {
         dispatch({
@@ -16,27 +17,53 @@ export default function MessageWindow({ classes }) {
     }, []);
 
     return (
-        <Box height={450} overflow="auto"> 
+        <Box height={450} overflow="auto">
             {messages.map((message) => (
                 <>
-                    {message.id_sender === Number(params.id) ?
-                        <div className={classes.messageLeft}>
-                            <Typography variant="caption">
-                                {message.send_date}
-                            </Typography>
-                            <Typography variant="h6">
-                                {message.text}
-                            </Typography>
-                        </div>
+                    {user.authorization_level === 2 ?
+                        <>
+                            {message.id_sender === Number(params.id) ?
+                                <div className={classes.messageLeft}>
+                                    <Typography variant="caption">
+                                        {message.send_date}
+                                    </Typography>
+                                    <Typography variant="h6">
+                                        {message.text}
+                                    </Typography>
+                                </div>
+                                :
+                                <div className={classes.messageRight}>
+                                    <Typography variant="caption">
+                                        {message.send_date}
+                                    </Typography>
+                                    <Typography variant="h6">
+                                        {message.text}
+                                    </Typography>
+                                </div>
+                            }
+                        </>
                         :
-                        <div className={classes.messageRight}>
-                            <Typography variant="caption">
-                                {message.send_date}
-                            </Typography>
-                            <Typography variant="h6">
-                                {message.text}
-                            </Typography>
-                        </div>
+                        <>
+                            {message.id_sender === user.id ?
+                                <div className={classes.messageRight}>
+                                    <Typography variant="caption">
+                                        {message.send_date}
+                                    </Typography>
+                                    <Typography variant="h6">
+                                        {message.text}
+                                    </Typography>
+                                </div>
+                                :
+                                <div className={classes.messageLeft}>
+                                    <Typography variant="caption">
+                                        {message.send_date}
+                                    </Typography>
+                                    <Typography variant="h6">
+                                        {message.text}
+                                    </Typography>
+                                </div>
+                            }
+                        </>
                     }
                 </>
             ))}

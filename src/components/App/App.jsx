@@ -100,6 +100,7 @@ export default function App() {
           </AdminProtectedRoute>
 
           <ClientProtectedRoute>
+            <NavBar text="Chat With Coach" />
             <Messaging />
           </ClientProtectedRoute>
 
