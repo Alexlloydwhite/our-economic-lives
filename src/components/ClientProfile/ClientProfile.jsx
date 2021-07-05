@@ -55,9 +55,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Profile() {
     const classes = useStyles();
     const history = useHistory();
-    const errors = useSelector(store => store.errors);
     const dispatch = useDispatch();
     const user = useSelector(store => store.user);
+    const errors = useSelector(store => store.errors);
+    const industryPyramids = useSelector(store => store.industry_pyramid);
 
     const [firstName, setFirstName] = useState(user.first_name);
     const [lastName, setLastName] = useState(user.last_name);
@@ -65,9 +66,7 @@ export default function Profile() {
     const [phoneNum, setPhoneNum] = useState(user.phone_number);
     const [city, setCity] = useState(user.city);
     const [profession, setProfession] = useState(user.current_profession);
-    const [career, setCareer] = useState(user.desired_career);
-
-    const industryPyramids = useSelector(store => store.industry_pyramid);
+    const [career, setCareer] = useState(user.industry_pyramid);
 
       useEffect(() => {
         dispatch({ type: 'FETCH_INDUSTRY_PYRAMID'})
@@ -86,7 +85,7 @@ export default function Profile() {
             phone_number: phoneNum,
             city: city,
             current_profession: profession,
-            desired_career: career,
+            industry_pyramid: career,
         }
         // Dispatch edits to the update saga
         dispatch({ type: 'UPDATE_CLIENT', payload: update })

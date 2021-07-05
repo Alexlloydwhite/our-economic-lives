@@ -213,11 +213,11 @@ router.put('/approve-crit-experience/:id', rejectUnauthorized, (req, res) => {
 router.get('/unapproved_Exp/:id/:bbId', rejectUnauthenticated, (req, res) => {
     const user_id = req.params.id;
     const buildingBlockId = req.params.bbId;
-    let queryText = `SELECT * FROM critical_experience
-    JOIN user_blocks on user_blocks.id = critical_experience.user_blocks_id
-    WHERE user_blocks.user_id = $1 
-    AND critical_experience.is_approved = false 
-    AND user_blocks.building_block_id = $2;`
+    let queryText = `SELECT cr.id, cr.user_text, cr.user_blocks_id, cr.coach_comments, cr.is_approved, ub.user_id, ub.building_block_id FROM critical_experience cr
+    JOIN user_blocks ub on ub.id = cr.user_blocks_id
+    WHERE ub.user_id = $1 
+    AND ub.building_block_id = $2
+    ORDER BY cr.is_approved ASC, cr.id DESC;`
     pool.query(queryText, [user_id, buildingBlockId])
         .then(result => {
             res.send(result.rows)
