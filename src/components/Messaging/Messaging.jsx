@@ -1,4 +1,5 @@
 import MessageWindow from './MessageWindow';
+import SendMessageForm from './SendMessageForm';
 // MUI
 import {
     Typography,
@@ -49,6 +50,9 @@ export default function Messaging() {
                 </Grid>
                 <Grid item xs={12}>
                     <MessageWindow />
+                </Grid>
+                <Grid item xs={12}>
+                    <SendMessageForm />
                 </Grid>
             </Grid>
         </div>
