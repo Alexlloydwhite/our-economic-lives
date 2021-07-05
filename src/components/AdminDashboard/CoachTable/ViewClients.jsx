@@ -21,6 +21,7 @@ export default function viewClients({ classes, coach }) {
     const dispatch = useDispatch();
     // List of clients from store
     const clientList = useSelector(store => store.clients);
+    const activeClientList = clientList.filter((client) => client.is_active === true);
     const handleOpenClientList = (id) => {
         // Open dialog
         setOpenDialog(true);
@@ -62,9 +63,9 @@ export default function viewClients({ classes, coach }) {
                 <DialogContent>
                     <List>
                         {/* Check if the coach has any clients */}
-                        {clientList.length >= 1 ?
+                        {activeClientList.length >= 1 ?
                             // If the coach has clients map over array to display data
-                            clientList.map((client) => (
+                            activeClientList.map((client) => (
                                 <div key={client.id}>
                                     {/* If client is register display name */}
                                     {client.is_registered &&

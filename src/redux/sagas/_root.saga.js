@@ -20,10 +20,12 @@ import fetchClientPyramid from './fetchClientPyramid.saga';
 import toggleBuildingBlock from './toggleBuildingBlock.saga';
 import unapprovedExp from './unapprovedExp.saga';
 import fetchCritExp from './fetchCritExp.saga';
-import createClient from './createClient.saga';
 import approveCritExp from './approveCritExp.saga';
 import addCoachComment from './addCoachComment.saga';
+import createClient from './createClient.saga';
 import fetchPyramidProgress from './fetchPyramidProgress.saga';
+import postMessage from './postMessage.saga';
+import fetchMessages from './fetchMessages.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -54,7 +56,8 @@ export default function* rootSaga() {
   yield takeEvery('APPROVE_EXPERIENCE', approveCritExp);
   yield takeEvery('ADD_COACH_COMMENT', addCoachComment);
   yield takeEvery('FETCH_PYRAMID_PROGRESS', fetchPyramidProgress);
-
+  yield takeEvery('POST_MESSAGE', postMessage);
+  yield takeEvery('FETCH_MESSAGES', fetchMessages);
   yield all([
     loginSaga(), // login saga is now registered
     userSaga(),

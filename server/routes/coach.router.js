@@ -5,6 +5,9 @@ const encryptLib = require('../modules/encryption');
 const {
     rejectUnauthorized,
 } = require('../modules/coachAuthorization-middleware');
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 
 //gets all the critical experience created by a specific user
 router.get('/critical-experience/:id', rejectUnauthorized, (req, res) => {
@@ -207,8 +210,7 @@ router.put('/approve-crit-experience/:id', rejectUnauthorized, (req, res) => {
         });
 });
 
-// Removed rejectUnauthorized so unapproved_Exp router/saga could be reused from client side block detail
-router.get('/unapproved_Exp/:id/:bbId', (req, res) => {
+router.get('/unapproved_Exp/:id/:bbId', rejectUnauthenticated, (req, res) => {
     const user_id = req.params.id;
     const buildingBlockId = req.params.bbId;
     let queryText = `SELECT * FROM critical_experience
