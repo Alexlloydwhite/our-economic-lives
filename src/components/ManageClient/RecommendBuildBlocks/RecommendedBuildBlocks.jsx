@@ -29,6 +29,7 @@ export default function RecommendedBuildBlocks({ classes }) {
                 component={Paper}
                 variant="outlined"
                 direction="row"
+                style={{ padding: 10 }}
             >
                 <Grid
                     item
