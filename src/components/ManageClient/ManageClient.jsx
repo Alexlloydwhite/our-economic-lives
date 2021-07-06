@@ -29,9 +29,6 @@ const useStyles = makeStyles((theme) => ({
     chip: {
         padding: theme.spacing(0.5)
     },
-    header: {
-        padding: theme.spacing(1)
-    }
 }));
 
 function TabPanel(props) {

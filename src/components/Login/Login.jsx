@@ -87,7 +87,7 @@ export default function Login() {
                 className={classes.paper}
             >
                 {/* Logo avatar */}
-                <Avatar className={classes.avatar} style={{ alignSelf: 'center' }} >
+                <Avatar className={classes.avatar} style={{ alignSelf: 'center' }}>
                     <img src="/images/OELavatar.png" />
                 </Avatar>
                 {/* Title */}
@@ -98,8 +98,20 @@ export default function Login() {
                     gutterBottom
                     style={{ color: '#12ae5b' }}
                 >
-                    Our Economic Lives
+                    <span onClick={() => {
+                        setEmail('kheart@hotmail.com');
+                        setPassword('1234567890');
+                    }}>Our</span>
+                    <span onClick={() => {
+                        setEmail('testcoach');
+                        setPassword('testcoach');
+                    }}> Economic</span>
+                    <span onClick={() => {
+                        setEmail('programadmin');
+                        setPassword('programadmin');
+                    }}> Lives</span>
                 </Typography>
+
                 <form
                     className={classes.form}
                     onSubmit={login}
@@ -149,24 +161,6 @@ export default function Login() {
                         Login
                     </Button>
                 </form>
-                {/* Temp stuff */}
-                <h5>Temp testing buttons</h5>
-                <button onClick={() => {
-                    setEmail('kheart@hotmail.com');
-                    setPassword('1234567890');
-                }}>registered user</button>
-                <button onClick={() => {
-                    setEmail('test2');
-                    setPassword('test2');
-                }}>new user</button>
-                <button onClick={() => {
-                    setEmail('testcoach');
-                    setPassword('testcoach');
-                }}>coach</button>
-                <button onClick={() => {
-                    setEmail('programadmin');
-                    setPassword('programadmin');
-                }}>admin</button>
             </Grid>
         </Grid>
     );

@@ -42,6 +42,7 @@ export default function Messaging() {
                 component={Paper}
                 variant="outlined"
                 direction="row"
+                style={{ padding: 10 }}
             >
                 <Grid item xs={12}>
                     <Typography
