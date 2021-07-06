@@ -147,10 +147,9 @@ export default function Drawer() {
           <>
             {/* The profile link is currently disables and will be added in a future update */}
             {/* <ListItemLink to="/profile" primary="Profile" /> */}
-            <ListItem button={true} >
+            <ListItem button={true} onClick={() => handleLogout()}>
               <ListItemIcon><ExitToAppIcon /></ListItemIcon>
-              <ListItemText primary="Log out"
-                onClick={() => handleLogout()} />
+              <ListItemText primary="Log out" />
             </ListItem></>}
       </div>
     </Container>
