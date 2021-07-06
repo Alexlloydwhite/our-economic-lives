@@ -39,7 +39,7 @@ export default function RecommendedBuildBlocks({ classes }) {
                     <Typography variant="h4">
                         Recommend Building Blocks
                     </Typography>
-                    <Typography>
+                    <Typography gutterBottom>
                         We suggest recommending 3 blocks at a time
                     </Typography>
                 </Grid>
