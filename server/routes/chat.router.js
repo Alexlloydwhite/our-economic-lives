@@ -23,8 +23,6 @@ router.get('/:id?', rejectUnauthenticated, (req, res) => {
         LIMIT 100;
     `;
     
-    console.log(`in chat get router sendId ${req.user.id}, ${recipientId}`);
-
     pool
         .query(queryText, [req.user.id, recipientId])
         .then((result) => {
