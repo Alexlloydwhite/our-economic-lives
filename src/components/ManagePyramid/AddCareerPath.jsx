@@ -22,6 +22,7 @@ export default function AdminDashboard() {
                 type: 'ADD_INDUSTRY_PYRAMID',
                 payload: industryPyramid
             });
+            setIndustryPyramid('');
         }
     }
 
