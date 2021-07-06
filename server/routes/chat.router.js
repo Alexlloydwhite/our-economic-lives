@@ -19,11 +19,10 @@ router.get('/:id?', rejectUnauthenticated, (req, res) => {
         JOIN users_messages um ON um.id_message = m.id
         WHERE (m.id_sender = $1 AND um.id_recipient = $2)
         OR (m.id_sender = $2 AND um.id_recipient = $1)
-        ORDER BY m.send_date ASC;
+        ORDER BY m.send_date ASC
+        LIMIT 100;
     `;
     
-    console.log(`in chat get router sendId ${req.user.id}, ${recipientId}`);
-
     pool
         .query(queryText, [req.user.id, recipientId])
         .then((result) => {
