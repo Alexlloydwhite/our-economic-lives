@@ -25,7 +25,7 @@ export default function MessageWindow({ classes }) {
     }, []);
 
     return (
-        <Box height={500} overflow="auto">
+        <Box height={430} overflow="auto">
             {messages.map((message) => (
                 <>
                     {user.authorization_level === 2 ?
@@ -41,6 +41,7 @@ export default function MessageWindow({ classes }) {
                                     <Typography variant="h6">
                                         {message.text}
                                     </Typography>
+                                    <AlwaysScrollToBottom />
                                 </div>
                                 :
                                 <div
@@ -53,6 +54,7 @@ export default function MessageWindow({ classes }) {
                                     <Typography variant="h6">
                                         {message.text}
                                     </Typography>
+                                    <AlwaysScrollToBottom />
                                 </div>
                             }
                         </>
@@ -69,6 +71,7 @@ export default function MessageWindow({ classes }) {
                                     <Typography variant="h6">
                                         {message.text}
                                     </Typography>
+                                    <AlwaysScrollToBottom />
                                 </div>
                                 :
                                 <div
@@ -81,13 +84,13 @@ export default function MessageWindow({ classes }) {
                                     <Typography variant="h6">
                                         {message.text}
                                     </Typography>
+                                    <AlwaysScrollToBottom />
                                 </div>
                             }
                         </>
                     }
                 </>
             ))}
-            <AlwaysScrollToBottom />
         </Box>
     );
 }
