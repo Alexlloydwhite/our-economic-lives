@@ -1,3 +1,4 @@
+// Message displays if a user tries to view a route without proper auth level
 export default function AccessDenied() {
     return (
         <div style={{ backgroundColor: 'red', textAlign: 'center' }}>

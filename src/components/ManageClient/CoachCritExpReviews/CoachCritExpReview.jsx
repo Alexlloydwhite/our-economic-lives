@@ -1,13 +1,13 @@
+// MUI
+import {
+    Grid,
+    Paper, Typography
+} from '@material-ui/core';
 // React
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router";
-// M-UI
-import {
-    Typography,
-    Grid,
-    Paper,
-} from '@material-ui/core';
+// Components
 import CritExpReviewCard from './CritExpReviewCard';
 
 export default function CoachCritExpReview({ classes }) {
@@ -32,6 +32,7 @@ export default function CoachCritExpReview({ classes }) {
                 direction="row"
                 style={{ padding: 10 }}
             >
+                {/* Page Title */}
                 <Grid
                     item
                     xs={12}
@@ -41,6 +42,7 @@ export default function CoachCritExpReview({ classes }) {
                         Review Critical Experiences
                     </Typography>
                 </Grid>
+                {/* Maps UNAPPROVED critical experiences onto cards */}
                 {experiences.map((experience) => (
                     <Grid
                         item
