@@ -29,6 +29,7 @@ export default function BlockCritExpList({ xp, classes, detail, user_id, block_i
     const [editExp, setEditExp] = useState('');
     const [editId, setEditId] = useState('');
 
+    // Setting dialog to true which pops up edit textField
     const handleReview = (xp) => {
         setOpenDialog(true), 
         setEditExp(xp.user_text)
@@ -46,99 +47,113 @@ export default function BlockCritExpList({ xp, classes, detail, user_id, block_i
             id: editId,
           },
         });
+        // Close dialogue pop up
         setOpenDialog(false)
       };
 
     return (
-    <>
-    <Card variant="outlined" style={{ width: '100%', marginBottom: '1rem'}}>
-        <CardContent>
-            <Typography style={{ textAlign: 'left', marginRight: '10%' }}>
-                {xp.coach_comments ? <><b>Coach:</b> <i>"{xp.coach_comments}"</i></> : <i>Awaiting Review...</i>}
-            </Typography>
-            <Divider style={{ marginTop: 10, marginBottom: 10 }} />
-            <Typography >
-                {xp.user_text}
-            </Typography>
-        </CardContent>
-        <CardActions>
-            {xp.is_approved === false ? 
-            <>
-                <Button 
-                    type="submit" 
-                    variant="contained" 
-                    className={classes.unapproved}
-                    style={{ width: '50%' }}
-                    onClick={() => handleReview(xp.user_text)}
-                    endIcon={<ThumbDownIcon />}
-                >
-                    Unapproved
-                </Button>
-                <Button 
-                    type="submit" 
-                    variant="contained" 
-                    color="primary"
-                    style={{ width: '50%' }}
-                    onClick={() => handleReview(xp)}
-                    endIcon={<EditIcon />}
-                >
-                    Edit
-                </Button>
+        <>
+        {/* Each submitted  */}
+        <Card variant="outlined" style={{ width: '100%', marginBottom: '1rem'}}>
+            <CardContent>
+                {/* Display coach comments or default */}
+                <Typography style={{ textAlign: 'left', marginRight: '10%' }}>
+                    {xp.coach_comments ? <><b>Coach:</b> <i>"{xp.coach_comments}"</i></> : <i>Awaiting Review...</i>}
+                </Typography>
+                <Divider style={{ marginTop: 10, marginBottom: 10 }} />
+                {/* User CE submittal */}
+                <Typography >
+                    {xp.user_text}
+                </Typography>
+            </CardContent>
+            <CardActions>
+                {/* Which btns to display */}
+                {xp.is_approved === false ? 
+                    <>
+                    {/* Unapproved Btn */}
+                    <Button 
+                        type="submit" 
+                        variant="contained" 
+                        className={classes.unapproved}
+                        style={{ width: '50%' }}
+                        onClick={() => handleReview(xp.user_text)}
+                        endIcon={<ThumbDownIcon />}
+                    >
+                        Unapproved
+                    </Button>
+                    {/* Edit Btn */}
+                    <Button 
+                        type="submit" 
+                        variant="contained" 
+                        color="primary"
+                        style={{ width: '50%' }}
+                        onClick={() => handleReview(xp)}
+                        endIcon={<EditIcon />}
+                    >
+                        Edit
+                    </Button>
+                    </>
+                    :
+                    <>
+                    {/* Approved Btn */}
+                    <Button 
+                        type="submit"
+                        variant="contained" 
+                        className={classes.approved}
+                        style={{ width: '100%' }}
+                        endIcon={<ThumbUpIcon />}
+                        onClick={() => handleReview(xp)}
+                    >
+                        Approved!
+                    </Button>
+                    </>
+                }
+                 {/* Dialog / Edit pop up */}
                 <Dialog open={openDialog}>
-                    {/* Dialog Title */}
+                    {/* block title */}
                     <DialogTitle style={{ marginBottom: -25 }}>
                         <span
                         style={{ float: 'left', marginTop: 9 }}
                     >
                         {detail.name}
                     </span>
-                    <IconButton
-                        onClick={() => setOpenDialog(false)}
-                        style={{ float: 'right' }}
-                    >
-                        <CloseIcon />
-                    </IconButton>
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        {xp.coach_comments ? <b>Coach: "{xp.coach_comments}"</b> : <b>Awaiting Coach Review...</b>}
-                    </DialogContentText>
-                    <TextField
-                        fullWidth
-                        variant="outlined"
-                        multiline
-                        rows={6}
-                        value={editExp}
-                        onChange={(e) => setEditExp(e.target.value)}
-                    />
-                </DialogContent>
-                <DialogActions >
-                    <Button
-                        type="submit"
-                        endIcon={<PublishIcon />}
-                        variant="contained"
-                        color="primary"
-                        onClick={submitEditExp}
-                        style={{ float: 'right', marginRight: '5%', width: '40%'}}
-                    >
-                        Resubmit
-                    </Button>
+                        <IconButton
+                            onClick={() => setOpenDialog(false)}
+                            style={{ float: 'right' }}
+                        >
+                            <CloseIcon />
+                        </IconButton>
+                    </DialogTitle>
+                    <DialogContent>
+                        {/* Coach Comments */}
+                        <DialogContentText>
+                            {xp.coach_comments ? <b>Coach: "{xp.coach_comments}"</b> : <b>Awaiting Coach Review...</b>}
+                        </DialogContentText>
+                        <TextField
+                            fullWidth
+                            variant="outlined"
+                            multiline
+                            rows={6}
+                            value={editExp}
+                            onChange={(e) => setEditExp(e.target.value)}
+                        />
+                    </DialogContent>
+                    <DialogActions >
+                        {/* Resubmit Btn */}
+                        <Button
+                            type="submit"
+                            endIcon={<PublishIcon />}
+                            variant="contained"
+                            color="primary"
+                            onClick={submitEditExp}
+                            style={{ float: 'right', marginRight: '5%', width: '40%'}}
+                        >
+                            Resubmit
+                        </Button>
                     </DialogActions>
                 </Dialog>    
-                </>
-                :
-                <Button 
-                    type="submit"
-                    variant="contained" 
-                    className={classes.approved}
-                    style={{ width: '100%' }}
-                    endIcon={<ThumbUpIcon />}
-                >
-                    Approved!
-                </Button>
-            }
-        </CardActions>
-    </Card>
-    </>
+            </CardActions>
+        </Card>
+        </>
     )
 }
