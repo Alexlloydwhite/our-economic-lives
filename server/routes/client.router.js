@@ -16,9 +16,8 @@ router.put('/update', rejectUnauthenticated, (req, res) => {
       email=$3,
       phone_number=$4,
       city=$5,
-      current_profession=$6,
-      industry_pyramid=$7
-    WHERE id=$8`
+      current_profession=$6
+    WHERE id=$7`
   pool
     .query(queryText, [
       req.body.first_name,
@@ -27,7 +26,6 @@ router.put('/update', rejectUnauthenticated, (req, res) => {
       req.body.phone_number,
       req.body.city,
       req.body.current_profession,
-      req.body.industry_pyramid,
       req.user.id
     ])
     .then(() => res.sendStatus(201))

@@ -58,19 +58,15 @@ export default function Profile() {
     const dispatch = useDispatch();
     const user = useSelector(store => store.user);
     const errors = useSelector(store => store.errors);
-    const industryPyramids = useSelector(store => store.industry_pyramid);
 
     const [firstName, setFirstName] = useState(user.first_name);
     const [lastName, setLastName] = useState(user.last_name);
     const [email, setEmail] = useState(user.email);
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const [phoneNum, setPhoneNum] = useState(user.phone_number);
     const [city, setCity] = useState(user.city);
     const [profession, setProfession] = useState(user.current_profession);
-    const [career, setCareer] = useState(user.industry_pyramid);
-
-      useEffect(() => {
-        dispatch({ type: 'FETCH_INDUSTRY_PYRAMID'})
-    }, [])
 
     // Handles submit of form
     const saveEdit = (e) => {
@@ -78,22 +74,48 @@ export default function Profile() {
 
         // Putting all edit changes into a object
         const update = {
+            authorization: user.authorization,
+            city: city,
+            coach_id: user.coach_id,
+            current_profession: profession,
+            email: email,
+            first_name: firstName,
+            id: user.id, // User can't edit id, grabbing it from reducer for query
+            industry_pyramid: user.industry_pyramid,
+            is_active: user.is_active,
+            is_registered: user.is_registered,
+            last_name: lastName,
+            organization_name: user.organization_name,
+            phone_number: phoneNum,
+        }
+
+        const updateWithPassword = {
             id: user.id, // User can't edit id, grabbing it from reducer for query
             first_name: firstName,
             last_name: lastName,
             email: email,
+            password: newPassword,
             phone_number: phoneNum,
             city: city,
             current_profession: profession,
-            industry_pyramid: career,
         }
-        // Dispatch edits to the update saga
-        dispatch({ type: 'UPDATE_CLIENT', payload: update })
-        history.push('/home')
+
+        if (newPassword) {
+            if (newPassword === confirmNewPassword) {
+                // Dispatch edits to the update saga
+                dispatch({ type: 'UPDATE_CLIENT', payload: updateWithPassword });
+                setNewPassword('');
+                setConfirmNewPassword('');
+            } else {
+                dispatch({ type: 'SET_NEW_PASSWORD_ERROR' });
+            }
+        } else {
+            // Dispatch edits to the update saga
+            dispatch({ type: 'UPDATE_CLIENT', payload: update });
+        }
     };
 
     return (
-
         <Grid
             container
             component="main"
@@ -126,9 +148,9 @@ export default function Profile() {
                     noValidate
                 >
                     {/* hook into errors reducer to display msg */}
-                    {errors.registrationMessage && (
+                    {errors.changePasswordMessage && (
                         <h3 className="alert" role="alert">
-                            {errors.registrationMessage}
+                            {errors.changePasswordMessage}
                         </h3>
                     )}
                     {/* First Name */}
@@ -164,6 +186,28 @@ export default function Profile() {
                         onChange={(e) => setEmail(e.target.value)}
                         name="email"
                     />
+                    {/* Password */}
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        type="password"
+                        label="New Password"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        name="password"
+                    />
+                    {/* Confirm Password */}
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        fullWidth
+                        type="password"
+                        label="Confirm New Password"
+                        value={confirmNewPassword}
+                        onChange={(e) => setConfirmNewPassword(e.target.value)}
+                        name="confirmPassword"
+                    />
                     {/* Phone Number */}
                     <TextField
                         variant="outlined"
@@ -197,29 +241,6 @@ export default function Profile() {
                         onChange={(e) => setProfession(e.target.value)}
                         name="currentProfession"
                     />
-                    {/* Desired Career */}
-                    <FormControl
-                        variant="outlined"
-                        fullWidth
-                        style={{ marginTop: 15 }}
-                        required
-                        value={career}
-                    >
-                        <InputLabel>Industry Pyramid</InputLabel>
-                        <Select
-                            value={career}
-                            name="industry_pyramid"
-                            onChange={(e) => setCareer(e.target.value)}
-                        >
-                            {/* TODO - pull pyramid data from Postgres to display here! */}
-                            {/* Here, value is the id of the career pyramid. */}
-                          {industryPyramids ? industryPyramids.map(path => {
-                            return (
-                              <MenuItem value={path.id} key={path.id}>{path.name}</MenuItem>
-                            )
-                          }):''}
-                        </Select>
-                    </FormControl>
                     {/* Div sets margin/position for buttons */}
                     <div className={classes.buttons}>
                         {/* Cancel btn */}
@@ -228,7 +249,7 @@ export default function Profile() {
                             style={{ marginRight: 10 }}
                             onClick={() => history.push('/home')}
                         >
-                            Cancel
+                            back
                         </Button>
                         {/* Save btn */}
                         <Button
