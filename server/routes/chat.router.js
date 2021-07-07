@@ -6,14 +6,19 @@ const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
+// This end point is used to get a list of all messages between a coach and a client.
+// It takes an optional params ID used by the coach to grab messages for their specific client.
+// Clients get coach id from req.user.coach_id
 router.get('/:id?', rejectUnauthenticated, (req, res) => {
     let recipientId;
+    // If user is a client, get coach ID from req.user
+    // If user is a coach, get client id from params
     if (req.user.authorization === 3) {
         recipientId = req.user.coach_id; 
     } else {
         recipientId = req.params.id;
     }
-    
+    // Query to grab messages, note that it limits to 100
     const queryText = `
         SELECT * FROM messages m
         JOIN users_messages um ON um.id_message = m.id
@@ -22,7 +27,6 @@ router.get('/:id?', rejectUnauthenticated, (req, res) => {
         ORDER BY m.send_date ASC
         LIMIT 100;
     `;
-    
     pool
         .query(queryText, [req.user.id, recipientId])
         .then((result) => {
@@ -34,22 +38,27 @@ router.get('/:id?', rejectUnauthenticated, (req, res) => {
         });
 });
 
+// This end point is used to post a new message.
 router.post('/', rejectUnauthenticated, async (req, res) => {
     let recipientId;
-
+    // If user is a client, get coach ID from req.user
+    // If user is a coach, get client id from req.body
     if (req.user.authorization === 3) {
         recipientId = req.user.coach_id; 
     } else {
         recipientId = req.body.clientId;
     }
-
+    // First query adds the message to generic messages table. 
+    // This captures the sender id, message text, and timestamps the message.
+    // The ID is returned and used in the second query.
     const queryText1 = `
         INSERT INTO messages ("id_sender", "text") VALUES ($1, $2) RETURNING id;
     `;
+    // Second query adds the message to the user messages table.
+    // This adds a recipient to the message and tracks wether it has been read.
     const queryText2 = `
         INSERT INTO users_messages("id_recipient", "id_message") VALUES ($1, $2);
     `;
-
     const client = await pool.connect();
     try {
         // Post new message to messages table
