@@ -7,4 +7,14 @@ describe('Testing userReducer', () => {
         let returnedState = userReducer(state, action);
         expect(returnedState).toEqual({});
     });
+
+    test('Testing SET_USER', () => {
+        let action = {
+            type: 'SET_USER',
+            payload: { username: 'alex', id: 1}
+        }
+        let state = { username: 'alex', id: 1 }
+        let returnedState = userReducer(state, action);
+        expect(returnedState);
+    });
 });
