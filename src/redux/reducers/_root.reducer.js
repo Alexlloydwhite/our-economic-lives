@@ -3,7 +3,6 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import clients from './clients.reducer';
 import industry_pyramid from './industryPyramid.reducer.js';
-import detail from './details.reducer';
 import coaches from './coaches.reducer';
 import buildingBlocks from './buildingBlocks.reducer';
 import clientBlocks from './clientBlocks.reducer';
@@ -27,7 +26,6 @@ const rootReducer = combineReducers({
   coaches,
   industry_pyramid, //holds an array of all the career path data
   buildingBlocks, //holds array of buildingBlocks for tier slider
-  detail, // holds an array of building block details
   clientBlocks, // holds array of building blocks for specific client
   blockDetails, // static info for block details page
   clientPyramid, // data of clients current industry pyramid

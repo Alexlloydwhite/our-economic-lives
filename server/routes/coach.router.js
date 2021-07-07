@@ -210,6 +210,7 @@ router.put('/approve-crit-experience/:id', rejectUnauthorized, (req, res) => {
         });
 });
 
+// grabs ALL submitted critical experiences based on user id, building block id
 router.get('/unapproved_Exp/:id/:bbId', rejectUnauthenticated, (req, res) => {
     const user_id = req.params.id;
     const buildingBlockId = req.params.bbId;

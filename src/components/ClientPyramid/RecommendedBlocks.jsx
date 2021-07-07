@@ -19,29 +19,29 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-around',
         overflow: 'hidden',
         backgroundColor: theme.palette.background.default,
-      },
-      gridList: { // gridList styles the list of building blocks
+    },
+    gridList: { // gridList styles the list of building blocks
         flexWrap: 'nowrap', // makes the list horizontal
         transform: 'translateZ(0)', // recommended by m-ui
         padding: '.5rem',
         width: '80%',
-      },
-      card: { // card styles the building blocks
+    },
+    card: { // card styles the building blocks
         width: '95%',
         height: '95%',
         background: theme.palette.primary.main,
         margin: '.5rem',
         textAlign: 'center',
-      },
-      title: {
+    },
+    title: {
         marginTop: '2',
         color: theme.palette.primary, 
-      },
-      arrow: {
+    },
+    arrow: {
         marginTop: '18%',
         fontSize: 35,
         color: theme.palette.primary.main,
-      }
+    }
   }));
 
 export default function RecommendedBlocks() {
@@ -68,6 +68,7 @@ export default function RecommendedBlocks() {
       {/* List of Blocks */}
       <GridList className={classes.gridList} cols={1.1} > 
       {blocks ? blocks.map((block) => {
+        // Checking for recommended building blocks
         if( block.is_recommended === true ) {
             return (
           /* Invidual Blocks */

@@ -15,7 +15,6 @@ import fetchClientsByCoachId from './fetchClientByCoachId.saga';
 import createCritExp from './createCritExp.saga';
 import createIndustryPyramid from './createIndustryPyramid.saga';
 import blockDetails from './blockDetails.saga';
-import fetchDetail from './fetchDetail.saga';
 import fetchClientPyramid from './fetchClientPyramid.saga';
 import toggleBuildingBlock from './toggleBuildingBlock.saga';
 import unapprovedExp from './unapprovedExp.saga';
@@ -50,7 +49,6 @@ export default function* rootSaga() {
   yield takeEvery('UPDATE_CLIENT', updateClient);
   yield takeEvery('FETCH_CLIENT_BLOCKS', fetchClientBlocks);
   yield takeEvery('CREATE_EXP', createCritExp);
-  yield takeEvery('FETCH_DETAIL', fetchDetail);
   yield takeEvery('FETCH_CLIENT_PYRAMID', fetchClientPyramid);
   yield takeEvery('TOGGLE_RECOMMENDED_BLOCK', toggleBuildingBlock);
   yield takeEvery('FETCH_UNAPPROVED', unapprovedExp);

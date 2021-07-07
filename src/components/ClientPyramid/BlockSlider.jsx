@@ -1,18 +1,13 @@
 // React
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // M-UI
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 import BlockSliderButton from './BlockSliderButton';
-
 // Styling
 const useStyles = makeStyles((theme) => ({
   root: { // root styles the div, background of building block list
@@ -37,28 +32,14 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
   }
 }));
-
-  const currentColor = () => {
-    return 'linear-gradient(45deg, #3ca6fe 40%, #cdecfa 90%)'
-  }
  
 export default function PyramidTier(props) {
   const classes = useStyles();
-  const history = useHistory();
-  const dispatch = useDispatch();
   const tierNum = props.tier;
   const user = useSelector(store => store.user);
   const buildingBlocks = useSelector(store => store.buildingBlocks);
   const user_id = user.id;
-  console.log('buildingBlocks:', buildingBlocks);
 
-  // Click handler to capture block id and dispatch to detail store
-  const handleClick = (id) => {
-    dispatch({ type: 'SET_DETAIL', payload: id });
-    history.push(`/blockDetail/${id}`);  
-  }
-
-  // console.log('in Block slider for tier', tierNum, 'as', user);
   return (
     <div className={classes.root} >
       {/* Left Arrow */}
