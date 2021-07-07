@@ -11,6 +11,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+// Components
 import ClientInfo from './ClientInfo';
 import DeactivateClient from './DeactivateClient';
 

@@ -1,13 +1,11 @@
-import RecommendedBuildBlocks from "./RecommendBuildBlocks/RecommendedBuildBlocks";
-import CoachCritExpReview from './CoachCritExpReviews/CoachCritExpReview';
-import Messaging from '../Messaging/Messaging';
-import { useState } from 'react';
 // MUI
-import {
-    Tab,
-    Tabs,
-} from '@material-ui/core';
+import { Tab, Tabs } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useState } from 'react';
+// Components
+import Messaging from '../Messaging/Messaging';
+import CoachCritExpReview from './CoachCritExpReviews/CoachCritExpReview';
+import RecommendedBuildBlocks from "./RecommendBuildBlocks/RecommendedBuildBlocks";
 // Styles
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+// Tabpanel sub component takes in props children, value, and index
+// Displays children (component) based on index of tab clicked
 function TabPanel(props) {
     const { children, value, index } = props;
     return (

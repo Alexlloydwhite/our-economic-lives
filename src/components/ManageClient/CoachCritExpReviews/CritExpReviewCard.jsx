@@ -1,3 +1,4 @@
+// MUI
 import {
     Typography,
     TextField,
@@ -16,7 +17,7 @@ import {
 import CloseIcon from '@material-ui/icons/Close';
 import CommentIcon from '@material-ui/icons/Comment';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-
+// React
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from "react-router";
@@ -28,6 +29,7 @@ export default function CritExpReviewCard({ experience, classes }) {
     const [openDialog, setOpenDialog] = useState(false);
     const [coachComment, setCoachComment] = useState('');
 
+    // Takes the experience ID and dispatches saga to approve 
     const approveExperience = (experienceId) => {
         dispatch({
             type: 'APPROVE_EXPERIENCE',
@@ -36,7 +38,7 @@ export default function CritExpReviewCard({ experience, classes }) {
         });
         setOpenApproveDialog(false);
     }
-
+    // Takes the experience ID and dispatches saga to post comment
     const addComment = (experienceId) => {
         if (coachComment) {
             dispatch({
@@ -52,13 +54,16 @@ export default function CritExpReviewCard({ experience, classes }) {
     return (
         <Card variant="outlined">
             <CardContent>
+                {/* Name of Building Block */}
                 <Typography variant="h5" gutterBottom>
                     {experience.name}
                 </Typography>
+                {/* Client Submitted Text */}
                 <Typography variant="subtitle2">
                     <b>Client submitted critical experience:</b>{' '}
                     "{experience.user_text}"
                 </Typography>
+                {/* IF coach comments exist, display comments on the card */}
                 {experience.coach_comments &&
                     <>
                         <Divider style={{ marginTop: 10, marginBottom: 10 }} />
@@ -70,6 +75,7 @@ export default function CritExpReviewCard({ experience, classes }) {
                 }
             </CardContent>
             <CardActions>
+                {/* Approve BTN, opens confirmation dialog */}
                 <Button
                     size="small"
                     endIcon={<ThumbUpIcon />}
@@ -77,6 +83,7 @@ export default function CritExpReviewCard({ experience, classes }) {
                 >
                     Approve
                 </Button>
+                {/* Comment BTN, opens comment creation dialog */}
                 <Button
                     size="small"
                     onClick={() => setOpenDialog(true)}
@@ -85,6 +92,7 @@ export default function CritExpReviewCard({ experience, classes }) {
                     Comment
                 </Button>
             </CardActions>
+            {/* Coach Comment Dialog */}
             <Dialog open={openDialog}>
                 {/* Dialog Title */}
                 <DialogTitle style={{ marginBottom: -25 }}>
@@ -121,6 +129,8 @@ export default function CritExpReviewCard({ experience, classes }) {
                     </Button>
                 </DialogActions>
             </Dialog>
+
+            {/* Confirm Approve Critical Experience Dialog */}
             <Dialog open={openApproveDialog}>
                 <DialogTitle>
                     {"Approve this critical experience?"}

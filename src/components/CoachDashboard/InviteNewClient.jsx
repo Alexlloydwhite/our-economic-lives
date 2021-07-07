@@ -1,4 +1,4 @@
-// MUI imports
+// MUI 
 import {
     Typography,
     TextField,
@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
-// React Imports
+// React
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Styles

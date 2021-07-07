@@ -1,12 +1,13 @@
-import MessageWindow from './MessageWindow';
-import SendMessageForm from './SendMessageForm';
 // MUI
 import {
-    Typography,
     Grid,
-    Paper
+    Paper, 
+    Typography
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+// Components
+import MessageWindow from './MessageWindow';
+import SendMessageForm from './SendMessageForm';
 // Styles
 const useStyles = makeStyles((theme) => ({
     container: {
