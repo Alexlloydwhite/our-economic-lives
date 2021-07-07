@@ -43,6 +43,15 @@ const createUserMessage = (state = '', action) => {
   }
 }
 
+const changePasswordMessage = (state = '', action) => {
+  switch (action.type) {
+    case 'SET_NEW_PASSWORD_ERROR':
+      return 'The Confirm Password confirmation does not match'
+    default:
+      return state;
+  }
+}
+
 // make one object that has keys loginMessage, registrationMessage
 // these will be on the redux state at:
 // state.errors.loginMessage and state.errors.registrationMessage
@@ -50,4 +59,5 @@ export default combineReducers({
   loginMessage,
   registrationMessage,
   createUserMessage,
+  changePasswordMessage,
 });
