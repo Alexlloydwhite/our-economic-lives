@@ -1,5 +1,6 @@
+// React
 import { useSelector } from "react-redux";
-
+// Components
 import CoachDashboard from '../CoachDashboard/CoachDashboard';
 import AdminDashboard from '../AdminDashboard/AdminDashboard';
 import ClientPyramid from '../ClientPyramid/ClientPyramid';
@@ -37,5 +38,4 @@ export default function Home() {
             </>
         );
     }
-
 }
