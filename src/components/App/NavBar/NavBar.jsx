@@ -28,7 +28,9 @@ export default function NavBar({ text }) {
     <div className={classes.root}>
       <AppBar className={classes.navbar} elevation={1}>
         <Toolbar>
+          {/* component for the menu drawer */}
           <Drawer className={classes.menuButton} />
+          {/* displays test from prop on nav bar */}
           <Typography variant="h5">
             {text}
           </Typography>

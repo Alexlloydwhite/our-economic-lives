@@ -99,15 +99,15 @@ export default function Login() {
                     style={{ color: '#12ae5b' }}
                 >
                     <span onClick={() => {
-                        setEmail('kheart@hotmail.com');
+                        setEmail('karsten@gmail.com');
                         setPassword('1234567890');
                     }}>Our</span>
                     <span onClick={() => {
-                        setEmail('testcoach');
+                        setEmail('alex@initech.org');
                         setPassword('testcoach');
                     }}> Economic</span>
                     <span onClick={() => {
-                        setEmail('programadmin');
+                        setEmail('sam@oureconomiclives.com');
                         setPassword('programadmin');
                     }}> Lives</span>
                 </Typography>
