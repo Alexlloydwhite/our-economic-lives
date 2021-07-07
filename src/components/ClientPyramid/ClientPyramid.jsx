@@ -1,7 +1,5 @@
-import { InputLabel, MenuItem, Select } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
-import { useState } from "react";
-import { useEffect } from "react";
+import { InputLabel, makeStyles, MenuItem, Select } from "@material-ui/core";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Pyramid from "./Pyramid";
 import RecommendedButton from "./RecommendedButton";

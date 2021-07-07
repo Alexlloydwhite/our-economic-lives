@@ -14,24 +14,24 @@
 
 
 
-import React from 'react';
-import clsx from 'clsx';
+import { Container, ListItem, ListItemIcon, ListItemText, Typography } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import MenuIcon from '@material-ui/icons/Menu';
-import { Link as RouterLink, useHistory, HashRouter as Router } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { Container, ListItem, ListItemText, ListItemIcon, Typography } from '@material-ui/core';
-import PropTypes from 'prop-types';
-import { theme } from '../../Theme/Theme';
-import HomeIcon from '@material-ui/icons/Home';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory';
 import ChatIcon from '@material-ui/icons/Chat';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import HomeIcon from '@material-ui/icons/Home';
+import MenuIcon from '@material-ui/icons/Menu';
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { HashRouter as Router, Link as RouterLink, useHistory } from 'react-router-dom';
+import { theme } from '../../Theme/Theme';
 
 const useStyles = makeStyles({
   list: {
@@ -89,6 +89,7 @@ export default function Drawer() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  //sets the default menu drawer location to false
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -108,7 +109,7 @@ export default function Drawer() {
     setState({ ...state, [anchor]: open });
   };
 
-  // This is the logs out the user then forwards them back to the homepage when
+  // This is the logs out the user then forwards them back to the log in page when
   // "Logout" is clicked
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' })
@@ -129,6 +130,8 @@ export default function Drawer() {
         <Divider />
         <List>
           <ListItemLink to="/home" primary="Home" icon={<HomeIcon />} />
+          {/* the followwing three elements determine menu options 
+          that should be loaded based on authorization level */}
           {user.authorization > 1 &&
             <ListItemLink to="/profile" primary="Profile" icon={<AccountCircleIcon />} />
           }
@@ -145,8 +148,6 @@ export default function Drawer() {
           // The following link only displays if a user is not logged in and the remaining links after the colon are rendered when a user is logged in
           <ListItemLink to="/login" primary="Login" /> :
           <>
-            {/* The profile link is currently disables and will be added in a future update */}
-            {/* <ListItemLink to="/profile" primary="Profile" /> */}
             <ListItem button={true} onClick={() => handleLogout()}>
               <ListItemIcon><ExitToAppIcon /></ListItemIcon>
               <ListItemText primary="Log out" />
@@ -155,13 +156,11 @@ export default function Drawer() {
     </Container>
   );
 
-  // This describs the part of the display the drawer comes from. Top makes it look
-  // like the drawer is being pulled down from the top of the page
+  // sets where the drawer will open from
   const anchor = 'left'
 
   // The return statement takes all the elements described above and puts them
-  // together with the MenuIcon. The menu icon is the button made of three lines that
-  // is frequently called a hamburger button
+  // together with the MenuIcon.
   return (
     <div>
       <React.Fragment key={anchor}>
