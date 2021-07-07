@@ -1,14 +1,12 @@
 // MUI
-import {
-    Grid,
-    TextField,
-    Button
-} from '@material-ui/core';
+import { Grid, TextField } from '@material-ui/core';
 // React
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+// SendMessageForm is the textfield in the message window 
+// This is used to type messages and send dispatch to post messages
 export default function SendMessageForm() {
     const dispatch = useDispatch();
     const [message, setMessage] = useState('');
