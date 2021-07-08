@@ -149,6 +149,7 @@ router.get('/progress/:pyramid', rejectUnauthenticated, async (req, res) => {
     res.send(progress);
   } catch (error) {
     console.log('Cannot get pyramid progress', error);
+    res.sendStatus(500);
   } finally {
     client.release();
   }

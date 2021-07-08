@@ -47,7 +47,6 @@ export default function ClientPyramid() {
     setCurrentPyramid(event.target.value);
     dispatch({ type: "FETCH_PYRAMID_PROGRESS", payload: event.target.value });
   };
-  console.log(pyramidList);
   return (
     <>
         <div className={classes.center}>
@@ -62,7 +61,7 @@ export default function ClientPyramid() {
             >
               {/* loads the list of pyramids once it is received */}
             {pyramidList ? (
-              pyramidList.map((thisPyramid) => {console.log(thisPyramid);
+              pyramidList.map((thisPyramid) => {
                 return <MenuItem key={thisPyramid.id} value={thisPyramid.id}>{thisPyramid.name}</MenuItem>;
               })
               ) : (

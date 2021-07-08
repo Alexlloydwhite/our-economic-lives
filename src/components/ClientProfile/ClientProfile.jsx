@@ -1,19 +1,13 @@
 // MUI
 import {
-    Typography,
-    makeStyles,
-    TextField,
-    Button,
-    Grid,
-    Select,
-    MenuItem,
-    InputLabel,
-    FormControl
+  Button,
+  Grid, makeStyles,
+  TextField, Typography
 } from '@material-ui/core/';
 import SaveIcon from '@material-ui/icons/Save';
 // React
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 // Styles
 const useStyles = makeStyles((theme) => ({
@@ -67,6 +61,12 @@ export default function Profile() {
     const [phoneNum, setPhoneNum] = useState(user.phone_number);
     const [city, setCity] = useState(user.city);
     const [profession, setProfession] = useState(user.current_profession);
+    const [updatePassword, setUpdatePassword] = useState('true');
+
+    const handlePasswordChange = (text) => {
+      setUpdatePassword(true);
+      setNewPassword(text);
+    }
 
     // Handles submit of form
     const saveEdit = (e) => {
@@ -89,29 +89,21 @@ export default function Profile() {
             phone_number: phoneNum,
         }
 
-        const updateWithPassword = {
-            id: user.id, // User can't edit id, grabbing it from reducer for query
-            first_name: firstName,
-            last_name: lastName,
-            email: email,
-            password: newPassword,
-            phone_number: phoneNum,
-            city: city,
-            current_profession: profession,
-        }
-
-        if (newPassword) {
+        if (updatePassword) {
+          const updateWithPassword = { ...update, password: newPassword}
             if (newPassword === confirmNewPassword) {
                 // Dispatch edits to the update saga
                 dispatch({ type: 'UPDATE_CLIENT', payload: updateWithPassword });
                 setNewPassword('');
                 setConfirmNewPassword('');
+                history.push('/home');
             } else {
                 dispatch({ type: 'SET_NEW_PASSWORD_ERROR' });
             }
         } else {
             // Dispatch edits to the update saga
             dispatch({ type: 'UPDATE_CLIENT', payload: update });
+            history.push('/home');
         }
     };
 
@@ -194,7 +186,7 @@ export default function Profile() {
                         type="password"
                         label="New Password"
                         value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
+                        onChange={(e) => handlePasswordChange(e.target.value)}
                         name="password"
                     />
                     {/* Confirm Password */}
