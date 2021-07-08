@@ -59,7 +59,7 @@ router.post('/add_critical_experience', rejectUnauthenticated, async (req, res) 
     userBlocksId = userBlocksId.rows;
     console.log(userBlocksId);
     //checks to see if the block exists in the user block table
-    if (userBlocksId.id) {
+    if (userBlocksId[0]) {
       //if it does exist add the critical experience using the userBlockId
       await client.query(queryText1, [req.body.user_text, userBlocksId[0].id]);
     } else {

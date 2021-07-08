@@ -75,7 +75,7 @@ router.post('/create_coach', rejectUnauthorized, (req, res) => {
     });
 });
 
-//route to create an admin through postman or a similar service
+// route to create an admin through postman or a similar service
 // router.post('/create_admin', (req, res) => {
 //   const firstName = req.body.first_name;
 //   const lastName = req.body.last_name
