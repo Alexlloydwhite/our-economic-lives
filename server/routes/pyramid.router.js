@@ -41,14 +41,11 @@ router.get(
       for (let i = 0; i < tier.length; i++) {
         let approved = 0;
         let block_id = tier[i].id;
-        const queryTextLoop = `SELECT user_blocks.user_id, user_blocks.building_block_id, COUNT(critical_experience.is_approved = true) AS approved FROM user_blocks
-          JOIN critical_experience ON user_blocks.id = critical_experience.user_blocks_id
-          WHERE user_blocks.user_id = $1 AND user_blocks.building_block_id = $2SELECT user_blocks.user_id, user_blocks.building_block_id, COUNT(critical_experience.is_approved)  
-          FILTER (WHERE critical_experience.is_approved =  'true') AS approved FROM user_blocks
-          JOIN critical_experience ON user_blocks.id = critical_experience.user_blocks_id
-          WHERE user_blocks.user_id = 6 AND user_blocks.building_block_id = 14
-          GROUP BY user_blocks.user_id, user_blocks.building_block_id;
-          GROUP BY user_blocks.user_id, user_blocks.building_block_id;`;
+        const queryTextLoop = `SELECT user_blocks.user_id, user_blocks.building_block_id, COUNT(critical_experience.is_approved)  
+        FILTER (WHERE critical_experience.is_approved =  'true') AS approved FROM user_blocks
+            JOIN critical_experience ON user_blocks.id = critical_experience.user_blocks_id
+            WHERE user_blocks.user_id = $1 AND user_blocks.building_block_id = $2
+            GROUP BY user_blocks.user_id, user_blocks.building_block_id;`;
         // contains the count of approved building blocks for a user
         let result2 = await client.query(queryTextLoop, [user, block_id])
         //sets approved to 0 if no response is returned (none are approved)
