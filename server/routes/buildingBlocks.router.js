@@ -89,7 +89,7 @@ const queryText = `
     pool
       .query(queryText, [
         req.body.user_text,
-        req.user.id
+        req.body.id
       ])
     client.query('COMMIT')
     res.sendStatus(201);
