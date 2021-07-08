@@ -89,7 +89,6 @@ export default function Profile() {
             phone_number: phoneNum,
         }
 
-        console.log('update the stupid password all ready AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', updatePassword);
         if (updatePassword) {
           const updateWithPassword = { ...update, password: newPassword}
             if (newPassword === confirmNewPassword) {
